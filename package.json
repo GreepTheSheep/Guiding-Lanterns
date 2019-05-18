@@ -1,0 +1,29 @@
+{
+    "name": "lanterns",
+    "version": "1.0.0",
+    "description": "",
+    "main": "bot.js",
+    "scripts": {
+        "start": "node bot.js",
+        "test": "node bot_nightly.js"
+    },
+    "keywords": [
+        "discord",
+        "bot"
+    ],
+    "author": "Greep",
+    "license": "GPL-3.0",
+    "dependencies": {
+        "bufferutil": "^3.0.3",
+        "country-data": "0.0.31",
+        "dateformat": "^3.0.3",
+        "didyoumean2": "^3.0.0",
+        "discord-emoji": "^1.1.1",
+        "discord.js": "^11.5.0",
+        "fs": "0.0.1-security",
+        "fs-extra": "^8.0.1",
+        "math-expression-evaluator": "^1.2.17",
+        "node-notifier": "^5.2.1",
+        "node-opus": "^0.2.7"
+    }
+}
