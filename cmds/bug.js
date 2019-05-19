@@ -1,44 +1,44 @@
 const Discord = require("discord.js");
 
-function bug(message, client, prefix){
+function bug(message, client, prefix) {
 
-if(message.content.startsWith(prefix + 'bug')){
-  if (message.channel.type === 'dm') return;
-        
-    const args = message.content.split(" ").slice(1);
+    if (message.content.startsWith(prefix + 'bug')) {
+        if (message.channel.type === 'dm') return;
 
-    if (args.length < 1) {
-         return message.reply("Please enter your bug details!")
-    }
+        const args = message.content.split(" ").slice(1);
 
-    var args2 = message.content.split(' ').slice(1).join(' ');
+        if (args.length < 1) {
+            return message.reply("Please enter your bug details!")
+        }
 
-    const suggestchannel = client.users.get('330030648456642562')
+        var args2 = message.content.split(' ').slice(1).join(' ');
 
-    suggestchannel.send('', {
-      embed: {
-        color: 654456,
-        author: {
-          name: "Un bug a été posté !",
-          icon_url: message.author.avatarURL,
-        },
-        title: "BUG",
+        const reportchannel = client.guilds.get('570024448371982373').channels.get('579675887545614341')
+        reportchannel.send('', {
+            embed: {
+                color: 654456,
+                author: {
+                    name: "A bug report has been posted !",
+                    icon_url: message.author.avatarURL,
+                },
+                title: "BUG REPORT",
 
-        description: `_Envoyer dans_
+                description: `_Sent in_
         **${message.guild.name}**
 
-_Détails :_
+        __Bug details :_
 **${args2}**
 
-         _Par_
+         _Sent by_
 **${message.author.tag}**`,
 
-}})
-message.delete()
+            }
+        })
+        message.delete()
 
-message.channel.send("Thank you! I'll try to fix this as soon as possible! <:heureuse:570820764799074335>")
+        message.channel.send("Thank you! I'll try to fix this as soon as possible! <:heureuse:570820764799074335>")
 
-}
+    }
 }
 
 module.exports = bug;

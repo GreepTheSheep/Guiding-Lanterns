@@ -1,44 +1,45 @@
 const Discord = require("discord.js");
 
-function suggest(message, client, prefix){
+function suggest(message, client, prefix) {
 
-if(message.content.startsWith(prefix + 'suggest')){
-  if (message.channel.type === 'dm') return;
-        
-    const args = message.content.split(" ").slice(1);
+    if (message.content.startsWith(prefix + 'suggest')) {
+        if (message.channel.type === 'dm') return;
 
-    if (args.length < 1) {
-         return message.reply("Please enter your suggestion!")
-    }
+        const args = message.content.split(" ").slice(1);
 
-    var args2 = message.content.split(' ').slice(1).join(' ');
+        if (args.length < 1) {
+            return message.reply("Please enter your suggestion!")
+        }
 
-    const suggestchannel = client.users.get('330030648456642562')
+        var args2 = message.content.split(' ').slice(1).join(' ');
 
-    suggestchannel.send('', {
-      embed: {
-        color: 654456,
-        author: {
-          name: "Une suggestion a été posté !",
-          icon_url: message.author.avatarURL,
-        },
-        title: "Suggestion",
+        const suggestchannel = client.guilds.get('570024448371982373').channels.get('579675497970270240')
 
-        description: `_Envoyer dans_
+        suggestchannel.send('', {
+            embed: {
+                color: 654456,
+                author: {
+                    name: "A suggestion has been posted!",
+                    icon_url: message.author.avatarURL,
+                },
+                title: "Suggest",
+
+                description: `_Sent in_
         **${message.guild.name}**
 
-_Suggestion_
+_Suggest:_
 **${args2}**
 
-         _Par_
+         _Sent by_
 **${message.author.tag}**`,
 
-}})
-message.delete()
+            }
+        })
+        message.delete()
 
-message.channel.send('Your suggestion has been posted! <:heureuse:570820764799074335>')
+        message.channel.send('Your suggestion has been posted! <:heureuse:570820764799074335>')
 
-}
+    }
 }
 
 module.exports = suggest;
