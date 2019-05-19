@@ -63,3 +63,6 @@ typings/
 # config file (token)
 config.json
 
+# lanterns count file
+lanterns.json
+
