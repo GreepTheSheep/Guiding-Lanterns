@@ -2,27 +2,28 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const config = require('./config.json');
 
-function functiondate(){
+function functiondate() {
     const datefu = new Date();
-const months = ['Janv.','Févr.','Mars','Avr.','Mai','Juin','Juil.','Août','Sept.','Oct.','Nov.','Dec.'];
-const year = datefu.getFullYear();
-const month = months[datefu.getMonth()];
-const getdate = datefu.getDate();
-const date = getdate + ' ' + month + ' ' + year;
-return date;
+    const months = ['Janv.', 'Févr.', 'Mars', 'Avr.', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Dec.'];
+    const year = datefu.getFullYear();
+    const month = months[datefu.getMonth()];
+    const getdate = datefu.getDate();
+    const date = getdate + ' ' + month + ' ' + year;
+    return date;
 };
-function functiontime(){
+
+function functiontime() {
     const datefu = new Date();
-const hour = datefu.getHours();
-const min = datefu.getMinutes();
-const sec = datefu.getSeconds();
-const time = hour + ':' + min + ':' + sec;
-return time
-} 
+    const hour = datefu.getHours();
+    const min = datefu.getMinutes();
+    const sec = datefu.getSeconds();
+    const time = hour + ':' + min + ':' + sec;
+    return time
+}
 
 
 client.on('ready', () => {
-    console.log(`Logged in as ${client.user.tag}!\nLe ${functiondate(0)} à ${functiontime(0)}`);    
+    console.log(`Logged in as ${client.user.tag}!\nLe ${functiondate(0)} à ${functiontime(0)}`);
 });
 
 const prefix = config.prefix
@@ -51,19 +52,19 @@ client.on('message', message => {
 });
 
 client.on('guildMemberAdd', (member) => {
-    if (client.guilds.id == 562602234265731080){
-    const welcome = require('./welcome.js');
-    welcome(member, client);
-}
-    console.log(`\n[${client.guilds.name}] ${member.tag} joined the server at ${functiondate(0)} at ${functiontime(0)}\n`)
+    if (member.guilds.id == 562602234265731080) {
+        const welcome = require('./welcome.js');
+        welcome(member, client);
+    }
+    console.log(`\n[${member.guilds.name}] ${member.user.tag} joined the server at ${functiondate(0)} at ${functiontime(0)}\n`)
 })
 
 client.on('guildMemberRemove', (member) => {
-    if (client.guilds.id == 562602234265731080){
-    const goodbye = require('./goodbye.js');
-    goodbye(member, client);
+    if (member.guilds.id == 562602234265731080) {
+        const goodbye = require('./goodbye.js');
+        goodbye(member, client);
     }
-    console.log(`\n[${client.guilds.name}] ${member.tag} left the server at ${functiondate(0)} at ${functiontime(0)}\n`)
+    console.log(`\n[${member.guilds.name}] ${member.user.tag} left the server at ${functiondate(0)} at ${functiontime(0)}\n`)
 })
 
 client.login(config.token);
