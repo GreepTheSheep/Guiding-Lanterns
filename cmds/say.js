@@ -7,7 +7,8 @@ function say(message, client, prefix) {
             let args = message.content.split(" ");
             args.shift();
             if (args.length < 1) {
-                message.channel.send(`__Input your message!__`).delete(3000);
+                message.delete();
+                client.users.get(message.author.id).send('__Input your message!__\n\nExample: `!say Hello everyone!`');
             } else {
                 message.delete();
                 message.channel.send(`${args.join(" ")}`)
