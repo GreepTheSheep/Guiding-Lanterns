@@ -35,7 +35,7 @@ function goodbye(member, client) {
         .addField(`${msg}`, `**${member.user.username}**`)
         .setImage(`${img}`)
         .setFooter(`${member.user.username} left the Kingdom of Corona!`, `${member.user.avatarURL}`)
-    client.guilds.get('562602234265731080').channels.get('562611657419784202').send({ embed: embed })
+    client.guilds.get('562602234265731080').channels.get('562611657419784202').send(embed);
 }
 
 module.exports = goodbye;

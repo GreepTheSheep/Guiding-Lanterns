@@ -50,7 +50,7 @@ function welcome(member, client) {
         .addField(`${welcomemsg}`, `<@${member.user.id}>`)
         .setImage(`${welcomeimg}`)
         .setFooter(`${member.user.username} just landed in the Kingdom of Corona!`, `${member.user.avatarURL}`)
-    client.guilds.get('562602234265731080').channels.get('562611657419784202').send({ embed: embed })
+    client.guilds.get('562602234265731080').channels.get('562611657419784202').send(embed);
 }
 
 module.exports = welcome;
