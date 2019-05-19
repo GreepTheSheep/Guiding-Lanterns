@@ -52,19 +52,19 @@ client.on('message', message => {
 });
 
 client.on('guildMemberAdd', member => {
-    if (client.guilds.member.guilds.id === 562602234265731080) {
+    if (member.guild.id === 562602234265731080) {
         const welcome = require('./welcome.js');
         welcome(member, client);
     }
-    console.log(`\n${member.user.tag} joined ${client.guilds.member.guilds.name} at ${functiondate(0)} at ${functiontime(0)}\n`)
+    console.log(`\n${member.user.tag} joined ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`)
 })
 
 client.on('guildMemberRemove', member => {
-    if (client.guilds.member.guilds.id === 562602234265731080) {
+    if (member.guild.id === 562602234265731080) {
         const goodbye = require('./goodbye.js');
         goodbye(member, client);
     }
-    console.log(`\n${member.user.tag} left ${client.guilds.member.guilds.name} at ${functiondate(0)} at ${functiontime(0)}\n`)
+    console.log(`\n${member.user.tag} left ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`)
 })
 
 client.login(config.token);
