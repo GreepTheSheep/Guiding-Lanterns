@@ -52,7 +52,7 @@ client.on('message', message => {
 });
 
 client.on('guildMemberAdd', member => {
-    if (member.guild.id === 562602234265731080) {
+    if (member.guild.id === '562602234265731080') {
         const welcome = require('./welcome.js');
         welcome(member, client);
     }
@@ -60,7 +60,7 @@ client.on('guildMemberAdd', member => {
 })
 
 client.on('guildMemberRemove', member => {
-    if (member.guild.id === 562602234265731080) {
+    if (member.guild.id === '562602234265731080') {
         const goodbye = require('./goodbye.js');
         goodbye(member, client);
     }
