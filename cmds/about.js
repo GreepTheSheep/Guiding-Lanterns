@@ -6,8 +6,8 @@ function about(message, client, prefix) {
     if (message.content.startsWith(prefix + 'about')) {
         let embed = new Discord.RichEmbed()
             embed.setColor("#9C01C4")
-                .addField("About the bot:", `**${client.user.tag}**\nCreated by Greep#3022\nFor the Kingdom of Corona`)
-                .addField("Technical information", `Libary used: Discord.js\nDelay between bot and Discord server: ${Math.round(client.ping)} ms\nRAM used: ${Math.round(process.memoryUsage().rss / 1024 / 1000)} MB\nUptime: ${UpTime}`)
+                .addField("About the bot:", `**${client.user.tag}**\nCreated by Greep#3022\nFor [the Kingdom of Corona ☀](https://discord.gg/BunQeKh)`)
+                .addField("Technical information", `Libary used: [Discord.js](https://discord.js.org)\nDelay between bot and Discord server: ${Math.round(client.ping)} ms\nRAM used: ${Math.round(process.memoryUsage().rss / 1024 / 1000)} MB\nUptime: ${UpTime}`)
                 .setThumbnail(`${client.user.avatarURL}`)
                 .setFooter(`${client.user.username} is created by Greep#3022`, `${client.user.avatarURL}`)
             message.channel.send(embed)
