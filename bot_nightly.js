@@ -28,7 +28,7 @@ client.on('ready', () => {
 
 const prefix = config.prefix
 client.on('message', message => {
-    if (message.author.user.bot(true)) return;
+    if (message.author.bot) return;
 
     const lantern = require('./cmds/lantern.js');
     lantern(message, client, prefix);
