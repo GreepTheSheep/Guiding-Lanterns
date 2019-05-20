@@ -28,7 +28,7 @@ client.on('ready', () => { // If bot was connected:
 
 const prefix = config.prefix // Gets the prefix from the config file
 client.on('message', message => { // If any message was recived
-    if (message.author.user.bot()) return; // If is a bot, do nothing
+    if (message.author.user.bot(true)) return; // If is a bot, do nothing
 
     // Begin of all the commands
 
