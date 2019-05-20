@@ -4,7 +4,7 @@ const config = require('./config.json');
 
 function functiondate() {
     const datefu = new Date();
-    const months = ['Janv.', 'Févr.', 'Mars', 'Avr.', 'Mai', 'Juin', 'Juil.', 'Août', 'Sept.', 'Oct.', 'Nov.', 'Dec.'];
+    const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     const year = datefu.getFullYear();
     const month = months[datefu.getMonth()];
     const getdate = datefu.getDate();
