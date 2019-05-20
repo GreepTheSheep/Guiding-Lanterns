@@ -34,7 +34,9 @@ const images = [
     'https://cdn.discordapp.com/attachments/562612494640873483/576750451136004106/c0e85ffaf3cee383f551ad25edb1675d.gif',
     'https://i.ytimg.com/vi/OcFj0IlM32Y/maxresdefault.jpg',
     'https://cdn.discordapp.com/attachments/573609067289772032/576343400060813315/1557465852325.png',
-    'https://cdn.discordapp.com/attachments/562602234265731082/577754931155566603/1557816464452.png'
+    'https://cdn.discordapp.com/attachments/562602234265731082/577754931155566603/1557816464452.png',
+    'https://cdn.discordapp.com/attachments/562602234265731082/580088878992719897/1558324778686.gif',
+    'http://is2.4chan.org/co/1558373572716.gif'
 ];
 
 function randomItem(array) {
