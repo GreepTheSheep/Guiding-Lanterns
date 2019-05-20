@@ -23,7 +23,6 @@ for (var i = 0; i < lines.length;i++) {
             break;
         case SRT_STATE_TEXT:
             if (lines[i] === ''){
-                line.push(lines[i]);
                 subs.push(line);
                 line=[];
                 state=SRT_STATE_SUBNUMBER
