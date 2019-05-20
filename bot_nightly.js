@@ -23,11 +23,12 @@ function functiontime() {
 
 
 client.on('ready', () => {
-    console.log(`Logged in as ${client.user.tag}!\nLe ${functiondate(0)} à ${functiontime(0)}`);
+    console.log(`Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`);
 });
 
 const prefix = config.prefix
 client.on('message', message => {
+    if (message.author.user.bot()) return;
 
     const lantern = require('./cmds/lantern.js');
     lantern(message, client, prefix);

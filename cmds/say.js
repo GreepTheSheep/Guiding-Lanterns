@@ -13,9 +13,7 @@ function say(message, client, prefix) {
                 message.delete();
                 message.channel.send(`${args.join(" ")}`)
             }
-        } else {
-            message.channel.send("**__Only administrators and moderators can use this command__**")
-        }
+        } else return;
     }
 }
 
