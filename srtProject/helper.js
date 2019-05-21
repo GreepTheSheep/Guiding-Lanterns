@@ -15,8 +15,17 @@ const array=[
 //Functions for manipulating the above array
 
 //Remove subtitle block 728
-array.filter(block => block[0] !== '728').forEach(a => console.log(a))
+array.filter(block => block[0] !== '728')
 
+
+function replaceAt(array, index, value) {
+  const ret = array.slice(0);
+  ret[index] = value;
+  return ret;
+}
+array.map(b => replaceAt(b,0,Number(b[0]))).forEach(a => console.log(a))
+
+console.log(array)
 //Concat all subtitle text ()
 console.log(array.map(block => block[2]).reduce((acc,cur) => acc+'\n'+cur,''))
 /*
