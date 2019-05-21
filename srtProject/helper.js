@@ -17,7 +17,7 @@ const array=[
 //Remove subtitle block 728
 array.filter(block => block[0] !== '728')
 
-
+//
 function replaceAt(array, index, value) {
   const ret = array.slice(0);
   ret[index] = value;
@@ -26,7 +26,7 @@ function replaceAt(array, index, value) {
 array.map(b => replaceAt(b,0,Number(b[0]))).forEach(a => console.log(a))
 
 console.log(array)
-//Concat all subtitle text ()
+//Concat all subtitle text
 console.log(array.map(block => block[2]).reduce((acc,cur) => acc+'\n'+cur,''))
 /*
 Of course! I want her to feel safe.
@@ -34,5 +34,15 @@ I want her to be taken care of
 and I want her to be happy here.
 Funny, you seem to have
 a pretty good handle
+on the things you want.
+*/
+
+//Concat all subtitle text.
+//If same numeric counter then join lines of subtitles with a space
+console.log(array.map(block => block[2].replace(/\n/g,' ')).reduce((acc,cur) => acc+'\n'+cur,''))
+/*
+Of course! I want her to feel safe.
+I want her to be taken care of and I want her to be happy here.
+Funny, you seem to have a pretty good handle
 on the things you want.
 */
