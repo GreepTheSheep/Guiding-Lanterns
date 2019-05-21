@@ -9,7 +9,7 @@ const SRT_STATE_TEXT=2
 
 var subs=[]
 var state=SRT_STATE_SUBNUMBER
-var line = []
+var line=[]
 
 for (var i = 0; i < lines.length;i++) {
     switch(state){
@@ -18,23 +18,28 @@ for (var i = 0; i < lines.length;i++) {
             state=SRT_STATE_TIME;
             break;
         case SRT_STATE_TIME:
-            line.push(lines[i])
+            line.push(lines[i]);
             state=SRT_STATE_TEXT;
             break;
         case SRT_STATE_TEXT:
             if (lines[i] === ''){
                 subs.push(line);
                 line=[];
-                state=SRT_STATE_SUBNUMBER
-                
-            } else {
-                line.push(lines[i]);
+                state=SRT_STATE_SUBNUMBER;
+            }
+            else {
+                if (line.length === 3){
+                    line[2]+='\n'+lines[i];
+                }
+                else {
+                    line.push(lines[i]);
+                }
             }
             break;
     }
 }
+//If file was missing the trailing newlines, we'll be in this state here
 if (state === SRT_STATE_TEXT) {
-    line.push(lines[i]);
     subs.push(line);  
 }
 subs.forEach(a => console.log(a))
