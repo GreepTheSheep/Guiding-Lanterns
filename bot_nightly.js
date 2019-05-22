@@ -24,6 +24,7 @@ function functiontime() {
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`);
+    client.user.setStatus('dnd');
 });
 
 const prefix = config.prefix
@@ -35,6 +36,9 @@ client.on('message', message => {
 
     const pan = require('./cmds/pan.js');
     pan(message, client, prefix);
+    
+    const screenshot = require('./cmds/screenshots/screenshot.js');
+    screenshot(message, client, prefix);
 
     const songs = require('./cmds/songs.js');
     songs(message, client, prefix);
@@ -62,4 +66,4 @@ client.on('debug', (debugevent) => {
     console.log(`[${functiondate(0)} - ${functiontime(0)}] : ${debugevent}`)
 })
 
-client.login(config.token_nightly);
+client.login(config.token);
