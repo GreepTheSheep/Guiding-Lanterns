@@ -71,3 +71,4 @@ lanterns.json
 
 # Windows Exe files
 *.exe
+*.bat
