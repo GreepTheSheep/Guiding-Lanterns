@@ -114,13 +114,13 @@ function upload_scr(message,filename,runsec){
     ffmpeg(filename)
         .on('end', function() {
             console.log('Screenshots taken');
-            const attachment = new Attachment('./screenshots/screenshot.png');
+            const attachment = new Attachment('./cmds/screenshots/screenshot.png');
             message.channel.send(`${message.author}\n${min_}:${sec}`,attachment);
         })
         .screenshots({
             timestamps: [runsec],
             filename: 'screenshot.png',
-            folder: './cmds/screenshots/taken',
+            folder: './cmds/screenshots',
             });
     
 }
