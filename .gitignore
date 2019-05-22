@@ -68,3 +68,6 @@ lanterns.json
 
 # Movie files (GitHub is not a streaming site)
 *.mkv
+
+# Windows Exe files
+*.exe
