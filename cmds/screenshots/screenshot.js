@@ -14,7 +14,7 @@ function scr_msg(message){
     console.log('Function screenshot() called');
     const args = message.content.split(" ").slice(1);    
     if (args.length < 2) {
-            message.channel.send(`${message.author}\nusage: ${SCRcmd} <S02E__> <seconds>`);
+            message.channel.send(`${message.author}\nusage: ${prefix+SCR} <S02E__> <seconds>`);
         return;
     }
 	//
@@ -101,7 +101,7 @@ function scr_msg(message){
             break;
         */
         default:
-            message.channel.send(`${message.author}\nusage: ${SCRcmd} <S02E14> <seconds>`);
+            message.channel.send(`${message.author}\nusage: ${prefix+SCR} <S02E14> <seconds>`);
             return;
         }
     console.log(filename);
