@@ -27,7 +27,7 @@ client.on('ready', () => {
     client.user.setStatus('dnd');
 });
 
-const prefix = config.prefix
+const prefix = config.prefix_nightly
 client.on('message', message => {
     if (message.author.bot) return;
 
@@ -66,4 +66,4 @@ client.on('debug', (debugevent) => {
     console.log(`[${functiondate(0)} - ${functiontime(0)}] : ${debugevent}`)
 })
 
-client.login(config.token);
+client.login(config.token_nightly);
