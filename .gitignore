@@ -69,7 +69,9 @@ lanterns.json
 # Movie files (GitHub is not a streaming site)
 *.mkv
 
-# Windows Exe files
+# Windows Exe and batch files
 *.exe
 *.bat
+
+# Screenshot file
 cmds/screenshots/screenshot.png
