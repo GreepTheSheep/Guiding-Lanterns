@@ -11,6 +11,8 @@ function suggest(message, client, prefix) {
             return message.reply("Usage: `!suggest [bot, server] [your suggestion]`")
         }
 
+        if (args[0] == 'bot' || args[0] == 'server') {
+
         var args2 = args.slice(1).join(' ');
 
         const botsuggestchannel = client.guilds.get('570024448371982373').channels.get('579675497970270240')
@@ -64,7 +66,8 @@ _Suggest:_
 
         message.channel.send('Your suggestion has been posted! <:heureuse:570820764799074335>')
 
-    }
+    } else return message.reply("Usage: `!suggest [bot, server] [your suggestion]`");
+} 
 }
 
 module.exports = suggest;
