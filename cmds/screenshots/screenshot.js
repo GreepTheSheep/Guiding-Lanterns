@@ -10,7 +10,7 @@ const client = new Client();
 const checkTime = i => i < 10 ? "0" + i : i;
 const SCR = 'screenshot';
 
-function scr_msg(message){
+function scr_msg(message, prefix){
     console.log('Function screenshot() called');
     const args = message.content.split(" ").slice(1);    
     if (args.length < 2) {
@@ -126,7 +126,7 @@ function upload_scr(message,filename,runsec){
 }
 function screenshot(message, client, prefix) {
     if (message.content.startsWith(prefix+SCR)) {
-        scr_msg(message);
+        scr_msg(message, prefix);
         return;
     }
 };
