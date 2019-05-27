@@ -73,5 +73,5 @@ lanterns.json
 *.exe
 *.bat
 
-# Screenshot file
-cmds/screenshots/screenshot.png
+# PNG files in /cmds
+cmds/**/*.png
