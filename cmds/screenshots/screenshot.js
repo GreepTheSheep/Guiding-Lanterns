@@ -2,132 +2,74 @@
 // Edited for Corona Lanterns by Greep#3022
 
 // require the discord.js module
-const { Client, Attachment } = require('discord.js');
-const episode = require('./episode.json');
-// create a new Discord client
-const client = new Client();
+const { Attachment } = require('discord.js');
 
 const checkTime = i => i < 10 ? "0" + i : i;
 const SCR = 'screenshot';
 
-function scr_msg(message, prefix){
-    console.log('Function screenshot() called');
-    const args = message.content.split(" ").slice(1);    
-    if (args.length < 2) {
-            message.channel.send(`${message.author}\nusage: ${prefix+SCR} <S02E__> <seconds>`);
-        return;
-    }
-	//
-	//
-	//Time to seconds conversion
-    var a = args[1].split(':');
-    if (a.some(isNaN)){
-        message.channel.send('Not time')
-        return;
-    }
-    var runsec=+(a.reduce((acc,time) => (60 * acc) + +time));
-	//end
-    console.log(runsec);
-    var filename;
-    switch(args[0].toUpperCase().replace(/S0/,'S').replace(/E0/,'E')) {
-        /*
-        case 'S2E1':
-            filename=episode.S02E01;
-            break;
-        case 'S2E2':
-            filename=episode.S02E02;
-            break;
-        case 'S2E3':
-            filename=episode.S02E03;
-            break;
-        case 'S2E4':
-            filename=episode.S02E04;
-            break;
-        case 'S2E5':
-            filename=episode.S02E05;
-            break;
-        case 'S2E6':
-            filename=episode.S02E06;
-            break;
-        case 'S2E7':
-            filename=episode.S02E07;
-            break;
-        case 'S2E8':
-            filename=episode.S02E08;
-            break;
-        case 'S2E9':
-            filename=episode.S02E09;
-            break;
-        case 'S2E10':
-            filename=episode.S02E10;
-            break;
-        case 'S2E11':
-            filename=episode.S02E11;
-            break;
-        case 'S2E12':
-            filename=episode.S02E12;
-            break;
-        case 'S2E13':
-            filename=episode.S02E13;
-            break;
-            */
-        case 'S2E14':
-            filename=episode.S02E14;
-            break;
-/*
-        case 'S2E15':
-            filename=episode.S02E15;
-            break;
-        case 'S2E16':
-            filename=episode.S02E16;
-            break;
-        case 'S2E17':
-            filename=episode.S02E17;
-            break;
-        case 'S2E18':
-            filename=episode.S02E18;
-            break;
-        case 'S2E19':
-            filename=episode.S02E19;
-            break;
-        case 'S2E20':
-            filename=episode.S02E20;
-            break;
-        case 'S02E21':
-            filename=episode.S02E21;
-            break;
-        case 'S02E22':
-            filename=episode.S02E21;
-            break;
-        */
-        default:
-            message.channel.send(`${message.author}\nusage: ${prefix+SCR} <S02E14> <seconds>`);
-            return;
+function episode_to_filename(epi) {
+    const episode = require('./episode.json');
+    const epi_comp=epi.toUpperCase().replace(/S0/,'S').replace(/E0/,'E')
+    for (epNojson in episode) {
+        var epNojson_comp = epNojson.toUpperCase().replace(/S0/,'S').replace(/E0/,'E')
+        if (epi_comp === epNojson_comp){
+            return episode[epNojson];
         }
-    console.log(filename);
-    upload_scr(message,filename,runsec);
+    }
 }
-function upload_scr(message,filename,runsec){
-    var min_ = Math.floor(runsec / 60);
-    var sec = checkTime(Math.floor(runsec - min_ * 60));
+function video_id_str(){
+    const episode = require('./episode.json');
+    const video_ids = [];
+    for (epNojson in episode) {
+        video_ids.push(epNojson);
+    }
+    return video_ids.join(",");
+}
+
+function scr_msg(message,client,prefix){
+    const usage=`\nThe proper usage would be: \n\`${prefix+SCR} <video_id> <timestamp>\`\nThe timestamp may be a number (in seconds), a percentage (eg. \`50%\`) or in a format \`hh:mm:ss.xxx\` (where hours, minutes and milliseconds are optional)`
+    console.log('Function screenshot() called');
+    const args = message.content.split(/ +/).slice(1);    
+    if (args.length < 2) {
+        let reply = `You didn't provide enough arguments, ${message.author}!`
+        message.channel.send(`${reply}${usage}`);
+        return;
+    }
+    var filename = episode_to_filename(args[0]);
+    if (filename === undefined) {
+        message.reply(`I don\'t have that video id\nAvailable video ids are ${video_id_str()}`);
+        return;
+    }
+    console.log(filename);
+    if (args[1].split(':').some(isNaN) && !('' + args[1]).match(/^[\d.]+%$/)){
+        message.channel.send('That is not a valid duration');
+        return "usage";
+		}
+    console.log(filename);
+    upload_scr(message,filename,args[1]);
+}
+function upload_scr(message,filename,timemark){
     const ffmpeg = require('fluent-ffmpeg');
     ffmpeg(filename)
         .on('end', function() {
             console.log('Screenshots taken');
             const attachment = new Attachment('./cmds/screenshots/screenshot.png');
-            message.channel.send(`${message.author}\n${min_}:${sec}`,attachment);
+            message.channel.send(`${message.author}\n${timemark}`,attachment);
+        })
+        .on('error', function(err) {
+            console.log('an error happened: ' + err.message);
+            message.channel.send('an error happened: ffmpeg()');
         })
         .screenshots({
-            timestamps: [runsec],
+            timestamps: [timemark],
             filename: 'screenshot.png',
             folder: './cmds/screenshots',
-            });
+        });
     
 }
 function screenshot(message, client, prefix) {
     if (message.content.startsWith(prefix+SCR)) {
-        scr_msg(message, prefix);
-        return;
+        scr_msg(message,client,prefix);
     }
 };
 
