@@ -58,7 +58,7 @@ function upload_scr(message,filename,timemark){
         })
         .on('error', function(err) {
             console.log('an error happened: ' + err.message);
-            message.channel.send('an error happened: ffmpeg()');
+            message.channel.send('an error happened: ffmpeg(): ' + err.message);
         })
         .screenshots({
             timestamps: [timemark],
