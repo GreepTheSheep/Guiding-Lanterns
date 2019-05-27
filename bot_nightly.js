@@ -34,14 +34,8 @@ client.on('message', message => {
     const lantern = require('./cmds/lantern.js');
     lantern(message, client, prefix);
 
-    const pan = require('./cmds/pan.js');
-    pan(message, client, prefix);
-    
     const screenshot = require('./cmds/screenshots/screenshot.js');
     screenshot(message, client, prefix);
-
-    const songs = require('./cmds/songs.js');
-    songs(message, client, prefix);
 
     const quotes = require('./cmds/quotes.js');
     quotes(message, client, prefix);
