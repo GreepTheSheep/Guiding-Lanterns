@@ -77,4 +77,4 @@ lanterns.json
 cmds/**/*.png
 
 # Movie links file
-cmds/screenshots/episodes.json
+cmds/screenshots/episode.json
