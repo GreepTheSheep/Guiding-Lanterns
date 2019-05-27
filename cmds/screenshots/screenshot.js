@@ -27,9 +27,9 @@ function video_id_str(){
     return video_ids.join("\`\n- \`");
 }
 
-function scr_msg(message,client,prefix){
+function scr_msg(message,client,prefix, functiondate, functiontime){
     const usage=`\nThe proper usage would be: \n\`${prefix+SCR} <video_id> <timestamp>\`\nThe timestamp may be a number (in seconds), a percentage (eg. \`50%\`) or in a format \`hh:mm:ss.xxx\` (where hours, minutes and milliseconds are optional)`
-    console.log(`Function screenshot() called by ${message.author.tag}`);
+    console.log(`[${functiondate(0)} - ${functiontime(0)}] Function screenshot() called by ${message.author.tag}`);
     const args = message.content.split(/ +/).slice(1);    
     if (args.length < 2) {
         let reply = `You didn't provide enough arguments, ${message.author}!`
@@ -46,7 +46,6 @@ function scr_msg(message,client,prefix){
         message.reply(embed)
         return;
     }
-    console.log(filename);
     if (args[1].split(':').some(isNaN) && !('' + args[1]).match(/^[\d.]+%$/)){
         message.channel.send('That is not a valid duration');
         return "usage";
@@ -78,9 +77,9 @@ function upload_scr(message,filename,timemark,displayid){
         });
     
 }
-function screenshot(message, client, prefix) {
+function screenshot(message, client, prefix, functiondate, functiontime) {
     if (message.content.startsWith(prefix+SCR)) {
-        scr_msg(message,client,prefix);
+        scr_msg(message,client,prefix, functiondate, functiontime);
     }
 };
 
