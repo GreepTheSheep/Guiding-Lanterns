@@ -2,7 +2,8 @@
 // Edited for Corona Lanterns by Greep#3022
 
 // require the discord.js module
-const { Discord, Attachment } = require('discord.js');
+const { Attachment } = require('discord.js');
+const Discord = require('discord.js');
 
 const checkTime = i => i < 10 ? "0" + i : i;
 const SCR = 'screenshot';
@@ -37,19 +38,12 @@ function scr_msg(message,client,prefix){
     }
     var filename = episode_to_filename(args[0]);
     if (filename === undefined) {
-        message.reply('', {
-            embed: {
-                color: ff0000,
-                author: {
-                    name: "Error!",
-                    icon_url: 'https://cdn.icon-icons.com/icons2/317/PNG/512/sign-error-icon_34362.png',
-                },
-            title: "I don\'t have that video id!",
-
-            description: `Available video ids are:\n- \`${video_id_str()}\``,
-
-            }
-        })
+        let embed = new Discord.RichEmbed()
+        embed.setTitle('ERROR!')
+        .setColor('#ff0000')
+        .addField("I don\'t have that video id!", `Available video ids are:\n- \`${video_id_str()}\``)
+        .setFooter(`Type "!bug <details of your bug>" to send at the devs`, `${message.author.avatarURL}`)
+        message.reply(embed)
         return;
     }
     console.log(filename);
@@ -58,35 +52,24 @@ function scr_msg(message,client,prefix){
         return "usage";
 		}
     console.log(filename);
-    upload_scr(message,filename,args[1]);
+    upload_scr(message,filename,args[1],args[0]);
 }
-function upload_scr(message,filename,timemark){
+function upload_scr(message,filename,timemark,displayid){
     const ffmpeg = require('fluent-ffmpeg');
     ffmpeg(filename)
         .on('end', function() {
-            console.log(`Screenshots taken`);
+            console.log('Screenshots taken');
             const attachment = new Attachment('./cmds/screenshots/screenshot.png');
-            let embed = new Discord.RichEmbed()
-            embed.addField("Screenshot :", `${args[0]} at ${timemark}`)
-                .setImage(attachment)
-                .setFooter(`Taken by ${message.author.username}`, `${message.author.avatarURL}`)
-            message.channel.send({ embed: embed })
+            message.channel.send(`${message.author}\nScreenshot of ${displayid} taken at ${timemark}`,attachment);
         })
         .on('error', function(err) {
             console.log('an error happened: ' + err.message);
-            message.reply('', {
-                embed: {
-                    color: ff0000,
-                    author: {
-                        name: "Error!",
-                        icon_url: 'https://cdn.icon-icons.com/icons2/317/PNG/512/sign-error-icon_34362.png',
-                    },
-                title: "Screenshot error!",
-    
-                description: `Error returned an ${err.message}`,
-    
-                }
-            })
+            let embed = new Discord.RichEmbed()
+                embed.setTitle('ERROR!')
+                .setColor('#ff0000')
+                .addField("Screenshot Error :", `Error returned an:\n${err.message}`)
+                .setFooter(`Type "!bug <details of your bug>" to send at the devs`, `${message.author.avatarURL}`)
+                message.reply(embed)
         })
         .screenshots({
             timestamps: [timemark],
