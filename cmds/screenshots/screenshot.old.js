@@ -28,7 +28,7 @@ function video_id_str(){
 
 function scr_msg(message,client,prefix){
     const usage=`\nThe proper usage would be: \n\`${prefix+SCR} <video_id> <timestamp>\`\nThe timestamp may be a number (in seconds), a percentage (eg. \`50%\`) or in a format \`hh:mm:ss.xxx\` (where hours, minutes and milliseconds are optional)`
-    console.log(`Function screenshot() called by ${message.author.tag}`);
+    console.log('Function screenshot() called');
     const args = message.content.split(/ +/).slice(1);    
     if (args.length < 2) {
         let reply = `You didn't provide enough arguments, ${message.author}!`
@@ -37,19 +37,7 @@ function scr_msg(message,client,prefix){
     }
     var filename = episode_to_filename(args[0]);
     if (filename === undefined) {
-        message.reply('', {
-            embed: {
-                color: ff0000,
-                author: {
-                    name: "Error!",
-                    icon_url: 'https://cdn.icon-icons.com/icons2/317/PNG/512/sign-error-icon_34362.png',
-                },
-            title: "I don\'t have that video id!",
-
-            description: `Available video ids are:\n- \`${video_id_str()}\``,
-
-            }
-        })
+        message.reply(`I don\'t have that video id\n\nAvailable video ids are:\n- \`${video_id_str()}\``);
         return;
     }
     console.log(filename);
@@ -64,29 +52,13 @@ function upload_scr(message,filename,timemark){
     const ffmpeg = require('fluent-ffmpeg');
     ffmpeg(filename)
         .on('end', function() {
-            console.log(`Screenshots taken`);
+            console.log('Screenshots taken');
             const attachment = new Attachment('./cmds/screenshots/screenshot.png');
-            let embed = new Discord.RichEmbed()
-            embed.addField("Screenshot :", `${args[0]} at ${timemark}`)
-                .setImage(attachment)
-                .setFooter(`Taken by ${message.author.username}`, `${message.author.avatarURL}`)
-            message.channel.send({ embed: embed })
+            message.channel.send(`${message.author}\n${timemark}`,attachment);
         })
         .on('error', function(err) {
             console.log('an error happened: ' + err.message);
-            message.reply('', {
-                embed: {
-                    color: ff0000,
-                    author: {
-                        name: "Error!",
-                        icon_url: 'https://cdn.icon-icons.com/icons2/317/PNG/512/sign-error-icon_34362.png',
-                    },
-                title: "Screenshot error!",
-    
-                description: `Error returned an ${err.message}`,
-    
-                }
-            })
+            message.channel.send('an error happened: ffmpeg(): ' + err.message);
         })
         .screenshots({
             timestamps: [timemark],
