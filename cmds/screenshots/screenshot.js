@@ -23,7 +23,7 @@ function video_id_str(){
     for (epNojson in episode) {
         video_ids.push(epNojson);
     }
-    return video_ids.join("\n- ");
+    return video_ids.join("\`\n- \`");
 }
 
 function scr_msg(message,client,prefix){
@@ -37,7 +37,7 @@ function scr_msg(message,client,prefix){
     }
     var filename = episode_to_filename(args[0]);
     if (filename === undefined) {
-        message.reply(`I don\'t have that video id\n\nAvailable video ids are:\n\`- ${video_id_str()}\``);
+        message.reply(`I don\'t have that video id\n\nAvailable video ids are:\n- \`${video_id_str()}\``);
         return;
     }
     console.log(filename);
