@@ -37,7 +37,7 @@ function scr_msg(message,client,prefix){
     }
     var filename = episode_to_filename(args[0]);
     if (filename === undefined) {
-        message.reply(`I don\'t have that video id\n\nAvailable video ids are:\n- \`${video_id_str()}\``);
+        message.reply(`I don\'t have that video id\n\nAvailable video ids are:\n\`- ${video_id_str()}\``);
         return;
     }
     console.log(filename);
