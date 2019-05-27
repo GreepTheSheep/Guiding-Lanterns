@@ -2,7 +2,7 @@
 // Edited for Corona Lanterns by Greep#3022
 
 // require the discord.js module
-const { Attachment } = require('discord.js');
+const { Discord, Attachment } = require('discord.js');
 
 const checkTime = i => i < 10 ? "0" + i : i;
 const SCR = 'screenshot';
