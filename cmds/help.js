@@ -28,8 +28,8 @@ function help(message, client, prefix) {
         let thumb = randomItem(images);
         let embed = new Discord.RichEmbed()
             embed.setColor("#9C01C4")
-                .addField("You feel lost? Don't worry :wink:", '`!quote` : Send a random quote from Tangled (and the series also)\n`!lanterns` : see how much lanterns are thown (launch your lantern using this emoji : <:Lantern:570822664789426186>)')
-                .addField("If you have any problems :", '`!bug`: Report any bug to owner\nor\n`!suggest`: Suggest an improvement')
+                .addField("You feel lost? Don't worry :wink:", '`!quote` : Send a random quote from Tangled (and the series also)\n`!lanterns` : see how much lanterns are thown (launch your lantern using this emoji : <:Lantern:570822664789426186>)', true)
+                .addField("If you have any problems :", '`!bug`: Report any bug to devs\nor\n`!suggest`: Suggest an improvement', true)
                 .setThumbnail(`${thumb}`)
                 .setFooter(`You can type !about for credits!`, `${client.user.avatarURL}`)
             message.channel.send({ embed: embed })
