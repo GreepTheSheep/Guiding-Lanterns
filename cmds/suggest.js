@@ -24,7 +24,7 @@ function suggest(message, client, prefix) {
                 color: 654456,
                 author: {
                     name: "A suggestion has been posted!",
-                    icon_url: message.author.avatarURL,
+                    icon_url: message.author.displayAvatarURL,
                 },
                 title: "Suggest",
 
@@ -43,7 +43,7 @@ function suggest(message, client, prefix) {
                 color: 654456,
                 author: {
                     name: "A server suggestion has been posted!",
-                    icon_url: message.author.avatarURL,
+                    icon_url: message.author.displayAvatarURL,
                 },
                 title: "Server Suggest",
 
