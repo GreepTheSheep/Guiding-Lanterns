@@ -58,8 +58,8 @@ function scr_msg(message,client,prefix, functiondate, functiontime){
     if (args[1].split(':').some(isNaN) && !('' + args[1]).match(/^[\d.]+%$/)){
         console.log(`Invalid Duration: ${args[1]}`)
         message.channel.send('That is not a valid duration');
-        return usage;
-		}
+        return;
+    }
     console.log(filename);
     upload_scr(message,filename,args[1],args[0], prefix);
 }
