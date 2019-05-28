@@ -66,3 +66,15 @@ config.json
 # lanterns count file
 lanterns.json
 
+# Movie files (GitHub is not a streaming site)
+*.mkv
+
+# Windows Exe and batch files
+*.exe
+*.bat
+
+# PNG files in /cmds
+cmds/**/*.png
+
+# Movie links file
+cmds/screenshots/episode.json

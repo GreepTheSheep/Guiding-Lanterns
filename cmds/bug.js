@@ -19,17 +19,14 @@ function bug(message, client, prefix) {
                 color: 654456,
                 author: {
                     name: "A bug report has been posted !",
-                    icon_url: message.author.avatarURL,
+                    icon_url: message.author.displayAvatarURL,
                 },
                 title: "BUG REPORT",
 
-                description: `_Sent in_
-        **${message.guild.name}**
-
-        __Bug details :_
+                description: `__Bug details :__
 **${args2}**
 
-         _Sent by_
+         __Sent by__
 **${message.author.tag}**`,
 
             }

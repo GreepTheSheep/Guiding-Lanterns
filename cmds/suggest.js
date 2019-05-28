@@ -7,39 +7,61 @@ function suggest(message, client, prefix) {
 
         const args = message.content.split(" ").slice(1);
 
-        if (args.length < 1) {
-            return message.reply("Please enter your suggestion!")
+        if (args.length < 2) {
+            return message.reply("Usage: `!suggest <bot ; server> <your suggestion>`")
         }
 
-        var args2 = message.content.split(' ').slice(1).join(' ');
+        if (args[0] == 'bot' || args[0] == 'server') {
 
-        const suggestchannel = client.guilds.get('570024448371982373').channels.get('579675497970270240')
+        var args2 = args.slice(1).join(' ');
 
-        suggestchannel.send('', {
+        const botsuggestchannel = client.guilds.get('570024448371982373').channels.get('579675497970270240')
+        const srvsuggestchannel = client.guilds.get('562602234265731080').channels.get('582532588506447873')
+
+        if (args[0] == 'bot'){
+        botsuggestchannel.send('', {
             embed: {
                 color: 654456,
                 author: {
                     name: "A suggestion has been posted!",
-                    icon_url: message.author.avatarURL,
+                    icon_url: message.author.displayAvatarURL,
                 },
                 title: "Suggest",
 
-                description: `_Sent in_
-        **${message.guild.name}**
-
-_Suggest:_
+                description: `__Suggest:__
 **${args2}**
 
-         _Sent by_
+         __Sent by__
+**${message.author.tag}**`,
+
+            }
+        })}
+
+    if (args[0] == 'server'){
+        srvsuggestchannel.send('', {
+            embed: {
+                color: 654456,
+                author: {
+                    name: "A server suggestion has been posted!",
+                    icon_url: message.author.displayAvatarURL,
+                },
+                title: "Server Suggest",
+
+                description: `__Suggest:__
+**${args2}**
+
+        __Sent by__
 **${message.author.tag}**`,
 
             }
         })
+    }
         message.delete()
 
         message.channel.send('Your suggestion has been posted! <:heureuse:570820764799074335>')
 
-    }
+    } else return message.reply("Usage: `!suggest [bot, server] [your suggestion]`");
+} 
 }
 
 module.exports = suggest;

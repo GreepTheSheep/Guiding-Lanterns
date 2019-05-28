@@ -31,9 +31,7 @@ function lantern(message, client, prefix) {
             message.channel.send(':thumbsup:')
             console.log('Lantern counter reset !')
 
-        } else {
-            message.channel.send('Only the bot owner can use this command!')
-        }
+        } else return;
     }
 }
 

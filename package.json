@@ -20,10 +20,8 @@
         "didyoumean2": "^3.0.0",
         "discord-emoji": "^1.1.1",
         "discord.js": "^11.5.0",
+        "fluent-ffmpeg": "^2.1.2",
         "fs": "0.0.1-security",
-        "fs-extra": "^8.0.1",
-        "math-expression-evaluator": "^1.2.17",
-        "node-notifier": "^5.2.1",
-        "node-opus": "^0.2.7"
+        "fs-extra": "^8.0.1"
     }
 }
