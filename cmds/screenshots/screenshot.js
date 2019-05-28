@@ -27,7 +27,6 @@ function video_id_str(){
     return video_ids.join("\`\n- \`");
 }
 
-<<<<<<< HEAD
 function scr_msg(message,client,prefix, functiondate, functiontime, cooldowns){
     const usage=`\nThe proper usage would be: \n\`${prefix+SCR} <video_id> <timestamp>\`\nThe timestamp may be a number (in seconds), a percentage (eg. \`50%\`) or in a format \`hh:mm:ss.xxx\` (where hours, minutes and milliseconds are optional)\nType \`${prefix+SCR} list\` to get a list of Video IDs`
     console.log(`\n[${functiondate(0)} - ${functiontime(0)}] Function screenshot() called by ${message.author.tag}`);
