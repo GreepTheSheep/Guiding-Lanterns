@@ -19,7 +19,10 @@ const images = [
     'https://78.media.tumblr.com/db6256e0bb27fd77cbba6d3b5b14313a/tumblr_p6vvixKKZ61v5nb6zo1_400.gif',
     'https://68.media.tumblr.com/5d589ace2296bf25b86aca1a8642f046/tumblr_oodijwqPHE1tv83zuo2_400.gif',
     'https://66.media.tumblr.com/2e9b485c8bb512aae5032c251b7b15ea/tumblr_ozopghxTqI1tlomiho1_500.gif',
-    'https://cdn.discordapp.com/attachments/562602234265731082/576361649527586816/43169276_2222846214658575_7910639428306884730_n.jpg'
+    'https://cdn.discordapp.com/attachments/562602234265731082/576361649527586816/43169276_2222846214658575_7910639428306884730_n.jpg',
+    'https://media.discordapp.net/attachments/562602234265731082/582818630274777089/Screenshot_20190528-144236_MX_Player01.jpg',
+    'https://media.discordapp.net/attachments/562602234265731082/582838793959243794/PicsArt_05-28-04.53.11.png',
+    'https://media.discordapp.net/attachments/562602234265731082/582852031388319754/PicsArt_05-28-05.02.37.png'
 ];
 
 function randomItem(array) {
