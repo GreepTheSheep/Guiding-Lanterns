@@ -78,3 +78,6 @@ cmds/**/*.png
 
 # Movie links file
 cmds/screenshots/episode.json
+
+# package-lock.json
+package-lock.json
