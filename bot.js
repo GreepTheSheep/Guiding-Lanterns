@@ -35,6 +35,9 @@ client.on('message', message => { // If any message was recived
     const lantern = require('./cmds/lantern.js');
     lantern(message, client, prefix);
 
+    const screenshot = require('./cmds/screenshots/screenshot.js');
+    screenshot(message, client, prefix, functiondate, functiontime);
+
     const quotes = require('./cmds/quotes.js');
     quotes(message, client, prefix);
 
