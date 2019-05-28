@@ -30,7 +30,14 @@ function video_id_str(){
 function scr_msg(message,client,prefix, functiondate, functiontime){
     const usage=`\nThe proper usage would be: \n\`${prefix+SCR} <video_id> <timestamp>\`\nThe timestamp may be a number (in seconds), a percentage (eg. \`50%\`) or in a format \`hh:mm:ss.xxx\` (where hours, minutes and milliseconds are optional)`
     console.log(`\n[${functiondate(0)} - ${functiontime(0)}] Function screenshot() called by ${message.author.tag}`);
-    const args = message.content.split(/ +/).slice(1);    
+    const args = message.content.split(/ +/).slice(1);
+    if (args[0] === 'list'){
+        let embed = new Discord.RichEmbed()
+        embed.addField("Available video ids are:", `- \`${video_id_str()}\``)
+        .setFooter(`The proper usage would be: "${prefix+SCR} <video_id> <timestamp>"`, `${message.author.displayAvatarURL}`)
+        message.reply(embed)
+        return;
+    }
     if (args.length < 2) {
         let reply = `You didn't provide enough arguments, ${message.author}!`
         message.channel.send(`${reply}${usage}`);
@@ -44,7 +51,7 @@ function scr_msg(message,client,prefix, functiondate, functiontime){
         .setColor('#ff0000')
         .addField("I don\'t have that video id!", `Available video ids are:\n- \`${video_id_str()}\``)
         .setThumbnail("https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061132_960_720.png")
-        .setFooter(`Type "!bug <details of your bug>" to send at the devs`, `${message.author.displayAvatarURL}`)
+        .setFooter(`Type "${prefix}bug <details of your bug>" to send at the devs`, `${message.author.displayAvatarURL}`)
         message.reply(embed)
         return;
     }
@@ -54,9 +61,9 @@ function scr_msg(message,client,prefix, functiondate, functiontime){
         return usage;
 		}
     console.log(filename);
-    upload_scr(message,filename,args[1],args[0]);
+    upload_scr(message,filename,args[1],args[0], prefix);
 }
-function upload_scr(message,filename,timemark,displayid){
+function upload_scr(message,filename,timemark,displayid, prefix){
     const ffmpeg = require('fluent-ffmpeg');
     ffmpeg(filename)
         .on('end', function() {
@@ -69,9 +76,9 @@ function upload_scr(message,filename,timemark,displayid){
             let embed = new Discord.RichEmbed()
                 embed.setTitle('ERROR!')
                 .setColor('#ff0000')
-                .addField("Screenshot Error :", `Error returned an:\n${err.message}`)
+                .addField("Screenshot Error :", `Error during screenshot`)
                 .setThumbnail("https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061132_960_720.png")
-                .setFooter(`Type "!bug <details of your bug>" to send at the devs`, `${message.author.displayAvatarURL}`)
+                .setFooter(`Type "${prefix}bug <details of your bug>" to send at the devs`, `${message.author.displayAvatarURL}`)
                 message.reply(embed)
         })
         .screenshots({

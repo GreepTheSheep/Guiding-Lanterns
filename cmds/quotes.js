@@ -39,7 +39,7 @@ function quotes(message, client, prefix) {
         let embed = new Discord.RichEmbed()
             embed.setColor("#9C01C4")
                 .addField("Random Tangled quote :", `${rquote}`)
-                .setFooter(`Another? !quote`, `${client.user.avatarURL}`)
+                .setFooter(`Another? ${prefix}quote`, `${client.user.avatarURL}`)
             message.channel.send({ embed: embed })
     }
 }
