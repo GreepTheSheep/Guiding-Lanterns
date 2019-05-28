@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
 const config = require('./config.json');
+const cooldowns = new Discord.Collection();
 
 function functiondate() {
     const datefu = new Date();
@@ -35,7 +36,7 @@ client.on('message', message => {
     lantern(message, client, prefix);
 
     const screenshot = require('./cmds/screenshots/screenshot.js');
-    screenshot(message, client, prefix, functiondate, functiontime);
+    screenshot(message, client, prefix, functiondate, functiontime,cooldowns);
 
     const quotes = require('./cmds/quotes.js');
     quotes(message, client, prefix);
