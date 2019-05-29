@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
 function about(message, client, prefix) {
-    const UpTime =  (Math.round(client.uptime / (1000 * 60 * 60))) + " hours, " + (Math.round(client.uptime / (1000 * 60)) % 60) + " minutes, and " + (Math.round(client.uptime / 1000) % 60) + " seconds";
+    const UpTime =  (Math.round(client.uptime / (1000 * 60 * 60 * 24))) + "days, " + (Math.round(client.uptime / (1000 * 60 * 60))) + " hours, " + (Math.round(client.uptime / (1000 * 60)) % 60) + " minutes, and " + (Math.round(client.uptime / 1000) % 60) + " seconds";
     if (message.content.startsWith(prefix + 'about')) {
         let embed = new Discord.RichEmbed()
             embed.setColor("#9C01C4")
