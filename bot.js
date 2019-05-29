@@ -23,9 +23,33 @@ function functiontime() { // The function it gives a time (here the current time
 } // End of the function
 
 
+const actmsgs = [ // List of random activities
+    `Tangled`,
+    `Varian`,
+    `Rapunzel`,
+    `Corona`,
+    `TTS`,
+    `Tangled Ever After`,
+    `Eugene`,
+    `!help for help, duh`
+]; // End of list
+
+function randomItem(array) { // Output a random item from array
+    return array[Math.floor(Math.random() * array.length)];
+}
+
 client.on('ready', () => { // If bot was connected:
     console.log(`Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`); // Sends at the console 'I am connected!'
-    client.user.setStatus('Tangled', { type: 'WATCHING' })
+    client.user.setActivity(`Tangled`, { type: 'WATCHING' }) // Set starting activity to "Watching Tangled"
+
+    // Set random activity every 2 minutes
+    const actfunction = new Promise(function(resolve, reject) {
+        setInterval(function() {
+            let actmsg = randomItem(actmsgs);
+            client.user.setActivity(`${actmsg}`, { type: 'WATCHING' })
+        }, 2 * 60 * 1000);
+    });
+    actfunction
 }); // End
 
 const prefix = config.prefix // Gets the prefix from the config file
