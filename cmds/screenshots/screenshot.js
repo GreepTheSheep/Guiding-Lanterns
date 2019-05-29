@@ -76,7 +76,7 @@ function scr_msg(message,client,prefix, functiondate, functiontime, cooldowns){
 
         if (now < expirationTime) {
             const timeLeft = (expirationTime - now) / 1000;
-            return message.reply(`please wait ${timeLeft.toFixed(1)} more second(s) before reusing the \`${prefix+SCR}\` command.`);
+            return message.reply(`please wait ${timeLeft.toFixed(0)} more second(s) before reusing the \`${prefix+SCR}\` command.`);
         }
     }
 
