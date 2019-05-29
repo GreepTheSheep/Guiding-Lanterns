@@ -84,11 +84,10 @@ function scr_msg(message,client,prefix, functiondate, functiontime, cooldowns){
     timestamps.set(message.author.id, now);
     setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 	
-    /*
-    if (message.author.id === '564040697154633746'){ //Override cooldown
+    
+    if (message.member.roles.find(r => r.name === "KEY (Corona's Lanterns)")){ //Override cooldown
         timestamps.delete(message.author.id);
     }
-    */
 	// End of cooldown implement
 	
     upload_scr(message,filename,args[1],args[0], prefix);
