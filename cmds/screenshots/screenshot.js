@@ -86,7 +86,7 @@ function scr_msg(message,client,prefix, functiondate, functiontime, cooldowns){
     setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 	
     
-    if (message.author.roles.find(r => r.name === "KEY (Corona's Lanterns)")){ //Override cooldown
+    if (message.member.roles.find(r => r.name === "KEY (Corona's Lanterns)")){ //Override cooldown
         timestamps.delete(message.author.id);
     }
 	// End of cooldown implement
@@ -120,6 +120,8 @@ function upload_scr(message,filename,timemark,displayid, prefix){
 }
 function screenshot(message, client, prefix, functiondate, functiontime, cooldowns) {
     if (message.content.startsWith(prefix+SCR)) {
+        if (message.channel.type === 'dm') return message.reply('I can\'t do that in DMs');
+        
         scr_msg(message,client,prefix, functiondate, functiontime, cooldowns);
     }
 };
