@@ -25,6 +25,7 @@ function functiontime() { // The function it gives a time (here the current time
 
 client.on('ready', () => { // If bot was connected:
     console.log(`Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`); // Sends at the console 'I am connected!'
+    client.user.setStatus('Tangled', { type: 'WATCHING' })
 }); // End
 
 const prefix = config.prefix // Gets the prefix from the config file
