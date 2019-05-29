@@ -120,6 +120,8 @@ function upload_scr(message,filename,timemark,displayid, prefix){
 }
 function screenshot(message, client, prefix, functiondate, functiontime, cooldowns) {
     if (message.content.startsWith(prefix+SCR)) {
+        if (message.channel.type === 'dm') return message.reply('I can\'t do that in DMs');
+        
         scr_msg(message,client,prefix, functiondate, functiontime, cooldowns);
     }
 };
