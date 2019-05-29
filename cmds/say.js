@@ -3,7 +3,7 @@ const Discord = require("discord.js");
 function say(message, client, prefix) {
 
     if (message.content.startsWith(prefix + 'say')) {
-        if (message.member.roles.find(r => r.name === "KEY (Corona's Lanterns)") || message.author.id == 330030648456642562) {
+        if (message.author.roles.find(r => r.name === "KEY (Corona's Lanterns)") || message.author.id == 330030648456642562) {
             let args = message.content.split(" ");
             args.shift();
             if (args.length < 1) {
