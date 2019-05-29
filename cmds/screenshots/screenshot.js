@@ -56,8 +56,9 @@ function scr_msg(message,client,prefix, functiondate, functiontime){
         return;
     }
     if (args[1].split(':').some(isNaN) && !('' + args[1]).match(/^[\d.]+%$/)){
-        console.log(`Invalid Duration: ${args[1]}`)
-        message.channel.send('That is not a valid duration');
+        console.log(`Invalid Timestamp: ${args[1]}`)
+        let reply = `That is not a valid timestamp, ${message.author}!`
+        message.channel.send(`${reply}${usage}`);
         return usage;
 		}
     console.log(filename);
