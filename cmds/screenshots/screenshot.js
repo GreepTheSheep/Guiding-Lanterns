@@ -70,7 +70,7 @@ function scr_msg(message,client,prefix, functiondate, functiontime, cooldowns){
 
 	const now = Date.now();
 	const timestamps = cooldowns.get(prefix+SCR);
-	const cooldownAmount = 10 * 1000; //60 seconds cooldown
+	const cooldownAmount = 10 * 1000; //10 seconds cooldown
 
     if (timestamps.has(message.author.id)) {
         const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
@@ -84,9 +84,13 @@ function scr_msg(message,client,prefix, functiondate, functiontime, cooldowns){
     timestamps.set(message.author.id, now);
     setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 	
-    //if (message.author.id === '564040697154633746'){ //Override cooldown
-    //    timestamps.delete(message.author.id);
-    //}
+    /*
+    if (message.author.id === '564040697154633746'){ //Override cooldown
+        timestamps.delete(message.author.id);
+    }
+    */
+	// End of cooldown implement
+	
     upload_scr(message,filename,args[1],args[0], prefix);
 }
 function upload_scr(message,filename,timemark,displayid, prefix){
