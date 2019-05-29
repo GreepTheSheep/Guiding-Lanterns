@@ -27,7 +27,7 @@ function video_id_str(){
     return video_ids.join("\`\n- \`");
 }
 
-function scr_msg(message,client,prefix, functiondate, functiontime){
+function scr_msg(message,client,prefix, functiondate, functiontime, cooldowns){
     const usage=`\nThe proper usage would be: \n\`${prefix+SCR} <video_id> <timestamp>\`\nThe timestamp may be a number (in seconds), a percentage (eg. \`50%\`) or in a format \`hh:mm:ss.xxx\` (where hours, minutes and milliseconds are optional)\nType \`${prefix+SCR} list\` to get a list of Video IDs`
     console.log(`\n[${functiondate(0)} - ${functiontime(0)}] Function screenshot() called by ${message.author.tag}`);
     const args = message.content.split(/ +/).slice(1);
@@ -59,9 +59,38 @@ function scr_msg(message,client,prefix, functiondate, functiontime){
         console.log(`Invalid Timestamp: ${args[1]}`)
         let reply = `That is not a valid timestamp, ${message.author}!`
         message.channel.send(`${reply}${usage}`);
-        return usage;
-		}
+        return;
+    }
     console.log(filename);
+
+    //Implement cooldown
+	if (!cooldowns.has(prefix+SCR)) {
+		cooldowns.set(prefix+SCR, new Discord.Collection());
+	}
+
+	const now = Date.now();
+	const timestamps = cooldowns.get(prefix+SCR);
+	const cooldownAmount = 10 * 1000; //10 seconds cooldown
+
+    if (timestamps.has(message.author.id)) {
+        const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+
+        if (now < expirationTime) {
+            const timeLeft = (expirationTime - now) / 1000;
+            return message.reply(`please wait ${timeLeft.toFixed(0)} more second(s) before reusing the \`${prefix+SCR}\` command.`);
+        }
+    }
+
+    timestamps.set(message.author.id, now);
+    setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+	
+    /*
+    if (message.author.id === '564040697154633746'){ //Override cooldown
+        timestamps.delete(message.author.id);
+    }
+    */
+	// End of cooldown implement
+	
     upload_scr(message,filename,args[1],args[0], prefix);
 }
 function upload_scr(message,filename,timemark,displayid, prefix){
@@ -89,9 +118,9 @@ function upload_scr(message,filename,timemark,displayid, prefix){
         });
     
 }
-function screenshot(message, client, prefix, functiondate, functiontime) {
+function screenshot(message, client, prefix, functiondate, functiontime, cooldowns) {
     if (message.content.startsWith(prefix+SCR)) {
-        scr_msg(message,client,prefix, functiondate, functiontime);
+        scr_msg(message,client,prefix, functiondate, functiontime, cooldowns);
     }
 };
 

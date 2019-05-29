@@ -1,6 +1,7 @@
 const Discord = require('discord.js'); // Defines the Discord.js library
 const client = new Discord.Client(); // Makes him say it's for a Discord client (the bot)
 const config = require('./config.json'); // Retrieves the contents of the configuration file (the prefix and the login token)
+const cooldowns = new Discord.Collection(); //Stores cooldown info for screenshot()
 
 function functiondate() { // The function it gives a date (here the current date)
     const datefu = new Date();
@@ -36,7 +37,7 @@ client.on('message', message => { // If any message was recived
     lantern(message, client, prefix);
 
     const screenshot = require('./cmds/screenshots/screenshot.js');
-    screenshot(message, client, prefix, functiondate, functiontime);
+    screenshot(message, client, prefix, functiondate, functiontime, cooldowns);
 
     const quotes = require('./cmds/quotes.js');
     quotes(message, client, prefix);
