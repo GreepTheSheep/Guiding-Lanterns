@@ -23,7 +23,7 @@ function functiontime() { // The function it gives a time (here the current time
 } // End of the function
 
 
-const actmsgs = [ // List of random activities
+const actmsgs = [ // List of activities
     `Tangled`,
     `Varian`,
     `Rapunzel`,
@@ -55,6 +55,7 @@ client.on('ready', () => { // If bot was connected:
 const prefix = config.prefix // Gets the prefix from the config file
 client.on('message', message => { // If any message was recived
     if (message.author.bot) return; // If is a bot, do nothing
+    if (message.channel.type === 'dm') return; // If commands was send in DMs, do nothing
 
     // Begin of all the commands
 

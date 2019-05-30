@@ -3,7 +3,6 @@ const Discord = require("discord.js");
 function bug(message, client, prefix) {
 
     if (message.content.startsWith(prefix + 'bug')) {
-        if (message.channel.type === 'dm') return;
 
         const args = message.content.split(" ").slice(1);
 
