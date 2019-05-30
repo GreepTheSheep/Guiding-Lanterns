@@ -1,5 +1,6 @@
-# Corona's Lanterns
-Official Discord bot of r/tangled
+# The Guiding Lanterns
+## (formerly known as Corona's Lanterns)
+### Official Discord bot of r/tangled
 
 ![icon](icon1.png)
 
