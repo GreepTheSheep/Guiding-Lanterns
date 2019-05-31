@@ -6,7 +6,7 @@ const { Attachment } = require('discord.js');
 const Discord = require('discord.js');
 
 const checkTime = i => i < 10 ? "0" + i : i;
-const SCR = 'screenshot';
+const SCR = 'scr';
 
 function episode_to_filename(epi) {
     const episode = require('./episode.json');
