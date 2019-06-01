@@ -71,7 +71,7 @@ function scr_msg(message, client, prefix, functiondate, functiontime, cooldowns)
 
     const now = Date.now();
     const timestamps = cooldowns.get(prefix + SCR);
-    const cooldownAmount = 10 * 1000; //10 seconds cooldown
+    const cooldownAmount = 20 * 1000; // 20 seconds cooldown
 
     if (timestamps.has(message.author.id)) {
         const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
