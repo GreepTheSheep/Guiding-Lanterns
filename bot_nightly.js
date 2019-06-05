@@ -47,7 +47,7 @@ var num_messages = 0; //set num_messages to 0
 const prefix = config.prefix_nightly
 client.on('message', message => {
 
-    message_count(client,num_messages++)
+    message_count(client,++num_messages)
 
     if (message.author.bot) return;
 
