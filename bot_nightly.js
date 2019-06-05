@@ -44,16 +44,16 @@ client.on('ready', () => {
     message_count(client,0);
 });
 client.on('guildMemberAdd', member => {
-    num_members(client);
+    num_members(member.client);
 });
 client.on('guildMemberRemove', member => {
-    num_members(client);
+    num_members(member.client);
 });
 var num_messages = 0; //set num_messages to 0
 const prefix = config.prefix_nightly
 client.on('message', message => {
 
-    message_count(client,++num_messages)
+    message_count(message.client,++num_messages)
 
     if (message.author.bot) return;
 
