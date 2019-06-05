@@ -12,6 +12,7 @@ function frozen_2_countdown(client) {
     const updatecount = new Promise(function(resolve, reject) {
         setInterval(function() {
             channel.setName(`${text}`).catch(err=>console.log(err));
+            console.log(`Frozen II countdown refreshed!\n${text}`)
         }, 24 * 60 * 60 * 1000);
     });
     updatecount
