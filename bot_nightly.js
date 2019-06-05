@@ -27,9 +27,20 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`);
     client.user.setStatus('dnd');
 });
+//Counts number of messages
+var num_messages = 0;
+function stats(client) {
+    num_messages++;
+    const guild = client.guilds.get('570024448371982373');
+    const channel = guild.channels.get('585767717387370496');
+    channel.setName(`Messages: ${num_messages}`).catch(err=>console.log(err));
+}
 
 const prefix = config.prefix_nightly
 client.on('message', message => {
+
+    stats(client);
+
     if (message.author.bot) return;
 
     const lantern = require('./cmds/lantern.js');
