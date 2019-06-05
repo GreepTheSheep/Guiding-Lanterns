@@ -43,6 +43,12 @@ client.on('ready', () => {
     num_members(client);
     message_count(client,0);
 });
+client.on('guildMemberAdd', member => {
+    num_members(client);
+});
+client.on('guildMemberRemove', member => {
+    num_members(client);
+});
 var num_messages = 0; //set num_messages to 0
 const prefix = config.prefix_nightly
 client.on('message', message => {
