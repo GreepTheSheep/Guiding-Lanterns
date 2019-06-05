@@ -35,13 +35,21 @@ function message_count(client,count) {
     console.log(count);
     channel.setName(`Messages: ${count}`).catch(err=>console.log(err));
 }
-
+//Frozen II countdown
+function frozen_2_countdown(client) {
+    var t = Date.parse("November 22 2019 00:00:00 GMT-0400") - Date.parse(new Date());
+    var days = Math.floor( t/(1000*60*60*24) );
+    const guild = client.guilds.get('570024448371982373');
+    const channel = guild.channels.get('585834618910015491');
+    channel.setName(`${days} Days until Frozen II`).catch(err=>console.log(err));
+}
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`);
     client.user.setStatus('dnd');
     num_members(client);
     message_count(client,0);
+    frozen_2_countdown(client);
 });
 client.on('guildMemberAdd', member => {
     num_members(member.client);
