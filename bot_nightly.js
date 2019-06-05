@@ -22,33 +22,15 @@ function functiontime() {
     return time
 }
 
-//Update amount of members.
-function num_members(client) {
-    const guild = client.guilds.get('570024448371982373');
-    const channel = guild.channels.get('585782174012407848');
-    channel.setName(`Members: ${guild.memberCount}`).catch(err=>console.log(err));
-}
-//Update number of messages.
-function message_count(client,count) {
-    const guild = client.guilds.get('570024448371982373');
-    const channel = guild.channels.get('585767717387370496');
-    console.log(count);
-    channel.setName(`Messages: ${count}`).catch(err=>console.log(err));
-}
-//Frozen II countdown
-function frozen_2_countdown(client) {
-    var t = Date.parse("November 22 2019 00:00:00 GMT-0400") - Date.parse(new Date());
-    var days = Math.floor( t/(1000*60*60*24) );
-    const guild = client.guilds.get('570024448371982373');
-    const channel = guild.channels.get('585834618910015491');
-    channel.setName(`${days} Days until Frozen II`).catch(err=>console.log(err));
-}
+const message_count = require('./counter/message.js');
+const num_members = require('./counter/member.js');
+const frozen_2_countdown = require('./counter/frozen2.js');
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`);
     client.user.setStatus('dnd');
     num_members(client);
-    message_count(client,0);
+    message_count(client);
     frozen_2_countdown(client);
 });
 client.on('guildMemberAdd', member => {
@@ -57,13 +39,13 @@ client.on('guildMemberAdd', member => {
 client.on('guildMemberRemove', member => {
     num_members(member.client);
 });
-var num_messages = 0; //set num_messages to 0
+
 const prefix = config.prefix_nightly
 client.on('message', message => {
 
-    message_count(message.client,++num_messages)
-
     if (message.author.bot) return;
+
+    message_count(message.client);
 
     const lantern = require('./cmds/lantern.js');
     lantern(message, client, prefix);
