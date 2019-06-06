@@ -9,6 +9,7 @@ function num_members(client,guild_id,channel_id) {
     }
     if (!guild.available) {
         console.log(`Guild: ${guild_id} is not available`);
+        return;
     }
     const channel = client.channels.get(channel_id);
     if (!channel) {
