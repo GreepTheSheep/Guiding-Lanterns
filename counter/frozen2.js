@@ -1,5 +1,9 @@
 
 const Discord = require('discord.js');
+function days_until_frozen_2():
+    var t = Date.parse("November 22 2019 00:00:00 GMT-0400") - Date.parse(new Date());
+    var days = Math.floor( t/(1000*60*60*24) );
+    return `${days} Days until Frozen II`;
 
 //Frozen II countdown
 function frozen_2_countdown(client,channel_id) {
@@ -8,14 +12,10 @@ function frozen_2_countdown(client,channel_id) {
         console.log(`Channel: ${channel_id} cannot be found`);
         return;
     }
-    var t = Date.parse("November 22 2019 00:00:00 GMT-0400") - Date.parse(new Date());
-    const text = `${days} Days until Frozen II`
-    channel.setName(`${text}`).catch(err=>console.log(err));
+    channel.setName(`${days_until_frozen_2()}`).catch(err=>console.log(err));
 
     var x = setInterval(function() {
-        var days = Math.floor( t/(1000*60*60*24) );
-        var t = Date.parse("November 22 2019 00:00:00 GMT-0400") - Date.parse(new Date());
-        const text = `${days} Days until Frozen II`
+        const text = `${days_until_frozen_2()}`
         channel.setName(`${text}`).catch(err=>console.log(err));
         console.log(`Frozen II countdown refreshed!\n${text}`)
 
