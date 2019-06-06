@@ -30,18 +30,22 @@ Dev-testing category channel ids
 	585767717387370496 - Messages
 	585782174012407848 - Members
 	585834618910015491 - Countdown for frozen II
-	586086472201797681 - Unused
+    586086472201797681 - Unused
+    586199073292550161 - Raps' Birthday Countdown
 */
 const lant_message_count = () => message_count(client, "585767717387370496");
 const lant_num_members = () => num_members(client,"570024448371982373","585782174012407848");
 const lant_frozen_II = () => frozen_2_countdown(client,"585834618910015491");
+const lant_raps_birth = () => raps_birthday_countdown(client,"586199073292550161");
 //
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`);
     client.user.setStatus('dnd');
     lant_num_members();
+    lant_message_count();
     lant_frozen_II();
+    lant_raps_birth();
 });
 client.on('guildMemberAdd', member => {
     lant_num_members();
@@ -55,7 +59,7 @@ client.on('message', message => {
 
     if (message.author.bot) return;
 
-    lant_message_count();//increment message count by 1
+    lant_message_count();
 
     const lantern = require('./cmds/lantern.js');
     lantern(message, client, prefix);
