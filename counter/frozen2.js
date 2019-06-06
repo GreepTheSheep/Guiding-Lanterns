@@ -31,7 +31,7 @@ function frozen_2_countdown(client,channel_id) {
             channel.setName(`FROZEN II IS OUT!!`).catch(err=>console.log(err));
             console.log(`Frozen II countdown refreshed!\nFROZEN II IS OUT!!`)
         }
-    }, 1000 * );
+    }, 1000);
 }
 
 module.exports = frozen_2_countdown;
