@@ -6,7 +6,7 @@ function days_until_frozen_2(){
     var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
     var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-    return `${days}d ${hours}h ${minutes}m ${seconds}s until Frozen II`;
+    return `${days}d ${hours}h ${minutes}m ${seconds}s`;
 }
 function milliseconds_until_frozen_2(){
     return Date.parse("November 22 2019 00:00:00 GMT-0400") - Date.parse(new Date());
