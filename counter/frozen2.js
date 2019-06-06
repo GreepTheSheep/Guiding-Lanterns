@@ -1,8 +1,12 @@
 
 const Discord = require('discord.js');
 function days_until_frozen_2(){
+    var distance = milliseconds_until_frozen_2()
     var days = Math.floor( milliseconds_until_frozen_2()/(1000*60*60*24) );
-    return `${days} Days until Frozen II`;
+    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+    return `${days}d ${hours}h ${minutes}m ${seconds}s until Frozen II`;
 }
 function milliseconds_until_frozen_2(){
     return Date.parse("November 22 2019 00:00:00 GMT-0400") - Date.parse(new Date());
@@ -27,7 +31,7 @@ function frozen_2_countdown(client,channel_id) {
             channel.setName(`FROZEN II IS OUT!!`).catch(err=>console.log(err));
             console.log(`Frozen II countdown refreshed!\nFROZEN II IS OUT!!`)
         }
-    }, 1000);
+    }, 1000 * );
 }
 
 module.exports = frozen_2_countdown;
