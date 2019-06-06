@@ -1,16 +1,23 @@
 const Discord = require('discord.js');
-
-var num_messages = 0; //set num_messages to 0
+const fs = require('fs');
+const msgcount = require('./messages.json');
 
 //Update number of messages.
-function message_count(client,channel_id,increment) {
+function message_count(client,channel_id) {
     const channel = client.channels.get(channel_id);
     if (!channel) {
         console.log(`Channel: ${channel_id} cannot be found`);
         return;
     }
-    num_messages+=increment;
-    channel.setName(`Messages: ${num_messages}`).catch(err=>console.log(err));
+
+    msgcount.messages++;
+
+    let countwrite = { "messages": `${msgcount.messages}` };
+    let data = JSON.stringify(countwrite);
+    fs.writeFileSync('./counter/messages.json', data);
+
+    channel.setName(`Messages: ${msgcount.messages}`).catch(err=>console.log(err));
+
 }
 
 module.exports = message_count;
