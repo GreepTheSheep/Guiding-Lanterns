@@ -66,6 +66,7 @@ config.json
 # count files
 lanterns.json
 counter/messages.json
+counter/channel_ids.json
 
 # Movie files (GitHub is not a streaming site)
 *.mkv
