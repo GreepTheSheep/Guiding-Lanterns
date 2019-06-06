@@ -25,7 +25,13 @@ function functiontime() {
 const message_count = require('./counter/message.js');
 const num_members = require('./counter/member.js');
 const frozen_2_countdown = require('./counter/frozen2.js');
-//For the Guiding lanterns channel statistics category
+/*
+Dev-testing category channel ids
+	585767717387370496 - Messages
+	585782174012407848 - Members
+	585834618910015491 - Countdown for frozen II
+	586086472201797681 - Unused
+*/
 const lant_message_count = i => message_count(client, "585767717387370496",i);
 const lant_num_members = () => num_members(client,"570024448371982373","585782174012407848");
 const lant_frozen_II = () => frozen_2_countdown(client,"585834618910015491");
