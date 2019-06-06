@@ -25,6 +25,7 @@ function functiontime() {
 const message_count = require('./counter/message.js');
 const num_members = require('./counter/member.js');
 const frozen_2_countdown = require('./counter/frozen2.js');
+const channel_id = require('./counter/channel_ids.json');
 /*
 Dev-testing category channel ids
 	585767717387370496 - Messages
@@ -32,9 +33,9 @@ Dev-testing category channel ids
 	585834618910015491 - Countdown for frozen II
 	586086472201797681 - Unused
 */
-const lant_message_count = () => message_count(client, "585767717387370496");
-const lant_num_members = () => num_members(client,"570024448371982373","585782174012407848");
-const lant_frozen_II = () => frozen_2_countdown(client,"585834618910015491");
+const lant_message_count = () => message_count(client, lant_1);
+const lant_num_members = () => num_members(client,"570024448371982373",lant_2);
+const lant_frozen_II = () => frozen_2_countdown(client,lant_3);
 //
 
 client.on('ready', () => {
