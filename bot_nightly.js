@@ -29,15 +29,15 @@ const frozen_2_countdown = require('./counter/frozen2.js');
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`);
     client.user.setStatus('dnd');
-    num_members(client);
-    message_count(client);
-    frozen_2_countdown(client);
+    num_members(member.client,"570024448371982373","585834618910015491");
+    message_count(client,"585767717387370496");
+    frozen_2_countdown(client,"585834618910015491");
 });
 client.on('guildMemberAdd', member => {
-    num_members(member.client);
+    num_members(member.client,"570024448371982373","585834618910015491");
 });
 client.on('guildMemberRemove', member => {
-    num_members(member.client);
+    num_members(member.client,"570024448371982373","585834618910015491");
 });
 
 const prefix = config.prefix_nightly
@@ -45,7 +45,7 @@ client.on('message', message => {
 
     if (message.author.bot) return;
 
-    message_count(message.client);
+    message_count(message.client, "585767717387370496");
 
     const lantern = require('./cmds/lantern.js');
     lantern(message, client, prefix);
