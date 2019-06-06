@@ -25,6 +25,7 @@ function functiontime() {
 const message_count = require('./counter/message.js');
 const num_members = require('./counter/member.js');
 const frozen_2_countdown = require('./counter/frozen2.js');
+const raps_birthday_countdown = require('./counter/raps_birthday.js')
 const channel_id = require('./counter/channel_ids.json');
 /*
 Dev-testing category channel ids
