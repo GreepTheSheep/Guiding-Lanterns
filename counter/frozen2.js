@@ -24,12 +24,10 @@ function frozen_2_countdown(client,channel_id) {
     var x = setInterval(function() {
         const text = `${days_until_frozen_2()}`
         channel.setName(`${text}`).catch(err=>console.log(err));
-        console.log(`Frozen II countdown refreshed!\n${text}`)
 
         if (milliseconds_until_frozen_2() < 0) {
             clearInterval(x);
             channel.setName(`FROZEN II IS OUT!!`).catch(err=>console.log(err));
-            console.log(`Frozen II countdown refreshed!\nFROZEN II IS OUT!!`)
         }
     }, 1000);
 }
