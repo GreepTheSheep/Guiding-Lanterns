@@ -27,7 +27,7 @@ const num_members = require('./counter/member.js');
 const frozen_2_countdown = require('./counter/frozen2.js');
 //For the Guiding lanterns channel statistics category
 const lant_message_count = () => message_count(client, "585767717387370496");
-const lant_num_members = () => num_members(client,"570024448371982373","585834618910015491");
+const lant_num_members = () => num_members(client,"570024448371982373","585782174012407848");
 const lant_frozen_II = () => frozen_2_countdown(client,"585834618910015491");
 //
 
