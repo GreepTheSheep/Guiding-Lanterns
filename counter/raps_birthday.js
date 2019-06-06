@@ -9,7 +9,7 @@ function days_until_raps_birthday(){
     return `${days}d ${hours}h ${minutes}m ${seconds}s`;
 }
 function milliseconds_until_raps_birthday(){
-    return Date.parse("September 1 2019 00:00:00 GMT-0000") - Date.parse(new Date());
+    return Date.parse("September 1 2019 00:00:00 GMT+0100") - Date.parse(new Date());
 }
 
 function raps_birthday_countdown(client,channel_id) {
