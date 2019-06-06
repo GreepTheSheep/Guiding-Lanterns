@@ -22,7 +22,6 @@ function functiontime() {
     return time
 }
 
-const message_count = require('./counter/message.js');
 const num_members = require('./counter/member.js');
 const frozen_2_countdown = require('./counter/frozen2.js');
 const raps_birthday_countdown = require('./counter/raps_birthday.js')
@@ -35,7 +34,6 @@ Dev-testing category channel ids
     586086472201797681 - Unused
     586199073292550161 - Raps' Birthday Countdown
 */
-const lant_message_count = () => message_count(client, channel_id.messages);
 const lant_num_members = () => num_members(client,"570024448371982373", channel_id.members);
 const lant_frozen_II = () => frozen_2_countdown(client, channel_id.frozen2);
 const lant_raps_birth = () => raps_birthday_countdown(client, channel_id.raps_birthday);
@@ -44,7 +42,6 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`);
     client.user.setStatus('dnd');
     lant_num_members();
-    lant_message_count();
     lant_frozen_II();
     lant_raps_birth();
 });
@@ -60,8 +57,10 @@ client.on('message', message => {
 
     if (message.author.bot) return;
 
-    lant_message_count();
+    const lant_message_count = require('./counter/message.js');
+    lant_message_count(message, client, prefix, channel_id.messages);
 
+    
     const lantern = require('./cmds/lantern.js');
     lantern(message, client, prefix);
 

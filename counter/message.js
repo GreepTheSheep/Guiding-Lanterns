@@ -4,7 +4,7 @@ const countfile = "./counter/messages.json";
 const msgcount = JSON.parse(fs.readFileSync(countfile, "utf8"));
 
 //Update number of messages.
-function message_count(client,channel_id) {
+function message_count(message, client, prefix, channel_id) {
     const channel = client.channels.get(channel_id);
     if (!channel) {
         console.log(`Channel: ${channel_id} cannot be found`);
@@ -12,6 +12,14 @@ function message_count(client,channel_id) {
     }
 
     msgcount.messages++;
+
+    if (message.content.startsWith(prefix + 'resetmsgcount')) {
+        if (message.author.id == "330030648456642562") {
+            msgcount.messages = 0;
+            message.channel.send(':thumbsup:')
+            console.log('Messages counter reset !')
+        } else return;
+    }
 
     let countwrite = { "messages": `${msgcount.messages}` };
     fs.writeFile(countfile, JSON.stringify(countwrite), (x) => {
