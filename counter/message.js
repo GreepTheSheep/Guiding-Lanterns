@@ -1,6 +1,7 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-const msgcount = require('./messages.json');
+const countfile = "./counter/messages.json";
+const msgcount = JSON.parse(fs.readFileSync(countfile, "utf8"));
 
 //Update number of messages.
 function message_count(client,channel_id) {
@@ -13,8 +14,9 @@ function message_count(client,channel_id) {
     msgcount.messages++;
 
     let countwrite = { "messages": `${msgcount.messages}` };
-    let data = JSON.stringify(countwrite);
-    fs.writeFileSync('./counter/messages.json', data);
+    fs.writeFile(countfile, JSON.stringify(countwrite), (x) => {
+        if (x) console.error(x)
+    });
 
     channel.setName(`Messages: ${msgcount.messages}`).catch(err=>console.log(err));
 
