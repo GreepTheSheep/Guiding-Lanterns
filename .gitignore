@@ -84,6 +84,8 @@ cmds/screenshots/episode.json
 # package-lock.json
 package-lock.json
 
-.vscode/settings.json
+# VSCode files
+.vscode/*
 
-counter/messages.json
+# Raw text file
+*.txt
