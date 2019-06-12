@@ -63,8 +63,10 @@ typings/
 # config file (token)
 config.json
 
-# lanterns count file
+# count files
 lanterns.json
+counter/messages.json
+counter/channel_ids.json
 
 # Movie files (GitHub is not a streaming site)
 *.mkv
@@ -81,4 +83,7 @@ cmds/screenshots/episode.json
 
 # package-lock.json
 package-lock.json
+
+.vscode/settings.json
+
 counter/messages.json

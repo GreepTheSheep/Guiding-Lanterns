@@ -22,14 +22,39 @@ function functiontime() {
     return time
 }
 
+const num_members = require('./counter/member.js');
+const frozen_2_countdown = require('./counter/frozen2.js');
+const raps_birthday_countdown = require('./counter/raps_birthday.js')
+const channel_id = require('./counter/channel_ids.json');
+/*
+Dev-testing category channel ids
+	585767717387370496 - Messages
+	585782174012407848 - Members
+	585834618910015491 - Countdown for frozen II
+    586086472201797681 - Unused
+    586199073292550161 - Raps' Birthday Countdown
+*/
+const lant_num_members = () => num_members(client,"570024448371982373", channel_id.members);
+const lant_frozen_II = () => frozen_2_countdown(client, channel_id.frozen2);
+const lant_raps_birth = () => raps_birthday_countdown(client, channel_id.raps_birthday);
 
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`);
     client.user.setStatus('dnd');
+    lant_num_members();
+    lant_frozen_II();
+    lant_raps_birth();
+});
+client.on('guildMemberAdd', member => {
+    lant_num_members();
+});
+client.on('guildMemberRemove', member => {
+    lant_num_members();
 });
 
 const prefix = config.prefix_nightly
 client.on('message', message => {
+
     if (message.author.bot) return;
     if (message.channel.type === 'dm') return;
 
@@ -40,6 +65,10 @@ client.on('message', message => {
     const eval_cmd = require('./cmds/eval.js');
     eval_cmd(message, client, prefix);
 
+    const lant_message_count = require('./counter/message.js');
+    lant_message_count(message, client, prefix, channel_id.messages);
+
+    
     const lantern = require('./cmds/lantern.js');
     lantern(message, client, prefix);
 
