@@ -64,10 +64,6 @@ client.on('message', message => {
     
     const eval_cmd = require('./cmds/eval.js');
     eval_cmd(message, client, prefix);
-
-    const lant_message_count = require('./counter/message.js');
-    lant_message_count(message, client, prefix, channel_id.messages);
-
     
     const lantern = require('./cmds/lantern.js');
     lantern(message, client, prefix);
