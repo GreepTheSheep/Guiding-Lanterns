@@ -56,6 +56,14 @@ const prefix = config.prefix_nightly
 client.on('message', message => {
 
     if (message.author.bot) return;
+    if (message.channel.type === 'dm') return;
+
+    const lant_message_count = require('./counter/message.js');
+    lant_message_count(message, client, prefix, channel_id.messages);
+
+    
+    const eval_cmd = require('./cmds/eval.js');
+    eval_cmd(message, client, prefix);
 
     const lant_message_count = require('./counter/message.js');
     lant_message_count(message, client, prefix, channel_id.messages);
