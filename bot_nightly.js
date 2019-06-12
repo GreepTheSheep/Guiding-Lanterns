@@ -31,9 +31,8 @@ client.on('ready', () => {
 const prefix = config.prefix_nightly
 client.on('message', message => {
     if (message.author.bot) return;
+    if (message.channel.type === 'dm') return;
 
-<<<<<<< Updated upstream
-=======
     const lant_message_count = require('./counter/message.js');
     lant_message_count(message, client, prefix, channel_id.messages);
 
@@ -41,7 +40,6 @@ client.on('message', message => {
     const eval_cmd = require('./cmds/eval.js');
     eval_cmd(message, client, prefix);
 
->>>>>>> Stashed changes
     const lantern = require('./cmds/lantern.js');
     lantern(message, client, prefix);
 
