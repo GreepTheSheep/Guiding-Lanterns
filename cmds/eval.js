@@ -19,10 +19,9 @@ const Discord = require("discord.js");
              if (typeof evaled !== "string"){
                 evaled = require("util").inspect(evaled);
             }
-            message.author.send(`EVAL COMMAND SUCESS!\n\`${code}\``);
-            message.author.send(clean(evaled), {code:"xl"});
+            message.author.send(`EVAL COMMAND SUCESS!\n\`\`\`xl\n${code}\`\`\`\nNode Result: \`${clean(evaled)}\``);
         } catch (err) {
-            message.author.send(`EVAL COMMAND ERROR\n\`${code}\` \`\`\`xl\n${clean(err)}\n\`\`\``);
+            message.author.send(`EVAL COMMAND **ERROR**\n\`\`\`xl\n${code}\`\`\`\nNode Result: \`${clean(err)}\``);
         }
     }
 
