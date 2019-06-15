@@ -4,7 +4,7 @@ function status(message, client, prefix) {
     let donorsonly = new Discord.RichEmbed()
     donorsonly.setColor("#D30051")
     .addField("Sorry :shrug:", `This command is reserved for donors only\n\n[You can contribute to the financing of the project by clicking here](https://patreon.com/KingdomCoronaBot)`)
-    .setFooter(`If you have already donated but you don't have the role, type "!bug bot donated but haven't the role"`, `${client.user.avatarURL}`)
+    .setFooter(`If you have already donated but you don't have the role, type " !bug Donated but haven't the KEY "`, `${client.user.avatarURL}`)
 
     if (message.content.startsWith(prefix + 'setgame')) {
         if (!message.member.roles.find(r => r.name === "KEY (The Guiding Lanterns)")) return message.channel.send(donorsonly)
