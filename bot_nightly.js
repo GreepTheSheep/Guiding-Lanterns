@@ -29,8 +29,8 @@ const channel_id = require('./counter/channel_ids.json');
 const num_members = require('./counter/member.js');
 const frozen_2_countdown = require('./counter/frozen2.js');
 
-const lant_num_members = () => num_members(client,"570024448371982373", channel_id.members);
-const lant_frozen_II = () => frozen_2_countdown(client, channel_id.frozen2);
+const lant_num_members = () => num_members(client,"570024448371982373", channel_id.nightly_members);
+const lant_frozen_II = () => frozen_2_countdown(client, channel_id.nightly_frozen2);
 
 client.on('ready', () => {
     const readylog = `Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`
@@ -54,7 +54,7 @@ client.on('message', message => {
     if (message.channel.type === 'dm') return;
 
     const lant_message_count = require('./counter/message.js');
-    lant_message_count(message, client, prefix, channel_id.messages);
+    lant_message_count(message, client, prefix, channel_id.nightly_messages);
 
     
     const eval_cmd = require('./cmds/eval.js');
