@@ -69,6 +69,7 @@ function scr_msg(message, client, prefix, functiondate, functiontime, cooldowns,
         return;
     }
     console.log(filename);
+    getlogchannel.send(filename);
 
     //Implement cooldown
     if (!cooldowns.has(prefix + SCR)) {
