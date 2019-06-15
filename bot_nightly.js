@@ -2,6 +2,8 @@ const Discord = require('discord.js');
 const client = new Discord.Client();
 const config = require('./config.json');
 const cooldowns = new Discord.Collection();
+const logchannel = '589337521553539102'
+const getlogchannel = () => client.channels.get(logchannel)
 
 function functiondate() {
     const datefu = new Date();
@@ -22,21 +24,50 @@ function functiontime() {
     return time
 }
 
+const channel_id = require('./counter/channel_ids.json');
+
+const num_members = require('./counter/member.js');
+const frozen_2_countdown = require('./counter/frozen2.js');
+
+const lant_num_members = () => num_members(client,"570024448371982373", channel_id.members);
+const lant_frozen_II = () => frozen_2_countdown(client, channel_id.frozen2);
 
 client.on('ready', () => {
-    console.log(`Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`);
+    const readylog = `Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`
+    console.log(readylog);
+    getlogchannel().send(readylog);
     client.user.setStatus('dnd');
+    lant_num_members();
+    lant_frozen_II();
+});
+client.on('guildMemberAdd', member => {
+    lant_num_members();
+});
+client.on('guildMemberRemove', member => {
+    lant_num_members();
 });
 
 const prefix = config.prefix_nightly
 client.on('message', message => {
-    if (message.author.bot) return;
 
+    if (message.author.bot) return;
+    if (message.channel.type === 'dm') return;
+
+    const lant_message_count = require('./counter/message.js');
+    lant_message_count(message, client, prefix, channel_id.messages);
+
+    
+    const eval_cmd = require('./cmds/eval.js');
+    eval_cmd(message, client, prefix, getlogchannel());
+    
     const lantern = require('./cmds/lantern.js');
-    lantern(message, client, prefix);
+    lantern(message, client, prefix, getlogchannel());
+
+    const status = require('./cmds/status.js');
+    status(message, client, prefix);
 
     const screenshot = require('./cmds/screenshots/screenshot.js');
-    screenshot(message, client, prefix, functiondate, functiontime,cooldowns);
+    screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel());
 
     const quotes = require('./cmds/quotes.js');
     quotes(message, client, prefix);

@@ -2,6 +2,8 @@ const Discord = require('discord.js'); // Defines the Discord.js library
 const client = new Discord.Client(); // Makes him say it's for a Discord client (the bot)
 const config = require('./config.json'); // Retrieves the contents of the configuration file (the prefix and the login token)
 const cooldowns = new Discord.Collection(); //Stores cooldown info for screenshot()
+const logchannel = '589337734754336781' //Set a channel for logging
+const getlogchannel = () => client.channels.get(logchannel)
 
 function functiondate() { // The function it gives a date (here the current date)
     const datefu = new Date();
@@ -23,33 +25,10 @@ function functiontime() { // The function it gives a time (here the current time
 } // End of the function
 
 
-const actmsgs = [ // List of activities
-    `Tangled`,
-    `Varian`,
-    `Rapunzel`,
-    `Corona`,
-    `TTS`,
-    `Tangled Ever After`,
-    `Eugene`,
-    `!help for help, duh`
-]; // End of list
-
-function randomItem(array) { // Output a random item from array
-    return array[Math.floor(Math.random() * array.length)];
-}
-
 client.on('ready', () => { // If bot was connected:
-    console.log(`Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`); // Sends at the console 'I am connected!'
-    client.user.setActivity(`Tangled`, { type: 'WATCHING' }) // Set starting activity to "Watching Tangled"
-
-    // Set random activity every 2 minutes
-    const actfunction = new Promise(function(resolve, reject) {
-        setInterval(function() {
-            let actmsg = randomItem(actmsgs);
-            client.user.setActivity(`${actmsg}`, { type: 'WATCHING' })
-        }, 2 * 60 * 1000);
-    });
-    actfunction
+    const readylog = `Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}` //Set a text who is said I'm connected!
+    console.log(readylog); // Send the text in the console
+    getlogchannel().send(readylog); // Send the text in the logging channel
 }); // End
 
 const prefix = config.prefix // Gets the prefix from the config file
@@ -60,10 +39,13 @@ client.on('message', message => { // If any message was recived
     // Begin of all the commands
 
     const lantern = require('./cmds/lantern.js');
-    lantern(message, client, prefix);
+    lantern(message, client, prefix, getlogchannel());
+
+    const status = require('./cmds/status.js');
+    status(message, client, prefix);
 
     const screenshot = require('./cmds/screenshots/screenshot.js');
-    screenshot(message, client, prefix, functiondate, functiontime, cooldowns);
+    screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel());
 
     const quotes = require('./cmds/quotes.js');
     quotes(message, client, prefix);

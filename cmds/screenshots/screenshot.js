@@ -28,9 +28,11 @@ function video_id_str() {
     return video_ids.join("\`\n- \`");
 }
 
-function scr_msg(message, client, prefix, functiondate, functiontime, cooldowns) {
+function scr_msg(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel) {
     const usage = `\nThe proper usage would be: \n\`${prefix+SCR} <video_id> <timestamp>\`\nThe timestamp may be a number (in seconds), a percentage (eg. \`50%\`) or in a format \`hh:mm:ss.xxx\` (where hours, minutes and milliseconds are optional)\nType \`${prefix+SCR} list\` to get a list of Video IDs`
-    console.log(`\n[${functiondate(0)} - ${functiontime(0)}] Function screenshot() called by ${message.author.tag}`);
+    const functioncalledlog = `\n[${functiondate(0)} - ${functiontime(0)}] Function screenshot() called by ${message.author.tag}`
+    console.log(functioncalledlog);
+    getlogchannel.send(functioncalledlog);
     const args = message.content.split(/ +/).slice(1);
     if (args[0] === 'list') {
         let embed = new Discord.RichEmbed()
@@ -46,7 +48,9 @@ function scr_msg(message, client, prefix, functiondate, functiontime, cooldowns)
     }
     var filename = episode_to_filename(args[0]);
     if (filename === undefined) {
-        console.log(`Invalid video ID: ${args[0]}`)
+        const invalididlog = `Invalid video ID: ${args[0]}`
+        console.log(invalididlog)
+        getlogchannel.send(invalididlog)
         let embed = new Discord.RichEmbed()
         embed.setTitle('ERROR!')
             .setColor('#ff0000')
@@ -57,12 +61,15 @@ function scr_msg(message, client, prefix, functiondate, functiontime, cooldowns)
         return;
     }
     if (args[1].split(':').some(isNaN) && !('' + args[1]).match(/^[\d.]+%$/)) {
-        console.log(`Invalid Timestamp: ${args[1]}`)
+        const invalidtimestamplog = `Invalid Timestamp: ${args[1]}`
+        console.log(invalidtimestamplog)
+        getlogchannel.send(invalidtimestamplog)
         let reply = `That is not a valid timestamp, ${message.author}!`
         message.channel.send(`${reply}${usage}`);
         return;
     }
     console.log(filename);
+    getlogchannel.send(filename);
 
     //Implement cooldown
     if (!cooldowns.has(prefix + SCR)) {
@@ -78,7 +85,9 @@ function scr_msg(message, client, prefix, functiondate, functiontime, cooldowns)
 
         if (now < expirationTime) {
             const timeLeft = (expirationTime - now) / 1000;
-            console.log(`COOLDOWN : Wait ${timeLeft} sec`);
+            const cooldownlog = `COOLDOWN : Wait ${timeLeft} sec`
+            console.log(cooldownlog);
+            getlogchannel.send(cooldownlog);
             return message.reply(`please wait ${timeLeft.toFixed(0)} more second(s) before reusing the \`${prefix+SCR}\` command.`);
         }
     }
@@ -92,19 +101,23 @@ function scr_msg(message, client, prefix, functiondate, functiontime, cooldowns)
     }
     // End of cooldown implement
 
-    upload_scr(message, filename, args[1], args[0], prefix);
+    upload_scr(message, filename, args[1], args[0], prefix, getlogchannel);
 }
 
-function upload_scr(message, filename, timemark, displayid, prefix) {
+function upload_scr(message, filename, timemark, displayid, prefix, getlogchannel) {
     const ffmpeg = require('fluent-ffmpeg');
     ffmpeg(filename)
         .on('end', function() {
-            console.log('Screenshots taken, sending...');
+            const scrtakenlog = 'Screenshots taken, sending...'
+            console.log(scrtakenlog);
+            getlogchannel.send(scrtakenlog);
             const attachment = new Attachment('./cmds/screenshots/screenshot.png');
             message.channel.send(`${message.author}\nScreenshot of ${displayid} taken at ${timemark}`, attachment);
         })
         .on('error', function(err) {
-            console.log('an error happened: ' + err.message);
+            const errlog = 'an error happened: ' + err.message
+            console.log(errlog);
+            getlogchannel.send(errlog);
             let embed = new Discord.RichEmbed()
             embed.setTitle('ERROR!')
                 .setColor('#ff0000')
@@ -121,9 +134,9 @@ function upload_scr(message, filename, timemark, displayid, prefix) {
 
 }
 
-function screenshot(message, client, prefix, functiondate, functiontime, cooldowns) {
+function screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel) {
     if (message.content.startsWith(prefix + SCR)) {
-        scr_msg(message, client, prefix, functiondate, functiontime, cooldowns);
+        scr_msg(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel);
     }
 };
 
