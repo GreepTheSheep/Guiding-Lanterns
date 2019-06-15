@@ -89,3 +89,5 @@ package-lock.json
 
 # Raw text file
 *.txt
+
+package-lock.json
