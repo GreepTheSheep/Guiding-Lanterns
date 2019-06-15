@@ -24,17 +24,27 @@ function functiontime() { // The function it gives a time (here the current time
     return time
 } // End of the function
 
+const channel_id = require('./counter/channel_ids.json');
+
+const num_members = require('./counter/member.js');
+
+const lant_num_members = () => num_members(client,"562602234265731080", channel_id.members);
 
 client.on('ready', () => { // If bot was connected:
     const readylog = `Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}` //Set a text who is said I'm connected!
     console.log(readylog); // Send the text in the console
     getlogchannel().send(readylog); // Send the text in the logging channel
+    lant_num_members(); //Set the Member count
 }); // End
 
 const prefix = config.prefix // Gets the prefix from the config file
 client.on('message', message => { // If any message was recived
     if (message.author.bot) return; // If is a bot, do nothing
     if (message.channel.type === 'dm') return; // If commands was send in DMs, do nothing
+
+    //Messages count, aviable in the Dev Server
+    const lant_message_count = require('./counter/message.js');
+    lant_message_count(message, client, prefix, channel_id.messages);
 
     // Begin of all the commands
 
@@ -74,6 +84,7 @@ client.on('guildMemberAdd', member => { // If any member join a server (or guild
         welcome(member, client);
     }
     console.log(`\n${member.user.tag} joined ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who joined
+    lant_num_members(); //Change the members count (+1)
 })
 
 client.on('guildMemberRemove', member => { // If any member leave a server (or guild in Discord language)
@@ -82,6 +93,7 @@ client.on('guildMemberRemove', member => { // If any member leave a server (or g
         goodbye(member, client);
     }
     console.log(`\n${member.user.tag} left ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who left
+    lant_num_members(); //Change the members count (-1)
 })
 
 client.login(config.token); // Login to Discord using token
