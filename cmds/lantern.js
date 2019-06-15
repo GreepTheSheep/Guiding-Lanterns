@@ -1,14 +1,15 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-const lancount = require('../lanterns.json');
+const countfile = "./counter/lanterns.json";
+const lancount = JSON.parse(fs.readFileSync(countfile, "utf8"));
 
 
-function lantern(message, client, prefix) {
+function lantern(message, client, prefix, getlogchannel) {
 
     if (message.content == '<:Lantern:570822664789426186>') {
-        var l = lancount.count++
+        lancount.count++
 
-        let countwrite = { "count": `${l}` };
+        let countwrite = { "count": `${lancount.count}` };
         let data = JSON.stringify(countwrite);
         fs.writeFileSync('lanterns.json', data);
     };
@@ -28,8 +29,8 @@ function lantern(message, client, prefix) {
             let data = JSON.stringify(countwrite);
             fs.writeFileSync('lanterns.json', data);
             lancount.count = 0;
-            message.channel.send(':thumbsup:')
             console.log('Lantern counter reset !')
+            getlogchannel.send('Lantern counter reset !')
 
         } else return;
     }

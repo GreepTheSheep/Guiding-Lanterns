@@ -7,7 +7,7 @@ const Discord = require("discord.js");
         return text;
 }
 
- function eval_cmd(message, client, prefix) {
+ function eval_cmd(message, client, prefix, getlogchannel) {
 
      if(!message.author.id === "330030648456642562") return;
     const args = message.content.split(" ").slice(1);
@@ -19,9 +19,9 @@ const Discord = require("discord.js");
              if (typeof evaled !== "string"){
                 evaled = require("util").inspect(evaled);
             }
-            message.author.send(`EVAL COMMAND SUCESS!\n\`\`\`xl\n${code}\`\`\`\nNode Result: \`${clean(evaled)}\``);
+            getlogchannel.send(`EVAL COMMAND SUCESS!\n\`\`\`xl\n${code}\`\`\`\nNode Result: \`${clean(evaled)}\``);
         } catch (err) {
-            message.author.send(`EVAL COMMAND **ERROR**\n\`\`\`xl\n${code}\`\`\`\nNode Result: \`${clean(err)}\``);
+            getlogchannel.send(`EVAL COMMAND **ERROR**\n\`\`\`xl\n${code}\`\`\`\nNode Result: \`${clean(err)}\``);
         }
     }
 
