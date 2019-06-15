@@ -19,8 +19,7 @@ function frozen_2_countdown(client,channel_id) {
         console.log(`Channel: ${channel_id} cannot be found`);
         return;
     }
-    channel.setName(`${days_until_frozen_2()}`).catch(err=>console.log(err));
-
+    
     const cd = function() {
         if (milliseconds_until_frozen_2() < 0) {
             channel.setName(`FROZEN II IS OUT!!`).catch(err=>console.log(err));
@@ -28,7 +27,7 @@ function frozen_2_countdown(client,channel_id) {
         }
         const text = `${days_until_frozen_2()}`
         channel.setName(`${text}`)
-            .then(a=>setTimeout(cd, 200))
+            .then(a=>setTimeout(cd, 1000))
             .catch(err=>console.log(err));
     };
     cd();
