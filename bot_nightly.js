@@ -3,7 +3,7 @@ const client = new Discord.Client();
 const config = require('./config.json');
 const cooldowns = new Discord.Collection();
 const logchannel = '589337521553539102'
-const getlogchannel = client.guilds.get('570024448371982373').channels.get(logchannel)
+const getlogchannel = () => client.channels.get(logchannel)
 
 function functiondate() {
     const datefu = new Date();
@@ -35,7 +35,7 @@ const lant_frozen_II = () => frozen_2_countdown(client, channel_id.frozen2);
 client.on('ready', () => {
     const readylog = `Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`
     console.log(readylog);
-    getlogchannel.send(readylog);
+    getlogchannel().send(readylog);
     client.user.setStatus('dnd');
     lant_num_members();
     lant_frozen_II();
@@ -58,16 +58,16 @@ client.on('message', message => {
 
     
     const eval_cmd = require('./cmds/eval.js');
-    eval_cmd(message, client, prefix, getlogchannel);
+    eval_cmd(message, client, prefix, getlogchannel());
     
     const lantern = require('./cmds/lantern.js');
-    lantern(message, client, prefix, getlogchannel);
+    lantern(message, client, prefix, getlogchannel());
 
     const status = require('./cmds/status.js');
     status(message, client, prefix);
 
     const screenshot = require('./cmds/screenshots/screenshot.js');
-    screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel);
+    screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel());
 
     const quotes = require('./cmds/quotes.js');
     quotes(message, client, prefix);
