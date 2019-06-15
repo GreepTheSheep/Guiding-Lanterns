@@ -21,15 +21,17 @@ function frozen_2_countdown(client,channel_id) {
     }
     channel.setName(`${days_until_frozen_2()}`).catch(err=>console.log(err));
 
-    var x = setInterval(function() {
-        const text = `${days_until_frozen_2()}`
-        channel.setName(`${text}`).catch(err=>console.log(err));
-
+    const cd = function() {
         if (milliseconds_until_frozen_2() < 0) {
-            clearInterval(x);
             channel.setName(`FROZEN II IS OUT!!`).catch(err=>console.log(err));
+            return;
         }
-    }, 1000);
+        const text = `${days_until_frozen_2()}`
+        channel.setName(`${text}`)
+            .then(a=>setTimeout(cd, 200))
+            .catch(err=>console.log(err));
+    };
+    cd();
 }
 
 module.exports = frozen_2_countdown;
