@@ -89,3 +89,4 @@ package-lock.json
 *.txt
 
 package-lock.json
+patreon_db.json
