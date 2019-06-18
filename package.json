@@ -1,6 +1,6 @@
 {
     "name": "lanterns",
-    "version": "1.0.0",
+    "version": "1.2.0",
     "description": "",
     "main": "bot.js",
     "scripts": {
@@ -12,7 +12,7 @@
         "bot"
     ],
     "author": "Greep",
-    "license": "GPL-3.0",
+    "license": "Apache-2.0",
     "dependencies": {
         "bufferutil": "^3.0.3",
         "country-data": "0.0.31",
