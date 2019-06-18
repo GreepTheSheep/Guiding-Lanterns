@@ -56,6 +56,8 @@ client.on('message', message => {
     const lant_message_count = require('./counter/message.js');
     lant_message_count(message, client, prefix, channel_id.nightly_messages);
 
+    const PatreonCheck = require('./Patreon/patreon_check.js');
+    PatreonCheck(message, client, prefix)
     
     const eval_cmd = require('./cmds/eval.js');
     eval_cmd(message, client, prefix, getlogchannel());
@@ -63,17 +65,11 @@ client.on('message', message => {
     const lantern = require('./cmds/lantern.js');
     lantern(message, client, prefix, getlogchannel());
 
-    const status = require('./cmds/status.js');
-    status(message, client, prefix);
-
     const screenshot = require('./cmds/screenshots/screenshot.js');
     screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel());
 
     const quotes = require('./cmds/quotes.js');
     quotes(message, client, prefix);
-
-    const say = require('./cmds/say.js');
-    say(message, client, prefix);
 
     const about = require('./cmds/about.js');
     about(message, client, prefix);
