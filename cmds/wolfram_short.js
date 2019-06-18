@@ -5,10 +5,9 @@ const { wolfID } = require('../config.json');
 const Discord = require('discord.js');
 const WolframAlphaAPI = require('wolfram-alpha-api');
 const waApi = WolframAlphaAPI(wolfID);
-    function wolfram_short (message, client, prefix, donor, donoronlymsg) {
+    function wolfram_short (message, client, prefix) {
         if (message.content.startsWith(prefix + 'wolfram'))  {
             (async () => {
-            if (!donor) return message.channel.send(donoronlymsg)
             try {
                 let args = message.content.split(" ");
                 args.shift();
@@ -29,7 +28,8 @@ const waApi = WolframAlphaAPI(wolfID);
             }
             catch (e) {
                 console.log(e);
-                message.reply(e.message);
+                if (!e.message == 'No short answer available') return message.reply(e.message);
+                message.reply(e.message + `. Try with \`${prefix}full-wolfram\``);
             }
         })();
         };
