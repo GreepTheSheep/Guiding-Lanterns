@@ -12,6 +12,9 @@ const waApi = WolframAlphaAPI(wolfID);
             try {
                 let args = message.content.split(" ");
                 args.shift();
+                if (args.length < 1) {
+                    message.channel.send(`__Input your message!__\nExample: \`${prefix}full-wolfram Tangled\`\n\nWarning for spam!`);
+                } else {
                 const queryresult = await waApi.getFull(args.join(" "));
                 if (queryresult.success === false) {
                      message.reply('Wolfram|Alpha did not understand your input')
@@ -30,6 +33,7 @@ const waApi = WolframAlphaAPI(wolfID);
                         await embed(message,pods[i].subpods[j].img.src,pods[i].subpods[j].img.alt);
                     }   
                 }
+            }
             }
             catch (e) {
                 console.log(e);

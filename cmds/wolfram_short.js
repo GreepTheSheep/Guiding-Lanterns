@@ -12,6 +12,9 @@ const waApi = WolframAlphaAPI(wolfID);
             try {
                 let args = message.content.split(" ");
                 args.shift();
+                if (args.length < 1) {
+                message.channel.send(`__Input your message!__\nExample: \`${prefix}wolfram Tangled\``);
+                } else {
                 const queryresult = await waApi.getShort(args.join(" "));
                 if (queryresult.success === false) {
                      message.reply('Wolfram|Alpha did not understand your input')
@@ -20,8 +23,9 @@ const waApi = WolframAlphaAPI(wolfID);
                 let embed = new Discord.RichEmbed;
                 embed.setColor('#008888')
                     .addField('Wolfram|Alpha says:', queryresult)
-                    .setFooter('https://www.wolframalpha.com/', "https://images-eu.ssl-images-amazon.com/images/I/41II4YzkFxL.png")
-                await message.reply(embed);   
+                    .setFooter('https://www.wolframalpha.com/ | Type " !full-wolfram <Your Input>" for detailled description', "https://images-eu.ssl-images-amazon.com/images/I/41II4YzkFxL.png")
+                await message.reply(embed);  
+            } 
             }
             catch (e) {
                 console.log(e);
