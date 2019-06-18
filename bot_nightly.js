@@ -61,6 +61,12 @@ client.on('message', message => {
     
     const eval_cmd = require('./cmds/eval.js');
     eval_cmd(message, client, prefix, getlogchannel());
+
+    const wolfram_short = require('./cmds/wolfram_short.js');
+    wolfram_short(message, client, prefix);
+
+    const wolfram = require('./cmds/wolfram.js');
+    wolfram(message, client, prefix);
     
     const lantern = require('./cmds/lantern.js');
     lantern(message, client, prefix, getlogchannel());
