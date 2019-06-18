@@ -35,7 +35,6 @@ const waApi = WolframAlphaAPI(wolfID);
             }
             }
             catch (e) {
-                console.log(e);
                 message.reply(e.message);
             }
         })();
