@@ -89,3 +89,6 @@ package-lock.json
 *.txt
 
 package-lock.json
+
+# Patreons Database
+Patreons/*.json

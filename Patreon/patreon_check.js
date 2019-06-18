@@ -18,6 +18,12 @@ function PatreonCheck (message, client, prefix) {
     const say = require('../cmds/say.js');
     say(message, client, prefix, donor, donorsonly);
 
+    const wolfram_short = require('../cmds/wolfram_short.js');
+    wolfram_short(message, client, prefix, donor, donorsonly);
+
+    const wolfram = require('../cmds/wolfram.js');
+    wolfram(message, client, prefix, donor, donorsonly);
+
     if (message.content.startsWith(prefix + 'addpatreon')) {
         if (message.author.id == "330030648456642562") {
             let args = message.content.split(" ");
