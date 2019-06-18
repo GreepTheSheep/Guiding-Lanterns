@@ -27,7 +27,6 @@ const waApi = WolframAlphaAPI(wolfID);
             } 
             }
             catch (e) {
-                console.log(e);
                 if (!e.message == 'No short answer available') return message.reply(e.message);
                 message.reply(e.message + `. Try with \`${prefix}full-wolfram\``);
             }
