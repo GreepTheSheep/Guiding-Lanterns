@@ -48,7 +48,7 @@ module.exports = {
             }
 
             return logchannel.send(
-                `${member.user.tag} joined using an unknown invite. Invite might be limited use or created recently`
+                `${member.user.tag} joined using an unknown invite.`
             );
             
         } catch (e) {
