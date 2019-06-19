@@ -74,13 +74,13 @@ client.on('guildMemberAdd', member => {
             const ei = invites[member.guild.id];
             invites[member.guild.id] = guildInvites;
 
-            //Find out which invite incremented noUses
+            //Find out which invite incremented number of uses
             const invite = guildInvites.find(i => {
                 const checkInvite = ei.get(i.code);
                 if (!checkInvite) return false;
                 return (checkInvite.uses < i.uses);
             });
-            if (invite) { //If invite incremented noUses then that's the one
+            if (invite) { //If invite incremented number of uses then that's the one
                 const inviter = client.users.get(invite.inviter.id);
                 return client.channels.get("585859835527036943").send(
                     `${member.user.tag} joined using invite code ${invite.code} from ${inviter.tag}. Invite was used ${invite.uses} times since its creation.`
