@@ -27,7 +27,7 @@ module.exports = {
         When a member joins a guild, the bot compare the current invites with the cached ones
 	*/
         try {
-            const logchannel = member.client.channel("585859835527036943");
+            const logchannel = member.client.channels.get("585859835527036943");
             const guildInvites = await member.guild.fetchInvites();
 
             //Update cached invites
@@ -41,7 +41,7 @@ module.exports = {
                 return (checkInvite.uses < i.uses);
             });
             if (invite) {
-                const inviter = client.users.get(invite.inviter.id);
+                const inviter = member.client.users.get(invite.inviter.id);
                 return logchannel.send(
                     `${member.user.tag} joined using invite code ${invite.code} from ${inviter.tag}. Invite was used ${invite.uses} times since its creation.`
                 );
