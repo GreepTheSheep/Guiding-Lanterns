@@ -63,10 +63,12 @@ client.on('guildMemberAdd', member => {
     lant_num_members();
 
     (async () => {
-        //WARNING: This is error prone and can lead to misinformation
-        //THIS IS A WORK IN PROGRESS
-        //Comparing invites to see which one incremented
-        //Load current invites
+	/*
+        WARNING: This is error prone and can lead to misinformation
+	^^ There is no way to get around this. There is no event for invites (neither creation or change)
+	Invite tracker
+        When a member joins a guild, the bot compare the current invites with the cached ones
+	*/
         try {
             const guildInvites = await member.guild.fetchInvites();
 
@@ -74,47 +76,20 @@ client.on('guildMemberAdd', member => {
             const ei = invites[member.guild.id];
             invites[member.guild.id] = guildInvites;
 
-            //Find out which invite incremented number of uses
+            //If number of uses for an invite changed then that's the invite used to join
             const invite = guildInvites.find(i => {
                 const checkInvite = ei.get(i.code);
                 if (!checkInvite) return false;
                 return (checkInvite.uses < i.uses);
             });
-            if (invite) { //If invite incremented number of uses then that's the one
+            if (invite) {
                 const inviter = client.users.get(invite.inviter.id);
-                return client.channels.get("585859835527036943").send(
+                return getlogchannel().send(
                     `${member.user.tag} joined using invite code ${invite.code} from ${inviter.tag}. Invite was used ${invite.uses} times since its creation.`
                 );
             }
-            
-            /*
-            Poll audit log for invites created between member join and last cache update
-            then check for missing invites
-            If the deleted invite expired before member join then you can rule that out which you can easily check
-            
-            */
-            /*
-            //Check for deleted invites from last cache update to member join. These invites are possible
-            probableInvites = guildInvites.filter(i => !ei.get(i.code));
-            //Filter for expiry after member join
-            //invites can be ruled out if invite expires before join
-            //BUG: invite.expiresTimestamp === invite.createTimestamp if no expiry
-            probableInvites = probableInvites.filter(i =>i.maxAge === 0 || i.expiresTimestamp > member.joinedTimestamp);
 
-            //Estimate timestamp right before previous cache update
-            //check if array is empty
-            const estTimestamp = 0;
-            if (ei.array().length !== 0) {
-                estTimestamp = constMath.max.apply(null,ei.array().map(b => b.createdTimestamp))
-            }
-            
-            //Check audit log for invite creation and deletions
-            //Same invites can be created twice in audit log
-            const AuditInviteCreate = () => member.guild.fetchAuditLogs({type:"INVITE_CREATE"});
-            const AuditInviteDelete = () => member.guild.fetchAuditLogs({type:"INVITE_DELETE"});
-            [AuditInviteCreate,AuditInviteDelete] = promise.all([AuditInviteCreate(), AuditInviteDelete()]);
-            */
-            return client.channels.get("585859835527036943").send(
+            return getlogchannel().send(
                 `${member.user.tag} joined using an unknown invite. Invite might be limited use or created recently`
             );
             
