@@ -41,6 +41,7 @@ client.on('ready', () => {
     client.user.setStatus('dnd');
     lant_num_members();
     lant_frozen_II();
+    inviteTracker.ready(client);
 
 });
 client.on('guildMemberAdd', member => {
