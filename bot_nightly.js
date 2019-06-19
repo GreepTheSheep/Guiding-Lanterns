@@ -4,6 +4,7 @@ const config = require('./config.json');
 const cooldowns = new Discord.Collection();
 const logchannel = '589337521553539102'
 const getlogchannel = () => client.channels.get(logchannel)
+const inviteTracker = require('./invite-track.js');
 
 function functiondate() {
     const datefu = new Date();
@@ -32,10 +33,6 @@ const frozen_2_countdown = require('./counter/frozen2.js');
 const lant_num_members = () => num_members(client,"570024448371982373", channel_id.nightly_members);
 const lant_frozen_II = () => frozen_2_countdown(client, channel_id.nightly_frozen2);
 
-//Invite tracking
-const invites = {};
-//Delay without blocking whole script
-const wait = require('util').promisify(setTimeout);
 
 client.on('ready', () => {
     const readylog = `Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`
@@ -45,59 +42,10 @@ client.on('ready', () => {
     lant_num_members();
     lant_frozen_II();
 
-    //Caching Invites for tracking
-    // "ready" isn't really ready. We need to wait a spell.
-    wait(1000);
-
-    // Load all invites for all guilds and save them to the cache.
-    client.guilds.forEach(async g => {
-        try {
-            const guildInvites = await g.fetchInvites();
-            invites[g.id] = guildInvites;
-        } catch (e) {
-            console.log(`Invite fetch failed for ${g.id}`)
-        };
-    });
 });
 client.on('guildMemberAdd', member => {
     lant_num_members();
-
-    (async () => {
-	/*
-        WARNING: This is error prone and can lead to misinformation
-	^^ There is no way to get around this. There is no event for invites (neither creation or change)
-	Invite tracker
-        When a member joins a guild, the bot compare the current invites with the cached ones
-	*/
-        try {
-            const guildInvites = await member.guild.fetchInvites();
-
-            //Update cached invites
-            const ei = invites[member.guild.id];
-            invites[member.guild.id] = guildInvites;
-
-            //If number of uses for an invite changed then that's the invite used to join
-            const invite = guildInvites.find(i => {
-                const checkInvite = ei.get(i.code);
-                if (!checkInvite) return false;
-                return (checkInvite.uses < i.uses);
-            });
-            if (invite) {
-                const inviter = client.users.get(invite.inviter.id);
-                return getlogchannel().send(
-                    `${member.user.tag} joined using invite code ${invite.code} from ${inviter.tag}. Invite was used ${invite.uses} times since its creation.`
-                );
-            }
-
-            return getlogchannel().send(
-                `${member.user.tag} joined using an unknown invite. Invite might be limited use or created recently`
-            );
-            
-        } catch (e) {
-            console.error(e);
-        }
-
-    })();
+    inviteTracker.track(member);
 });
 client.on('guildMemberRemove', member => {
     lant_num_members();
