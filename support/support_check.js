@@ -1,8 +1,8 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-const dbfile = './Patreon/patreon_db.json'
+const dbfile = './support/support_db.json'
 
-function PatreonCheck (message, client, prefix) {
+function SupportCheck (message, client, prefix) {
     const db = JSON.parse(fs.readFileSync(dbfile, "utf8"))
 
     let donorsonly = new Discord.RichEmbed()
@@ -18,7 +18,7 @@ function PatreonCheck (message, client, prefix) {
     const say = require('../cmds/say.js');
     say(message, client, prefix, donor, donorsonly);
 
-    if (message.content.startsWith(prefix + 'addpatreon')) {
+    if (message.content.startsWith(prefix + 'adddonation')) {
         if (message.author.id == "330030648456642562") {
             let args = message.content.split(" ");
             args.shift();
@@ -32,7 +32,7 @@ function PatreonCheck (message, client, prefix) {
               });
             message.channel.send(`Congratulations! Thanks you so much for supporting the projet!! <3`);
             let newpatreonembed = new Discord.RichEmbed()
-            newpatreonembed.setTitle("NEW PATREON !")
+            newpatreonembed.setTitle("NEW DONATOR !")
                 .setColor("#F203BE")
                 .addField(`Thanks you so much:`, mention.user.tag)
                 .setThumbnail("https://media0.giphy.com/media/3ohs7WN06a3Fd6otMI/source.gif")
@@ -42,4 +42,4 @@ function PatreonCheck (message, client, prefix) {
     }
 }
 
-module.exports = PatreonCheck
+module.exports = SupportCheck

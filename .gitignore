@@ -90,5 +90,5 @@ package-lock.json
 
 package-lock.json
 
-# Patreons Database
-Patreon/*.json
+# supporters Database
+support/*.json

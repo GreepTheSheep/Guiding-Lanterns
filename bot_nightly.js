@@ -56,8 +56,8 @@ client.on('message', message => {
     const lant_message_count = require('./counter/message.js');
     lant_message_count(message, client, prefix, channel_id.nightly_messages);
 
-    const PatreonCheck = require('./Patreon/patreon_check.js');
-    PatreonCheck(message, client, prefix)
+    const SupportCheck = require('./support/support_check.js');
+    SupportCheck(message, client, prefix)
     
     const eval_cmd = require('./cmds/eval.js');
     eval_cmd(message, client, prefix, getlogchannel());
