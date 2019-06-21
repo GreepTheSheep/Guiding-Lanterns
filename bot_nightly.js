@@ -4,6 +4,7 @@ const config = require('./config.json');
 const cooldowns = new Discord.Collection();
 const logchannel = '589337521553539102'
 const getlogchannel = () => client.channels.get(logchannel)
+const inviteTracker = require('./invite-track.js');
 
 function functiondate() {
     const datefu = new Date();
@@ -32,6 +33,7 @@ const frozen_2_countdown = require('./counter/frozen2.js');
 const lant_num_members = () => num_members(client,"570024448371982373", channel_id.nightly_members);
 const lant_frozen_II = () => frozen_2_countdown(client, channel_id.nightly_frozen2);
 
+
 client.on('ready', () => {
     const readylog = `Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`
     console.log(readylog);
@@ -39,9 +41,12 @@ client.on('ready', () => {
     client.user.setStatus('dnd');
     lant_num_members();
     lant_frozen_II();
+    inviteTracker.ready(client);
+
 });
 client.on('guildMemberAdd', member => {
     lant_num_members();
+    inviteTracker.track(member);
 });
 client.on('guildMemberRemove', member => {
     lant_num_members();

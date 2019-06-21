@@ -4,6 +4,7 @@ const config = require('./config.json'); // Retrieves the contents of the config
 const cooldowns = new Discord.Collection(); //Stores cooldown info for screenshot()
 const logchannel = '589337734754336781' //Set a channel for logging
 const getlogchannel = () => client.channels.get(logchannel)
+const inviteTracker = require('./invite-track.js'); // Define the invite tracker plugin
 
 function functiondate() { // The function it gives a date (here the current date)
     const datefu = new Date();
@@ -35,6 +36,7 @@ client.on('ready', () => { // If bot was connected:
     console.log(readylog); // Send the text in the console
     getlogchannel().send(readylog); // Send the text in the logging channel
     lant_num_members(); //Set the Member count
+    inviteTracker.ready(client); // Starts the invite tracker plugin
 }); // End
 
 const prefix = config.prefix // Gets the prefix from the config file
@@ -86,8 +88,9 @@ client.on('guildMemberAdd', member => { // If any member join a server (or guild
     if (member.guild.id === '562602234265731080') { // If the member join Kingdom of Corona, do the welcome script
         const welcome = require('./welcome.js');
         welcome(member, client);
+        inviteTracker.track(member);
+        console.log(`\n${member.user.tag} joined ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who joined
     }
-    console.log(`\n${member.user.tag} joined ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who joined
     lant_num_members(); //Change the members count (+1)
 })
 
@@ -95,8 +98,8 @@ client.on('guildMemberRemove', member => { // If any member leave a server (or g
     if (member.guild.id === '562602234265731080') { // If the member leave Kingdom of Corona, do the goodbye script
         const goodbye = require('./goodbye.js');
         goodbye(member, client);
+        console.log(`\n${member.user.tag} left ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who left
     }
-    console.log(`\n${member.user.tag} left ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who left
     lant_num_members(); //Change the members count (-1)
 })
 
