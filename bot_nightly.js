@@ -29,9 +29,11 @@ const channel_id = require('./counter/channel_ids.json');
 
 const num_members = require('./counter/member.js');
 const countdown = require('./counter/countdown.js');
+const num_guilds = require('./counter/guilds.js');
 
 const lant_num_members = () => num_members(client, "570024448371982373", channel_id.nightly_members);
 const lant_frozen_II = () => countdown.frozen2(client, channel_id.nightly_frozen2);
+const lant_num_guilds = () => num_guilds(client, channel_id.nightly_guilds);
 
 
 client.on('ready', () => {
@@ -40,6 +42,7 @@ client.on('ready', () => {
     getlogchannel().send(readylog);
     client.user.setStatus('dnd');
     lant_num_members();
+    lant_num_guilds();
     lant_frozen_II();
     inviteTracker.ready(client);
 
@@ -96,6 +99,20 @@ client.on('message', message => {
         lantern(message, client, prefix, getlogchannel());
     }
 });
+
+client.on('guildCreate', guild => {
+    const botjoinguildlog = `${client.user.username} joined __${guild.name}__\n*ID: ${guild.id}*`
+    console.log(`[${functiondate(0)} - ${functiontime(0)}]\n${botjoinguildlog}`)
+    getlogchannel().send('\n' + botjoinguildlog + '\n')
+    lant_num_guilds();
+})
+
+client.on('guildDelete', guild => {
+    const botleftguildlog = `${client.user.username} left __${guild.name}__\n*ID: ${guild.id}*`
+    console.log(`[${functiondate(0)} - ${functiontime(0)}]\n${botleftguildlog}`)
+    getlogchannel().send('\n' + botleftguildlog + '\n')
+    lant_num_guilds();
+})
 
 client.on('debug', (debugevent) => {
     console.log(`[${functiondate(0)} - ${functiontime(0)}] : ${debugevent}`)
