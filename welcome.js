@@ -36,7 +36,8 @@ const images = [
     'https://cdn.discordapp.com/attachments/573609067289772032/576343400060813315/1557465852325.png',
     'https://cdn.discordapp.com/attachments/562602234265731082/577754931155566603/1557816464452.png',
     'https://cdn.discordapp.com/attachments/562602234265731082/580088878992719897/1558324778686.gif',
-    'http://is2.4chan.org/co/1558373572716.gif'
+    'http://is2.4chan.org/co/1558373572716.gif',
+    'https://cdn.discordapp.com/attachments/562602234265731082/591856120822497280/rapunzel-20190622-103652-002.gif'
 ];
 
 function randomItem(array) {
