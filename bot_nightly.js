@@ -30,7 +30,7 @@ const channel_id = require('./counter/channel_ids.json');
 const num_members = require('./counter/member.js');
 const countdown = require('./counter/countdown.js');
 
-const lant_num_members = () => num_members(client,"570024448371982373", channel_id.nightly_members);
+const lant_num_members = () => num_members(client, "570024448371982373", channel_id.nightly_members);
 const lant_frozen_II = () => countdown.frozen2(client, channel_id.nightly_frozen2);
 
 
@@ -63,7 +63,7 @@ client.on('message', message => {
 
     const SupportCheck = require('./support/support_check.js');
     SupportCheck(message, client, prefix)
-    
+
     const eval_cmd = require('./cmds/eval.js');
     eval_cmd(message, client, prefix, getlogchannel());
 
@@ -72,9 +72,6 @@ client.on('message', message => {
 
     const wolfram = require('./cmds/wolfram.js');
     wolfram(message, client, prefix);
-    
-    const lantern = require('./cmds/lantern.js');
-    lantern(message, client, prefix, getlogchannel());
 
     const screenshot = require('./cmds/screenshots/screenshot.js');
     screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel());
@@ -93,6 +90,11 @@ client.on('message', message => {
 
     const suggest = require('./cmds/suggest.js');
     suggest(message, client, prefix);
+
+    if (message.guild.id("562602234265731080")) {
+        const lantern = require('./cmds/lantern.js');
+        lantern(message, client, prefix, getlogchannel());
+    }
 });
 
 client.on('debug', (debugevent) => {

@@ -29,7 +29,7 @@ const channel_id = require('./counter/channel_ids.json');
 
 const num_members = require('./counter/member.js');
 
-const lant_num_members = () => num_members(client,"562602234265731080", channel_id.members);
+const lant_num_members = () => num_members(client, "562602234265731080", channel_id.members);
 
 client.on('ready', () => { // If bot was connected:
     const readylog = `Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}` //Set a text who is said I'm connected!
@@ -48,14 +48,11 @@ client.on('message', message => { // If any message was recived
     const lant_message_count = require('./counter/message.js');
     lant_message_count(message, client, prefix, channel_id.messages);
 
-    //Check if user has supported in Patreon
-    const PatreonCheck = require('./Patreon/patreon_check.js');
+    //Check if user has supported
+    const PatreonCheck = require('./support/support_check.js');
     PatreonCheck(message, client, prefix)
-    
-    // Begin of all the commands
 
-    const lantern = require('./cmds/lantern.js');
-    lantern(message, client, prefix, getlogchannel());
+    // Begin of all the commands
 
     const screenshot = require('./cmds/screenshots/screenshot.js');
     screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel());
@@ -80,6 +77,11 @@ client.on('message', message => { // If any message was recived
 
     const suggest = require('./cmds/suggest.js');
     suggest(message, client, prefix);
+
+    if (message.guild.id("562602234265731080")) {
+        const lantern = require('./cmds/lantern.js');
+        lantern(message, client, prefix, getlogchannel());
+    }
 
     // End
 });
