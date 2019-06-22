@@ -4,6 +4,7 @@ const config = require('./config.json');
 const cooldowns = new Discord.Collection();
 const logchannel = '589337521553539102'
 const getlogchannel = () => client.channels.get(logchannel)
+const inviteTracker = require('./invite-track.js');
 
 function functiondate() {
     const datefu = new Date();
@@ -27,10 +28,11 @@ function functiontime() {
 const channel_id = require('./counter/channel_ids.json');
 
 const num_members = require('./counter/member.js');
-const frozen_2_countdown = require('./counter/frozen2.js');
+const countdown = require('./counter/countdown.js');
 
-const lant_num_members = () => num_members(client,"570024448371982373", channel_id.nightly_members);
-const lant_frozen_II = () => frozen_2_countdown(client, channel_id.nightly_frozen2);
+const lant_num_members = () => num_members(client, "570024448371982373", channel_id.nightly_members);
+const lant_frozen_II = () => countdown.frozen2(client, channel_id.nightly_frozen2);
+
 
 client.on('ready', () => {
     const readylog = `Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`
@@ -39,9 +41,12 @@ client.on('ready', () => {
     client.user.setStatus('dnd');
     lant_num_members();
     lant_frozen_II();
+    inviteTracker.ready(client);
+
 });
 client.on('guildMemberAdd', member => {
     lant_num_members();
+    inviteTracker.track(member);
 });
 client.on('guildMemberRemove', member => {
     lant_num_members();
@@ -56,9 +61,9 @@ client.on('message', message => {
     const lant_message_count = require('./counter/message.js');
     lant_message_count(message, client, prefix, channel_id.nightly_messages);
 
-    const PatreonCheck = require('./Patreon/patreon_check.js');
-    PatreonCheck(message, client, prefix)
-    
+    const SupportCheck = require('./support/support_check.js');
+    SupportCheck(message, client, prefix)
+
     const eval_cmd = require('./cmds/eval.js');
     eval_cmd(message, client, prefix, getlogchannel());
 
@@ -67,9 +72,6 @@ client.on('message', message => {
 
     const wolfram = require('./cmds/wolfram.js');
     wolfram(message, client, prefix);
-    
-    const lantern = require('./cmds/lantern.js');
-    lantern(message, client, prefix, getlogchannel());
 
     const screenshot = require('./cmds/screenshots/screenshot.js');
     screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel());
@@ -88,6 +90,11 @@ client.on('message', message => {
 
     const suggest = require('./cmds/suggest.js');
     suggest(message, client, prefix);
+
+    if (message.guild.id("562602234265731080")) {
+        const lantern = require('./cmds/lantern.js');
+        lantern(message, client, prefix, getlogchannel());
+    }
 });
 
 client.on('debug', (debugevent) => {
