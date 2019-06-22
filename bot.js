@@ -28,14 +28,17 @@ function functiontime() { // The function it gives a time (here the current time
 const channel_id = require('./counter/channel_ids.json');
 
 const num_members = require('./counter/member.js');
+const num_guilds = require('./counter/guilds.js');
 
 const lant_num_members = () => num_members(client, "562602234265731080", channel_id.members);
+const lant_num_guilds = () => num_guilds(client, channel_id.guilds);
 
 client.on('ready', () => { // If bot was connected:
     const readylog = `Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}` //Set a text who is said I'm connected!
     console.log(readylog); // Send the text in the console
     getlogchannel().send(readylog); // Send the text in the logging channel
     lant_num_members(); //Set the Member count
+    lant_num_guilds(); //Set the guilds count
     inviteTracker.ready(client); // Starts the invite tracker plugin
 }); // End
 
@@ -103,6 +106,20 @@ client.on('guildMemberRemove', member => { // If any member leave a server (or g
         console.log(`\n${member.user.tag} left ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who left
     }
     lant_num_members(); //Change the members count (-1)
+})
+
+client.on('guildCreate', guild => { // If the bot join a server
+    const botjoinguildlog = `${client.user.username} joined __${guild.name}__\n*ID: ${guild.id}*` // Set the text
+    console.log(`[${functiondate(0)} - ${functiontime(0)}]\n${botjoinguildlog}`) // Send at the console
+    getlogchannel().send(botjoinguildlog) // Send at the Discord log channel
+    lant_num_guilds(); // Change the servers count (+1)
+})
+
+client.on('guildDelete', guild => { // If the bot leave a server
+    const botleftguildlog = `${client.user.username} left __${guild.name}__\n*ID: ${guild.id}*`
+    console.log(`[${functiondate(0)} - ${functiontime(0)}]\n${botleftguildlog}`)
+    getlogchannel().send(botleftguildlog)
+    lant_num_guilds(); // Change the servers count (-1)
 })
 
 client.login(config.token); // Login to Discord using token
