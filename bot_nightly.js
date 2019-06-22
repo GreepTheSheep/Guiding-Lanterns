@@ -28,10 +28,10 @@ function functiontime() {
 const channel_id = require('./counter/channel_ids.json');
 
 const num_members = require('./counter/member.js');
-const frozen_2_countdown = require('./counter/frozen2.js');
+const countdown = require('./counter/countdown.js');
 
 const lant_num_members = () => num_members(client,"570024448371982373", channel_id.nightly_members);
-const lant_frozen_II = () => frozen_2_countdown(client, channel_id.nightly_frozen2);
+const lant_frozen_II = () => countdown.frozen2(client, channel_id.nightly_frozen2);
 
 
 client.on('ready', () => {
