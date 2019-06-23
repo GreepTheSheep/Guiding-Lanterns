@@ -6,7 +6,7 @@ function help(message, client, prefix) {
         embed.setTitle('You feel lost? Don\'t worry :wink:')
             .setColor("#9C01C4")
             .addField("Commands:", `\`${prefix}quote\` : Send a random quote from Tangled (and the series also)\n\`${prefix}screenshot\` : Take a screenshot from the movie or from the series\n **NEW!** \`${prefix}wolfram\` or \`${prefix}full-wolfram\` : What would you like to know about ?`, true)
-            .addField("Commands for Patreons:", `\`${prefix}say\` : Makes the bot talking ! \n\`${prefix}setgame\` : Sets a "Playing ..." status\n\`${prefix}setwatch\` : same as setgame but is "Watching ..."\n\`${prefix}setlisten\` : Same as setgame but is "Listening to ..."`, true)
+            .addField("Commands for supporters:", `\`${prefix}say\` : Makes the bot talking ! \n\`${prefix}setgame\` : Sets a "Playing ..." status\n\`${prefix}setwatch\` : same as setgame but is "Watching ..."\n\`${prefix}setlisten\` : Same as setgame but is "Listening to ..."`, true)
             .addField("If you have any problems :", `\`${prefix}bug\`: Report any bug to devs\n\`${prefix}suggest\`: Suggest an improvement`, true)
             .setFooter(`You can type ${prefix}about for credits!`, `${client.user.avatarURL}`)
         message.channel.send(embed)

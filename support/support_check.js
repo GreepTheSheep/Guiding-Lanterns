@@ -7,7 +7,7 @@ function SupportCheck (message, client, prefix) {
 
     let donorsonly = new Discord.RichEmbed()
     donorsonly.setColor("#D30051")
-    .addField("Sorry :shrug:", `This command is reserved for donors only\n\n[You can contribute to the financing of the project by clicking here](https://patreon.com/GuidingLanterns)`)
+    .addField("Sorry :shrug:", `This command is reserved for donors only\n\n[You can contribute to the financing of the project by clicking here](https://donatebot.io/checkout/570024448371982373?buyer=${message.author.id})`)
     .setFooter(`If you have already donated but you don't have the role, type " !bug Donated but can't do commands "`, `${client.user.avatarURL}`)
 
     const donor = db[message.author.id]
