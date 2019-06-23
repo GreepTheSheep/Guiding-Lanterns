@@ -6,7 +6,7 @@ const { RichEmbed } = require('discord.js');
 const WolframAlphaAPI = require('wolfram-alpha-api');
 const waApi = WolframAlphaAPI(wolfID);
     function wolfram (message, client, prefix) {
-        if (message.content.startsWith(prefix + 'full-wolfram'))  {
+        if (message.content.startsWith(prefix + 'full-wolf'))  {
             (async () => {
             try {
                 let args = message.content.split(" ");
