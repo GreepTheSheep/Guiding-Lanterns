@@ -73,8 +73,9 @@ counter/*.json
 *.exe
 *.bat
 
-# PNG files in /cmds
+# Image files in /cmds
 cmds/**/*.png
+cmds/**/*.jpg
 
 # Movie links file
 cmds/screenshots/episode.json
