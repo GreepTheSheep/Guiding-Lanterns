@@ -81,7 +81,7 @@ client.on('message', message => { // If any message was recived
     const suggest = require('./cmds/suggest.js');
     suggest(message, client, prefix);
 
-    if (message.guilds.id("562602234265731080")) {
+    if (message.guild.id == '562602234265731080') {
         const lantern = require('./cmds/lantern.js');
         lantern(message, client, prefix, getlogchannel());
     }
