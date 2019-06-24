@@ -30,7 +30,7 @@ function video_id_str() {
 
 function scr_msg(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel) {
     const usage = `\nThe proper usage would be: \n\`${prefix+SCR} <video_id> <timestamp>\`\nThe timestamp may be a number (in seconds), a percentage (eg. \`50%\`) or in a format \`hh:mm:ss.xxx\` (where hours, minutes and milliseconds are optional)\nType \`${prefix+SCR} list\` to get a list of Video IDs`
-    const doclink = `[See the documentation about screenshots here](https://greepthesheep.github.io/Guiding-Lanterns/screenshot.html)`
+    const doclink = "https://greepthesheep.github.io/Guiding-Lanterns/screenshot.html"
     const functioncalledlog = `\n[${functiondate(0)} - ${functiontime(0)}] Function screenshot() called by ${message.author.tag}`
     console.log(functioncalledlog);
     getlogchannel.send(functioncalledlog);
@@ -38,14 +38,14 @@ function scr_msg(message, client, prefix, functiondate, functiontime, cooldowns,
     if (args[0] === 'list') {
         let embed = new Discord.RichEmbed()
         embed.addField("Available video ids are:", `- \`${video_id_str()}\``)
-            .addField("More info:", doclink)
+            .addField("More info:", `[See the documentation about screenshots here](${doclink})`)
             .setFooter(`The proper usage would be: "${prefix+SCR} <video_id> <timestamp>"`, `${message.author.displayAvatarURL}`)
         message.reply(embed)
         return;
     }
     if (args.length < 2) {
         let reply = `You didn't provide enough arguments, ${message.author}!`
-        message.channel.send(`${reply}${usage}\n${doclink}`);
+        message.channel.send(`${reply}${usage}\n\n More info: ${doclink}`);
         return;
     }
     var filename = episode_to_filename(args[0]);
@@ -67,7 +67,7 @@ function scr_msg(message, client, prefix, functiondate, functiontime, cooldowns,
         console.log(invalidtimestamplog)
         getlogchannel.send(invalidtimestamplog)
         let reply = `That is not a valid timestamp, ${message.author}!`
-        message.channel.send(`${reply}${usage}\n${doclink}`);
+        message.channel.send(`${reply}${usage}\n\n More info: ${doclink}`);
         return;
     }
     console.log(filename);
