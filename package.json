@@ -22,6 +22,7 @@
         "discord.js": "^11.5.0",
         "fluent-ffmpeg": "^2.1.2",
         "fs": "0.0.1-security",
-        "fs-extra": "^8.0.1"
+        "fs-extra": "^8.0.1",
+        "wolfram-alpha-api": "https://products.wolframalpha.com/api/libraries/javascript/wolfram-alpha-api-1.0.0-rc.1.tgz"
     }
 }
