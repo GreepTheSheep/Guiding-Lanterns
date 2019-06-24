@@ -5,6 +5,9 @@
 const { Attachment } = require('discord.js');
 const Discord = require('discord.js');
 
+const fs = require('fs');
+const supportdbfile = './support/support_db.json'
+
 const checkTime = i => i < 10 ? "0" + i : i;
 const SCR = 'scr';
 
@@ -103,14 +106,20 @@ function scr_msg(message, client, prefix, functiondate, functiontime, cooldowns,
     }
     // End of cooldown implement
 
-    upload_scr(message, filename, args[1], args[0], prefix, getlogchannel);
+    const supportdb = JSON.parse(fs.readFileSync(supportdbfile, "utf8"))
+    const donor = supportdb[message.author.id]
+    if (donor) {
+        upload_scr_png(message, filename, args[1], args[0], prefix, getlogchannel);
+    } else {
+        upload_scr_jpg(message, filename, args[1], args[0], prefix, getlogchannel);
+    }
 }
 
-function upload_scr(message, filename, timemark, displayid, prefix, getlogchannel) {
+function upload_scr_png(message, filename, timemark, displayid, prefix, getlogchannel) {
     const ffmpeg = require('fluent-ffmpeg');
     ffmpeg(filename)
         .on('end', function() {
-            const scrtakenlog = 'Screenshots taken, sending...'
+            const scrtakenlog = '[PNG] Screenshots taken, sending...'
             console.log(scrtakenlog);
             getlogchannel.send(scrtakenlog);
             const attachment = new Attachment('./cmds/screenshots/screenshot.png');
@@ -131,6 +140,36 @@ function upload_scr(message, filename, timemark, displayid, prefix, getlogchanne
         .screenshots({
             timestamps: [timemark],
             filename: 'screenshot.png',
+            folder: './cmds/screenshots',
+        });
+
+}
+
+function upload_scr_jpg(message, filename, timemark, displayid, prefix, getlogchannel) {
+    const ffmpeg = require('fluent-ffmpeg');
+    ffmpeg(filename)
+        .on('end', function() {
+            const scrtakenlog = '[JPG] Screenshots taken, sending...'
+            console.log(scrtakenlog);
+            getlogchannel.send(scrtakenlog);
+            const attachment = new Attachment('./cmds/screenshots/screenshot.jpg');
+            message.channel.send(`${message.author}\nScreenshot of ${displayid} taken at ${timemark}`, attachment);
+        })
+        .on('error', function(err) {
+            const errlog = 'an error happened: ' + err.message
+            console.log(errlog);
+            getlogchannel.send(errlog);
+            let embed = new Discord.RichEmbed()
+            embed.setTitle('ERROR!')
+                .setColor('#ff0000')
+                .addField("Screenshot Error :", `Error during screenshot`)
+                .setThumbnail("https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061132_960_720.png")
+                .setFooter(`Type "${prefix}bug <details of your bug>" to send at the devs`, `${message.author.displayAvatarURL}`)
+            message.reply(embed)
+        })
+        .screenshots({
+            timestamps: [timemark],
+            filename: 'screenshot.jpg',
             folder: './cmds/screenshots',
         });
 
