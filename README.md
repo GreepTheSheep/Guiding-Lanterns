@@ -1,6 +1,8 @@
 # The Guiding Lanterns
 ## (formerly known as Corona's Lanterns)
 ### Official Discord bot of r/tangled
+[![Status](https://discordbots.org/api/widget/status/569624646475972608.svg?noavatar=true)](https://discordbots.org/bot/569624646475972608)[![Lib](https://discordbots.org/api/widget/lib/569624646475972608.svg?noavatar=true)](https://discordbots.org/bot/569624646475972608)[![Upvotes](https://discordbots.org/api/widget/upvotes/569624646475972608.svg?noavatar=true)](https://discordbots.org/bot/569624646475972608)
+---
 
 ![icon](icon1.png)
 
