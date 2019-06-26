@@ -18,6 +18,9 @@ function SupportCheck (message, client, prefix) {
     const say = require('../cmds/say.js');
     say(message, client, prefix, donor, donorsonly);
 
+    const wolfram = require('./cmds/wolfram.js');
+    wolfram(message, client, prefix, donor, donorsonly);
+
     if (message.content.startsWith(prefix + 'adddonation')) {
         if (message.author.id == "330030648456642562") {
             let args = message.content.split(" ");
@@ -30,14 +33,7 @@ function SupportCheck (message, client, prefix) {
             fs.writeFile(dbfile, JSON.stringify(db), (x) => {
                 if (x) console.error(x)
               });
-            message.channel.send(`Congratulations! Thanks you so much for supporting the projet!! <3`);
-            let newpatreonembed = new Discord.RichEmbed()
-            newpatreonembed.setTitle("NEW DONATOR !")
-                .setColor("#F203BE")
-                .addField(`Thanks you so much:`, mention.user.tag)
-                .setThumbnail("https://media0.giphy.com/media/3ohs7WN06a3Fd6otMI/source.gif")
-                .setFooter('<3', mention.user.displayAvatarURL)
-            client.channels.get('590285525248901130').send(newpatreonembed)
+            message.channel.send(`:+1:`);
         } else return;
     }
 }

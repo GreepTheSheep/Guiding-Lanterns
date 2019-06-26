@@ -73,9 +73,6 @@ client.on('message', message => {
     const wolfram_short = require('./cmds/wolfram_short.js');
     wolfram_short(message, client, prefix);
 
-    const wolfram = require('./cmds/wolfram.js');
-    wolfram(message, client, prefix);
-
     const eight_ball = require('./cmds/8ball.js');
     eight_ball(message, client, prefix);
 
