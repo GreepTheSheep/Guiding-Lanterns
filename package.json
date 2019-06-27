@@ -1,6 +1,6 @@
 {
     "name": "lanterns",
-    "version": "1.6.0",
+    "version": "1.6.2",
     "description": "",
     "main": "bot.js",
     "scripts": {
