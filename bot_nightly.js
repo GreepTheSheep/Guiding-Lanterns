@@ -61,8 +61,8 @@ client.on('message', message => {
     if (message.author.bot) return;
     if (message.channel.type === 'dm') return;
 
-    const lant_message_count = require('./counter/message.js');
-    lant_message_count(message, client, prefix, channel_id.nightly_messages);
+    // const lant_message_count = require('./counter/message.js');
+    // lant_message_count(message, client, prefix, channel_id.nightly_messages);
 
     const SupportCheck = require('./support/support_check.js');
     SupportCheck(message, client, prefix)
@@ -73,8 +73,8 @@ client.on('message', message => {
     const wolfram_short = require('./cmds/wolfram_short.js');
     wolfram_short(message, client, prefix);
 
-    const wolfram = require('./cmds/wolfram.js');
-    wolfram(message, client, prefix);
+    const eight_ball = require('./cmds/8ball.js');
+    eight_ball(message, client, prefix, functiondate, functiontime, getlogchannel());
 
     const screenshot = require('./cmds/screenshots/screenshot.js');
     screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel());

@@ -73,6 +73,7 @@ function scr_msg(message, client, prefix, functiondate, functiontime, cooldowns,
         message.channel.send(`${reply}${usage}\n\n More info: ${doclink}`);
         return;
     }
+    message.channel.startTyping()
     console.log(filename);
     getlogchannel.send(filename);
 
@@ -123,7 +124,8 @@ function upload_scr_png(message, filename, timemark, displayid, prefix, getlogch
             console.log(scrtakenlog);
             getlogchannel.send(scrtakenlog);
             const attachment = new Attachment('./cmds/screenshots/screenshot.png');
-            message.channel.send(`${message.author}\nScreenshot of ${displayid} taken at ${timemark}`, attachment);
+            message.channel.send(`${message.author}\nScreenshot of ${displayid} taken at ${timemark}`, attachment)
+            .then(m=>message.channel.stopTyping(true));
         })
         .on('error', function(err) {
             const errlog = 'an error happened: ' + err.message
@@ -153,7 +155,8 @@ function upload_scr_jpg(message, filename, timemark, displayid, prefix, getlogch
             console.log(scrtakenlog);
             getlogchannel.send(scrtakenlog);
             const attachment = new Attachment('./cmds/screenshots/screenshot.jpg');
-            message.channel.send(`${message.author}\nScreenshot of ${displayid} taken at ${timemark}`, attachment);
+            message.channel.send(`${message.author}\nScreenshot of ${displayid} taken at ${timemark}`, attachment)
+            .then(m=>message.channel.stopTyping(true));
         })
         .on('error', function(err) {
             const errlog = 'an error happened: ' + err.message

@@ -5,7 +5,8 @@ const { wolfID } = require('../config.json');
 const { RichEmbed } = require('discord.js');
 const WolframAlphaAPI = require('wolfram-alpha-api');
 const waApi = WolframAlphaAPI(wolfID);
-    function wolfram (message, client, prefix) {
+    function wolfram (message, client, prefix, donor, donoronlymsg) {
+        if (!donor) return message.channel.send(donoronlymsg)
         if (message.content.startsWith(prefix + 'full-wolf'))  {
             (async () => {
             try {
