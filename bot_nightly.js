@@ -6,6 +6,14 @@ const logchannel = '589337521553539102'
 const getlogchannel = () => client.channels.get(logchannel)
 const inviteTracker = require('./invite-track.js');
 
+const Enmap = require("enmap");
+client.guildPrefix = new Enmap({name: "guildPrefix"});
+
+const getGuildPrefix = (guild) => {
+    if (!guild.client.guildPrefix.has(guild.id)) guild.client.guildPrefix.set(guild.id, config.prefix_nightly)
+    return guild.client.guildPrefix.get(guild.id);
+}
+
 function functiondate() {
     const datefu = new Date();
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -45,8 +53,8 @@ client.on('ready', () => {
     lant_num_guilds();
     lant_frozen_II();
     inviteTracker.ready(client);
-
 });
+
 client.on('guildMemberAdd', member => {
     lant_num_members();
     inviteTracker.track(member);
@@ -55,11 +63,13 @@ client.on('guildMemberRemove', member => {
     lant_num_members();
 });
 
-const prefix = config.prefix_nightly
 client.on('message', message => {
+    const prefix = getGuildPrefix(message.guild);
 
     if (message.author.bot) return;
     if (message.channel.type === 'dm') return;
+    const set_prefix = require('./cmds/prefix.js')
+    set_prefix(message, client, prefix);
 
     console.log(`${message.author.tag}: " ${message.content} " in #${message.channel.name}`)
 

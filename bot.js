@@ -6,6 +6,14 @@ const logchannel = '589337734754336781' //Set a channel for logging
 const getlogchannel = () => client.channels.get(logchannel)
 const inviteTracker = require('./invite-track.js'); // Define the invite tracker plugin
 
+const Enmap = require("enmap"); // Define enmap, a database integrated with the bot
+client.guildPrefix = new Enmap({name: "guildPrefix"}); // Define a new table for custom prefixes
+
+const getGuildPrefix = (guild) => {
+    if (!guild.client.guildPrefix.has(guild.id)) guild.client.guildPrefix.set(guild.id, config.prefix) // If the server has not a prefix, give the default one
+    return guild.client.guildPrefix.get(guild.id); // Gives the prefix for the server
+}
+
 function functiondate() { // The function it gives a date (here the current date)
     const datefu = new Date();
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -29,9 +37,11 @@ const channel_id = require('./counter/channel_ids.json');
 
 const num_members = require('./counter/member.js');
 const num_guilds = require('./counter/guilds.js');
+const ver = require('./counter/version.js')
 
 const lant_num_members = () => num_members(client, "562602234265731080", channel_id.members);
 const lant_num_guilds = () => num_guilds(client, channel_id.guilds);
+const lant_ver = () => ver(client, channel_id.version);
 
 client.on('ready', () => { // If bot was connected:
     const readylog = `Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}` //Set a text who is said I'm connected!
@@ -39,11 +49,12 @@ client.on('ready', () => { // If bot was connected:
     getlogchannel().send(readylog); // Send the text in the logging channel
     lant_num_members(); //Set the Member count
     lant_num_guilds(); //Set the guilds count
+    lant_ver(); //Set version number in the version number channel
     inviteTracker.ready(client); // Starts the invite tracker plugin
 }); // End
 
-const prefix = config.prefix // Gets the prefix from the config file
 client.on('message', message => { // If any message was recived
+    const prefix = getGuildPrefix(message.guild); // Gets the server prefix from the database
     if (message.author.bot) return; // If is a bot, do nothing
     if (message.channel.type === 'dm') return; // If commands was send in DMs, do nothing
 
@@ -62,6 +73,9 @@ client.on('message', message => { // If any message was recived
 
     const wolfram_short = require('./cmds/wolfram_short.js');
     wolfram_short(message, client, prefix);
+
+    const set_prefix = require('./cmds/prefix.js')
+    set_prefix(message, client, prefix);
 
     const bot_ping = require('./cmds/ping.js');
     bot_ping(message, client, prefix);
