@@ -18,7 +18,7 @@ function SupportCheck (message, client, prefix) {
     const say = require('../cmds/say.js');
     say(message, client, prefix, donor, donorsonly);
 
-    const wolfram = require('./cmds/wolfram.js');
+    const wolfram = require('../cmds/wolfram.js');
     wolfram(message, client, prefix, donor, donorsonly);
 
     if (message.content.startsWith(prefix + 'adddonation')) {
