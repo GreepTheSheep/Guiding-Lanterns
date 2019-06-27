@@ -10,7 +10,7 @@ const Enmap = require("enmap");
 client.guildPrefix = new Enmap({name: "guildPrefix"});
 const getGuildPrefix = (guild) => {
     guild.client.guildPrefix.has(guild.id)
-    ? guild.client.guildPrefix.get(guild.id): prefix
+    ? guild.client.guildPrefix.get(guild.id): config.prefix_nightly
 }
 function functiondate() {
     const datefu = new Date();
