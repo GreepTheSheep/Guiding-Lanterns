@@ -93,3 +93,5 @@ package-lock.json
 
 # supporters Database
 support/*.json
+
+data/*
