@@ -7,9 +7,9 @@ const WolframAlphaAPI = require('wolfram-alpha-api');
 const waApi = WolframAlphaAPI(wolfID);
     function wolfram (message, client, prefix, donor, donoronlymsg) {
         if (message.content.startsWith(prefix + 'full-wolf'))  {
-            if (!donor) return message.channel.send(donoronlymsg)
             (async () => {
             try {
+                if (!donor) return message.channel.send(donoronlymsg)
                 let args = message.content.split(" ");
                 args.shift();
                 if (args.length < 1) {
