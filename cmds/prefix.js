@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-function setPrefix(message, client, prefix, date, time, logchannel){
+function setPrefix(message, client, prefix){
     if !message.content.startsWith(prefix + "prefix") return;
 
     message.client.guildPrefix.set(message.guild.id,args[0]);
