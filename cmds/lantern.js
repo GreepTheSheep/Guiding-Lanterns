@@ -11,7 +11,7 @@ function lantern(message, client, prefix, getlogchannel) {
 
         let countwrite = { "count": `${lancount.count}` };
         let data = JSON.stringify(countwrite);
-        fs.writeFileSync('lanterns.json', data);
+        fs.writeFileSync(countfile, data);
     };
 
     if (message.content.startsWith(prefix + 'lanterns')) {
@@ -27,7 +27,7 @@ function lantern(message, client, prefix, getlogchannel) {
         if (message.author.id == "330030648456642562") {
             let countwrite = { "count": `0` };
             let data = JSON.stringify(countwrite);
-            fs.writeFileSync('lanterns.json', data);
+            fs.writeFileSync(countfile, data);
             lancount.count = 0;
             console.log('Lantern counter reset !')
             getlogchannel.send('Lantern counter reset !')

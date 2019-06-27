@@ -74,7 +74,7 @@ client.on('message', message => {
     wolfram_short(message, client, prefix);
 
     const eight_ball = require('./cmds/8ball.js');
-    eight_ball(message, client, prefix);
+    eight_ball(message, client, prefix, functiondate, functiontime, getlogchannel());
 
     const screenshot = require('./cmds/screenshots/screenshot.js');
     screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel());
