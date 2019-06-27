@@ -63,6 +63,9 @@ client.on('message', message => { // If any message was recived
     const wolfram_short = require('./cmds/wolfram_short.js');
     wolfram_short(message, client, prefix);
 
+    const bot_ping = require('./cmds/ping.js');
+    bot_ping(message, client, prefix);
+
     const eight_ball = require('./cmds/8ball.js');
     eight_ball(message, client, prefix, functiondate, functiontime, getlogchannel());
 
