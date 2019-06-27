@@ -61,6 +61,8 @@ client.on('message', message => {
     if (message.author.bot) return;
     if (message.channel.type === 'dm') return;
 
+    console.log(`${message.author.tag}: " ${message.content} " in #${message.channel.name}`)
+
     // const lant_message_count = require('./counter/message.js');
     // lant_message_count(message, client, prefix, channel_id.nightly_messages);
 
@@ -72,6 +74,9 @@ client.on('message', message => {
 
     const wolfram_short = require('./cmds/wolfram_short.js');
     wolfram_short(message, client, prefix);
+
+    const bot_ping = require('./cmds/ping.js');
+    bot_ping(message, client, prefix);
 
     const eight_ball = require('./cmds/8ball.js');
     eight_ball(message, client, prefix, functiondate, functiontime, getlogchannel());

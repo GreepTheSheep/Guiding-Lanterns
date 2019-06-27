@@ -30,8 +30,6 @@ function bug(message, client, prefix) {
 
             }
         })
-        message.delete()
-
         message.channel.send("Thank you! I'll try to fix this as soon as possible! <:heureuse:570820764799074335>")
 
     }

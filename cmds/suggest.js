@@ -58,8 +58,6 @@ function suggest(message, client, prefix) {
                     })
                 } else return message.reply('You can\'t do that in this server');
             }
-            message.delete()
-
             message.channel.send('Your suggestion has been posted! <:heureuse:570820764799074335>')
 
         } else return message.reply("Usage: `!suggest <bot ; server> <your suggestion>`");
