@@ -10,7 +10,7 @@ function bot_ping(message, client, prefix){
     var reponsesread = fs.readFileSync(answerfile, "utf8");
     var reponses = JSON.parse(reponsesread);
 
-    if(message.content.startsWith(`<@${client.user.id}>`) || message.content.startsWith(`<@!${client.user.id}>`)){
+    if(message.content == `<@${client.user.id}>` || message.content == `<@!${client.user.id}>`){
 
         function randomItem(array) {
             return array[Math.floor(Math.random() * array.length)];

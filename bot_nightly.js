@@ -8,10 +8,12 @@ const inviteTracker = require('./invite-track.js');
 
 const Enmap = require("enmap");
 client.guildPrefix = new Enmap({name: "guildPrefix"});
+
 const getGuildPrefix = (guild) => {
-    guild.client.guildPrefix.has(guild.id)
-    ? guild.client.guildPrefix.get(guild.id): config.prefix_nightly
+    if (!guild.client.guildPrefix.has(guild.id)) guild.client.guildPrefix.set(guild.id, config.prefix_nightly)
+    return guild.client.guildPrefix.get(guild.id);
 }
+
 function functiondate() {
     const datefu = new Date();
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -51,8 +53,8 @@ client.on('ready', () => {
     lant_num_guilds();
     lant_frozen_II();
     inviteTracker.ready(client);
-
 });
+
 client.on('guildMemberAdd', member => {
     lant_num_members();
     inviteTracker.track(member);
