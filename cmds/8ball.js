@@ -1,19 +1,37 @@
 const Discord = require("discord.js");
-const fs = require("fs");
-const answerfile = './cmds/8ball_answers.json'
 
 const wait = require('util').promisify(setTimeout);
-const min=500; 
+const min=1000; 
 const max=10000;
 
 function eight_ball(message, client, prefix, date, time, logchannel){
-    var reponsesread = fs.readFileSync(answerfile, "utf8");
-    var reponses = JSON.parse(reponsesread);
+    var reponses = [
+        "It is certain.",
+        "It is decidedly so.",
+        "Without a doubt.",
+        "Yes - definitely.",
+        "You may rely on it.",
+        "As I see it, yes.",
+        "Most likely.",
+        "Outlook good.",
+        "Yes.",
+        "Signs point to yes.",
+        "Reply hazy, try again",
+        "Ask again later.",
+        "Better not tell you now.",
+        "Cannot predict now.",
+        "Concentrate and ask again.",
+        "Don't count on it.",
+        "My reply is no.",
+        "My sources say no.",
+        "Outlook not so good.",
+        "Very doubtful."
+    ]
 
     let args = message.content.split(" ")
     args.shift()
 
-    if(message.content.startsWith(prefix + "tellme")){
+    if(message.content.startsWith(prefix + "8ball")){
 
         function randomItem(array) {
             return array[Math.floor(Math.random() * array.length)];
@@ -29,19 +47,10 @@ function eight_ball(message, client, prefix, date, time, logchannel){
             .then(msg => wait(randomwait).then(m=>msg.edit(`**${reponse}**`))
             )
             .catch(e => message.channel.send('\`\`\`:/ Hmm... Looks like there\'s been a error.\nDon\'t worry! The report was sent at the devs!\`\`\`')
-            .then(console.log(`\n[${date(0)} - ${time(0)}] ${prefix}tellme Error: ${e}\n`)
-            .then(logchannel.send(`\`\`\`${prefix}tellme Error:\n${e}\`\`\``))
+            .then(console.log(`\n[${date(0)} - ${time(0)}] ${prefix}8ball Error: ${e}\n`)
+            .then(logchannel.send(`\`\`\`${prefix}8ball Error:\n${e}\`\`\``))
             ));
         }
-    }
-
-    if (message.content.startsWith(prefix + "addtellme")){
-        if (!message.author.id == '330030648456642562') return;
-        if (args.length < 1) return message.react('❌');
-        reponses.push(`${args.join(" ")}`);
-        reponsesread = JSON.stringify(reponses);
-        fs.writeFileSync(answerfile, reponsesread);
-        message.react('✅')
     }
 }
 
