@@ -6,9 +6,12 @@ function setPrefix(message, client, prefix){
         args.shift()
 
         if (args.length < 1) return message.reply(`The server's prefix is \`${prefix}\`. Type \`${prefix}help\` for a list of commands.\nYou can change the server's prefix with \`${prefix}prefix set <new prefix>\``);
-        if(!message.member.hasPermission("ADMINISTRATOR") || message.member.id != '330030648456642562') return message.reply('Sorry, you can\'t do that!');
-        message.client.guildPrefix.set(message.guild.id,args.join(""))
-        message.channel.send(`Prefix \`${args.join("")}\` set\n:warning: If you can't remember the prefix, mention the bot followed by \`prefix\``)
+        if(message.member.hasPermission("ADMINISTRATOR") || message.member.id == '330030648456642562'){
+            message.client.guildPrefix.set(message.guild.id,args.join(""))
+            message.channel.send(`Prefix \`${args.join("")}\` set\n:warning: If you can't remember the prefix, mention the bot followed by \`prefix\``)
+        } else {
+            return message.reply('Sorry, you can\'t do that!');
+        }
     }
 }
 module.exports = setPrefix;
