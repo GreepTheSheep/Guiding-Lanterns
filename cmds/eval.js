@@ -9,10 +9,11 @@ const Discord = require("discord.js");
 
  function eval_cmd(message, client, prefix, getlogchannel) {
 
-     if(!message.author.id === "330030648456642562") return;
-    const args = message.content.split(" ").slice(1);
+    if (!message.author.id === "330030648456642562") return;
     if (message.content.startsWith(prefix + "eval")) {
         try {
+            const args = message.content.split(" ").slice(1);
+            if (args.length < 1) return message.react('❌');
             const code = args.join(" ");
             let evaled = eval(code);
 
