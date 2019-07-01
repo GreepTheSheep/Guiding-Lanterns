@@ -149,14 +149,8 @@ dbl.on('posted', () => {
     console.log(postedlog);
     getlogchannel().send(postedlog)
 })
-  
-dbl.on('error', e => {
-   const dblerror = `DBL error : ${e}`
-   console.log(dblerror);
-   getlogchannel().send(dblerror)
-})
 
-dbl.webhook.on('vote', vote => {
+dbl.on('vote', vote => {
     const votelog = `User with ID ${vote.user} just voted!`
     console.log(votelog);
     getlogchannel().send(votelog)
