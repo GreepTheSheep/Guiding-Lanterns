@@ -6,6 +6,9 @@ const logchannel = '589337734754336781' //Set a channel for logging
 const getlogchannel = () => client.channels.get(logchannel)
 const inviteTracker = require('./invite-track.js'); // Define the invite tracker plugin
 
+const DBL = require("dblapi.js");
+const dbl = new DBL(config.dbl_token, client);
+
 const Enmap = require("enmap"); // Define enmap, a database integrated with the bot
 client.guildPrefix = new Enmap({name: "guildPrefix"}); // Define a new table for custom prefixes
 
@@ -46,6 +49,7 @@ const lant_ver = () => ver(client, channel_id.version);
 client.on('ready', () => { // If bot was connected:
     const readylog = `Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}` //Set a text who is said I'm connected!
     console.log(readylog); // Send the text in the console
+    dbl.postStats(client.guilds.size)
     getlogchannel().send(readylog); // Send the text in the logging channel
     lant_num_members(); //Set the Member count
     lant_num_guilds(); //Set the guilds count
@@ -138,5 +142,24 @@ client.on('guildDelete', guild => { // If the bot leave a server
     getlogchannel().send(botleftguildlog)
     lant_num_guilds(); // Change the servers count (-1)
 })
+
+
+dbl.on('posted', () => {
+    const postedlog = `[${functiondate(0)} - ${functiontime(0)}] Server count posted!`
+    console.log(postedlog);
+    getlogchannel().send(postedlog)
+})
+  
+dbl.on('error', e => {
+   const dblerror = `DBL error : ${e}`
+   console.log(dblerror);
+   getlogchannel().send(dblerror)
+})
+
+dbl.webhook.on('vote', vote => {
+    const votelog = `User with ID ${vote.user} just voted!`
+    console.log(votelog);
+    getlogchannel().send(votelog)
+});
 
 client.login(config.token); // Login to Discord using token

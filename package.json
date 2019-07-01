@@ -18,6 +18,7 @@
         "bufferutil": "^3.0.3",
         "country-data": "0.0.31",
         "dateformat": "^3.0.3",
+        "dblapi.js": "^2.3.0",
         "didyoumean2": "^3.0.0",
         "discord-emoji": "^1.1.1",
         "discord.js": "^11.5.0",
