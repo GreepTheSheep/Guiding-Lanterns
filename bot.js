@@ -147,7 +147,6 @@ client.on('guildDelete', guild => { // If the bot leave a server
 dbl.on('posted', () => {
     const postedlog = `[${functiondate(0)} - ${functiontime(0)}] Server count posted on https://discordbots.org/bot/${client.user.id}`
     console.log(postedlog);
-    getlogchannel().send(postedlog)
 })
 
 dbl.on('vote', vote => {
