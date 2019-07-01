@@ -22,6 +22,8 @@ const Discord = require("discord.js");
             }
             getlogchannel.send(`EVAL COMMAND SUCESS!\n\`\`\`xl\n${code}\`\`\`\nNode Result: \`${clean(evaled)}\``);
         } catch (err) {
+            const args = message.content.split(" ").slice(1);
+            const code = args.join(" ");
             getlogchannel.send(`EVAL COMMAND **ERROR**\n\`\`\`xl\n${code}\`\`\`\nNode Result: \`${clean(err)}\``);
         }
     }
