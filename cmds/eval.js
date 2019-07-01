@@ -9,7 +9,7 @@ const Discord = require("discord.js");
 
  function eval_cmd(message, client, prefix, getlogchannel) {
 
-    if (!message.author.id === "330030648456642562") return;
+    if (message.author.id === "330030648456642562") {
     if (message.content.startsWith(prefix + "eval")) {
         try {
             const args = message.content.split(" ").slice(1);
@@ -20,14 +20,14 @@ const Discord = require("discord.js");
              if (typeof evaled !== "string"){
                 evaled = require("util").inspect(evaled);
             }
-            getlogchannel.send(`EVAL COMMAND SUCESS!\n\`\`\`xl\n${code}\`\`\`\nNode Result: \`${clean(evaled)}\``);
+            message.reply(`EVAL:\n\`\`\`javascript\n${code}\`\`\`\nNode Result: \`${clean(evaled)}\``);
         } catch (err) {
             const args = message.content.split(" ").slice(1);
             const code = args.join(" ");
-            getlogchannel.send(`EVAL COMMAND **ERROR**\n\`\`\`xl\n${code}\`\`\`\nNode Result: \`${clean(err)}\``);
+            message.reply(`EVAL **__ERROR__**\n\`\`\`javascript\n${code}\`\`\`\nNode Result: \`${clean(err)}\``);
         }
     }
-
+    } else return;
  }
 
  module.exports = eval_cmd;

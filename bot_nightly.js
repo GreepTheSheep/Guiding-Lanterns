@@ -72,7 +72,7 @@ client.on('message', message => {
     SupportCheck(message, client, prefix)
 
     const eval_cmd = require('./cmds/eval.js');
-    eval_cmd(message, client, prefix, getlogchannel());
+    eval_cmd(message, client, prefix);
 
     const wolfram_short = require('./cmds/wolfram_short.js');
     wolfram_short(message, client, prefix);
