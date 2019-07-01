@@ -6,9 +6,6 @@ const logchannel = '589337521553539102'
 const getlogchannel = () => client.channels.get(logchannel)
 const inviteTracker = require('./invite-track.js');
 
-const DBL = require("dblapi.js");
-const dbl = new DBL(config.dbl_token, client);
-
 function functiondate() {
     const datefu = new Date();
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -127,23 +124,5 @@ client.on('guildDelete', guild => {
 client.on('debug', (debugevent) => {
     console.log(`[${functiondate(0)} - ${functiontime(0)}] : ${debugevent}`)
 })
-
-dbl.on('posted', () => {
-    const postedlog = `[${functiondate(0)} - ${functiontime(0)}] Server count posted!`
-    console.log(postedlog);
-    getlogchannel().send(postedlog)
-})
-  
-dbl.on('error', e => {
-   const dblerror = `DBL error : ${e}`
-   console.log(dblerror);
-   getlogchannel().send(dblerror)
-})
-
-dbl.on('vote', vote => {
-    const votelog = `User with ID ${vote.user} just voted!`
-    console.log(votelog);
-    getlogchannel().send(votelog)
-});
 
 client.login(config.token_nightly);
