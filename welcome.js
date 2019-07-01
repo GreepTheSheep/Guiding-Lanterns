@@ -47,13 +47,25 @@ function randomItem(array) {
 function welcome(member, client) {
     let welcomemsg = randomItem(messages);
     let welcomeimg = randomItem(images);
-    let embed = new Discord.RichEmbed()
-    embed.setColor("#01B023")
+
+    if (member.guild.id === '562602234265731080'){
+        let embed = new Discord.RichEmbed()
+        embed.setColor("#01B023")
         .setTimestamp()
         .addField(`${welcomemsg}`, `<@${member.user.id}>`)
         .setImage(`${welcomeimg}`)
         .setFooter(`${member.user.username} just landed in the Kingdom of Corona!`, `${member.user.displayAvatarURL}`)
-    client.guilds.get('562602234265731080').channels.get('562611657419784202').send(embed);
+        client.guilds.get('562602234265731080').channels.get('562611657419784202').send(embed);
+    }
+    if (member.guild.id === '570024448371982373'){
+        let embed = new Discord.RichEmbed()
+        embed.setColor("#01B023")
+        .setTimestamp()
+        .addField(`Welcome to the Guiding Lanterns support server!`, `<@${member.user.id}>`)
+        .setImage(`${welcomeimg}`)
+        .setFooter(`${member.user.username} just landed in the Guiding Lanterns support server!`, `${member.user.displayAvatarURL}`)
+        client.guilds.get('570024448371982373').channels.get('591219640315674641').send(embed);
+    }
 }
 
 module.exports = welcome;

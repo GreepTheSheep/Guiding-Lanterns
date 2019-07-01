@@ -111,17 +111,17 @@ client.on('message', message => { // If any message was recived
 });
 
 client.on('guildMemberAdd', member => { // If any member join a server (or guild in Discord language)
-    if (member.guild.id === '562602234265731080') { // If the member join Kingdom of Corona, do the welcome script
+    if (member.guild.id === '562602234265731080'|| member.guild.id === '570024448371982373') { // If the member join Kingdom of Corona, do the welcome script
         const welcome = require('./welcome.js');
         welcome(member, client);
-        inviteTracker.track(member);
+        if (member.guild.id === '562602234265731080') inviteTracker.track(member);
         console.log(`\n${member.user.tag} joined ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who joined
     }
     lant_num_members(); //Change the members count (+1)
 })
 
 client.on('guildMemberRemove', member => { // If any member leave a server (or guild in Discord language)
-    if (member.guild.id === '562602234265731080') { // If the member leave Kingdom of Corona, do the goodbye script
+    if (member.guild.id === '562602234265731080' || member.guild.id === '570024448371982373') { // If the member leave Kingdom of Corona, do the goodbye script
         const goodbye = require('./goodbye.js');
         goodbye(member, client);
         console.log(`\n${member.user.tag} left ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who left
