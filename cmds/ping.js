@@ -28,7 +28,7 @@ function bot_ping(message, client, prefix){
         }
 
     if (message.content.startsWith(prefix + "addpingmsg")){
-        if (!message.author.id == '330030648456642562') return;
+        if (message.author.id == '330030648456642562') {
         let args = message.content.split(" ")
         args.shift()
         if (args.length < 1) return message.react('❌');
@@ -36,6 +36,7 @@ function bot_ping(message, client, prefix){
         reponsesread = JSON.stringify(reponses);
         fs.writeFileSync(answerfile, reponsesread);
         message.react('✅')
+        } else return;
     }
 }
 
