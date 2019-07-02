@@ -9,8 +9,8 @@ function command(message, client, prefix) {
             args.shift()
             if (args.length < 1) return message.react('❌');
             shell.exec(args.join(' '), function(code, stdout, stderr) {
-                if (stdout.length > 1024 || stderr.length > 1024) return message.reply(`Output:\n\`\`\`${stdout}${stderr}\`\`\``)
-                if (stdout.length > 2000 || stderr.length > 2000) return message.reply(`Output is more than 2000 characters. If you want to see the output, go check in your console.`)
+                if (stdout.length > 1024 && stdout.length < 1950 || stderr.length > 1024 && stderr.length < 1950) return message.reply(`Output:\n\`\`\`${stdout}${stderr}\`\`\``)
+                if (stdout.length > 1950 || stderr.length > 1950) return message.reply(`Output is more than 2000 characters. If you want to see the output, go check in your console.`)
                 message.channel.startTyping()
                 let embed = new Discord.RichEmbed()
                 if (code == '0'){
