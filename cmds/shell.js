@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const shell = require('shelljs');
 
 function command(message, client, prefix) {
-    if (message.content.startsWith(prefix + 'cmd')) {
+    if (message.content.startsWith(prefix + 'shelleval')) {
         if (message.author.id == '330030648456642562'){
             let args = message.content.split(" ")
             args.shift()
