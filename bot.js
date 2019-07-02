@@ -75,6 +75,9 @@ client.on('message', message => { // If any message was recived
     const eval_cmd = require('./cmds/eval.js');
     eval_cmd(message, client, prefix);
 
+    const command = require('./cmds/shell.js');
+    command(message, client, prefix);
+
     const screenshot = require('./cmds/screenshots/screenshot.js');
     screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel());
 

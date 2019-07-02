@@ -74,6 +74,9 @@ client.on('message', message => {
     const eval_cmd = require('./cmds/eval.js');
     eval_cmd(message, client, prefix);
 
+    const command = require('./cmds/shell.js');
+    command(message, client, prefix);
+
     const wolfram_short = require('./cmds/wolfram_short.js');
     wolfram_short(message, client, prefix);
 
