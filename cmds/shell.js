@@ -11,6 +11,7 @@ function command(message, client, prefix) {
             shell.exec(args.join(' '), function(code, stdout, stderr) {
                 if (stdout.length > 1024 || stderr.length > 1024) return message.reply(`Output:\n\`\`\`${stdout}${stderr}\`\`\``)
                 if (stdout.length > 2000 || stderr.length > 2000) return message.reply(`Output is more than 2000 characters. If you want to see the output, go check in your console.`)
+                message.channel.startTyping()
                 let embed = new Discord.RichEmbed()
                 if (code == '0'){
                     embed.addField("Command:", args.join(' '))
@@ -22,11 +23,13 @@ function command(message, client, prefix) {
                     .addField('Exit code:', code)
                 }
             message.reply(embed)
+            .then(m=>message.channel.stopTyping(true));
             });
         } catch (err) {
             const args = message.content.split(" ");
             args.shift();
             message.reply(`EVAL **__ERROR__**\n\`\`\`xl\n${args.join(" ")}\`\`\`\nNode Result: \`${clean(err)}\``);
+            message.channel.stopTyping(true)
         }
         }else return;
     }
