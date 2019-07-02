@@ -94,7 +94,8 @@ function scr_msg(message, client, prefix, functiondate, functiontime, cooldowns,
             const cooldownlog = `COOLDOWN : Wait ${timeLeft} sec`
             console.log(cooldownlog);
             getlogchannel.send(cooldownlog);
-            return message.reply(`please wait ${timeLeft.toFixed(0)} more second(s) before reusing the \`${prefix+SCR}\` command.`);
+            return message.reply(`please wait ${timeLeft.toFixed(0)} more second(s) before reusing the \`${prefix+SCR}\` command.`)
+            .then(m=>message.channel.stopTyping(true));
         }
     }
 
