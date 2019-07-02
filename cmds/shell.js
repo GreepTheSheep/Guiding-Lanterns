@@ -9,9 +9,9 @@ function command(message, client, prefix) {
             args.shift()
             if (args.length < 1) return message.react('❌');
             shell.exec(args.join(' '), function(code, stdout, stderr) {
+                if (stdout.length > 1024 || stderr.length > 1024) return message.reply(`Output:\n\`\`\`${stdout}${stderr}\`\`\``)
+                if (stdout.length > 2000 || stderr.length > 2000) return message.reply(`Output is more than 2000 characters. If you want to see the output, go check in your console.`)
                 message.channel.startTyping()
-                if (stdout.length > 1024 || stderr.length > 1024) {message.reply(`Output:\n\`\`\`${stdout}${stderr}\`\`\``)} else {
-                if (stdout.length > 1950 || stderr.length > 1950) return message.reply(`Output is more than 2000 characters. If you want to see the output, go check in your console.`)
                 let embed = new Discord.RichEmbed()
                 if (code == '0'){
                     embed.addField("Command:", args.join(' '))
@@ -22,9 +22,8 @@ function command(message, client, prefix) {
                     .addField('Program output:', `\`\`\`${stderr}\`\`\``)
                     .addField('Exit code:', code)
                 }
-                message.reply(embed)
-                }
-                message.channel.stopTyping(true)
+            message.reply(embed)
+            .then(m=>message.channel.stopTyping(true));
             });
         } catch (err) {
             const args = message.content.split(" ");
