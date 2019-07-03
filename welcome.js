@@ -66,6 +66,15 @@ function welcome(member, client) {
         .setFooter(`${member.user.username} just landed in the Guiding Lanterns support server!`, `${member.user.displayAvatarURL}`)
         client.guilds.get('570024448371982373').channels.get('591219640315674641').send(embed);
     }
+    if (member.guild.id === '264445053596991498'){
+        let embed = new Discord.RichEmbed()
+        embed.setColor("#01B023")
+        .setTimestamp()
+        .addField(`${welcomemsg}`, `<@${member.user.id}>`)
+        .setImage(`${welcomeimg}`)
+        .setFooter(`${member.user.username} just landed in the DBL server!`, `${member.user.displayAvatarURL}`)
+        client.guilds.get('264445053596991498').channels.get('265156361791209475').send(embed);
+    }
 }
 
 module.exports = welcome;
