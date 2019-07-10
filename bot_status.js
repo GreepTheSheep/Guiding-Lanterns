@@ -1,8 +1,16 @@
 const Discord = require('discord.js');
+const shell = require('shelljs');
 const client = new Discord.Client();
 const config = require('./config.json');
 const logchannel = '589337734754336781'
 const getlogchannel = () => client.channels.get(logchannel)
+
+function clean(text) {
+    if (typeof(text) === "string")
+        return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+    else
+        return text;
+}
 
 function functiondate() {
     const datefu = new Date();
@@ -26,13 +34,28 @@ function functiontime() {
 client.on('ready', () => {
     const readylog = `Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`
     console.log(readylog);
-    getlogchannel().send(readylog);
+    //getlogchannel().send(readylog);
 
 });
 
 client.on('message', message => {
-    if (message.author.bot) return;
     if (message.channel.type !== 'dm') return;
+
+    if(message.content.startsWith('ping')) {
+        message.channel.send(":ping_pong: ?")
+        .then(m => m.edit(`:ping_pong: !\nLatency is ${m.createdTimestamp - message.createdTimestamp}ms.\nAPI Latency is ${Math.round(client.ping)}ms`));
+      }
+
+    if (message.content.startsWith('start')) {
+        if (message.author.id == '330030648456642562'){
+        try {
+            shell.exec('npm start')
+            message.reply('Booting The Guiding Lanterns from the rescue server...')
+        } catch (err) {
+            message.reply(`EVAL **__ERROR__**\n\`\`\`xl\nnpm start\`\`\`\nNode Result: \`${clean(err)}\``);
+        }
+        }else return;
+    }
 });
 
 client.login(config.token_status)
