@@ -46,7 +46,7 @@ client.on('message', message => {
         .then(m => m.edit(`:ping_pong: !\nLatency is ${m.createdTimestamp - message.createdTimestamp}ms.\nAPI Latency is ${Math.round(client.ping)}ms`));
       }
 
-    if (message.content.startsWith('start')) {
+    if (message.content.startsWith('rescue start')) {
         if (message.author.id == '330030648456642562'){
         try {
             shell.exec('npm start')
