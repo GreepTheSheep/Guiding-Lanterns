@@ -1,6 +1,13 @@
 const Discord = require('discord.js');
 const shell = require('shelljs');
 
+function clean(text) {
+    if (typeof(text) === "string")
+        return text.replace(/`/g, "`" + String.fromCharCode(8203)).replace(/@/g, "@" + String.fromCharCode(8203));
+    else
+        return text;
+}
+
 function command(message, client, prefix) {
     if (message.content.startsWith(prefix + 'shelleval')) {
         if (message.author.id == '330030648456642562'){
