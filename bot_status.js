@@ -113,4 +113,9 @@ client.on('message', message => {
     }else return;
 });
 
+client.on('error', err =>{
+    getlogchannel().send(err)
+    console.log(err)
+})
+
 client.login(config.token_status)
