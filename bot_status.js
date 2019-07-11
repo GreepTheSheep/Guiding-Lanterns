@@ -4,6 +4,8 @@ const client = new Discord.Client();
 const config = require('./config.json');
 const logchannel = '589337734754336781'
 const getlogchannel = () => client.channels.get(logchannel)
+const guidinglanternsid = '569624646475972608'
+const glid = guidinglanternsid
 
 function clean(text) {
     if (typeof(text) === "string")
@@ -35,6 +37,16 @@ client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`);
     getlogchannel().send(`Status and auto-restart bot started`);
 
+    if (client.users.get(glid).presence.status == 'online'){
+        console.log('The Guiding Lanterns is online!')
+    } else if (client.users.get(glid).presence.status == 'offline'){
+        console.log('The Guiding Lanterns is offline...')
+    } else if (client.users.get(glid).presence.status == 'dnd'){
+        console.log('The Guiding Lanterns is online! Its status is set to Do Not Disturb')
+    } else if (client.users.get(glid).presence.status == 'idle'){
+        console.log('The Guiding Lanterns is online! Its status is set to idle')
+    }
+
 });
 
 client.on('message', message => {
@@ -54,7 +66,7 @@ client.on('message', message => {
             .then(a.edit(':+1: Started!')))
             .catch(err=>console.log(`[RESCUE : ${functiondate()} - ${functiontime()}] ${err}`))
         }
-        
+
         if (message.content.startsWith('eval')) {
             try {
                 const args = message.content.split(" ").slice(1);
