@@ -49,15 +49,15 @@ client.on('ready', () => {
 });
 
 client.on('presenceUpdate', member => {
-    if (member == glid){
-        if (member.presence.status == 'online'){
-            console.log('The Guiding Lanterns is online!')
-        } else if (member.presence.status == 'offline'){
-            console.log('The Guiding Lanterns is offline...')
-        } else if (member.presence.status == 'dnd'){
-            console.log('The Guiding Lanterns is online! Its status is set to Do Not Disturb')
-        } else if (member.presence.status == 'idle'){
-            console.log('The Guiding Lanterns is online! Its status is set to idle')
+    if (member === glid){
+        if (member.user.presence.status == 'online'){
+            console.log(`${member.user.username} is online!`)
+        } else if (member.user.presence.status == 'offline'){
+            console.log(`${member.user.username} is offline...`)
+        } else if (member.user.presence.status == 'dnd'){
+            console.log(`${member.user.username} is online! Its status is set to Do Not Disturb`)
+        } else if (member.user.presence.status == 'idle'){
+            console.log(`${member.user.username} is online! Its status is set to idle`)
         }
     }
 })
