@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const main_script = require('./bot.js')
 const client = new Discord.Client();
 const config = require('./config.json');
 const logchannel = '589337734754336781'
@@ -43,6 +42,8 @@ client.on('ready', () => {
         client.user.setActivity('Bot online', { type: 'WATCHING' });
     } else if (client.users.get(glid).presence.status == 'offline'){
         console.log('The Guiding Lanterns is offline...')
+        client.user.setStatus('dnd')
+        client.user.setActivity('Bot OFFLINE', { type: 'WATCHING' });
     } else if (client.users.get(glid).presence.status == 'dnd'){
         console.log('The Guiding Lanterns is online! Its status is set to Do Not Disturb')
     } else if (client.users.get(glid).presence.status == 'idle'){
@@ -55,6 +56,7 @@ client.on('presenceUpdate', member => {
         if (member.user.presence.status == 'online'){
             console.log(`${member.user.username} is online!`)
         } else if (member.user.presence.status == 'offline'){
+            const main_script = require('./bot.js')
             client.user.setStatus('dnd')
             client.user.setActivity('Bot OFFLINE', { type: 'WATCHING' });
             const offlinemsg = `${member.user.username} is offline...\nTrying to restart the bot from the rescue server`
@@ -81,6 +83,7 @@ client.on('message', message => {
       }
     if (message.author.id == '330030648456642562'){
         if (message.content.startsWith('rescue start')) {
+            const main_script = require('./bot.js')
             getlogchannel().send(`**Forced by command**\n\`\`\`Starting The Guiding Lanterns from the rescue server...\`\`\``);
             message.reply('Booting The Guiding Lanterns from the rescue server...')
             .then(a=>main_script
