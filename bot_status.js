@@ -48,7 +48,7 @@ client.on('ready', () => {
     }
 });
 
-client.on('guildMemberUpdate', member, newmember => {
+client.on('guildMemberAvailable', member => {
     if (member == glid){
         if (member.presence.status == 'online'){
             console.log('The Guiding Lanterns is online!')
