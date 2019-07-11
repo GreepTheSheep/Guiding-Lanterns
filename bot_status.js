@@ -1,5 +1,5 @@
 const Discord = require('discord.js');
-const shell = require('shelljs');
+const main_script = require('./bot.js')
 const client = new Discord.Client();
 const config = require('./config.json');
 const logchannel = '589337734754336781'
@@ -39,6 +39,8 @@ client.on('ready', () => {
 
     if (client.users.get(glid).presence.status == 'online'){
         console.log('The Guiding Lanterns is online!')
+        client.user.setStatus('idle')
+        client.user.setActivity('Bot online', { type: 'WATCHING' });
     } else if (client.users.get(glid).presence.status == 'offline'){
         console.log('The Guiding Lanterns is offline...')
     } else if (client.users.get(glid).presence.status == 'dnd'){
@@ -49,11 +51,19 @@ client.on('ready', () => {
 });
 
 client.on('presenceUpdate', member => {
-    if (member === glid){
+    if (member.id === glid){
         if (member.user.presence.status == 'online'){
             console.log(`${member.user.username} is online!`)
         } else if (member.user.presence.status == 'offline'){
-            console.log(`${member.user.username} is offline...`)
+            client.user.setStatus('dnd')
+            client.user.setActivity('Bot OFFLINE', { type: 'WATCHING' });
+            const offlinemsg = `${member.user.username} is offline...\nTrying to restart the bot from the rescue server`
+            console.log(offlinemsg)
+            getlogchannel().send(`<@!330030648456642562> ${offlinemsg}\n\`\`\`Starting The Guiding Lanterns from the rescue server...\`\`\``)
+            .then(a=>main_script)
+            .then(client.user.setActivity('Bot started automatically from the rescue server', { type: 'STREAMING', url:"https://twitch.tv/greeplive" }))
+            .catch(err => getlogchannel().send('ERROR: ' + err))
+            //client.users.get('330030648456642562').send(`${member.user.username} is offline...`);
         } else if (member.user.presence.status == 'dnd'){
             console.log(`${member.user.username} is online! Its status is set to Do Not Disturb`)
         } else if (member.user.presence.status == 'idle'){
@@ -71,12 +81,11 @@ client.on('message', message => {
       }
     if (message.author.id == '330030648456642562'){
         if (message.content.startsWith('rescue start')) {
-
-            const main_script = require('./bot.js')
             getlogchannel().send(`**Forced by command**\n\`\`\`Starting The Guiding Lanterns from the rescue server...\`\`\``);
             message.reply('Booting The Guiding Lanterns from the rescue server...')
             .then(a=>main_script
             .then(a.edit(':+1: Started!')))
+            .then(client.user.setActivity('Bot started by force from the rescue server', { type: 'STREAMING', url:"https://twitch.tv/greeplive" }))
             .catch(err=>console.log(`[RESCUE : ${functiondate()} - ${functiontime()}] ${err}`))
         }
 
