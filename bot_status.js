@@ -32,9 +32,8 @@ function functiontime() {
 }
 
 client.on('ready', () => {
-    const readylog = `Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`
-    console.log(readylog);
-    //getlogchannel().send(readylog);
+    console.log(`Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`);
+    getlogchannel().send(`Status and auto-restart bot started`);
 
 });
 
@@ -45,16 +44,36 @@ client.on('message', message => {
         message.channel.send(":ping_pong: ?")
         .then(m => m.edit(`:ping_pong: !\nLatency is ${m.createdTimestamp - message.createdTimestamp}ms.\nAPI Latency is ${Math.round(client.ping)}ms`));
       }
+    if (message.author.id == '330030648456642562'){
+        if (message.content.startsWith('rescue start')) {
 
-    if (message.content.startsWith('rescue start')) {
-        if (message.author.id == '330030648456642562'){
             const main_script = require('./bot.js')
+            getlogchannel().send(`**Forced by command**\n\`\`\`Starting The Guiding Lanterns from the rescue server...\`\`\``);
             message.reply('Booting The Guiding Lanterns from the rescue server...')
-            .then(a=>main_script()
+            .then(a=>main_script
             .then(a.edit(':+1: Started!')))
             .catch(err=>console.log(`[RESCUE : ${functiondate()} - ${functiontime()}] ${err}`))
-        }else return;
-    }
+        }
+        
+        if (message.content.startsWith('eval')) {
+            try {
+                const args = message.content.split(" ").slice(1);
+                if (args.length < 1) return message.react('❌');
+                const code = args.join(" ");
+                let evaled = eval(code);
+    
+                if (typeof evaled !== "string"){
+                    evaled = require("util").inspect(evaled);
+                }
+                message.reply(`EVAL:\n\`\`\`javascript\n${code}\`\`\`\nNode Result: \`${clean(evaled)}\``);
+            } catch (err) {
+                const args = message.content.split(" ").slice(1);
+                const code = args.join(" ");
+                message.reply(`EVAL **__ERROR__**\n\`\`\`javascript\n${code}\`\`\`\nNode Result: \`${clean(err)}\``);
+            }
+        }
+
+    }else return;
 });
 
 client.login(config.token_status)
