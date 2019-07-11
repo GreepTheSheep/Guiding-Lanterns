@@ -46,8 +46,21 @@ client.on('ready', () => {
     } else if (client.users.get(glid).presence.status == 'idle'){
         console.log('The Guiding Lanterns is online! Its status is set to idle')
     }
-
 });
+
+client.on('guildMemberUpdate', member, newmember => {
+    if (member == glid){
+        if (member.presence.status == 'online'){
+            console.log('The Guiding Lanterns is online!')
+        } else if (member.presence.status == 'offline'){
+            console.log('The Guiding Lanterns is offline...')
+        } else if (member.presence.status == 'dnd'){
+            console.log('The Guiding Lanterns is online! Its status is set to Do Not Disturb')
+        } else if (member.presence.status == 'idle'){
+            console.log('The Guiding Lanterns is online! Its status is set to idle')
+        }
+    }
+})
 
 client.on('message', message => {
     if (message.channel.type !== 'dm') return;
