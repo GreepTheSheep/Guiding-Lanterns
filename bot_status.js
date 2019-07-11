@@ -48,12 +48,11 @@ client.on('message', message => {
 
     if (message.content.startsWith('rescue start')) {
         if (message.author.id == '330030648456642562'){
-        try {
-            shell.exec('npm start')
+            const main_script = require('./bot.js')
             message.reply('Booting The Guiding Lanterns from the rescue server...')
-        } catch (err) {
-            message.reply(`EVAL **__ERROR__**\n\`\`\`xl\nnpm start\`\`\`\nNode Result: \`${clean(err)}\``);
-        }
+            .then(a=>main_script()
+            .then(a.edit(':+1: Started!')))
+            .catch(err=>console.log(`[RESCUE : ${functiondate()} - ${functiontime()}] ${err}`))
         }else return;
     }
 });
