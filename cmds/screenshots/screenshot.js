@@ -4,6 +4,7 @@
 // require the discord.js module
 const { Attachment } = require('discord.js');
 const Discord = require('discord.js');
+const dbl = require('dblapi.js');
 
 const fs = require('fs');
 const supportdbfile = './support/support_db.json'
@@ -181,7 +182,11 @@ function upload_scr_jpg(message, filename, timemark, displayid, prefix, getlogch
 
 function screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel) {
     if (message.content.startsWith(prefix + SCR)) {
-        scr_msg(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel);
+        if (dbl.hasVoted(message.author.id)) {
+            scr_msg(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel);
+        } else {
+            message.reply('Have you voted for the bot? Voting for the bot keeps the dev. of the bot alive :wink:\n\nhttps://discordbots.org/bot/569624646475972608/vote')
+        }
     }
 };
 
