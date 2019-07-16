@@ -5,6 +5,7 @@ const cooldowns = new Discord.Collection();
 const logchannel = '589337521553539102'
 const getlogchannel = () => client.channels.get(logchannel)
 const inviteTracker = require('./invite-track.js');
+const dbl = undefined
 
 function functiondate() {
     const datefu = new Date();
