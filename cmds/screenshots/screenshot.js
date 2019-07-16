@@ -4,7 +4,6 @@
 // require the discord.js module
 const { Attachment } = require('discord.js');
 const Discord = require('discord.js');
-const dbl = require('dblapi.js');
 
 const fs = require('fs');
 const supportdbfile = './support/support_db.json'
@@ -180,8 +179,10 @@ function upload_scr_jpg(message, filename, timemark, displayid, prefix, getlogch
 
 }
 
-function screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel) {
+function screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl) {
     if (message.content.startsWith(prefix + SCR)) {
+        if (client.user.id == '577477992608038912') return scr_msg(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel);
+        
         if (dbl.hasVoted(message.author.id) == true) {
             scr_msg(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel);
         } else {
