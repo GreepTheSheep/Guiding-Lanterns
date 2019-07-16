@@ -89,6 +89,9 @@ client.on('message', message => {
     const screenshot = require('./cmds/screenshots/screenshot.js');
     screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel());
 
+    const voted = require('./cmds/voted.js');
+    voted(message, client, prefix, dbl);
+
     const quotes = require('./cmds/quotes.js');
     quotes(message, client, prefix);
 

@@ -81,6 +81,9 @@ client.on('message', message => { // If any message was recived
     const screenshot = require('./cmds/screenshots/screenshot.js');
     screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel(), dbl);
 
+    const voted = require('./cmds/voted.js');
+    voted(message, client, prefix, dbl);
+
     const wolfram_short = require('./cmds/wolfram_short.js');
     wolfram_short(message, client, prefix);
 
