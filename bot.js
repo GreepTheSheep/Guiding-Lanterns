@@ -7,7 +7,7 @@ const getlogchannel = () => client.channels.get(logchannel)
 const inviteTracker = require('./invite-track.js'); // Define the invite tracker plugin
 
 const DBL = require("dblapi.js");
-const dbl = new DBL(config.dbl_token, client);
+const dbl = new DBL(config.dbl_token, {webhookPort: 80});
 
 const Enmap = require("enmap"); // Define enmap, a database integrated with the bot
 client.guildPrefix = new Enmap({name: "guildPrefix"}); // Define a new table for custom prefixes
@@ -152,13 +152,26 @@ client.on('guildDelete', guild => { // If the bot leave a server
     lant_num_guilds(); // Change the servers count (-1)
 })
 
-
-dbl.on('posted', () => {
-    const postedlog = `[${functiondate(0)} - ${functiontime(0)}] Server count posted on https://discordbots.org/bot/${client.user.id}`
-    console.log(postedlog);
+client.on('disconnect', event => {
+    var eventcodemsg = 'Event Code Message not set for this code'
+    if (event = '1000') eventcodemsg = 'Normal closure'
+    if (event = '1001') eventcodemsg = 'Can\'t connect to WebSocket'
+    const eventmsg = `Bot down : code ${event}: "${eventcodemsg}"`
+    console.log(`[${functiondate(0)} - ${functiontime(0)}] ` + eventmsg)
+    getlogchannel().send(eventmsg)
 })
 
-dbl.on('vote', vote => {
+client.on('reconnecting', () => {
+    const eventmsg = `reconnecting to WebSocket`
+    console.log(`[${functiondate(0)} - ${functiontime(0)}] ` + eventmsg)
+    getlogchannel().send(eventmsg)
+})
+
+dbl.webhook.on('ready', hook => {
+    console.log(`Webhook running at http://${hook.hostname}:${hook.port}${hook.path}`);
+});
+
+dbl.webhook.on('vote', vote => {
     const votelog = `:arrow_up_small: User ${vote.user.tag} ID ${vote.user.id} just voted!`
     console.log(votelog);
     getlogchannel().send(votelog)
