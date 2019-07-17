@@ -183,8 +183,8 @@ function screenshot(message, client, prefix, functiondate, functiontime, cooldow
     if (message.content.startsWith(prefix + SCR)) {
         if (client.user.id == '577477992608038912') return scr_msg(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel);
         
-        dbl.getVotes().then(votes => {
-            if (votes.find(vote => vote.id == message.author.id)) {
+        dbl.hasVoted(message.author.id).then(voted => {
+            if (voted) {
                 scr_msg(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel);
             } else {
                 let embed = new Discord.RichEmbed()
