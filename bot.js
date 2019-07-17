@@ -7,7 +7,7 @@ const getlogchannel = () => client.channels.get(logchannel)
 const inviteTracker = require('./invite-track.js'); // Define the invite tracker plugin
 
 const DBL = require("dblapi.js");
-const dbl = new DBL(config.dbl_token, {webhookPort: 80});
+const dbl = new DBL(config.dbl_token, {webhookPort: 5000});
 
 const Enmap = require("enmap"); // Define enmap, a database integrated with the bot
 client.guildPrefix = new Enmap({name: "guildPrefix"}); // Define a new table for custom prefixes
