@@ -183,11 +183,18 @@ function screenshot(message, client, prefix, functiondate, functiontime, cooldow
     if (message.content.startsWith(prefix + SCR)) {
         if (client.user.id == '577477992608038912') return scr_msg(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel);
         
-        if (dbl.hasVoted(message.author.id) == true) {
-            scr_msg(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel);
-        } else {
-            message.reply('Have you voted for the bot? Voting for the bot keeps the dev. of the bot alive :wink:\n\nhttps://discordbots.org/bot/569624646475972608/vote')
-        }
+        dbl.getVotes().then(votes => {
+            if (votes.find(vote => vote.id == message.author.id)) {
+                scr_msg(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel);
+            } else {
+                let embed = new Discord.RichEmbed()
+                embed.setTitle('ERROR!')
+                .setColor('#ff0000')
+                .addField("This command is vote locked!", `Have you voted for the bot?\nVoting for the bot keeps the dev. of the bot alive :wink:\n\nhttps://discordbots.org/bot/569624646475972608/vote \n\n(Synchronization with the vote and bot can take about 5 minutes, you can check if you voted with \`${prefix}didivote\`)`)
+                .setFooter(`Type "${prefix}bug <details of your bug>" to send at the devs`, `${message.author.displayAvatarURL}`)
+                message.channel.send(embed)
+            }
+        });
     }
 };
 
