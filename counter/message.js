@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-const countfile = "./counter/messages.json";
+const countfile = "./data/messages.json";
 const msgcount = JSON.parse(fs.readFileSync(countfile, "utf8"));
 
 //Update number of messages.

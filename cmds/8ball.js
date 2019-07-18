@@ -32,6 +32,7 @@ function eight_ball(message, client, prefix, date, time, logchannel){
     args.shift()
 
     if(message.content.startsWith(prefix + "8ball")){
+    try {
 
         function randomItem(array) {
             return array[Math.floor(Math.random() * array.length)];
@@ -44,13 +45,15 @@ function eight_ball(message, client, prefix, date, time, logchannel){
         } else {
             let reponse = randomItem(reponses)
             message.channel.send("Let's see...")
-            .then(msg => wait(randomwait).then(m=>msg.edit(`**${reponse}**`))
-            )
-            .catch(e => message.channel.send('\`\`\`:/ Hmm... Looks like there\'s been a error.\nDon\'t worry! The report was sent at the devs!\`\`\`')
-            .then(console.log(`\n[${date(0)} - ${time(0)}] ${prefix}8ball Error: ${e}\n`)
-            .then(logchannel.send(`\`\`\`${prefix}8ball Error:\n${e}\`\`\``))
-            ));
+            .then(msg => wait(randomwait)
+            .then(m=>msg.edit(`**${reponse}**`)
+            ))
         }
+    } catch (err) {
+        message.channel.send('\`\`\`:/ Hmm... Looks like there\'s been a error.\nDon\'t worry! The report was sent at the devs!\`\`\`');
+        console.log(`\n[${date(0)} - ${time(0)}] ${prefix}8ball Error: ${e}\n`)
+        logchannel.send(`\`\`\`${prefix}8ball Error:\n${e}\`\`\``)
+    }
     }
 }
 

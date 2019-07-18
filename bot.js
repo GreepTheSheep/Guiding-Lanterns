@@ -1,6 +1,6 @@
 const Discord = require('discord.js'); // Defines the Discord.js library
 const client = new Discord.Client(); // Makes him say it's for a Discord client (the bot)
-const config = require('./config.json'); // Retrieves the contents of the configuration file (the prefix and the login token)
+const config = require('./data/config.json'); // Retrieves the contents of the configuration file (the prefix and the login token)
 const cooldowns = new Discord.Collection(); //Stores cooldown info for screenshot()
 const logchannel = '589337734754336781' //Set a channel for logging
 const getlogchannel = () => client.channels.get(logchannel)
@@ -36,7 +36,7 @@ function functiontime() { // The function it gives a time (here the current time
     return time
 } // End of the function
 
-const channel_id = require('./counter/channel_ids.json');
+const channel_id = require('./data/channel_ids.json');
 
 const num_members = require('./counter/member.js');
 const num_guilds = require('./counter/guilds.js');
