@@ -1,8 +1,12 @@
 {
-    "name": "lanterns",
-    "version": "1.7.4",
+    "name": "guiding-lanterns",
+    "version": "1.7.6",
     "description": "",
     "main": "bot.js",
+    "repository": {
+        "url": "https://github.com/GreepTheSheep/Guiding-Lanterns"
+    },
+    "private": true,
     "scripts": {
         "start": "node bot.js",
         "test": "node bot_nightly.js"
@@ -19,7 +23,6 @@
         "country-data": "0.0.31",
         "dateformat": "^3.0.3",
         "dblapi.js": "^2.3.0",
-        "didyoumean2": "^3.0.0",
         "discord-emoji": "^1.1.1",
         "discord.js": "^11.5.0",
         "enmap": "^5.0.0",
@@ -27,8 +30,8 @@
         "fs": "0.0.1-security",
         "fs-extra": "^8.0.1",
         "os": "^0.1.1",
+        "reddit-snooper": "^1.0.1",
         "request": "^2.88.0",
-        "shelljs": "^0.8.3",
-        "wolfram-alpha-api": "https://products.wolframalpha.com/api/libraries/javascript/wolfram-alpha-api-1.0.0-rc.1.tgz"
+        "shelljs": "^0.8.3"
     }
 }
