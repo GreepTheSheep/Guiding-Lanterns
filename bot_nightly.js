@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const config = require('./config.json');
+const config = require('./data/config.json');
 const cooldowns = new Discord.Collection();
 const logchannel = '589337521553539102'
 const getlogchannel = () => client.channels.get(logchannel)
@@ -26,7 +26,7 @@ function functiontime() {
     return time
 }
 
-const channel_id = require('./counter/channel_ids.json');
+const channel_id = require('./data/channel_ids.json');
 
 const num_members = require('./counter/member.js');
 const countdown = require('./counter/countdown.js');

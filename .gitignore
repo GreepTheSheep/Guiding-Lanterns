@@ -60,15 +60,6 @@ typings/
 # next.js build output
 .next
 
-# config file (token)
-config.json
-
-# count files
-counter/*.json
-
-# Movie files (GitHub is not a streaming site)
-*.mkv
-
 # Windows Exe and batch files
 *.exe
 *.bat
@@ -76,9 +67,6 @@ counter/*.json
 # Image files in /cmds
 cmds/**/*.png
 cmds/**/*.jpg
-
-# Movie links file
-cmds/screenshots/episode.json
 
 # package-lock.json
 package-lock.json
@@ -89,9 +77,5 @@ package-lock.json
 # Raw text file
 *.txt
 
-package-lock.json
-
-# supporters Database
-support/*.json
-
+# Local data files
 data/*

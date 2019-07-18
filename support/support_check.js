@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-const dbfile = './support/support_db.json'
+const dbfile = './data/support_db.json'
 
 function SupportCheck (message, client, prefix) {
     const db = JSON.parse(fs.readFileSync(dbfile, "utf8"))

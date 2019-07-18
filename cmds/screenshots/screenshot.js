@@ -7,12 +7,13 @@ const Discord = require('discord.js');
 
 const fs = require('fs');
 const supportdbfile = './support/support_db.json'
+const episodefile = './data/tangled_episodes.json'
 
 const checkTime = i => i < 10 ? "0" + i : i;
 const SCR = 'scr';
 
 function episode_to_filename(epi) {
-    const episode = require('./episode.json');
+    const episode = JSON.parse(fs.readFileSync(episodefile, "utf8"))
     const epi_comp = epi.toUpperCase().replace(/S0/, 'S').replace(/E0/, 'E')
     for (epNojson in episode) {
         var epNojson_comp = epNojson.toUpperCase().replace(/S0/, 'S').replace(/E0/, 'E')
@@ -23,7 +24,7 @@ function episode_to_filename(epi) {
 }
 
 function video_id_str() {
-    const episode = require('./episode.json');
+    const episode = JSON.parse(fs.readFileSync(episodefile, "utf8"))
     const video_ids = [];
     for (epNojson in episode) {
         video_ids.push(epNojson);

@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const fs = require('fs');
-const countfile = "./counter/lanterns.json";
+const countfile = "./data/lanterns.json";
 const lancount = JSON.parse(fs.readFileSync(countfile, "utf8"));
 
 
