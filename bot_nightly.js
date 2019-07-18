@@ -5,6 +5,7 @@ const cooldowns = new Discord.Collection();
 const logchannel = '589337521553539102'
 const getlogchannel = () => client.channels.get(logchannel)
 const inviteTracker = require('./invite-track.js');
+const dbl = undefined
 
 function functiondate() {
     const datefu = new Date();
@@ -88,6 +89,9 @@ client.on('message', message => {
 
     const screenshot = require('./cmds/screenshots/screenshot.js');
     screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel());
+
+    const voted = require('./cmds/voted.js');
+    voted(message, client, prefix, dbl);
 
     const quotes = require('./cmds/quotes.js');
     quotes(message, client, prefix);
