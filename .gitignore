@@ -79,3 +79,4 @@ package-lock.json
 
 # Local data files
 data/*
+cmds/ping_answers.json
