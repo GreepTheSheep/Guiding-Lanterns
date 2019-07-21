@@ -38,14 +38,14 @@ function ifoffline(client) {
     const main_script = require('./bot.js')
     client.user.setStatus('dnd')
     client.user.setActivity('Bot OFFLINE', { type: 'WATCHING' });
-    const offlinemsg = `${member.user.username} is offline...\nTrying to start the bot from the rescue server`
+    const offlinemsg = `The Guiding Lanterns is offline...\nTrying to start the bot from the rescue server`
     console.log(offlinemsg)
     getlogchannel().send(`<@!330030648456642562> ${offlinemsg}\n\`\`\`Starting The Guiding Lanterns from the rescue server...\`\`\``)
     .then(a=>main_script)
     .then(client.user.setActivity('Bot started automatically from the rescue server', { type: 'STREAMING', url:"https://twitch.tv/greeplive" }))
     .catch(err => getlogchannel().send('ERROR: ' + err))
     
-    //client.users.get('330030648456642562').send(`${member.user.username} is offline...`);
+    //client.users.get('330030648456642562').send(`The Guiding Lanterns is offline...`);
 }
 
 client.on('ready', () => {
@@ -70,7 +70,7 @@ client.on('presenceUpdate', member => {
         if (member.user.presence.status == 'online'){
             console.log(`${member.user.username} is online!`)
         } else if (member.user.presence.status == 'offline'){
-            ifoffline(client)
+            ifoffline(client, member)
         } else if (member.user.presence.status == 'dnd'){
             console.log(`${member.user.username} is online! Its status is set to Do Not Disturb`)
         } else if (member.user.presence.status == 'idle'){
