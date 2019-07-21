@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const config = require('./config.json');
+const config = require('./data/config.json');
 const logchannel = '589337734754336781'
 const getlogchannel = () => client.channels.get(logchannel)
 const guidinglanternsid = '569624646475972608'
