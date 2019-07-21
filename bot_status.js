@@ -34,6 +34,20 @@ function functiontime() {
     return time
 }
 
+function ifoffline(client) {
+    const main_script = require('./bot.js')
+    client.user.setStatus('dnd')
+    client.user.setActivity('Bot OFFLINE', { type: 'WATCHING' });
+    const offlinemsg = `${member.user.username} is offline...\nTrying to start the bot from the rescue server`
+    console.log(offlinemsg)
+    getlogchannel().send(`<@!330030648456642562> ${offlinemsg}\n\`\`\`Starting The Guiding Lanterns from the rescue server...\`\`\``)
+    .then(a=>main_script)
+    .then(client.user.setActivity('Bot started automatically from the rescue server', { type: 'STREAMING', url:"https://twitch.tv/greeplive" }))
+    .catch(err => getlogchannel().send('ERROR: ' + err))
+    
+    //client.users.get('330030648456642562').send(`${member.user.username} is offline...`);
+}
+
 client.on('ready', () => {
     console.log(`Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}`);
     getlogchannel().send(`Status and auto-restart bot started`);
@@ -43,9 +57,7 @@ client.on('ready', () => {
         client.user.setStatus('idle')
         client.user.setActivity('Bot online', { type: 'WATCHING' });
     } else if (client.users.get(glid).presence.status == 'offline'){
-        console.log('The Guiding Lanterns is offline...')
-        client.user.setStatus('dnd')
-        client.user.setActivity('Bot OFFLINE', { type: 'WATCHING' });
+        ifoffline(client)
     } else if (client.users.get(glid).presence.status == 'dnd'){
         console.log('The Guiding Lanterns is online! Its status is set to Do Not Disturb')
     } else if (client.users.get(glid).presence.status == 'idle'){
@@ -58,16 +70,7 @@ client.on('presenceUpdate', member => {
         if (member.user.presence.status == 'online'){
             console.log(`${member.user.username} is online!`)
         } else if (member.user.presence.status == 'offline'){
-            const main_script = require('./bot.js')
-            client.user.setStatus('dnd')
-            client.user.setActivity('Bot OFFLINE', { type: 'WATCHING' });
-            const offlinemsg = `${member.user.username} is offline...\nTrying to restart the bot from the rescue server`
-            console.log(offlinemsg)
-            getlogchannel().send(`<@!330030648456642562> ${offlinemsg}\n\`\`\`Starting The Guiding Lanterns from the rescue server...\`\`\``)
-            .then(a=>main_script)
-            .then(client.user.setActivity('Bot started automatically from the rescue server', { type: 'STREAMING', url:"https://twitch.tv/greeplive" }))
-            .catch(err => getlogchannel().send('ERROR: ' + err))
-            //client.users.get('330030648456642562').send(`${member.user.username} is offline...`);
+            ifoffline(client)
         } else if (member.user.presence.status == 'dnd'){
             console.log(`${member.user.username} is online! Its status is set to Do Not Disturb`)
         } else if (member.user.presence.status == 'idle'){
