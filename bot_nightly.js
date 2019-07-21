@@ -1,6 +1,8 @@
 const Discord = require('discord.js');
 const client = new Discord.Client();
-const config = require('./data/config.json');
+const fs = require('fs');
+const configfile = "./data/config.json";
+const config = JSON.parse(fs.readFileSync(configfile, "utf8"));
 const cooldowns = new Discord.Collection();
 const logchannel = '589337521553539102'
 const getlogchannel = () => client.channels.get(logchannel)

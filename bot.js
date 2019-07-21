@@ -1,6 +1,8 @@
 const Discord = require('discord.js'); // Defines the Discord.js library
 const client = new Discord.Client(); // Makes him say it's for a Discord client (the bot)
-const config = require('./data/config.json'); // Retrieves the contents of the configuration file (the prefix and the login token)
+const fs = require('fs');
+const configfile = "./data/config.json";
+const config = JSON.parse(fs.readFileSync(configfile, "utf8")); // Retrieves the contents of the configuration file (the prefix and the login token)
 const cooldowns = new Discord.Collection(); //Stores cooldown info for screenshot()
 const logchannel = '589337734754336781' //Set a channel for logging
 const getlogchannel = () => client.channels.get(logchannel)
