@@ -80,6 +80,9 @@ client.on('message', message => {
     const command = require('./cmds/shell.js');
     command(message, client, prefix);
 
+    const image_search_request = require('./cmds/img_search.js')
+    image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel, dbl)
+
     const wolfram_short = require('./cmds/wolfram_short.js');
     wolfram_short(message, client, prefix);
 
