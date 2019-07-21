@@ -70,7 +70,7 @@ client.on('presenceUpdate', member => {
         if (member.user.presence.status == 'online'){
             console.log(`${member.user.username} is online!`)
         } else if (member.user.presence.status == 'offline'){
-            ifoffline(client, member)
+            ifoffline(client)
         } else if (member.user.presence.status == 'dnd'){
             console.log(`${member.user.username} is online! Its status is set to Do Not Disturb`)
         } else if (member.user.presence.status == 'idle'){
