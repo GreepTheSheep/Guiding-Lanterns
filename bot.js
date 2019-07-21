@@ -169,6 +169,12 @@ client.on('reconnecting', () => {
     getlogchannel().send(eventmsg)
 })
 
+dbl.on('error', e => {
+    const errmsg = `DBL error: ${e}`
+    console.log(`[${functiondate(0)} - ${functiontime(0)}] ` + errmsg)
+    getlogchannel().send(errmsg)
+})
+
 dbl.webhook.on('ready', hook => {
     console.log(`Webhook running at http://${hook.hostname}:${hook.port}${hook.path}`);
 });
