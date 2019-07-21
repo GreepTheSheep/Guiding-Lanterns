@@ -83,6 +83,9 @@ client.on('message', message => { // If any message was recived
     const screenshot = require('./cmds/screenshots/screenshot.js');
     screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel(), dbl);
 
+    const image_search_request = require('./cmds/img_search.js')
+    image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel, dbl)
+
     const voted = require('./cmds/voted.js');
     voted(message, client, prefix, dbl);
 
