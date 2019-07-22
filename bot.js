@@ -92,8 +92,8 @@ client.on('message', message => { // If any message was recived
     const wolfram_short = require('./cmds/wolfram_short.js');
     wolfram_short(message, client, prefix);
 
-    const set_prefix = require('./cmds/prefix.js')
-    set_prefix(message, client, prefix);
+    const setPrefix = require('./cmds/prefix.js')
+    setPrefix(message, client, prefix);
 
     const bot_ping = require('./cmds/ping.js');
     bot_ping(message, client, prefix);

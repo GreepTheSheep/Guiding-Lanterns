@@ -68,9 +68,6 @@ typings/
 cmds/**/*.png
 cmds/**/*.jpg
 
-# package-lock.json
-package-lock.json
-
 # VSCode files
 .vscode/*
 
