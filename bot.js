@@ -16,7 +16,7 @@ client.guildPrefix = new Enmap({name: "guildPrefix"}); // Define a new table for
 
 const getGuildPrefix = (guild) => {
     if (!guild.client.guildPrefix.has(guild.id)) guild.client.guildPrefix.set(guild.id, config.prefix) // If the server has not a prefix, give the default one
-    return guild.client.guildPrefix.get(guild.id); // Gives the prefix for the server
+    guild.client.guildPrefix.get(guild.id); // Gives the prefix for the server
 }
 
 function functiondate() { // The function it gives a date (here the current date)
@@ -60,7 +60,7 @@ client.on('ready', () => { // If bot was connected:
 }); // End
 
 client.on('message', message => { // If any message was recived
-    const prefix = getGuildPrefix(message.guild); // Gets the server prefix from the database
+    var prefix = getGuildPrefix(message.guild); // Gets the server prefix from the database
     if (message.author.bot) return; // If is a bot, do nothing
     if (message.channel.type === 'dm') return; // If commands was send in DMs, do nothing
 
