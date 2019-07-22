@@ -6,7 +6,7 @@ const { Attachment } = require('discord.js');
 const Discord = require('discord.js');
 
 const fs = require('fs');
-const supportdbfile = './support/support_db.json'
+const supportdbfile = './data/support_db.json'
 const episodefile = './data/tangled_episodes.json'
 
 const checkTime = i => i < 10 ? "0" + i : i;
