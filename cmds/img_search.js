@@ -31,14 +31,14 @@ function image_search(message, client, prefix, functiondate, functiontime, getlo
         message.reply('Hmm... Something went wrong. Don\'t worry, the report has been send!');
         const errmsg = `Google Image Search Error: ${err}`;
         console.log(`[${functiondate(0)} - ${functiontime(0)}] ${errmsg}`);
-        getlogchannel.send(errmsg);
+        getlogchannel().send(errmsg);
     }, undefined)
 
     } catch(err) {
         message.reply('Hmm... Something went wrong. Don\'t worry, the report has been send!');
         const errmsg = `Google Image Search Error: ${err}`;
         console.log(`[${functiondate(0)} - ${functiontime(0)}] ${errmsg}`);
-        getlogchannel.send(errmsg);
+        getlogchannel().send(errmsg);
     }    
 }
 
