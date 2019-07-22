@@ -9,14 +9,14 @@ const getlogchannel = () => client.channels.get(logchannel)
 const inviteTracker = require('./invite-track.js'); // Define the invite tracker plugin
 
 const DBL = require("dblapi.js");
-const dbl = new DBL(config.dbl_token, {webhookPort: 5000, statsInterval: 60 * 60 * 60 * 1000, webhookServer : config.dbl_hooksrv}, client);
+const dbl = new DBL(config.dbl_token, {webhookPort: 5000, statsInterval: 60 * 60 * 60 * 1000}, client);
 
 const Enmap = require("enmap"); // Define enmap, a database integrated with the bot
 client.guildPrefix = new Enmap({name: "guildPrefix"}); // Define a new table for custom prefixes
 
 const getGuildPrefix = (guild) => {
     if (!guild.client.guildPrefix.has(guild.id)) guild.client.guildPrefix.set(guild.id, config.prefix) // If the server has not a prefix, give the default one
-    guild.client.guildPrefix.get(guild.id); // Gives the prefix for the server
+    return guild.client.guildPrefix.get(guild.id); // Gives the prefix for the server
 }
 
 function functiondate() { // The function it gives a date (here the current date)
@@ -60,13 +60,10 @@ client.on('ready', () => { // If bot was connected:
 }); // End
 
 client.on('message', message => { // If any message was recived
+    try {
     var prefix = getGuildPrefix(message.guild); // Gets the server prefix from the database
     if (message.author.bot) return; // If is a bot, do nothing
     if (message.channel.type === 'dm') return; // If commands was send in DMs, do nothing
-
-    //Messages count, aviable in the Dev Server
-    const lant_message_count = require('./counter/message.js');
-    lant_message_count(message, client, prefix, channel_id.messages);
 
     //Check if user has supported
     const PatreonCheck = require('./support/support_check.js');
@@ -122,6 +119,10 @@ client.on('message', message => { // If any message was recived
     }
 
     // End
+    } catch (e) {
+        console.log(e)
+        getlogchannel().send(`**Message event ERROR** : ${e}`)
+    }
 });
 
 client.on('guildMemberAdd', member => { // If any member join a server (or guild in Discord language)
