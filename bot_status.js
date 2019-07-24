@@ -7,6 +7,7 @@ const logchannel = '589337734754336781'
 const getlogchannel = () => client.channels.get(logchannel)
 const guidinglanternsid = '569624646475972608'
 const glid = guidinglanternsid
+const wait = require('util').promisify(setTimeout);
 
 function clean(text) {
     if (typeof(text) === "string")
@@ -41,6 +42,7 @@ function ifoffline(client) {
     const offlinemsg = `The Guiding Lanterns is offline...\nTrying to start the bot from the rescue server`
     console.log(offlinemsg)
     getlogchannel().send(`<@!330030648456642562> ${offlinemsg}\n\`\`\`Starting The Guiding Lanterns from the rescue server...\`\`\``)
+    .then(w=>wait(2000))
     .then(a=>main_script)
     .then(client.user.setActivity('Bot started automatically from the rescue server', { type: 'STREAMING', url:"https://twitch.tv/greeplive" }))
     .catch(err => getlogchannel().send('ERROR: ' + err))
