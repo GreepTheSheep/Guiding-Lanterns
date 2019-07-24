@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const fs = require("fs");
-const quotesfile = './cmds/quotes_list.json'
+const quotesfile = './data/quotes_list.json'
 
 function quotes(message, client, prefix) {
     function randomItem(array) {
