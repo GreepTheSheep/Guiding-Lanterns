@@ -66,7 +66,7 @@ client.on('message', message => {
 
     console.log(`${message.author.tag}: " ${message.content} " in #${message.channel.name}`)
 
-    message.toLowerCase()
+    message.content.toLowerCase()
 
     const SupportCheck = require('./support/support_check.js');
     SupportCheck(message, client, prefix)
