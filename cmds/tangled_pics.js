@@ -17,7 +17,7 @@ function tangled_picture(message, client, prefix, functiondate, functiontime, ge
         embed.setAuthor(`No image? Click here!`, message.author.displayAvatarURL, pic)
             .setImage(pic)
             .setColor('RANDOM')
-            .setThumbnail(`If you want to add your own picture, type ${prefix}addtangledpicture`, client.user.displayAvatarURL)
+            .setFooter(`If you want to add your own picture, type ${prefix}addtangledpicture`, message.author.displayAvatarURL)
             
         message.channel.send(embed)
         } catch(err) {
