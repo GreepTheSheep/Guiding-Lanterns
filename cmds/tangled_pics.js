@@ -31,8 +31,8 @@ function tangled_picture(message, client, prefix, functiondate, functiontime, ge
         try {
         let args = message.content.split(" ")
         args.shift()
-        let url = args[0].startsWith("http://") || args[0].startsWith("https://")
         if (args.length < 1) return message.react('❌').then(message.reply(`Usage:\`\`\`${prefix}addtangledpicture <URL>\`\`\`URLs must ends with:\`\`\`.jpg\n.png\n.gif\n.bmp\`\`\``));
+        let url = args[0].startsWith("http://") || args[0].startsWith("https://")
         if (url){
         if (message.author.id == '330030648456642562') {
             pictures.push(`${args.join("")}`);
