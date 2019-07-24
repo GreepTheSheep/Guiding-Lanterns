@@ -63,13 +63,10 @@ client.on('message', message => {
 
     if (message.author.bot) return;
     if (message.channel.type === 'dm') return;
-    const set_prefix = require('./cmds/prefix.js')
-    set_prefix(message, client, prefix);
 
     console.log(`${message.author.tag}: " ${message.content} " in #${message.channel.name}`)
 
-    // const lant_message_count = require('./counter/message.js');
-    // lant_message_count(message, client, prefix, channel_id.nightly_messages);
+    message.content.toLowerCase()
 
     const SupportCheck = require('./support/support_check.js');
     SupportCheck(message, client, prefix)
@@ -82,6 +79,9 @@ client.on('message', message => {
 
     const image_search_request = require('./cmds/img_search.js')
     image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel, dbl)
+
+    const tangled_picture = require('./cmds/tangled_pics.js')
+    tangled_picture(message, client, prefix, functiondate, functiontime, getlogchannel)
 
     const wolfram_short = require('./cmds/wolfram_short.js');
     wolfram_short(message, client, prefix);

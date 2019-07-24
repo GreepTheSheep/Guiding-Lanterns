@@ -64,6 +64,7 @@ client.on('message', message => { // If any message was recived
     var prefix = getGuildPrefix(message.guild); // Gets the server prefix from the database
     if (message.author.bot) return; // If is a bot, do nothing
     if (message.channel.type === 'dm') return; // If commands was send in DMs, do nothing
+    message.content.toLowerCase()
 
     //Check if user has supported
     const PatreonCheck = require('./support/support_check.js');
@@ -82,6 +83,9 @@ client.on('message', message => { // If any message was recived
 
     const image_search_request = require('./cmds/img_search.js')
     image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel, dbl)
+
+    const tangled_picture = require('./cmds/tangled_pics.js')
+    tangled_picture(message, client, prefix, functiondate, functiontime, getlogchannel)
 
     const voted = require('./cmds/voted.js');
     voted(message, client, prefix, dbl);

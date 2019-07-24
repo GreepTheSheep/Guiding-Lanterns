@@ -81,6 +81,7 @@ client.on('presenceUpdate', member => {
 
 client.on('message', message => {
     if (message.channel.type !== 'dm') return;
+    message.content.toLowerCase()
 
     if(message.content.startsWith('ping')) {
         message.channel.send(":ping_pong: ?")
