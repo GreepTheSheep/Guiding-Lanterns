@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 const fs = require("fs");
-const answerfile = './cmds/ping_answers.json'
+const answerfile = './data/ping_answers.json'
 
 const wait = require('util').promisify(setTimeout);
 const min=1000; 
