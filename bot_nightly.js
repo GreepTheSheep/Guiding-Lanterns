@@ -80,6 +80,9 @@ client.on('message', message => {
     const image_search_request = require('./cmds/img_search.js')
     image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel, dbl)
 
+    const tangled_picture = require('./cmds/tangled_pics.js')
+    tangled_picture(message, client, prefix, functiondate, functiontime, getlogchannel)
+
     const wolfram_short = require('./cmds/wolfram_short.js');
     wolfram_short(message, client, prefix);
 

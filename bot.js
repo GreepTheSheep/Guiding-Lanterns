@@ -84,6 +84,9 @@ client.on('message', message => { // If any message was recived
     const image_search_request = require('./cmds/img_search.js')
     image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel, dbl)
 
+    const tangled_picture = require('./cmds/tangled_pics.js')
+    tangled_picture(message, client, prefix, functiondate, functiontime, getlogchannel)
+
     const voted = require('./cmds/voted.js');
     voted(message, client, prefix, dbl);
 
