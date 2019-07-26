@@ -5,62 +5,27 @@ function suggest(message, client, prefix) {
     if (message.content.startsWith(prefix + 'suggest')) {
 
         const args = message.content.split(" ").slice(1);
-
-        if (args.length < 2) {
-            return message.reply("Usage: `!suggest <bot ; server> <your suggestion>`")
+        if (args.length < 1) {
+            return message.reply(`Usage: \`${prefix}suggest <your suggestion>\``)
         }
 
-        if (args[0] == 'bot' || args[0] == 'server') {
+        var args2 = args.join(' ');
 
-            var args2 = args.slice(1).join(' ');
-
-            const botsuggestchannel = client.guilds.get('570024448371982373').channels.get('579675497970270240')
-            const srvsuggestchannel = client.guilds.get('562602234265731080').channels.get('582532588506447873')
-
-            if (args[0] == 'bot') {
-                botsuggestchannel.send('', {
-                    embed: {
-                        color: 654456,
-                        author: {
-                            name: "A suggestion has been posted!",
-                            icon_url: message.author.displayAvatarURL,
-                        },
-                        title: "Suggest",
-
-                        description: `__Suggest:__
-**${args2}**
-
-         __Sent by__
-**${message.author.tag}**`,
-
-                    }
-                })
-            }
-
-            if (args[0] == 'server') {
-                if (message.guild.id == '562602234265731080') {
-                    srvsuggestchannel.send('', {
-                        embed: {
-                            color: 654456,
-                            author: {
-                                name: "A server suggestion has been posted!",
-                                icon_url: message.author.displayAvatarURL,
-                            },
-                            title: "Server Suggest",
-
-                            description: `__Suggest:__
-**${args2}**
-
-        __Sent by__
-**${message.author.tag}**`,
-
-                        }
-                    })
-                } else return message.reply('You can\'t do that in this server');
-            }
-            message.channel.send('Your suggestion has been posted! <:heureuse:570820764799074335>')
-
-        } else return message.reply("Usage: `!suggest <bot ; server> <your suggestion>`");
+        const botsuggestchannel = client.guilds.get('570024448371982373').channels.get('579675497970270240')
+            
+        let embed = new Discord.RichEmbed;
+            embed.setColor('#14D0A6')
+            .setAuthor("A suggestion has been posted!", message.author.displayAvatarURL)
+            .setTitle(`Suggest by ${message.author.tag}`)
+            .setDescription('\`\`\`' + args2 + '\`\`\`')
+            .setTimestamp()
+            
+        botsuggestchannel.send(embed).then(m=>
+        message.reply('**Your suggestion has been posted!** Thanks for your feedback!\n\n> *If you want to see if your suggestion is accepted or rejected, join the support server in the suggestion channel:*\n> https://discord.gg/BPqvrkY'))
+        .catch(err=>{
+            message.reply('Uhh... An error occured.\nPlease try again');
+            console.log(err)
+        })
     }
 }
 

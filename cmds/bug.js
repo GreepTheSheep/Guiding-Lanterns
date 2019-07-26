@@ -7,31 +7,25 @@ function bug(message, client, prefix) {
         const args = message.content.split(" ").slice(1);
 
         if (args.length < 1) {
-            return message.reply("Please enter your bug details!")
+            return message.reply(`Usage: \`${prefix}bug <your bug details>\``)
         }
 
-        var args2 = message.content.split(' ').slice(1).join(' ');
-
+        var args2 = args.join(' ');
         const reportchannel = client.guilds.get('570024448371982373').channels.get('579675887545614341')
-        reportchannel.send('', {
-            embed: {
-                color: 654456,
-                author: {
-                    name: "A bug report has been posted !",
-                    icon_url: message.author.displayAvatarURL,
-                },
-                title: "BUG REPORT",
 
-                description: `__Bug details :__
-**${args2}**
+        let embed = new Discord.RichEmbed;
+            embed.setColor('#A11158')
+            .setAuthor("A bug report has been posted !", message.author.displayAvatarURL)
+            .setTitle(`Bug Report by ${message.author.tag}`)
+            .setDescription('\`\`\`' + args2 + '\`\`\`')
+            .setTimestamp()
 
-         __Sent by__
-**${message.author.tag}**`,
-
-            }
+        reportchannel.send(embed).then(m=>
+        message.reply("**Thank you for your bug report!** I'll try to fix this as soon as possible!\n\n> *If you want to see if your bug has been fixed, visit the support server and make a request, we will of course answer you!*\n> https://discord.gg/Nzherng"))
+        .catch(err=>{
+            message.reply('Uhh... An error occured.\nPlease try again');
+            console.log(err)
         })
-        message.channel.send("Thank you! I'll try to fix this as soon as possible! <:heureuse:570820764799074335>")
-
     }
 }
 
