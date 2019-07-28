@@ -8,8 +8,10 @@
     },
     "private": true,
     "scripts": {
-        "start": "node bot_status.js",
-        "test": "node bot_nightly.js"
+        "start": "pm2 start bot.js --name GL --watch --ignore-watch=\"node_modules\" --ignore-watch=\"logs\" --ignore-watch=\"data\" --log logs/bot.log",
+        "test": "pm2 start bot_nightly.js --name GLnightly --watch --ignore-watch=\"node_modules\" --ignore-watch=\"logs\" --ignore-watch=\"data\" --log logs/bot_nightly.log",
+        "restart": "pm2 reload GL",
+        "s": "pm2 start bot_status.js --name GLstat --log logs/bot_status.log"
     },
     "keywords": [
         "discord",
