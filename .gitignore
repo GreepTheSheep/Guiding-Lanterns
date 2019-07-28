@@ -76,4 +76,6 @@ cmds/**/*.jpg
 
 # Local data files
 data/*
-cmds/ping_answers.json
+
+# Log files
+logs/*
