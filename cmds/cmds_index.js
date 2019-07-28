@@ -71,13 +71,13 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     }
 
     //-----------------------------------------------------------------------------------------------
-    const screenshot = require('./cmds/screenshots/screenshot.js');
+    const screenshot = require('./screenshots/screenshot.js');
     screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel(), dbl);
 
-    const tangled_picture = require('./cmds/tangled_pics.js')
+    const tangled_picture = require('./tangled_pics.js')
     tangled_picture(message, client, prefix, functiondate, functiontime, getlogchannel)
 
-    const quotes = require('./cmds/quotes.js');
+    const quotes = require('./quotes.js');
     quotes(message, client, prefix);
 
 }

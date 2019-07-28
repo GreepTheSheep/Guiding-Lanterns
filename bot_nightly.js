@@ -71,52 +71,8 @@ client.on('message', message => {
     const SupportCheck = require('./support/support_check.js');
     SupportCheck(message, client, prefix)
 
-    const eval_cmd = require('./cmds/eval.js');
-    eval_cmd(message, client, prefix);
-
-    const command = require('./cmds/shell.js');
-    command(message, client, prefix);
-
-    const image_search_request = require('./cmds/img_search.js')
-    image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel, dbl)
-
-    const tangled_picture = require('./cmds/tangled_pics.js')
-    tangled_picture(message, client, prefix, functiondate, functiontime, getlogchannel)
-
-    const wolfram_short = require('./cmds/wolfram_short.js');
-    wolfram_short(message, client, prefix);
-
-    const bot_ping = require('./cmds/ping.js');
-    bot_ping(message, client, prefix);
-
-    const eight_ball = require('./cmds/8ball.js');
-    eight_ball(message, client, prefix, functiondate, functiontime, getlogchannel());
-
-    const screenshot = require('./cmds/screenshots/screenshot.js');
-    screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel());
-
-    const voted = require('./cmds/voted.js');
-    voted(message, client, prefix, dbl);
-
-    const quotes = require('./cmds/quotes.js');
-    quotes(message, client, prefix);
-
-    const about = require('./cmds/about.js');
-    about(message, client, prefix);
-
-    const help = require('./cmds/help.js');
-    help(message, client, prefix);
-
-    const bug = require('./cmds/bug.js');
-    bug(message, client, prefix);
-
-    const suggest = require('./cmds/suggest.js');
-    suggest(message, client, prefix);
-
-    if (message.guild.id == '562602234265731080') {
-        const lantern = require('./cmds/lantern.js');
-        lantern(message, client, prefix, getlogchannel());
-    }
+    const cmds_index = require('./cmds/cmds_index.js');
+    cmds_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl);
 });
 
 client.on('guildCreate', guild => {

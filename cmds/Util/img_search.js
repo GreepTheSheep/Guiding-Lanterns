@@ -24,7 +24,8 @@ function image_search(message, client, prefix, functiondate, functiontime, getlo
         let embed = new Discord.RichEmbed()
         embed.setAuthor(`Here is a picture of ${args.join(" ")}`, message.author.displayAvatarURL, parentpageurl)
         .setImage(imgurl)
-        .setColor('RANDOM');
+        .setColor('RANDOM')
+        .setFooter(`Picture ${random.toFixed(0)}/10`);
         message.channel.send(embed)
     }, undefined)
     .catch(err=> {

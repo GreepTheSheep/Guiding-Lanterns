@@ -1,5 +1,6 @@
 const Discord = require('discord.js');
-const package = require('../package.json');
+const fs = require('fs')
+const package = JSON.parse(fs.readFileSync('./package.json', "utf8"));
 const os = require('os');
 
 function about(message, client, prefix) {

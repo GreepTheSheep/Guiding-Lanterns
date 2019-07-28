@@ -1,7 +1,9 @@
 // Wolfram|Alpha code by Ajam#3536
 // https://www.wolframalpha.com
 
-const { wolfID } = require('../data/config.json');
+const fs = require('fs')
+const configfile = "./data/config.json";
+const { wolfID } = JSON.parse(fs.readFileSync(configfile, "utf8"));
 const { RichEmbed } = require('discord.js');
 const WolframAlphaAPI = require('wolfram-alpha-api');
 const waApi = WolframAlphaAPI(wolfID);
