@@ -8,10 +8,10 @@
     },
     "private": true,
     "scripts": {
-        "start": "pm2 start bot.js --name GL --watch --ignore-watch=\"node_modules\" --ignore-watch=\"logs\" --ignore-watch=\"data\" --log logs/bot.log",
-        "test": "pm2 start bot_nightly.js --name GLnightly --watch --ignore-watch=\"node_modules\" --ignore-watch=\"logs\" --ignore-watch=\"data\" --log logs/bot_nightly.log",
+        "start": "pm2 start bot.ecosystem.config.js",
+        "test": "pm2 start bot_nightly.ecosystem.config.js",
         "restart": "pm2 reload GL",
-        "s": "pm2 start bot_status.js --name GLstat --log logs/bot_status.log"
+        "s": "pm2 start bot_status.ecosystem.config.js"
     },
     "keywords": [
         "discord",

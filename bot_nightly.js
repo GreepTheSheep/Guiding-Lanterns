@@ -47,6 +47,10 @@ client.on('ready', () => {
     lant_num_members();
     lant_num_guilds();
     lant_frozen_II();
+    const interval = new Promise(function() {
+        setInterval(function() {fs.writeFileSync('./logs/bot_nightly.log', '')}, 1000);
+    });
+    interval
     inviteTracker.ready(client);
 });
 
