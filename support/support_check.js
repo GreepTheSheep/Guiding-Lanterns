@@ -12,13 +12,13 @@ function SupportCheck (message, client, prefix) {
 
     const donor = db[message.author.id]
 
-    const status = require('../cmds/status.js');
+    const status = require('../cmds/Util/status.js');
     status(message, client, prefix, donor, donorsonly);
 
-    const say = require('../cmds/say.js');
+    const say = require('../cmds/Fun/say.js');
     say(message, client, prefix, donor, donorsonly);
 
-    const wolfram = require('../cmds/wolfram.js');
+    const wolfram = require('../cmds/Util/wolfram.js');
     wolfram(message, client, prefix, donor, donorsonly);
 
     if (message.content.startsWith(prefix + 'adddonation')) {

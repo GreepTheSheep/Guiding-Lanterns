@@ -1,0 +1,19 @@
+module.exports = {
+  apps : [{
+    name: 'GLnightly',
+    script: 'bot_nightly.js',
+
+    // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
+    autorestart: true,
+    watch: true,
+    ignore_watch: ["node_modules", "data", "logs"],
+    max_memory_restart: '500M',
+    log_file: 'logs/bot_nightly.log',
+    env: {
+      NODE_ENV: 'development'
+    },
+    env_production: {
+      NODE_ENV: 'production'
+    }
+  }],
+};
