@@ -1,6 +1,6 @@
 {
     "name": "guiding-lanterns",
-    "version": "1.8.8",
+    "version": "1.9.0",
     "description": "",
     "main": "bot.js",
     "repository": {
@@ -8,8 +8,10 @@
     },
     "private": true,
     "scripts": {
-        "start": "node bot_status.js",
-        "test": "node bot_nightly.js"
+        "start": "pm2 start bot.ecosystem.config.js",
+        "test": "pm2 start bot_nightly.ecosystem.config.js",
+        "restart": "pm2 reload GL",
+        "s": "node bot_status.js"
     },
     "keywords": [
         "discord",

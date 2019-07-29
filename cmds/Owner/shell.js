@@ -1,5 +1,7 @@
+const { Attachment } = require('discord.js');
 const Discord = require('discord.js');
 const shell = require('shelljs');
+const fs = require('fs');
 
 function clean(text) {
     if (typeof(text) === "string")
@@ -18,17 +20,21 @@ function command(message, client, prefix) {
             message.channel.startTyping()
             shell.exec(args.join(' '), function(code, stdout, stderr) {
                 if (stdout.length > 1024 && stdout.length < 1950 || stderr.length > 1024 && stderr.length < 1950) return message.reply(`Output:\n\`\`\`${stdout}${stderr}\`\`\``).then(m=>message.channel.stopTyping(true));
-                if (stdout.length > 1950 || stderr.length > 1950) return message.reply(`Output is more than 2000 characters. If you want to see the output, go check in your console.`).then(m=>message.channel.stopTyping(true));
+                
+                if (stdout.length > 1950 || stderr.length > 1950) return fs.writeFile('./logs/shelleval.log', `Command: ${args.join(' ')}\nExit code: ${code}\n\n\nOutput:\n\n${stdout}${stderr}`, 'utf8', (err) => {
+                        if (err) return function(){
+                            console.log(err);
+                            message.reply(`FS error: ${err}`)
+                        }
+                        const attachment = new Attachment('./logs/shelleval.log')
+                        message.reply('Output is more than 2000 characters, see attachment', attachment)
+                        .then(m=>message.channel.stopTyping(true))
+                    })
+                
                 let embed = new Discord.RichEmbed()
-                if (code == '0'){
                     embed.addField("Command:", args.join(' '))
-                    .addField('Program output:', `\`\`\`${stdout}\`\`\``)
-                    .addField('Exit code:', code)
-                } else {
-                    embed.addField("Command:", args.join(' '))
-                    .addField('Program output:', `\`\`\`${stderr}\`\`\``)
-                    .addField('Exit code:', code)
-                }
+                    .addField('Program output:', `\`\`\`${stdout}${stderr}\`\`\``)
+                    .setFooter('Exit code: ' + code)
             message.reply(embed)
             .then(m=>message.channel.stopTyping(true));
             });
