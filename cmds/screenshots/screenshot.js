@@ -125,7 +125,7 @@ function upload_scr_png(message, filename, timemark, displayid, prefix, getlogch
             const scrtakenlog = '[PNG] Screenshots taken, sending...'
             console.log(scrtakenlog);
             getlogchannel.send(scrtakenlog);
-            const attachment = new Attachment('./cmds/screenshots/screenshot.png');
+            const attachment = new Attachment('./data/screenshot.png');
             message.channel.send(`${message.author}\nScreenshot of ${displayid} taken at ${timemark}`, attachment)
             .then(m=>message.channel.stopTyping(true));
         })
@@ -144,7 +144,7 @@ function upload_scr_png(message, filename, timemark, displayid, prefix, getlogch
         .screenshots({
             timestamps: [timemark],
             filename: 'screenshot.png',
-            folder: './cmds/screenshots',
+            folder: './data',
         });
 
 }
@@ -156,7 +156,7 @@ function upload_scr_jpg(message, filename, timemark, displayid, prefix, getlogch
             const scrtakenlog = '[JPG] Screenshots taken, sending...'
             console.log(scrtakenlog);
             getlogchannel.send(scrtakenlog);
-            const attachment = new Attachment('./cmds/screenshots/screenshot.jpg');
+            const attachment = new Attachment('./data/screenshot.jpg');
             message.channel.send(`${message.author}\nScreenshot of ${displayid} taken at ${timemark}`, attachment)
             .then(m=>message.channel.stopTyping(true));
         })
@@ -175,7 +175,7 @@ function upload_scr_jpg(message, filename, timemark, displayid, prefix, getlogch
         .screenshots({
             timestamps: [timemark],
             filename: 'screenshot.jpg',
-            folder: './cmds/screenshots',
+            folder: './data',
         });
 
 }
