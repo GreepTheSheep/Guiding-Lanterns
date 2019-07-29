@@ -8,6 +8,7 @@ const getlogchannel = () => client.channels.get(logchannel)
 const guidinglanternsid = '569624646475972608'
 const glid = guidinglanternsid
 const wait = require('util').promisify(setTimeout);
+const shell = require('shelljs');
 
 function clean(text) {
     if (typeof(text) === "string")
@@ -36,7 +37,7 @@ function functiontime() {
 }
 
 function ifoffline(client) {
-    const main_script = require('./bot.js')
+    const main_script = shell.exec("pm2 start bot.ecosystem.config.js")
     client.user.setStatus('dnd')
     client.user.setActivity('Bot OFFLINE', { type: 'WATCHING' });
     const offlinemsg = `The Guiding Lanterns is offline...\nTrying to start the bot from the rescue server`
@@ -91,7 +92,7 @@ client.on('message', message => {
       }
     if (message.author.id == '330030648456642562'){
         if (message.content.startsWith('rescue start')) {
-            const main_script = require('./bot.js')
+            const main_script = shell.exec("pm2 start bot.ecosystem.config.js")
             getlogchannel().send(`**Forced by command**\n\`\`\`Starting The Guiding Lanterns from the rescue server...\`\`\``);
             message.reply('Booting The Guiding Lanterns from the rescue server...')
             .then(a=>main_script
