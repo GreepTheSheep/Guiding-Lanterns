@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const {Attachment} = require('discord.js')
 const client = new Discord.Client();
 const fs = require('fs');
 const configfile = "./data/config.json";
@@ -48,8 +49,12 @@ client.on('ready', () => {
     lant_num_guilds();
     lant_frozen_II();
     const interval = new Promise(function() {
-        setInterval(function() {fs.writeFileSync('./logs/bot_nightly.log', '')}, 1000);
-    });
+        setInterval(function() {
+            const attachment = new Attachment('./logs/bot_nightly.log')
+            getlogchannel().send('Log file:', attachment)
+            .then(m=>fs.writeFileSync('./logs/bot_nightly.log', ''))
+        }, 3600000);
+    }).catch(err=>getlogchannel().send('Error during sending the weekly log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot_nightly.log', '')))
     interval
     inviteTracker.ready(client);
 });

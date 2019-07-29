@@ -12,6 +12,9 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     const command = require('./Owner/shell.js');
     command(message, client, prefix);
 
+    const claimlog = require('./Owner/log.js');
+    claimlog(message, client, prefix);
+
     /*--------------------------------
     ------------- Worlds -------------
     --------------------------------*/

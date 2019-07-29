@@ -1,4 +1,5 @@
 const Discord = require('discord.js'); // Defines the Discord.js library
+const {Attachment} = require('discord.js') // Defines attachment config (for sending files)
 const client = new Discord.Client(); // Makes him say it's for a Discord client (the bot)
 const fs = require('fs');
 const configfile = "./data/config.json";
@@ -57,6 +58,14 @@ client.on('ready', () => { // If bot was connected:
     lant_num_guilds(); //Set the guilds count
     lant_ver(); //Set version number in the version number channel
     inviteTracker.ready(client); // Starts the invite tracker plugin
+    const interval = new Promise(function() { // Automatic log file recreator function
+        setInterval(function() {
+            const attachment = new Attachment('./logs/bot.log') // Defines the log file to send
+            getlogchannel().send('<@330030648456642562> weekly log file:', attachment) // Send the file
+            .then(m=>fs.writeFileSync('./logs/bot.log', '')) // Recreates the log file
+        }, 604800000); // do this every week
+    }).catch(err=>getlogchannel().send('Error during sending the weekly log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot.log', '')))
+    interval
 }); // End
 
 client.on('message', message => { // If any message was recived

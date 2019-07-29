@@ -4,8 +4,6 @@ module.exports = {
     script: 'bot_nightly.js',
 
     // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
-    instances  : 4,
-    exec_mode  : "cluster",
     autorestart: true,
     watch: true,
     ignore_watch: ["node_modules", "data", "logs"],
