@@ -1,6 +1,6 @@
 module.exports = {
   apps : [{
-    name: 'GLnightly',
+    name: 'GL_nightly',
     script: 'bot_nightly.js',
 
     // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
