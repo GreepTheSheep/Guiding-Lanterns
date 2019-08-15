@@ -73,6 +73,7 @@ client.on('ready', () => { // If bot was connected:
             getlogchannel().send('Pulling changes from GitHub...')
             .then(shell.exec('git pull'), function(code, stdout, stderr){
                 if (code != 0) return getlogchannel().send(`Error during pulling: \`\`\`${stderr}\`\`\``)
+                if (stdout == 'Already up-to-date.') return getlogchannel().send(stdout)
                 getlogchannel().send(`:white_check_mark: Successfully pulled!\nRestarting the bot... *(if pm2 want it)*`)
             })
         }, 86400000); // do this every day
