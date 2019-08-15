@@ -51,8 +51,8 @@ function eight_ball(message, client, prefix, date, time, logchannel){
         }
     } catch (err) {
         message.channel.send('\`\`\`:/ Hmm... Looks like there\'s been a error.\nDon\'t worry! The report was sent at the devs!\`\`\`');
-        console.log(`\n[${date(0)} - ${time(0)}] ${prefix}8ball Error: ${e}\n`)
-        logchannel.send(`\`\`\`${prefix}8ball Error:\n${e}\`\`\``)
+        console.log(`\n[${date(0)} - ${time(0)}] ${prefix}8ball Error: ${err}\n`)
+        logchannel.send(`\`\`\`${prefix}8ball Error:\n${err}\`\`\``)
     }
     }
 }
