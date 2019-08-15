@@ -19,7 +19,8 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     ------------- Worlds -------------
     --------------------------------*/
 
-    // Coming... (pics, screenshots, quotes)
+    const quotes = require('./Worlds/quotes.js');
+    quotes(message, client, prefix, functiondate, functiontime, getlogchannel());
 
     /*--------------------------------
     --------------- Fun --------------
@@ -79,9 +80,6 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
 
     const tangled_picture = require('./tangled_pics.js')
     tangled_picture(message, client, prefix, functiondate, functiontime, getlogchannel)
-
-    const quotes = require('./quotes.js');
-    quotes(message, client, prefix);
 
 }
 
