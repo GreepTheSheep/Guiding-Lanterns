@@ -58,14 +58,26 @@ client.on('ready', () => { // If bot was connected:
     lant_num_guilds(); //Set the guilds count
     lant_ver(); //Set version number in the version number channel
     inviteTracker.ready(client); // Starts the invite tracker plugin
-    const interval = new Promise(function() { // Automatic log file recreator function
+    const loginterval = new Promise(function() { // Automatic log file recreator function
         setInterval(function() {
             const attachment = new Attachment('./logs/bot.log') // Defines the log file to send
             getlogchannel().send('<@330030648456642562> weekly log file:', attachment) // Send the file
             .then(m=>fs.writeFileSync('./logs/bot.log', '')) // Recreates the log file
         }, 604800000); // do this every week
     }).catch(err=>getlogchannel().send('Error during sending the weekly log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot.log', '')))
-    interval
+    loginterval
+
+    const autopull = new Promise(function() { // Automatic GitHub pull
+        setInterval(function() {
+            getlogchannel().send('Pulling changes from GitHub...')
+            .then(shell.exec('git pull'), function(code, stdout, stderr){
+                if (code != 0) return getlogchannel().send(`Error during pulling: \`\`\`${stderr}\`\`\``)
+                if (stdout == 'Already up-to-date.') return getlogchannel().send(stdout)
+                getlogchannel().send(`:white_check_mark: Successfully pulled!\nRestarting the bot... *(if pm2 want it)*`)
+            })
+        }, 86400000); // do this every day
+    }).catch(err=>getlogchannel().send('Error during auto pull: ' + err))
+    autopull
 }); // End
 
 client.on('message', message => { // If any message was recived
