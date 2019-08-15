@@ -1,6 +1,6 @@
 module.exports = {
   apps : [{
-    name: 'GL_base',
+    name: 'GL',
     script: 'bot.js',
 
     // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
