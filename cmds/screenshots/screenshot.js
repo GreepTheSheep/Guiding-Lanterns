@@ -182,7 +182,7 @@ function upload_scr_jpg(message, filename, timemark, displayid, prefix, getlogch
 
 function screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl) {
     if (message.content.startsWith(prefix + SCR)) {
-        if (client.user.id == '577477992608038912') return scr_msg(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel);
+        if (dbl == undefined) return scr_msg(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel);
         
         dbl.hasVoted(message.author.id).then(voted => {
             if (voted) {
