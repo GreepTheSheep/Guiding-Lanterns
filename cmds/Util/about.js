@@ -25,7 +25,7 @@ function about(message, client, prefix) {
     ]
     let v2msg = randomItem(v2msgs);
 
-    var clientUpTime = (Math.round(client.uptime / (1000 * 60 * 60 * 24))) + " days, " + (Math.round(client.uptime / (1000 * 60 * 60)) % 24) + " hours, " + (Math.round(client.uptime / (1000 * 60)) % 60) + " minutes, and " + (Math.round(client.uptime / 1000) % 60) + " seconds";
+    var clientUpTime = (Math.round(client.uptime / (1000 * 60 * 60 * 48))) + " days, " + (Math.round(client.uptime / (1000 * 60 * 60)) % 48) + " hours, " + (Math.round(client.uptime / (1000 * 60)) % 60) + " minutes, and " + (Math.round(client.uptime / 1000) % 60) + " seconds";
      
     if (message.content.startsWith(prefix + 'about')) {
         let embed = new Discord.RichEmbed()
