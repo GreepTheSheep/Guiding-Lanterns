@@ -22,6 +22,9 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     const quotes = require('./Worlds/quotes.js');
     quotes(message, client, prefix, functiondate, functiontime, getlogchannel());
 
+    const picture = require('./Worlds/pics.js')
+    picture(message, client, prefix, functiondate, functiontime, getlogchannel())
+
     /*--------------------------------
     --------------- Fun --------------
     --------------------------------*/
@@ -69,17 +72,16 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     --------- Guild-specific ---------
     --------------------------------*/
 
-    if (message.guild.id == '562602234265731080') {
+    if (message.guild.id == '562602234265731080') { // Kingdom of Corona
         const lantern = require('./Guild/lantern.js');
         lantern(message, client, prefix, getlogchannel());
     }
 
     //-----------------------------------------------------------------------------------------------
+
     const screenshot = require('./screenshots/screenshot.js');
     screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel(), dbl);
 
-    const tangled_picture = require('./tangled_pics.js')
-    tangled_picture(message, client, prefix, functiondate, functiontime, getlogchannel)
 
 }
 
