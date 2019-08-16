@@ -31,11 +31,11 @@ function functiontime() {
 
 const channel_id = require('./data/channel_ids.json');
 
-const num_members = require('./counter/member.js');
+const num_members_guild = require('./counter/guild-member.js');
 const countdown = require('./counter/countdown.js');
 const num_guilds = require('./counter/guilds.js');
 
-const lant_num_members = () => num_members(client, "570024448371982373", channel_id.nightly_members);
+const lant_num_members_guild = () => num_members_guild(client, "570024448371982373", channel_id.nightly_members);
 const lant_frozen_II = () => countdown.frozen2(client, channel_id.nightly_frozen2);
 const lant_num_guilds = () => num_guilds(client, channel_id.nightly_guilds);
 
@@ -45,7 +45,7 @@ client.on('ready', () => {
     console.log(readylog);
     getlogchannel().send(readylog);
     client.user.setStatus('dnd');
-    lant_num_members();
+    lant_num_members_guild();
     lant_num_guilds();
     lant_frozen_II();
     const interval = new Promise(function() {
@@ -53,6 +53,7 @@ client.on('ready', () => {
             const attachment = new Attachment('./logs/bot_nightly.log')
             getlogchannel().send('Log file:', attachment)
             .then(m=>fs.writeFileSync('./logs/bot_nightly.log', ''))
+            .catch(err=>getlogchannel().send('Error during sending the weekly log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot_nightly.log', '')))
         }, 3600000);
     }).catch(err=>getlogchannel().send('Error during sending the weekly log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot_nightly.log', '')))
     interval
@@ -60,11 +61,11 @@ client.on('ready', () => {
 });
 
 client.on('guildMemberAdd', member => {
-    lant_num_members();
+    lant_num_members_guild();
     inviteTracker.track(member);
 });
 client.on('guildMemberRemove', member => {
-    lant_num_members();
+    lant_num_members_guild();
 });
 
 client.on('message', message => {
