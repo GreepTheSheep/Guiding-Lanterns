@@ -1,6 +1,6 @@
 {
     "name": "guiding-lanterns",
-    "version": "1.9.0",
+    "version": "2.0.0-beta",
     "description": "",
     "main": "bot.js",
     "repository": {
@@ -10,8 +10,7 @@
     "scripts": {
         "start": "pm2 start bot.ecosystem.config.js",
         "test": "pm2 start bot_nightly.ecosystem.config.js",
-        "restart": "pm2 reload GL",
-        "s": "node bot_status.js"
+        "restart": "pm2 reload bot.ecosystem.config.js"
     },
     "keywords": [
         "discord",
