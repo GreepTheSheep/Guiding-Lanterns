@@ -19,9 +19,10 @@ function quotes(message, client, prefix, date, time, logchannel) {
             let listembed = new Discord.RichEmbed()
             listembed.setColor("#0567DA")
                 .addField("Avialble movies are:", `- \`${givelist()}\``)
+                .setFooter(`Usage: ${prefix} <movie>`)
             return message.channel.send(listembed)
         }
-        const quotesfile = `./data/movies/${args[0].toLowerCase()}_quotes.json`
+        var quotesfile = `./data/movies/${args[0].toLowerCase()}_quotes.json`
         fs.readFile(quotesfile, "utf8",function read(err, data){
             if (err) return message.channel.send("Hmm... I don't found the movie. *Maybe it was eaten, I don't know...*")
             
