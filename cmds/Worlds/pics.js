@@ -44,7 +44,7 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
             message.reply('Hmm... Something went wrong. Don\'t worry, the report has been send!');
             const errmsg = `Random Tangled Picture request error: ${err}`;
             console.log(`[${functiondate(0)} - ${functiontime(0)}] ${errmsg}`);
-            getlogchannel().send(errmsg);
+            getlogchannel.send(errmsg);
         }
     }
 
@@ -58,7 +58,7 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
         let url = args[1].endsWith('.jpg') || args[1].endsWith('.png') || args[1].endsWith('.gif')
         
         if (url){
-        if (message.member.roles.id == '611908442944176140') {
+        if (message.member.roles.find(r=>r.id === '611908442944176140')) {
             var picsfile = `./data/movies/${args[0].toLowerCase()}_pics.json`
             var pictures = JSON.parse(fs.readFileSync(picsfile, 'utf8'))
             pictures.push(args[1]);
@@ -69,7 +69,7 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
             const requestchannel = client.guilds.get('570024448371982373').channels.get('603649742441938944')
 
             let embed = new Discord.RichEmbed;
-            embed.setAuthor(`New request sent by ${message.author.tag}. Movie: ${args[0].charAt(0).toUpperCase() + args[0].slice(1)}`, message.author.displayAvatarURL, args[1])
+            embed.setAuthor(`New request sent by ${message.author.tag}.\nMovie: ${args[0].charAt(0).toUpperCase() + args[0].slice(1)}`, message.author.displayAvatarURL, args[1])
                 .setImage(args[1])
                 .setColor('RANDOM')
                 .setFooter(`User ID: ${message.author.id}`)
@@ -83,7 +83,7 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
             message.reply('Hmm... Something went wrong. Don\'t worry, the report has been send!');
             const errmsg = `New Tangled Picture request error: ${err}`;
             console.log(`[${functiondate(0)} - ${functiontime(0)}] ${errmsg}`);
-            getlogchannel().send(errmsg);
+            getlogchannel.send(errmsg);
         }
     }
 }
