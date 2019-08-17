@@ -20,7 +20,7 @@ function welcome(member, client) {
         'Bienvenue !',
         'Put down your luggages and enjoy the kingdom! :sunny:'
     ];
-    const images = require('./data/movie/tangled_pics.json');
+    const images = require('./data/movies/tangled_pics.json');
 
     let welcomemsg = randomItem(messages);
     let welcomeimg = randomItem(images);

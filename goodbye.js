@@ -17,7 +17,7 @@ function goodbye(member, client) {
         'We wish you a good trip!'
     ];
     
-    const images = require('./data/movie/tangled_pics.json');
+    const images = require('./data/movies/tangled_pics.json');
 
     let msg = randomItem(messages);
     let img = randomItem(images);
