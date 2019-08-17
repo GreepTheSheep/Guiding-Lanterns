@@ -19,7 +19,7 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
             let listembed = new Discord.RichEmbed()
             listembed.setColor("#0567DA")
                 .addField("Avialble movies are:", `- \`${givelist()}\``)
-                .setFooter(`Usage: ${prefix} <movie>`)
+                .setFooter(`Usage: ${prefix}picture <movie>`)
             return message.channel.send(listembed)
         }
         var picsfile = `./data/movies/${args[0].toLowerCase()}_pics.json`
