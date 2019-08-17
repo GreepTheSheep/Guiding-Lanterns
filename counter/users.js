@@ -8,7 +8,7 @@ function users_count(client, channel_id) {
     }
 
     const total = client.users.size;
-    const bots = client.users.filter(m => m.user.bot).size; 
+    const bots = client.users.filter(m => m.bot).size; 
     const members = total - bots
 
     channel.setName(`Users: ${members}`).catch(err => console.log(err));
