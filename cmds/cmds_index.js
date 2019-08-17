@@ -15,6 +15,9 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     const claimlog = require('./Owner/log.js');
     claimlog(message, client, prefix);
 
+    const worldsmanager = require('./Owner/worlds.js')
+    worldsmanager(message, client, prefix, functiondate, functiontime, getlogchannel())
+
     /*--------------------------------
     ------------- Worlds -------------
     --------------------------------*/
@@ -46,7 +49,7 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     voted(message, client, prefix, dbl);
 
     const image_search_request = require('./Util/img_search.js')
-    image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel, dbl)
+    image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel(), dbl)
 
     const about = require('./Util/about.js');
     about(message, client, prefix);
@@ -78,13 +81,12 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     if (message.guild.id == '562602234265731080') { // Kingdom of Corona
         const lantern = require('./Guild/lantern.js');
         lantern(message, client, prefix, getlogchannel());
+
+        const screenshot = require('./Guild/screenshot.js');
+        screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel(), dbl);
     }
 
     //-----------------------------------------------------------------------------------------------
-
-    const screenshot = require('./screenshots/screenshot.js');
-    screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel(), dbl);
-
 
 }
 
