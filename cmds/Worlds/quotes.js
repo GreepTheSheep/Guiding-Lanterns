@@ -19,7 +19,7 @@ function quotes(message, client, prefix, date, time, logchannel) {
             let listembed = new Discord.RichEmbed()
             listembed.setColor("#0567DA")
                 .addField("Avialble movies are:", `- \`${givelist()}\``)
-                .setFooter(`Usage: ${prefix} <movie>`)
+                .setFooter(`Usage: ${prefix}quote <movie>`)
             return message.channel.send(listembed)
         }
         var quotesfile = `./data/movies/${args[0].toLowerCase()}_quotes.json`
@@ -40,8 +40,34 @@ function quotes(message, client, prefix, date, time, logchannel) {
         });
         } catch(err) {
             message.channel.send('\`\`\`:/ Hmm... Looks like there\'s been a error.\nDon\'t worry! The report was sent at the devs!\`\`\`');
-            console.log(`\n[${date(0)} - ${time(0)}] ${prefix}8ball Error: ${err}\n`)
-            logchannel.send(`\`\`\`${prefix}8ball Error:\n${err}\`\`\``)
+            console.log(`\n[${date(0)} - ${time(0)}] ${prefix}Quotes Error: ${err}\n`)
+            logchannel.send(`\`\`\`${prefix}Quotes Error:\n${err}\`\`\``)
+        }
+    }
+    if (message.content.startsWith(prefix + "addquote")){
+        try {      
+        if (message.author.id == '330030648456642562') {
+            const args = message.content.split(" ");
+            args.shift()
+            message.delete(10000)
+            const text = args.join(' ')
+            if (args.length < 1) return message.react('❌')
+            var quotefile = `./data/movies/${args[0].toLowerCase()}_quotes.json`
+            var quotes = JSON.parse(fs.readFileSync(quotefile, 'utf8'))
+            quotes.push(text.slice(args[0].length+1));
+            quoteread = JSON.stringify(quotes);
+            fs.writeFile(quotefile, quoteread, function(err){if (err){
+                message.reply('I think the file does not exist').then(m=>m.delete(10000))
+            }});
+            message.react('✅')
+        }
+        } catch(err) {
+            const args = message.content.split(/ +/).slice(1);
+            var quotefile = `./data/movies/${args[0].toLowerCase()}_quotes.json`
+            message.reply('Hmm... Something went wrong. Don\'t worry, the report has been send!');
+            const errmsg = `Quote write error: ${err}. File: ${quotefile}`;
+            console.log(`[${date(0)} - ${time(0)}] ${errmsg}`);
+            logchannel.send(errmsg);
         }
     }
 }
