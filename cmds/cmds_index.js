@@ -54,6 +54,9 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     const setPrefix = require('./Util/prefix.js')
     setPrefix(message, client, prefix);
 
+    const geturlofattachment = require('./Util/geturlofattach.js')
+    geturlofattachment(message, client, prefix);
+
     /*--------------------------------
     -------------- Other -------------
     --------------------------------*/

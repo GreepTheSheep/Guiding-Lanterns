@@ -36,7 +36,7 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
             embed.setAuthor(`No image? Click here!`, message.author.displayAvatarURL, pic)
             .setImage(pic)
             .setColor('RANDOM')
-            .setFooter(`If you want to add your own picture, type ${prefix}addtangledpicture`, message.author.displayAvatarURL)
+            .setFooter(`If you want to add your own picture, type ${prefix}addpicture`, message.author.displayAvatarURL)
             
              message.channel.send(embed)
         })
@@ -53,7 +53,7 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
         try {
         const args = message.content.split(/ +/).slice(1);
         
-        if (args.length < 1) return message.react('❌').then(message.reply(`Usage:\`\`\`${prefix}addpicture <movie> <URL>\`\`\`URLs must ends with:\`\`\`.jpg\n.png\n.gif\`\`\``));
+        if (args.length < 1) return message.react('❌').then(message.reply(`Usage:\`\`\`${prefix}addpicture <movie> <URL>\`\`\`URLs must ends with:\`\`\`.jpg\n.png\n.gif\`\`\`If you have a picture on your device, use \`${prefix}geturl\` and follow the instructions for get your URL of your image`));
         
         let url = args[1].endsWith('.jpg') || args[1].endsWith('.png') || args[1].endsWith('.gif')
         
@@ -78,7 +78,7 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
             .then(m=>message.reply('✅ Your picture was requested!'))
             .catch(err=>message.reply('Error ¯\\_(ツ)_/¯\nTry again!'))
         }
-        } else message.react('❌').then(message.reply('You must entrer a URL!\nURLs must ends with:\`\`\`.jpg\n.png\n.gif\`\`\`'));;
+        } else message.react('❌').then(message.reply('Sorry, URLs must ends with:\`\`\`.jpg\n.png\n.gif\`\`\`'));;
         } catch(err) {
             message.reply('Hmm... Something went wrong. Don\'t worry, the report has been send!');
             const errmsg = `New Tangled Picture request error: ${err}`;
