@@ -6,7 +6,7 @@ const lancount = JSON.parse(fs.readFileSync(countfile, "utf8"));
 
 function lantern(message, client, prefix, getlogchannel) {
 
-    if (message.content == '<:Lantern:570822664789426186>') {
+    if (message.content.includes('<:Lantern:570822664789426186>')) {
         lancount.count++
 
         let countwrite = { "count": `${lancount.count}` };

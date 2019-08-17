@@ -15,11 +15,18 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     const claimlog = require('./Owner/log.js');
     claimlog(message, client, prefix);
 
+    const worldsmanager = require('./Owner/worlds.js')
+    worldsmanager(message, client, prefix, functiondate, functiontime, getlogchannel())
+
     /*--------------------------------
     ------------- Worlds -------------
     --------------------------------*/
 
-    // Coming... (pics, screenshots, quotes)
+    const quotes = require('./Worlds/quotes.js');
+    quotes(message, client, prefix, functiondate, functiontime, getlogchannel());
+
+    const picture = require('./Worlds/pics.js')
+    picture(message, client, prefix, functiondate, functiontime, getlogchannel())
 
     /*--------------------------------
     --------------- Fun --------------
@@ -42,13 +49,16 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     voted(message, client, prefix, dbl);
 
     const image_search_request = require('./Util/img_search.js')
-    image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel, dbl)
+    image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel(), dbl)
 
     const about = require('./Util/about.js');
     about(message, client, prefix);
 
     const setPrefix = require('./Util/prefix.js')
     setPrefix(message, client, prefix);
+
+    const geturlofattachment = require('./Util/geturlofattach.js')
+    geturlofattachment(message, client, prefix);
 
     /*--------------------------------
     -------------- Other -------------
@@ -68,20 +78,15 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     --------- Guild-specific ---------
     --------------------------------*/
 
-    if (message.guild.id == '562602234265731080') {
+    if (message.guild.id == '562602234265731080') { // Kingdom of Corona
         const lantern = require('./Guild/lantern.js');
         lantern(message, client, prefix, getlogchannel());
+
+        const screenshot = require('./Guild/screenshot.js');
+        screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel(), dbl);
     }
 
     //-----------------------------------------------------------------------------------------------
-    const screenshot = require('./screenshots/screenshot.js');
-    screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel(), dbl);
-
-    const tangled_picture = require('./tangled_pics.js')
-    tangled_picture(message, client, prefix, functiondate, functiontime, getlogchannel)
-
-    const quotes = require('./quotes.js');
-    quotes(message, client, prefix);
 
 }
 

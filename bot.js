@@ -42,11 +42,13 @@ function functiontime() { // The function it gives a time (here the current time
 
 const channel_id = require('./data/channel_ids.json');
 
-const num_members = require('./counter/member.js');
+const num_members_guild = require('./counter/guild-member.js');
+const num_members = require('./counter/users.js')
 const num_guilds = require('./counter/guilds.js');
 const ver = require('./counter/version.js')
 
-const lant_num_members = () => num_members(client, "562602234265731080", channel_id.members);
+const lant_num_members_guild = () => num_members_guild(client, "562602234265731080", channel_id.members);
+const lant_num_users = () => num_members(client, channel_id.users)
 const lant_num_guilds = () => num_guilds(client, channel_id.guilds);
 const lant_ver = () => ver(client, channel_id.version);
 
@@ -55,16 +57,17 @@ client.on('ready', () => { // If bot was connected:
     console.log(readylog); // Send the text in the console
     dbl.postStats(client.guilds.size)
     getlogchannel().send(readylog); // Send the text in the logging channel
-    lant_num_members(); //Set the Member count
+    lant_num_members_guild(); //Set the Member count
+    lant_num_users();
     lant_num_guilds(); //Set the guilds count
     lant_ver(); //Set version number in the version number channel
     inviteTracker.ready(client); // Starts the invite tracker plugin
     const loginterval = new Promise(function() { // Automatic log file recreator function
         setInterval(function() {
             const attachment = new Attachment('./logs/bot.log') // Defines the log file to send
-            getlogchannel().send('<@330030648456642562> weekly log file:', attachment) // Send the file
+            getlogchannel().send('<@330030648456642562> daily log file:', attachment) // Send the file
             .then(m=>fs.writeFileSync('./logs/bot.log', '')) // Recreates the log file
-        }, 68400000); // do this every day
+        }, 8.64e+7); // do this every day
     }).catch(err=>getlogchannel().send('Error during sending the weekly log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot.log', '')))
     loginterval
 
@@ -75,7 +78,7 @@ client.on('ready', () => { // If bot was connected:
                 if (code != 0) return getlogchannel().send(`Error during pulling: \`\`\`${stderr}\`\`\``)
                 getlogchannel().send(`\`\`\`${stdout}\`\`\` :white_check_mark:`)
             })
-        }, 86400000 * 2 ); // Do this every 2 days
+        }, 1.728e+8); // Do this every 2 days
     }).catch(err=>getlogchannel().send('Error during auto pull: ' + err))
     autopull
 }); // End
@@ -108,7 +111,8 @@ client.on('guildMemberAdd', member => { // If any member join a server (or guild
         if (member.guild.id === '562602234265731080') inviteTracker.track(member);
         if (member.guild.id === '562602234265731080'|| member.guild.id === '570024448371982373') console.log(`\n${member.user.tag} joined ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who joined
     }
-    lant_num_members(); //Change the members count (+1)
+    lant_num_members_guild(); //Change the members count (+1)
+    lant_num_users();
 })
 
 client.on('guildMemberRemove', member => { // If any member leave a server (or guild in Discord language)
@@ -117,7 +121,8 @@ client.on('guildMemberRemove', member => { // If any member leave a server (or g
         goodbye(member, client);
         if (member.guild.id === '562602234265731080'|| member.guild.id === '570024448371982373') console.log(`\n${member.user.tag} left ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who left
     }
-    lant_num_members(); //Change the members count (-1)
+    lant_num_members_guild(); //Change the members count (-1)
+    lant_num_users();
 })
 
 client.on('guildCreate', guild => { // If the bot join a server
