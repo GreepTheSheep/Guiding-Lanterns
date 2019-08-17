@@ -64,10 +64,9 @@ client.on('ready', () => { // If bot was connected:
     const loginterval = new Promise(function() { // Automatic log file recreator function
         setInterval(function() {
             const attachment = new Attachment('./logs/bot.log') // Defines the log file to send
-            getlogchannel().send('<@330030648456642562> weekly log file:', attachment) // Send the file
+            getlogchannel().send('<@330030648456642562> daily log file:', attachment) // Send the file
             .then(m=>fs.writeFileSync('./logs/bot.log', '')) // Recreates the log file
-            .catch(err=>getlogchannel().send('Error during sending the weekly log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot.log', '')))
-        }, 604800000); // do this every week
+        }, 8.64e+7); // do this every day
     }).catch(err=>getlogchannel().send('Error during sending the weekly log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot.log', '')))
     loginterval
 
@@ -76,10 +75,9 @@ client.on('ready', () => { // If bot was connected:
             getlogchannel().send('Pulling changes from GitHub...')
             .then(shell.exec('git pull'), function(code, stdout, stderr){
                 if (code != 0) return getlogchannel().send(`Error during pulling: \`\`\`${stderr}\`\`\``)
-                if (stdout == 'Already up-to-date.') return getlogchannel().send(stdout)
-                getlogchannel().send(`:white_check_mark: Successfully pulled!\nRestarting the bot... *(if pm2 want it)*`)
-            }.catch(err=>getlogchannel().send('Error during auto pull: ' + err)))
-        }, 86400000); // do this every day
+                getlogchannel().send(`\`\`\`${stdout}\`\`\` :white_check_mark:`)
+            })
+        }, 1.728e+8); // Do this every 2 days
     }).catch(err=>getlogchannel().send('Error during auto pull: ' + err))
     autopull
 }); // End

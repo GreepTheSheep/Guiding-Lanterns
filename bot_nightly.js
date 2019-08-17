@@ -53,9 +53,9 @@ client.on('ready', () => {
             const attachment = new Attachment('./logs/bot_nightly.log')
             getlogchannel().send('Log file:', attachment)
             .then(m=>fs.writeFileSync('./logs/bot_nightly.log', ''))
-            .catch(err=>getlogchannel().send('Error during sending the weekly log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot_nightly.log', '')))
+            .catch(err=>getlogchannel().send('Error during sending the log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot_nightly.log', '')))
         }, 3600000);
-    }).catch(err=>getlogchannel().send('Error during sending the weekly log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot_nightly.log', '')))
+    }).catch(err=>getlogchannel().send('Error during sending the log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot_nightly.log', '')))
     interval
     inviteTracker.ready(client);
 });
