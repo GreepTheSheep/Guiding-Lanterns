@@ -10,7 +10,7 @@ function errorgenerating(message, err, date, time, logchannel) {
 
 function worlds(message, client, prefix, date, time, logchannel) {
     if (message.author.id == '330030648456642562') {
-        if (message.content.startsWith(prefix + 'createworld')) {
+        if (message.content.startsWith(prefix + 'createworld') || message.content.startsWith(prefix + 'addworld')) {
             try {
                 const args = message.content.split(/ +/).slice(1);
                 if (args.length < 1) return message.react('❌')
