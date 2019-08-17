@@ -1,7 +1,5 @@
 const Discord = require('discord.js');
 
-const images = require('./data/tangled_pics.json');
-
 function randomItem(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
