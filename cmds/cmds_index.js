@@ -1,7 +1,7 @@
 // All commands listed here
 
 function cmds_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl){
-    
+    if (message.channel.type === 'dm') return
     /*--------------------------------
     -------------- Owner -------------
     --------------------------------*/

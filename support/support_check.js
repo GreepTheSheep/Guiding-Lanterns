@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const fs = require('fs');
 const dbfile = './data/support_db.json'
 
-function SupportCheck (message, client, prefix) {
+function SupportCheck (message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl) {
     const db = JSON.parse(fs.readFileSync(dbfile, "utf8"))
 
     let donorsonly = new Discord.RichEmbed()
@@ -11,6 +11,9 @@ function SupportCheck (message, client, prefix) {
     .setFooter(`If you have already donated but you don't have the role, type " !bug Donated but can't do commands "`, `${client.user.avatarURL}`)
 
     const donor = db[message.author.id]
+
+    const chatbot = require('../chatbot.js')
+    chatbot(message, client, prefix, donor, functiondate, functiontime, getlogchannel())
 
     const status = require('../cmds/Util/status.js');
     status(message, client, prefix, donor, donorsonly);
@@ -21,6 +24,8 @@ function SupportCheck (message, client, prefix) {
     const wolfram = require('../cmds/Util/wolfram.js');
     wolfram(message, client, prefix, donor, donorsonly);
 
+    
+    
     if (message.content.startsWith(prefix + 'adddonation')) {
         if (message.author.id == "330030648456642562") {
             let args = message.content.split(" ");

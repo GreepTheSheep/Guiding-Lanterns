@@ -87,12 +87,11 @@ client.on('message', message => { // If any message was recived
     try {
     var prefix = getGuildPrefix(message.guild); // Gets the server prefix from the database
     if (message.author.bot) return; // If is a bot, do nothing
-    if (message.channel.type === 'dm') return; // If commands was send in DMs, do nothing
     message.content.toLowerCase()
 
     //Check if user has supported
     const PatreonCheck = require('./support/support_check.js');
-    PatreonCheck(message, client, prefix)
+    PatreonCheck(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl)
 
     //All commands listed in cmds_index.js
     const cmds_index = require('./cmds/cmds_index.js');
