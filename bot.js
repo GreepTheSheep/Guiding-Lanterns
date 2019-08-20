@@ -16,9 +16,9 @@ const dbl = new DBL(config.dbl_token, {webhookPort: 5000, statsInterval: 3600000
 const Enmap = require("enmap"); // Define enmap, a database integrated with the bot
 const guildPrefix = new Enmap({name: "guildPrefix"}); // Define a new table for custom prefixes
 
-const getGuildPrefix = (guild) => {
-    if (!guildPrefix.has(guild.id)) guildPrefix.set(guild.id, config.prefix) // If the server has not a prefix, give the default one
-    return guildPrefix.get(guild.id); // Gives the prefix for the server
+const getGuildPrefix = (message) => {
+    if (!guildPrefix.has(message.guild.id)) guildPrefix.set(message.guild.id, config.prefix) // If the server has not a prefix, give the default one
+    return guildPrefix.get(message.guild.id); // Gives the prefix for the server
 }
 
 function functiondate() { // The function it gives a date (here the current date)
@@ -85,7 +85,7 @@ client.on('ready', () => { // If bot was connected:
 
 client.on('message', message => { // If any message was recived
     try {
-    var prefix = getGuildPrefix(message.guild); // Gets the server prefix from the database
+    var prefix = getGuildPrefix(message); // Gets the server prefix from the database
     if (message.author.bot) return; // If is a bot, do nothing
     message.content.toLowerCase()
 
