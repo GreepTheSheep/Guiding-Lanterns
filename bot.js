@@ -85,7 +85,7 @@ client.on('ready', () => { // If bot was connected:
 
 client.on('message', message => { // If any message was recived
     try {
-    var prefix = getGuildPrefix(message); // Gets the server prefix from the database
+    if (message.channel.type === 'text') var prefix = getGuildPrefix(message); // Gets the server prefix from the database
     if (message.author.bot) return; // If is a bot, do nothing
     message.content.toLowerCase()
 
