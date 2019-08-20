@@ -14,11 +14,11 @@ const DBL = require("dblapi.js");
 const dbl = new DBL(config.dbl_token, {webhookPort: 5000, statsInterval: 3600000});
 
 const Enmap = require("enmap"); // Define enmap, a database integrated with the bot
-guildPrefix = new Enmap({name: "guildPrefix"}); // Define a new table for custom prefixes
+const guildPrefix = new Enmap({name: "guildPrefix"}); // Define a new table for custom prefixes
 
 const getGuildPrefix = (guild) => {
-    if (!guild.guildPrefix.has(guild.id)) guild.guildPrefix.set(guild.id, config.prefix) // If the server has not a prefix, give the default one
-    return guild.guildPrefix.get(guild.id); // Gives the prefix for the server
+    if (!guildPrefix.has(guild.id)) guildPrefix.set(guild.id, config.prefix) // If the server has not a prefix, give the default one
+    return guildPrefix.get(guild.id); // Gives the prefix for the server
 }
 
 function functiondate() { // The function it gives a date (here the current date)
