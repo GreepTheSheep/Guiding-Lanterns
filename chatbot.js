@@ -53,14 +53,16 @@ function chatbot(message, client, prefix, donor, date, time, logchannel){
 
         if (!chatbotdb.has("Requests")) chatbotdb.set("Requests", "0")
         var requests = chatbotdb.get("Requests")
-        chatbotdb.set("Requests", requests+1)
+        var requestsplus = requests++
+        chatbotdb.set("Requests", requestsplus)
         if (requests == '80') logchannel.send('[SimSimi Chatbot] 80 requests reached, please set a new API KEY\nhttps://workshop.simsimi.com/dashboard\nCommand: \`' + prefix + 'chatbotkey\`')
         if (requests >= '90' && requests < '100') logchannel.send('[SimSimi Chatbot] ' + requests + ' requests reached, please set a new API KEY\nhttps://workshop.simsimi.com/dashboard\nCommand: \`' + prefix + 'chatbotkey\`')
         if (requests == '100') logchannel.send('[SimSimi Chatbot] 100 requests reached, chatbot is unavialble. Please set a new API KEY\nhttps://workshop.simsimi.com/dashboard\nCommand: \`' + prefix + 'chatbotkey\`')
 
         if (!chatbotdb.has("Total_Requests")) chatbotdb.set("Total_Requests", "0")
         var totalrequests = chatbotdb.get("Total_Requests")
-        chatbotdb.set("Total_Requests", totalrequests+1)
+        var totalrequestsplus = totalrequests++
+        chatbotdb.set("Total_Requests", totalrequestsplus)
         
         if (body.atext.length < 1) return message.reply('I\'m speechless.').then(message.channel.stopTyping(true))
         message.reply(body.atext).then(message.channel.stopTyping(true))
