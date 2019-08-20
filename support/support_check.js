@@ -15,6 +15,8 @@ function SupportCheck (message, client, prefix, functiondate, functiontime, cool
     const chatbot = require('../chatbot.js')
     chatbot(message, client, prefix, donor, functiondate, functiontime, getlogchannel())
 
+
+    if (message.channel.type !== 'dm'){
     const status = require('../cmds/Util/status.js');
     status(message, client, prefix, donor, donorsonly);
 
@@ -23,7 +25,9 @@ function SupportCheck (message, client, prefix, functiondate, functiontime, cool
 
     const wolfram = require('../cmds/Util/wolfram.js');
     wolfram(message, client, prefix, donor, donorsonly);
+    
 
+    }
     
     
     if (message.content.startsWith(prefix + 'adddonation')) {

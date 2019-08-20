@@ -5,6 +5,7 @@ const request = require('request')
 chatbotdb = new Enmap({name: "chatbot"})
 
 function chatbot(message, client, prefix, donor, date, time, logchannel){
+    if (message.channel.type !== 'dm'){
     if (message.content.startsWith(prefix + 'chatbotkey')){
         if (message.author.id == '330030648456642562'){
             let args = message.content.split(" ");
@@ -23,7 +24,7 @@ function chatbot(message, client, prefix, donor, date, time, logchannel){
             message.channel.send(`__ChatBot Stats:__\`\`\`ChatBot API: SimSimi\n\nRequests since the API key regen: ${requests}\nTotal requests: ${totalrequests}\`\`\``)
         } else return;
     }
-
+    }
 
     if (message.channel.type === 'dm'){
         try {
