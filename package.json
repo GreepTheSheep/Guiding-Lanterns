@@ -1,6 +1,6 @@
 {
     "name": "guiding-lanterns",
-    "version": "2.0.0",
+    "version": "2.1.0",
     "description": "",
     "main": "bot.js",
     "repository": {
@@ -20,12 +20,13 @@
     "license": "Apache-2.0",
     "dependencies": {
         "better-sqlite-pool": "^0.2.2",
+        "better-sqlite3": "^5.4.2",
         "bufferutil": "^3.0.3",
         "country-data": "0.0.31",
         "dateformat": "^3.0.3",
         "dblapi.js": "^2.3.0",
         "discord-emoji": "^1.1.1",
-        "discord.js": "^11.5.0",
+        "discord.js": "^11.5.1",
         "enmap": "^5.0.0",
         "fluent-ffmpeg": "^2.1.2",
         "fs": "0.0.1-security",
