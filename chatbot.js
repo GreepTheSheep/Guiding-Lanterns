@@ -61,7 +61,7 @@ function chatbot(message, client, prefix, donor, date, time, logchannel){
         if (!chatbotdb.has("Total_Requests")) chatbotdb.set("Total_Requests", 0)
         chatbotdb.set("Total_Requests", chatbotdb.get("Total_Requests")+1)
         
-        chatbotdb.set("LastRequest_name", message.author.name)
+        chatbotdb.set("LastRequest_name", message.author.username)
         
         if (body.atext.length < 1) return message.reply('I\'m speechless.').then(message.channel.stopTyping(true))
         message.reply(body.atext).then(message.channel.stopTyping(true))
