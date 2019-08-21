@@ -12,17 +12,16 @@ function chatbot(message, client, prefix, donor, date, time, logchannel){
             args.shift();
             if (args.length < 1 ) return message.author.send(chatbotdb.get("KEY")).then(message.delete())
             chatbotdb.set("KEY", args[0])
-            chatbotdb.set("Requests", "0")
+            chatbotdb.set("Requests", 0)
             message.delete()
             message.channel.send(':+1:').then(m=>m.delete(5000))
         } else return;
     }
     if (message.content.startsWith(prefix + 'chatbotstats')){
-        if (message.author.id == '330030648456642562'){
-            const requests = chatbotdb.get("Requests")
-            const totalrequests = chatbotdb.get("Total_Requests")
-            message.channel.send(`__ChatBot Stats:__\`\`\`ChatBot API: SimSimi\n\nRequests since the API key regen: ${requests}\nTotal requests: ${totalrequests}\`\`\``)
-        } else return;
+        const requests = chatbotdb.get("Requests")
+        const totalrequests = chatbotdb.get("Total_Requests")
+        const lastrequest = chatbotdb.get("LastRequest_name")
+        message.channel.send(`__ChatBot Stats:__\`\`\`ChatBot API: SimSimi\n\nRequests since the API key regen: ${requests}/100\nTotal requests: ${totalrequests}\n\nLast request sent by ${lastrequest}\`\`\``)
     }
     }
 
@@ -52,15 +51,17 @@ function chatbot(message, client, prefix, donor, date, time, logchannel){
             logchannel.send(`SimSimi ChatBot error: ${error}`)
         }
 
-        if (!chatbotdb.has("Requests")) chatbotdb.set("Requests", "0")
+        if (!chatbotdb.has("Requests")) chatbotdb.set("Requests", 0)
         var requests = chatbotdb.get("Requests")
         chatbotdb.set("Requests", chatbotdb.get("Requests")+1)
         if (requests == '80') logchannel.send('[SimSimi Chatbot] 80 requests reached, please set a new API KEY\nhttps://workshop.simsimi.com/dashboard\nCommand: \`' + prefix + 'chatbotkey\`')
         if (requests >= '90' && requests < '100') logchannel.send('[SimSimi Chatbot] ' + requests + ' requests reached, please set a new API KEY\nhttps://workshop.simsimi.com/dashboard\nCommand: \`' + prefix + 'chatbotkey\`')
         if (requests == '100') logchannel.send('[SimSimi Chatbot] 100 requests reached, chatbot is unavialble. Please set a new API KEY\nhttps://workshop.simsimi.com/dashboard\nCommand: \`' + prefix + 'chatbotkey\`')
 
-        if (!chatbotdb.has("Total_Requests")) chatbotdb.set("Total_Requests", "0")
+        if (!chatbotdb.has("Total_Requests")) chatbotdb.set("Total_Requests", 0)
         chatbotdb.set("Total_Requests", chatbotdb.get("Total_Requests")+1)
+        
+        chatbotdb.set("LastRequest_name", message.author.name)
         
         if (body.atext.length < 1) return message.reply('I\'m speechless.').then(message.channel.stopTyping(true))
         message.reply(body.atext).then(message.channel.stopTyping(true))
