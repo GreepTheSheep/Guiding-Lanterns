@@ -19,7 +19,7 @@ function fanart(message, client, prefix, functiondate, functiontime, getlogchann
             let listembed = new Discord.RichEmbed()
             listembed.setColor("#0567DA")
                 .addField("Avialble movies are:", `- \`${givelist()}\``)
-                .setFooter(`Usage: ${prefix}picture <movie>`)
+                .setFooter(`Usage: ${prefix}fanart <movie>`)
             return message.channel.send(listembed)
         }
         var picsfile = `./data/movies/${args[0].toLowerCase()}_fanarts.json`
@@ -36,7 +36,7 @@ function fanart(message, client, prefix, functiondate, functiontime, getlogchann
             embed.setAuthor(`No image? Click here!`, message.author.displayAvatarURL, pic)
             .setImage(pic)
             .setColor('RANDOM')
-            .setFooter(`If you want to add your own picture, type ${prefix}addpicture`, message.author.displayAvatarURL)
+            .setFooter(`If you want to add your own picture, type ${prefix}addfanart`, message.author.displayAvatarURL)
             
              message.channel.send(embed)
         })
