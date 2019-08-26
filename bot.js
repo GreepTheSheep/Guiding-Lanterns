@@ -95,7 +95,7 @@ client.on('message', message => { // If any message was recived
 
     //All commands listed in cmds_index.js
     const cmds_index = require('./cmds/cmds_index.js');
-    cmds_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl);
+    cmds_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix);
 
     } catch (e) {
         console.log(e)
