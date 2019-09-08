@@ -74,7 +74,7 @@ function chatbot(message, client, prefix, donor, date, time, logchannel){
         
         chatbotdb.set("LastRequest_name", message.author.username)
         
-        if (body.atext.length < 1) return message.reply('I have no words to caption that.').then(message.channel.stopTyping(true))
+        //if (body.atext.length < 1) return message.reply('I have no words to caption that.').then(message.channel.stopTyping(true))
         message.reply(body.atext).then(message.channel.stopTyping(true))
         }
         catch (err){
