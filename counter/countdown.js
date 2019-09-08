@@ -32,16 +32,16 @@ const countdown = (param) => {
     };
 };
 module.exports = {
-    frozen2_test: countdown({
-        date : "November 22 2019 00:00:00 GMT-0400",
-        output: (d,h,m,s) => `${d} Days until Frozen II`,
-        end:   "FROZEN II IS OUT",
-        timeout: 500
+    tangled_s3: countdown({
+        date : "October 07 2019 00:00:00 UTC-0700",
+        output: (d,h,m,s) => `${d}d ${h}h ${m}m ${s}s`,
+        end:   "TTS S3 IS OUT!",
+        timeout: 1000
     }),
     frozen2: countdown({
-        date : "November 22 2019 00:00:00 GMT-0400",
+        date : "November 22 2019 00:00:00 UTC-0700",
         output: (d,h,m,s) => `${d}d ${h}h ${m}m ${s}s`,
-        end:   "FROZEN II IS OUT",
-        timeout: 500
+        end:   "FROZEN 2 IS OUT!",
+        timeout: 1000
     })
 }

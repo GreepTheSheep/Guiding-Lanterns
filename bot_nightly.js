@@ -36,7 +36,6 @@ const countdown = require('./counter/countdown.js');
 const num_guilds = require('./counter/guilds.js');
 
 const lant_num_members_guild = () => num_members_guild(client, "570024448371982373", channel_id.nightly_members);
-const lant_frozen_II = () => countdown.frozen2(client, channel_id.nightly_frozen2);
 const lant_num_guilds = () => num_guilds(client, channel_id.nightly_guilds);
 
 
@@ -47,7 +46,6 @@ client.on('ready', () => {
     client.user.setStatus('dnd');
     lant_num_members_guild();
     lant_num_guilds();
-    lant_frozen_II();
     const interval = new Promise(function() {
         setInterval(function() {
             const attachment = new Attachment('./logs/bot_nightly.log')
