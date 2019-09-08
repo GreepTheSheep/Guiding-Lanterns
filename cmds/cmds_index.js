@@ -63,6 +63,9 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     const geturlofattachment = require('./Util/geturlofattach.js')
     geturlofattachment(message, client, prefix);
 
+    const speedtest = require('./Util/speedtest.js')
+    speedtest(message, client, prefix, getlogchannel(), dbl)
+    
     /*--------------------------------
     -------------- Other -------------
     --------------------------------*/
