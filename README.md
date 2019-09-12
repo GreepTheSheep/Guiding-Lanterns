@@ -3,7 +3,7 @@
 ### Official Discord bot of r/tangled
 ![Version](https://img.shields.io/github/package-json/v/greepthesheep/Guiding-Lanterns)     [![Status](https://discordbots.org/api/widget/status/569624646475972608.svg?noavatar=true)](https://discordbots.org/bot/569624646475972608)  [![Lib](https://discordbots.org/api/widget/lib/569624646475972608.svg?noavatar=true)](https://discord.js.org)  [![Upvotes](https://discordbots.org/api/widget/upvotes/569624646475972608.svg?noavatar=true)](https://discordbots.org/bot/569624646475972608/vote)
 
-[![license](https://img.shields.io/github/license/GreepTheSheep/Guiding-Lanterns)](https://github.com/GreepTheSheep/Guiding-Lanterns/blob/master/LICENSE)   ![Size](https://img.shields.io/github/repo-size/greepthesheep/Guiding-Lanterns)   [![Discord](https://img.shields.io/discord/570024448371982373)](https://discord.gg/5QCQpr9)   ![Star](https://img.shields.io/github/stars/greepthesheep/Guiding-lanterns)
+[![license](https://img.shields.io/github/license/GreepTheSheep/Guiding-Lanterns)](https://github.com/GreepTheSheep/Guiding-Lanterns/blob/master/LICENSE)   ![Size](https://img.shields.io/github/repo-size/greepthesheep/Guiding-Lanterns)   [![Discord](https://img.shields.io/discord/570024448371982373)](https://discord.gg/5QCQpr9)   [![Star](https://img.shields.io/github/stars/greepthesheep/Guiding-lanterns)](https://github.com/GreepTheSheep/Guiding-Lanterns/stargazers)
 
 ---
 Click on the picture down to invite the bot in your server!
