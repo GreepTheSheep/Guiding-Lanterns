@@ -83,7 +83,7 @@ client.on('ready', () => { // If bot was connected:
         setInterval(function() {
             getlogchannel().send('Pulling changes from GitHub...')
             .then(shell.exec('git pull'), function(code, stdout, stderr){
-                if (code != 0) return getlogchannel().send(`Error during pulling: \`\`\`${stderr}\`\`\``)
+                if (code !== 0) return getlogchannel().send(`Error during pulling: \`\`\`${stderr}\`\`\``)
                 getlogchannel().send(`\`\`\`${stdout}\`\`\` :white_check_mark:`)
             })
         }, 1.728e+8); // Do this every 2 days

@@ -9,7 +9,7 @@ const Discord = require("discord.js");
 
  function eval_cmd(message, client, prefix, getlogchannel) {
 
-    if (message.author.id === "330030648456642562") {
+    if (message.author.id === "330030648456642562" || message.author.id === "460348027463401472") {
     if (message.content.startsWith(prefix + "eval")) {
         try {
             const args = message.content.split(" ").slice(1);
