@@ -13,5 +13,5 @@
     "help_fun": "`${prefix}8ball` : Poser une question et il répondra.\nSupporter seulement: `${prefix}say` : fait parler le bot !",
     "help_anyproblems": "Si vous avez des problèmes :",
     "help_problems2": "`${prefix}bug`: Signaler un bug aux devs\n`${prefix}suggest`: Suggérer une amélioration",
-    "help_credits": "You can type ${prefix}about for credits!"
+    "help_credits": "Vous pouvez taper ${prefix}about pour les crédits !"
 }
