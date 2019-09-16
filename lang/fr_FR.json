@@ -1,4 +1,9 @@
 {
-    "didivote_yes": "Yes, you did!",
-    "didivote_no": "No, you didn't.\nHere's the link: https://discordbots.org/bot/569624646475972608/vote"
+    "didivote_yes": "Oui, tu as bien voté !",
+    "didivote_no": "Non, tu ne l'as pas fait.\nJe te donne le lien: https://discordbots.org/bot/569624646475972608/vote",
+    "lang_check": "`Your language is set to `${langtext}`.\nYou can change your language with `${prefix}language list``",
+    "lang_ok": "`Language `${args[0]}` set.`",
+    "lang_usage": "`Use ${prefix}language <Your language> to set your language`",
+    "lang_list_title": "List of languages",
+    "lang_notonlist": "This language is not on the list. Please check!"
 }
