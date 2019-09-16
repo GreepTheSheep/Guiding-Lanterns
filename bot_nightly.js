@@ -9,13 +9,14 @@ const logchannel = '589337521553539102'
 const getlogchannel = () => client.channels.get(logchannel)
 const inviteTracker = require('./invite-track.js');
 const dbl = undefined
+const guildPrefix = undefined
 
 const Enmap = require("enmap");
 const userLang = new Enmap({name: "user_languages"});
 
 const getUserLang = (message) => {
     if (!userLang.has(message.author.id)) userLang.set(message.author.id, "en_US")
-    return JSON.parse(fs.readdirSync(`./lang/${userLang.get(message.author.id)}.json`, "utf8"));
+    return JSON.parse(fs.readFileSync(`./lang/${userLang.get(message.author.id)}.json`, "utf8"));
 }
 
 function functiondate() {

@@ -12,9 +12,8 @@ function givelist(){
 }
 
 function setLanguage(message, client, prefix, userLang, lang){
-    if (message.content.startsWith(prefix + "language")) {
-        let args = message.content.split(" ")
-        args.shift()
+    if (message.content.startsWith(prefix + "lang")) {
+        const args = message.content.split(/ +/).slice(1);
 
         if (args.length < 1) return message.reply(`Your language is set to \`${lang}\`.\nYou can change your language with \`${prefix}language list\``);
         

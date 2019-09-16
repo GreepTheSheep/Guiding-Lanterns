@@ -23,7 +23,7 @@ const getGuildPrefix = (message) => {
 }
 const getUserLang = (message) => {
     if (!userLang.has(message.author.id)) userLang.set(message.author.id, "en_US")
-    return JSON.parse(fs.readdirSync(`./lang/${userLang.get(message.author.id)}.json`, "utf8"));
+    return JSON.parse(fs.readFileSync(`./lang/${userLang.get(message.author.id)}.json`, "utf8"));
 }
 
 function functiondate() { // The function it gives a date (here the current date)
