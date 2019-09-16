@@ -2,7 +2,7 @@
     "didivote_yes": "Oui, tu as bien voté !",
     "didivote_no": "Non, tu ne l'as pas fait.\nJe te donne le lien: https://discordbots.org/bot/569624646475972608/vote",
     "lang_check": "Votre langue est définie à `${langtext}`.\nVous pouvez changer votre langue avec `${prefix}lang list`",
-    "lang_ok": "Votre langue est défini sur `$[args[0]}`.",
+    "lang_ok": "Votre langue est défini sur `${args[0]}`.",
     "lang_usage": "Utilisez ${prefix}lang <Your language> pour définir votre langue",
     "lang_list_title": "Liste des langues",
     "lang_notonlist": "Cette langue n'est pas dans la liste. Veuillez vérifier !"
