@@ -35,7 +35,7 @@ function setLanguage(message, client, prefix, userLang, lang, langtext){
         }
         listarray.join("\`\n- \`")
 
-        if (listarray.indexOf(args[0]) <= 0){
+        if (listarray.indexOf(args[0]) >= 0){
             userLang.set(message.author.id, args[0])
             message.channel.send(lang.lang_ok.replace('${args[0]}', args[0]))
         } else {
