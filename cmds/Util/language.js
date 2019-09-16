@@ -16,20 +16,30 @@ function setLanguage(message, client, prefix, userLang, lang, langtext){
     if (message.content.startsWith(prefix + "lang")) {
         const args = message.content.split(/ +/).slice(1);
 
-        if (args.length < 1) return message.reply(lang.lang_check);
+        if (args.length < 1) return message.reply(lang.lang_check.replace('${langtext}', langtext).replace('${prefix}', prefix));
         
-        if (args[0] == 'list'){
+        if (args[0] === 'list'){
             let embed = new Discord.RichEmbed;
             embed.setTitle(lang.lang_list_title)
             .setDescription(`- \`${givelist()}\``)
-            .setFooter(lang.lang_usage)
+            .setFooter(lang.lang_usage.replace('${prefix}', prefix))
+            .setColor('RANDOM')
+            return message.channel.send(embed)
+        }
+
+        const readdb = fs.readdirSync('./lang/').filter(file => file.endsWith('.json'))
+        const listarray = [];
+        for (var file of readdb){
+            var langs = file.replace(".json", "")
+            listarray.push(langs)
+        }
+        listarray.join("\`\n- \`")
+
+        if (listarray.indexOf(args[0]) <= 0){
+            userLang.set(message.author.id, args[0])
+            message.channel.send(lang.lang_ok.replace('${args[0]}', args[0]))
         } else {
-            if (args[0] instanceof listarray){
-                userLang.set(message.author.id, args[0])
-                message.channel.send(lang.lang_ok)
-            } else {
-                message.reply(lang.lang_notonlist)
-            }
+            message.reply(lang.lang_notonlist)
         }
     }
     } catch (err){
