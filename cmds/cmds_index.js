@@ -1,6 +1,6 @@
 // All commands listed here
 
-function cmds_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang){
+function cmds_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext){
     if (message.channel.type === 'dm') return
     /*--------------------------------
     -------------- Owner -------------
@@ -61,7 +61,7 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     setPrefix(message, client, prefix, guildPrefix);
 
     const setLanguage = require('./Util/language.js')
-    setPrefix(message, client, prefix, userLang, lang);
+    setLanguage(message, client, prefix, userLang, lang, langtext);
 
     const geturlofattachment = require('./Util/geturlofattach.js')
     geturlofattachment(message, client, prefix);

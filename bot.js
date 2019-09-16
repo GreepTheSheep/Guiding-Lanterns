@@ -23,6 +23,10 @@ const getGuildPrefix = (message) => {
 }
 const getUserLang = (message) => {
     if (!userLang.has(message.author.id)) userLang.set(message.author.id, "en_US")
+    return userLang.get(message.author.id);
+}
+const giveUserLang = (message) => {
+    if (!userLang.has(message.author.id)) userLang.set(message.author.id, "en_US")
     return JSON.parse(fs.readFileSync(`./lang/${userLang.get(message.author.id)}.json`, "utf8"));
 }
 
@@ -99,7 +103,8 @@ client.on('ready', () => { // If bot was connected:
 client.on('message', message => { // If any message was recived
     try {
     if (message.channel.type === 'text') var prefix = getGuildPrefix(message); // Gets the server prefix from the database
-    if (message.channel.type === 'text') var lang = getUserLang(message); // Gets the user language from the database
+    if (message.channel.type === 'text') var langtext = getUserLang(message); // Gets the user language from the database
+    if (message.channel.type === 'text') var lang = giveUserLang(message); // Gets the user language from the database
     if (message.author.bot) return; // If is a bot, do nothing
     message.content.toLowerCase()
 
@@ -109,7 +114,7 @@ client.on('message', message => { // If any message was recived
 
     //All commands listed in cmds_index.js
     const cmds_index = require('./cmds/cmds_index.js');
-    cmds_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang);
+    cmds_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext);
 
     } catch (e) {
         console.log(e)

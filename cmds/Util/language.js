@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const fs = require('fs')
 
 function givelist(){
-    const readdb = fs.readdirSync('./lang').filter(file => file.endsWith('.json'))
+    const readdb = fs.readdirSync('./lang/').filter(file => file.endsWith('.json'))
     const listarray = [];
     for (var file of readdb){
         var langs = file.replace(".json", "")
@@ -11,25 +11,40 @@ function givelist(){
     return listarray.join("\`\n- \`")
 }
 
-function setLanguage(message, client, prefix, userLang, lang){
+function setLanguage(message, client, prefix, userLang, lang, langtext){
+    try{
     if (message.content.startsWith(prefix + "lang")) {
         const args = message.content.split(/ +/).slice(1);
 
-        if (args.length < 1) return message.reply(`Your language is set to \`${lang}\`.\nYou can change your language with \`${prefix}language list\``);
+        if (args.length < 1) return message.reply(lang.lang_check.replace('${langtext}', langtext).replace('${prefix}', prefix));
         
-        if (args[0] == 'list'){
+        if (args[0] === 'list'){
             let embed = new Discord.RichEmbed;
-            embed.setTitle('List of languages')
+            embed.setTitle(lang.lang_list_title)
             .setDescription(`- \`${givelist()}\``)
-            .setFooter(`Use ${prefix}language <Your language> to set your language`)
-        } else {
-            if (args[0] instanceof listarray){
-                userLang.set(message.author.id, args[0])
-                message.channel.send(`Language \`${args.join("")}\` set.`)
-            } else {
-                message.reply('This lang is not on the list. Please check!')
-            }
+            .setFooter(lang.lang_usage.replace('${prefix}', prefix))
+            .setColor('RANDOM')
+            return message.channel.send(embed)
         }
+
+        const readdb = fs.readdirSync('./lang/').filter(file => file.endsWith('.json'))
+        const listarray = [];
+        for (var file of readdb){
+            var langs = file.replace(".json", "")
+            listarray.push(langs)
+        }
+        listarray.join("\`\n- \`")
+
+        if (listarray.indexOf(args[0]) <= 0){
+            userLang.set(message.author.id, args[0])
+            message.channel.send(lang.lang_ok.replace('${args[0]}', args[0]))
+        } else {
+            message.reply(lang.lang_notonlist)
+        }
+    }
+    } catch (err){
+        console.log(err)
+        message.channel.send('Error')
     }
 }
 module.exports = setLanguage;
