@@ -82,7 +82,7 @@ client.on('ready', () => { // If bot was connected:
     const loginterval = new Promise(function() { // Automatic log file recreator function
         setInterval(function() {
             const attachment = new Attachment('./logs/bot.log') // Defines the log file to send
-            getlogchannel().send('<@330030648456642562> daily log file:', attachment) // Send the file
+            getlogchannel().send('Daily log file:', attachment) // Send the file
             .then(m=>fs.writeFileSync('./logs/bot.log', '')) // Recreates the log file
         }, 8.64e+7); // do this every day
     }).catch(err=>getlogchannel().send('Error during sending the weekly log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot.log', '')))
@@ -95,7 +95,7 @@ client.on('ready', () => { // If bot was connected:
                 if (code !== 0) return getlogchannel().send(`Error during pulling: \`\`\`${stderr}\`\`\``)
                 getlogchannel().send(`\`\`\`${stdout}\`\`\` :white_check_mark:`)
             })
-        }, 1.728e+8); // Do this every 2 days
+        }, 8.64e+7); // Do this every day
     }).catch(err=>getlogchannel().send('Error during auto pull: ' + err))
     autopull
 }); // End
