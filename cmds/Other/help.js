@@ -6,12 +6,12 @@ function help(message, client, prefix, lang) {
         
         embed.setTitle(lang.help_title)
             .setColor("#9C01C4")
-        if (message.guild.id == '562602234265731080') embed.addField("**__Kingdom of Corona: ☀__**", lang.help_kingdomofcorona.replace('${prefix}', prefix));
-        embed.addField("**°o° Disney:**", lang.help_disney.replace('${prefix}', prefix), true)
-            .addField("Util:", lang.help_util.replace('${prefix}', prefix), true)
-            .addField("Fun:", lang.help_fun.replace('${prefix}', prefix), true)
-            .addField(lang.help_anyproblems, lang.help_problems2.replace('${prefix}', prefix), true)
-            .setFooter(lang.help_credits.replace('${prefix}', prefix), `${client.user.avatarURL}`)
+        if (message.guild.id == '562602234265731080') embed.addField("**__Kingdom of Corona: ☀__**", lang.help_kingdomofcorona.split('${prefix}').join(prefix));
+        embed.addField("**°o° Disney:**", lang.help_disney.split('${prefix}').join(prefix), true)
+            .addField("Util:", lang.help_util.split('${prefix}').join(prefix), true)
+            .addField("Fun:", lang.help_fun.split('${prefix}').join(prefix), true)
+            .addField(lang.help_anyproblems, lang.help_problems2.split('${prefix}').join(prefix), true)
+            .setFooter(lang.help_credits.split('${prefix}').join(prefix), `${client.user.avatarURL}`)
         message.channel.send(embed)
     }
 }
