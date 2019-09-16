@@ -1,14 +1,14 @@
 const Discord = require('discord.js');
 
-function voted(message, client, prefix, dbl) {
+function voted(message, client, prefix, dbl, lang) {
     if (message.content.startsWith(prefix + 'didivote')) {
         if (dbl == undefined) return message.react('😢')
         
         dbl.hasVoted(message.author.id).then(voted => {
             if (voted) {
-                message.reply('Yes, you did!')
+                message.reply(lang.didivote_yes)
             } else {
-                message.reply('No, you didn\'t.\nHere\'s the link: https://discordbots.org/bot/569624646475972608/vote')
+                message.reply(lang.didivote_no)
             }
         });
     }

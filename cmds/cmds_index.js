@@ -1,6 +1,6 @@
 // All commands listed here
 
-function cmds_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix){
+function cmds_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang){
     if (message.channel.type === 'dm') return
     /*--------------------------------
     -------------- Owner -------------
@@ -49,7 +49,7 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     wolfram_short(message, client, prefix);
 
     const voted = require('./Util/voted.js');
-    voted(message, client, prefix, dbl);
+    voted(message, client, prefix, dbl, lang);
 
     const image_search_request = require('./Util/img_search.js')
     image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel(), dbl)
@@ -59,6 +59,9 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
 
     const setPrefix = require('./Util/prefix.js')
     setPrefix(message, client, prefix, guildPrefix);
+
+    const setLanguage = require('./Util/language.js')
+    setPrefix(message, client, prefix, userLang, lang);
 
     const geturlofattachment = require('./Util/geturlofattach.js')
     geturlofattachment(message, client, prefix);

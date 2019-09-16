@@ -10,6 +10,14 @@ const getlogchannel = () => client.channels.get(logchannel)
 const inviteTracker = require('./invite-track.js');
 const dbl = undefined
 
+const Enmap = require("enmap");
+const userLang = new Enmap({name: "user_languages"});
+
+const getUserLang = (message) => {
+    if (!userLang.has(message.author.id)) userLang.set(message.author.id, "en_US")
+    return JSON.parse(fs.readdirSync(`./lang/${userLang.get(message.author.id)}.json`, "utf8"));
+}
+
 function functiondate() {
     const datefu = new Date();
     const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -68,6 +76,7 @@ client.on('guildMemberRemove', member => {
 
 client.on('message', message => {
     const prefix = config.prefix_nightly;
+    var lang = getUserLang(message);
 
     if (message.author.bot) return;
 
@@ -79,7 +88,7 @@ client.on('message', message => {
     SupportCheck(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl)
 
     const cmds_index = require('./cmds/cmds_index.js');
-    cmds_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl);
+    cmds_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang);
 });
 
 client.on('guildCreate', guild => {

@@ -15,10 +15,15 @@ const dbl = new DBL(config.dbl_token, {webhookPort: 5000, statsInterval: 3600000
 
 const Enmap = require("enmap"); // Define enmap, a database integrated with the bot
 const guildPrefix = new Enmap({name: "guildPrefix"}); // Define a new table for custom prefixes
+const userLang = new Enmap({name: "user_languages"}); // Define a new table for user languages
 
 const getGuildPrefix = (message) => {
     if (!guildPrefix.has(message.guild.id)) guildPrefix.set(message.guild.id, config.prefix) // If the server has not a prefix, give the default one
     return guildPrefix.get(message.guild.id); // Gives the prefix for the server
+}
+const getUserLang = (message) => {
+    if (!userLang.has(message.author.id)) userLang.set(message.author.id, "en_US")
+    return JSON.parse(fs.readdirSync(`./lang/${userLang.get(message.author.id)}.json`, "utf8"));
 }
 
 function functiondate() { // The function it gives a date (here the current date)
@@ -94,6 +99,7 @@ client.on('ready', () => { // If bot was connected:
 client.on('message', message => { // If any message was recived
     try {
     if (message.channel.type === 'text') var prefix = getGuildPrefix(message); // Gets the server prefix from the database
+    if (message.channel.type === 'text') var lang = getUserLang(message); // Gets the user language from the database
     if (message.author.bot) return; // If is a bot, do nothing
     message.content.toLowerCase()
 
@@ -103,7 +109,7 @@ client.on('message', message => { // If any message was recived
 
     //All commands listed in cmds_index.js
     const cmds_index = require('./cmds/cmds_index.js');
-    cmds_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix);
+    cmds_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang);
 
     } catch (e) {
         console.log(e)
