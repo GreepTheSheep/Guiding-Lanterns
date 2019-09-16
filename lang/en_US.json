@@ -1,7 +1,6 @@
 {
     "didivote_yes": "Yes, you did!",
     "didivote_no": "No, you didn't.\nHere's the link: https://discordbots.org/bot/569624646475972608/vote",
-  
     "lang_check": "Your language is set to `${langtext}`.\nYou can change your language with `${prefix}lang list`",
     "lang_ok": "Language `${args[0]}` set.",
     "lang_usage": "Use ${prefix}lang <Your language> to set your language",
