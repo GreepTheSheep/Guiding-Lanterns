@@ -2,7 +2,7 @@ const Discord = require("discord.js");
 const fs = require('fs')
 
 function givelist(){
-    const readdb = fs.readdirSync('./lang').filter(file => file.endsWith('.json'))
+    const readdb = fs.readdirSync('./lang/').filter(file => file.endsWith('.json'))
     const listarray = [];
     for (var file of readdb){
         var langs = file.replace(".json", "")
@@ -11,11 +11,12 @@ function givelist(){
     return listarray.join("\`\n- \`")
 }
 
-function setLanguage(message, client, prefix, userLang, lang){
+function setLanguage(message, client, prefix, userLang, lang, langtext){
+    try{
     if (message.content.startsWith(prefix + "lang")) {
         const args = message.content.split(/ +/).slice(1);
 
-        if (args.length < 1) return message.reply(`Your language is set to \`${lang}\`.\nYou can change your language with \`${prefix}language list\``);
+        if (args.length < 1) return message.reply(`Your language is set to \`${langtext}\`.\nYou can change your language with \`${prefix}language list\``);
         
         if (args[0] == 'list'){
             let embed = new Discord.RichEmbed;
@@ -30,6 +31,10 @@ function setLanguage(message, client, prefix, userLang, lang){
                 message.reply('This lang is not on the list. Please check!')
             }
         }
+    }
+    } catch (err){
+        console.log(err)
+        message.channel.send('Error')
     }
 }
 module.exports = setLanguage;

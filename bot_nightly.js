@@ -16,6 +16,10 @@ const userLang = new Enmap({name: "user_languages"});
 
 const getUserLang = (message) => {
     if (!userLang.has(message.author.id)) userLang.set(message.author.id, "en_US")
+    return userLang.get(message.author.id);
+}
+const giveUserLang = (message) => {
+    if (!userLang.has(message.author.id)) userLang.set(message.author.id, "en_US")
     return JSON.parse(fs.readFileSync(`./lang/${userLang.get(message.author.id)}.json`, "utf8"));
 }
 
@@ -77,7 +81,8 @@ client.on('guildMemberRemove', member => {
 
 client.on('message', message => {
     const prefix = config.prefix_nightly;
-    var lang = getUserLang(message);
+    var langtext = getUserLang(message);
+    var lang = giveUserLang(message);
 
     if (message.author.bot) return;
 
@@ -89,7 +94,7 @@ client.on('message', message => {
     SupportCheck(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl)
 
     const cmds_index = require('./cmds/cmds_index.js');
-    cmds_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang);
+    cmds_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext);
 });
 
 client.on('guildCreate', guild => {
