@@ -9,7 +9,7 @@
     "help_title": "Commands:",
     "help_kingdomofcorona": "`${prefix}screenshot` : Take a screenshot\n`${prefix}lanterns`: <:Lantern:570822664789426186> ",
     "help_disney": "`${prefix}quote` : Random quote\n`${prefix}picture`: Random picture\n`${prefix}fanart`: Random fanart",
-    "help_util": "`${prefix}wolfram` : What would you like to know about ?\nSupporter only: `${prefix}full-wolfram` : What would you like to know about ? (Get full answer)\nSupporter only: `${prefix}setgame` : Sets a \"Playing ...\" status\nSupporter only: `${prefix}setwatch` : same as setgame but is \"Watching ...\"\nSupporter only: `${prefix}setlisten` : Same as setgame but is \"Listening to ...\"\n`${prefix}googleimage` : Input your search and he will returns an image\n`${prefix}speedtest`: Run a bot speedtest\n`${prefix}prefix`: changes the server's prefix\n`${prefix}lang`: Changes the language of your favorite bot",
+    "help_util": "`${prefix}wolfram` : Wolfram search\nSupporter only: `${prefix}full-wolfram` : Wolfram search (Full answer)\nSupporter only: `${prefix}setgame` : \"Playing ...\"\nSupporter only: `${prefix}setwatch` : \"Watching ...\"\nSupporter only: `${prefix}setlisten` : \"Listening to ...`\"\n`${prefix}googleimage` : Image search\n`${prefix}speedtest`: I am speed!\n`${prefix}prefix`: prefix\n`${prefix}lang`: language",
     "help_fun": "`${prefix}8ball` : Is the bot down? Nope!\nSupporter only: `${prefix}say` : Skizophrenia",
     "help_anyproblems": "If you have any problems:",
     "help_problems2": "`${prefix}bug`: ERROR 404\n`${prefix}suggest`: Improvements!",
