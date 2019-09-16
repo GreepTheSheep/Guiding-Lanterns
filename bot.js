@@ -22,11 +22,11 @@ const getGuildPrefix = (message) => {
     return guildPrefix.get(message.guild.id); // Gives the prefix for the server
 }
 const getUserLang = (message) => {
-    if (!userLang.has(message.author.id)) userLang.set(message.author.id, "en_US")
+    if (!userLang.has(message.author.id)) userLang.set(message.author.id, "en")
     return userLang.get(message.author.id);
 }
 const giveUserLang = (message) => {
-    if (!userLang.has(message.author.id)) userLang.set(message.author.id, "en_US")
+    if (!userLang.has(message.author.id)) userLang.set(message.author.id, "en")
     return JSON.parse(fs.readFileSync(`./lang/${userLang.get(message.author.id)}.json`, "utf8"));
 }
 
