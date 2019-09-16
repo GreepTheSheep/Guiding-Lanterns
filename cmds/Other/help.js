@@ -10,7 +10,7 @@ function help(message, client, prefix, lang) {
         embed.addField("**°o° Disney:**", lang.help_disney.replace('${prefix}', prefix), true)
             .addField("Util:", lang.help_util.replace('${prefix}', prefix), true)
             .addField("Fun:", lang.help_fun.replace('${prefix}', prefix), true)
-            .addField(lang.help_anyproblems, ang.help_problems2.replace('${prefix}', prefix), true)
+            .addField(lang.help_anyproblems, lang.help_problems2.replace('${prefix}', prefix), true)
             .setFooter(lang.help_credit.replace('${prefix}', prefix), `${client.user.avatarURL}`)
         message.channel.send(embed)
     }
