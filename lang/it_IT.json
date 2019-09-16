@@ -5,5 +5,13 @@
     "lang_ok": "Language `${args[0]}` set.",
     "lang_usage": "Use ${prefix}lang <Your language> to set your language",
     "lang_list_title": "List of languages",
-    "lang_notonlist": "This language is not on the list. Please check!"
+    "lang_notonlist": "This language is not on the list. Please check!",
+    "help_title": "You feel lost? Don't worry :wink:\n\nList of commands:",
+    "help_kingdomofcorona": "`${prefix}screenshot` : Take a screenshot from the movie or the series\nSends lanterns! Use this emote: <:Lantern:570822664789426186> and see how much lanterns sent with `${prefix}lanterns`",
+    "help_disney": "`${prefix}quote` : Send a random quote from your movie\n`${prefix}picture`: Send a random picture (or GIF) from your movie\n`${prefix}fanart`: Send a random fanart from your movie 🎨",
+    "help_util": "`${prefix}wolfram` : What would you like to know about ?\nSupporter only: `${prefix}full-wolfram` : What would you like to know about ? (Get full answer)\nSupporter only: `${prefix}setgame` : Sets a \"Playing ...\" status\nSupporter only: `${prefix}setwatch` : same as setgame but is \"Watching ...\"\nSupporter only: `${prefix}setlisten` : Same as setgame but is \"Listening to ...`\"\n`${prefix}googleimage` : Input your search and he will returns an image\n`${prefix}speedtest`: Run a bot speedtest\n`${prefix}prefix`: changes the server's prefix\n`${prefix}lang`: Changes the language of your favorite bot",
+    "help_fun": "`${prefix}8ball` : Ask a question and he will answer.\nSupporter only: `${prefix}say` : Makes the bot talking !",
+    "help_anyproblems": "If you have any problems:",
+    "help_problems2": "`${prefix}bug`: Report any bug to devs\n`${prefix}suggest`: Suggest an improvement",
+    "help_credits": "You can type ${prefix}about for credits!"
 }
