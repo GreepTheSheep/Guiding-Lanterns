@@ -16,19 +16,19 @@ function setLanguage(message, client, prefix, userLang, lang, langtext){
     if (message.content.startsWith(prefix + "lang")) {
         const args = message.content.split(/ +/).slice(1);
 
-        if (args.length < 1) return message.reply(`Your language is set to \`${langtext}\`.\nYou can change your language with \`${prefix}language list\``);
+        if (args.length < 1) return message.reply(lang.lang_check);
         
         if (args[0] == 'list'){
             let embed = new Discord.RichEmbed;
-            embed.setTitle('List of languages')
+            embed.setTitle(lang.lang_list_title)
             .setDescription(`- \`${givelist()}\``)
-            .setFooter(`Use ${prefix}language <Your language> to set your language`)
+            .setFooter(lang.lang_usage)
         } else {
             if (args[0] instanceof listarray){
                 userLang.set(message.author.id, args[0])
-                message.channel.send(`Language \`${args.join("")}\` set.`)
+                message.channel.send(lang.lang_ok)
             } else {
-                message.reply('This lang is not on the list. Please check!')
+                message.reply(lang.lang_notonlist)
             }
         }
     }
