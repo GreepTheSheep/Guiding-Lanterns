@@ -24,5 +24,16 @@
     "geturl_limit2": "**Free users: 8MB**\nNitro users: 50MB\n\nNitro server boost (for all users):\nLevel 2: 50MB\nLevel 3: 100MB",
     "prefix_display": "The server's prefix is `${prefix}`. Type `${prefix}help` for a list of commands.\nYou can change the server's prefix with `${prefix}prefix set <new prefix>`",
     "prefix_set": "Prefix `${args.join(\" \")}` set\n:warning: If you can't remember the prefix, mention the bot followed by `prefix`",
-    "prefix_impossible": "Sorry, you can't do that!"
+    "prefix_impossible": "Sorry, you can't do that!",
+    "about_ver": "Version **${package.version}**\nLicense: ${package.license}",
+    "about_cast": "- **Greep#3022** : Original idea\n- **Ajam#3536** : Contributor & some good ideas for the Kingdom of Corona",
+    "about_tech": "Technical information:",
+    "about_libary": "Libary used:",
+    "about_delay": "Delay between bot and Discord server:",
+    "about_os": "Type of operating System:",
+    "about_ram": "RAM memory used:",
+    "about_links": "Useful links:",
+    "about_support": "Support server",
+    "about_github": "Bot source code on GitHub",
+    "about_supportlink": "Support the bot"
 }

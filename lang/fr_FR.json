@@ -24,5 +24,16 @@
     "geturl_limit2": "**Utilisateurs gratuits : 8MB**\nUtilisateurs Nitro : 50MB\n\nNitro boost serveur (pour tous les utilisateurs) :\nNiveau 2 : 50MB\nNiveau 3 : 100MB",
     "prefix_display": "Le préfixe du serveur est `${prefix}`. Tapez `${prefix}help` pour une liste de commandes.\nVous pouvez changer le préfixe du serveur avec `${prefix}prefix set <nouveau préfixe>`",
     "prefix_set": "Préfixe `${args.join(\" \")}` défini\n:warning: Si vous ne pouvez pas vous souvenir du préfixe, mentionnez le bot suivi du `prefix`",
-    "prefix_impossible": "Désolé, vous ne pouvez pas le faire !"
+    "prefix_impossible": "Désolé, vous ne pouvez pas le faire !",
+    "about_ver": "Version **${package.version}**\nLicense: ${package.license}",
+    "about_cast": "- **Greep#3022** : Original idea\n- **Ajam#3536** : Contributor & some good ideas for the Kingdom of Corona",
+    "about_tech": "Technical information:",
+    "about_libary": "Libary used:",
+    "about_delay": "Delay between bot and Discord server:",
+    "about_os": "Type of operating System:",
+    "about_ram": "RAM memory used:",
+    "about_links": "Useful links:",
+    "about_support": "Support server",
+    "about_github": "Bot source code on GitHub",
+    "about_supportlink": "Support the bot"
 }
