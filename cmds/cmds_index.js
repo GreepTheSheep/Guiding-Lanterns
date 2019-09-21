@@ -64,7 +64,7 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     setLanguage(message, client, prefix, userLang, lang, langtext);
 
     const geturlofattachment = require('./Util/geturlofattach.js')
-    geturlofattachment(message, client, prefix);
+    geturlofattachment(message, client, prefix, lang);
 
     const speedtest = require('./Util/speedtest.js')
     speedtest(message, client, prefix, getlogchannel(), dbl)
