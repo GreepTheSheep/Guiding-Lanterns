@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-function suggest(message, client, prefix) {
+function suggest(message, client, prefix, lang) {
 
     if (message.content.startsWith(prefix + 'suggest')) {
 
@@ -21,9 +21,9 @@ function suggest(message, client, prefix) {
             .setTimestamp()
             
         botsuggestchannel.send(embed).then(m=>
-        message.reply('**Your suggestion has been posted!** Thanks for your feedback!\n\n> *If you want to see if your suggestion is accepted or rejected, join the support server in the suggestion channel:*\n> https://discord.gg/BPqvrkY'))
+        message.reply(lang.suggest_ok + "\n> https://discord.gg/BPqvrkY"))
         .catch(err=>{
-            message.reply('Uhh... An error occured.\nPlease try again');
+            message.reply(lang.error);
             console.log(err)
         })
     }

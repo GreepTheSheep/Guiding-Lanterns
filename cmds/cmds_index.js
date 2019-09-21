@@ -77,10 +77,10 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     help(message, client, prefix, lang);
 
     const bug = require('./Other/bug.js');
-    bug(message, client, prefix);
+    bug(message, client, prefix, lang);
 
     const suggest = require('./Other/suggest.js');
-    suggest(message, client, prefix);
+    suggest(message, client, prefix, lang);
 
 
     /*--------------------------------
