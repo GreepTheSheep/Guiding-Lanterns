@@ -13,5 +13,16 @@
     "help_fun": "`${prefix}8ball` : Ask a question and he will answer.\nSupporter only: `${prefix}say` : Makes the bot talking !",
     "help_anyproblems": "If you have any problems:",
     "help_problems2": "`${prefix}bug`: Report any bug to devs\n`${prefix}suggest`: Suggest an improvement",
-    "help_credits": "You can type ${prefix}about for credits!"
+    "help_credits": "You can type ${prefix}about for credits!",
+    "suggest_ok": "**Your suggestion has been posted!** Thanks for your feedback!\n\n> *If you want to see if your suggestion is accepted or rejected, join the support server in the suggestion channel:*",
+    "bug_ok": "**Thank you for your bug report!** I'll try to fix this as soon as possible!\n\n> *If you want to see if your bug has been fixed, visit the support server and make a request, we will of course answer you!*",
+    "error": "Uhh... An error occured.\nPlease try again",
+    "geturl_title": "Gets URL of a file",
+    "geturl_done": "Here is the URL of your file:",
+    "geturl_usage": "Usage: Send your file with the command `${prefix}geturl` in the text.",
+    "geturl_limit1": "Size limit:",
+    "geturl_limit2": "**Free users: 8MB**\nNitro users: 50MB\n\nNitro server boost (for all users):\nLevel 2: 50MB\nLevel 3: 100MB",
+    "prefix_display": "The server's prefix is `${prefix}`. Type `${prefix}help` for a list of commands.\nYou can change the server's prefix with `${prefix}prefix set <new prefix>`",
+    "prefix_set": "Prefix `${args.join(\" \")}` set\n:warning: If you can't remember the prefix, mention the bot followed by `prefix`",
+    "prefix_impossible": "Sorry, you can't do that!"
 }
