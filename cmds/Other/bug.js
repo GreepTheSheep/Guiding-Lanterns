@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-function bug(message, client, prefix) {
+function bug(message, client, prefix, lang) {
 
     if (message.content.startsWith(prefix + 'bug')) {
 
@@ -21,9 +21,9 @@ function bug(message, client, prefix) {
             .setTimestamp()
 
         reportchannel.send(embed).then(m=>
-        message.reply("**Thank you for your bug report!** I'll try to fix this as soon as possible!\n\n> *If you want to see if your bug has been fixed, visit the support server and make a request, we will of course answer you!*\n> https://discord.gg/Nzherng"))
+        message.reply(lang.bug_ok + "\n> https://discord.gg/Nzherng"))
         .catch(err=>{
-            message.reply('Uhh... An error occured.\nPlease try again');
+            message.reply(lang.error);
             console.log(err)
         })
     }

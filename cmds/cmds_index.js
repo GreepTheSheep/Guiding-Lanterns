@@ -58,13 +58,13 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     about(message, client, prefix);
 
     const setPrefix = require('./Util/prefix.js')
-    setPrefix(message, client, prefix, guildPrefix);
+    setPrefix(message, client, prefix, guildPrefix, lang);
 
     const setLanguage = require('./Util/language.js')
     setLanguage(message, client, prefix, userLang, lang, langtext);
 
     const geturlofattachment = require('./Util/geturlofattach.js')
-    geturlofattachment(message, client, prefix);
+    geturlofattachment(message, client, prefix, lang);
 
     const speedtest = require('./Util/speedtest.js')
     speedtest(message, client, prefix, getlogchannel(), dbl)
@@ -77,10 +77,10 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     help(message, client, prefix, lang);
 
     const bug = require('./Other/bug.js');
-    bug(message, client, prefix);
+    bug(message, client, prefix, lang);
 
     const suggest = require('./Other/suggest.js');
-    suggest(message, client, prefix);
+    suggest(message, client, prefix, lang);
 
 
     /*--------------------------------
