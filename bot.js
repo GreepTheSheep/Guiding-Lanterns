@@ -167,7 +167,6 @@ client.on('disconnect', event => {
 client.on('reconnecting', () => {
     const eventmsg = `reconnecting to WebSocket`
     console.log(`[${functiondate(0)} - ${functiontime(0)}] ` + eventmsg)
-    getlogchannel().send(eventmsg)
 })
 
 dbl.on('error', e => {
