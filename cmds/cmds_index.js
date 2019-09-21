@@ -58,7 +58,7 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     about(message, client, prefix);
 
     const setPrefix = require('./Util/prefix.js')
-    setPrefix(message, client, prefix, guildPrefix);
+    setPrefix(message, client, prefix, guildPrefix, lang);
 
     const setLanguage = require('./Util/language.js')
     setLanguage(message, client, prefix, userLang, lang, langtext);
