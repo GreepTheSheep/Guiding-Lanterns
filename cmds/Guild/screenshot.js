@@ -34,7 +34,7 @@ function video_id_str() {
 
 function scr_msg(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel) {
     const usage = `\nThe proper usage would be: \n\`${prefix+SCR} <video_id> <timestamp>\`\nThe timestamp may be a number (in seconds), a percentage (eg. \`50%\`) or in a format \`hh:mm:ss.xxx\` (where hours, minutes and milliseconds are optional)\nType \`${prefix+SCR} list\` to get a list of Video IDs`
-    const doclink = "https://greepthesheep.github.io/Guiding-Lanterns/screenshot.html"
+    const doclink = "https://Guiding-Lanterns.github.io/Guiding-Lanterns/screenshot.html"
     const functioncalledlog = `\n[${functiondate(0)} - ${functiontime(0)}] Function screenshot() called by ${message.author.tag}`
     console.log(functioncalledlog);
     getlogchannel.send(functioncalledlog);
