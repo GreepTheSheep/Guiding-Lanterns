@@ -93,6 +93,9 @@ client.on('message', message => {
     const SupportCheck = require('./support/support_check.js');
     SupportCheck(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl)
 
+    const games_index = require('./games/games_index.js');
+    games_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext);
+
     const cmds_index = require('./cmds/cmds_index.js');
     cmds_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext);
 });

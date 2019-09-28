@@ -10,8 +10,9 @@ function help(message, client, prefix, lang) {
         embed.addField("**°o° Disney:**", lang.help_disney.split('${prefix}').join(prefix), true)
             .addField("Util:", lang.help_util.split('${prefix}').join(prefix), true)
             .addField("Fun:", lang.help_fun.split('${prefix}').join(prefix), true)
+            .addField("Games:", lang.help_game.split('${prefix}').join(prefix), true)
             .addField(lang.help_anyproblems, lang.help_problems2.split('${prefix}').join(prefix), true)
-            .setFooter(lang.help_credits.split('${prefix}').join(prefix), `${client.user.avatarURL}`)
+            .setFooter(lang.help_credits.split('${prefix}').join(prefix), client.user.displayAvatarURL)
         message.channel.send(embed)
     }
 }
