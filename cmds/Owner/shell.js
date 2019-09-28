@@ -11,7 +11,7 @@ function clean(text) {
 }
 
 function command(message, client, prefix) {
-    if (message.content.startsWith(prefix + 'shelleval')) {
+    if (message.content.startsWith(prefix + 'ssh')) {
         if (message.author.id === '330030648456642562'  || message.author.id === "460348027463401472"){
         try {
             let args = message.content.split(" ")
