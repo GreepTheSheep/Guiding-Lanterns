@@ -79,3 +79,6 @@ data/*
 
 # Log files
 logs/*
+
+# Translation api key
+crowdin.yml
