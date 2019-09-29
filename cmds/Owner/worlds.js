@@ -12,9 +12,10 @@ function worlds(message, client, prefix, date, time, logchannel) {
     if (message.author.id === '330030648456642562'  || message.author.id === "460348027463401472") {
         if (message.content.startsWith(prefix + 'createworld') || message.content.startsWith(prefix + 'addworld')) {
             try {
-                const args = message.content.split(/ +/).slice(1);
+                let args = message.content.split(" ")
+                args.shift()
                 if (args.length < 1) return message.react('❌')
-                const path = `./data/movies/${args[0].toLowerCase()}`
+                const path = `./data/movies/${args.join("-").toLowerCase()}`
                 message.delete(15000)
                 message.channel.send('Generating files...')
                 .then(m=>{
@@ -23,7 +24,7 @@ function worlds(message, client, prefix, date, time, logchannel) {
                     fs.writeFile(path+'_quotes.json', '[]', function(err){ if (err) {errorgenerating(message, err, date, time, logchannel)}})
                     fs.writeFile(path+'_fanarts.json', '[]', function(err){ if (err) {errorgenerating(message, err, date, time, logchannel)}})
                     m.edit('Files successfully generated!')
-                    const filesoklog = `New world added by owner: ${args[0].charAt(0).toUpperCase() + args[0].slice(1)}`
+                    const filesoklog = `New world added by owner: ${args.charAt(0).toUpperCase() + args.join(" ").slice(1)}`
                     logchannel.send(filesoklog)
                     console.log(`[${date()} - ${time()}] ${filesoklog}`)
                 })

@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const fs = require("fs");
 
 function givelist(){
-    const readdb = fs.readdirSync('./data/movies/').filter(file => file.endsWith('fanarts.json'))
+    const readdb = fs.readdirSync('./data/movies/').filter(file => file.endsWith('fanarts.json').replace("-", " "))
     const listarray = [];
     for (var file of readdb){
         var movie = file.replace("_fanarts.json", "")
@@ -14,7 +14,8 @@ function givelist(){
 function fanart(message, client, prefix, functiondate, functiontime, getlogchannel){
     if(message.content.startsWith(prefix + "fanart")){
         try {
-        const args = message.content.split(/ +/).slice(1);
+        let args = message.content.split(" ")
+        args.shift()
         if (args.length < 1 || args[0] === 'list') {
             let listembed = new Discord.RichEmbed()
             listembed.setColor("#0567DA")
@@ -22,7 +23,7 @@ function fanart(message, client, prefix, functiondate, functiontime, getlogchann
                 .setFooter(`Usage: ${prefix}fanart <movie>`)
             return message.channel.send(listembed)
         }
-        var picsfile = `./data/movies/${args[0].toLowerCase()}_fanarts.json`
+        var picsfile = `./data/movies/${args.join("-").toLowerCase()}_fanarts.json`
         fs.readFile(picsfile, "utf8",function read(err, data){
             if (err) return message.channel.send("Hmm... I don't found the movie. *Maybe it was eaten, I don't know...*")
             
