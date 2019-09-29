@@ -55,7 +55,7 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel(), dbl)
 
     const about = require('./Util/about.js');
-    about(message, client, prefix, lang, getlogchannel());
+    about(message, client, prefix, lang, langtext);
 
     const setPrefix = require('./Util/prefix.js')
     setPrefix(message, client, prefix, guildPrefix, lang);
