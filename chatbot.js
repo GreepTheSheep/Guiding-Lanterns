@@ -31,6 +31,7 @@ function chatbot(message, client, prefix, donor, date, time, logchannel){
         const requests = chatbotdb.get("Requests")
         const totalrequests = chatbotdb.get("Total_Requests")
         const lastrequest = chatbotdb.get("LastRequest_name")
+        const lastrequestid = chatbotdb.get("LastRequest_id")
         message.channel.send(`__ChatBot Stats:__\`\`\`ChatBot API: SimSimi\n\nRequests since the API key regen: ${requests}/100\nTotal requests: ${totalrequests}\n\nLast request sent by ${lastrequest}\`\`\``)
     }
     }
@@ -78,6 +79,7 @@ function chatbot(message, client, prefix, donor, date, time, logchannel){
             chatbotdb.set("Total_Requests", chatbotdb.get("Total_Requests")+1)
         
             chatbotdb.set("LastRequest_name", message.author.username)
+            chatbotdb.set("LastRequest_id", message.author.id)
 
             if (body.atext.length < 1) return message.reply('I have no words to caption that.').then(message.channel.stopTyping(true))
             message.reply(body.atext).then(message.channel.stopTyping(true))
