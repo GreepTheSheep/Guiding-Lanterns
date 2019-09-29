@@ -18,7 +18,7 @@ function command(message, client, prefix) {
             args.shift()
             if (args.length < 1) return message.react('❌');
             message.channel.startTyping()
-            shell.exec(args.join(' '), function(code, stdout, stderr) {
+            shell.exec(args.join(' '), {silent:true}, function(code, stdout, stderr) {
                 if (stdout.length > 1024 && stdout.length < 1950 || stderr.length > 1024 && stderr.length < 1950) return message.reply(`Output:\n\`\`\`${stdout}${stderr}\`\`\``).then(m=>message.channel.stopTyping(true));
                 
                 if (stdout.length > 1950 || stderr.length > 1950) return fs.writeFile('./logs/shelleval.log', `Command: ${args.join(' ')}\nExit code: ${code}\n\n\nOutput:\n\n${stdout}${stderr}`, 'utf8', (err) => {

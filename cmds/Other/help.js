@@ -12,7 +12,8 @@ function help(message, client, prefix, lang) {
             .addField("Fun:", lang.help_fun.split('${prefix}').join(prefix), true)
             .addField("Games:", lang.help_game.split('${prefix}').join(prefix), true)
             .addField(lang.help_anyproblems, lang.help_problems2.split('${prefix}').join(prefix), true)
-            .setFooter(lang.help_credits.split('${prefix}').join(prefix), client.user.displayAvatarURL)
+            .addField('Other:', lang.help_other.split('${prefix}').join(prefix), true)
+            .setFooter(lang.help_footer, client.user.displayAvatarURL)
         message.channel.send(embed)
     }
 }

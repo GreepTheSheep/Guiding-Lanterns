@@ -7,8 +7,8 @@ function speedtest(message, client, prefix, logchannel, dbl){
             dbl.hasVoted(message.author.id).then(voted => {
                 if (voted) {
                     message.channel.send('Running Speedtest. Please wait...').then(m=>{
-                        const stexec = shell.exec('speedtest --simple', function(code, stdout, stderr) {
-                            if (code !== 0 && code == 127) { // command not found
+                        shell.exec('speedtest --simple', {silent:true}, function(code, stdout, stderr) {
+                            if (code !== 0 && code == 127 || code == 1) { // command not found
                                 logchannel.send('Speedtest error: App is not installed.')
                                 m.edit('❌ Speedtest.net is not found in the server. The report has been sent.')
                             }
@@ -21,8 +21,6 @@ function speedtest(message, client, prefix, logchannel, dbl){
                                 m.edit(`\`\`\`${stdout}\`\`\``)
                             }
                         })
-                        console.log('running speedtest. User ID ' + message.author.id + ' Name: ' + message.author.tag);
-                        stexec
                     })
                 } else {
                     let embed = new Discord.RichEmbed()
