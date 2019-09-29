@@ -32,7 +32,7 @@ function chatbot(message, client, prefix, donor, date, time, logchannel){
         const totalrequests = chatbotdb.get("Total_Requests")
         const lastrequest = chatbotdb.get("LastRequest_name")
         const lastrequestid = chatbotdb.get("LastRequest_id")
-        message.channel.send(`__ChatBot Stats:__\`\`\`ChatBot API: SimSimi\n\nRequests since the API key regen: ${requests}/100\nTotal requests: ${totalrequests}\n\nLast request sent by ${lastrequest}\`\`\``)
+        message.channel.send(`__ChatBot Stats:__\`\`\`ChatBot API: SimSimi\n\nRequests since the API key regen: ${requests}/100\nTotal requests: ${totalrequests}\n\nLast request sent by ${lastrequest} - ${lastrequestid}\`\`\``)
     }
     }
 
