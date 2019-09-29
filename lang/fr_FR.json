@@ -14,7 +14,8 @@
     "help_game": "`${prefix}guessthenumber` : Démarre une partie du célèbre Guess The Number",
     "help_anyproblems": "Si vous avez des problèmes :",
     "help_problems2": "`${prefix}bug`: Signaler un bug aux devs\n`${prefix}suggest`: Suggérer une amélioration",
-    "help_credits": "Les commandes qui contiennent un * sont des commandes réservées aux supporters. | Vous pouvez taper ${prefix}pour les crédits!",
+    "help_other": "`${prefix}about` : Show stats of the bot\n`${prefix}invite` : Invite the bot in your server",
+    "help_footer": "Commands that contain an * are commands reserved for supporters.",
     "suggest_ok": "**Votre suggestion a été postée !** Merci pour votre commentaire !\n\n> *Si vous voulez voir si votre suggestion est acceptée ou rejetée, rejoignez le serveur de support dans le canal de suggestion:*",
     "bug_ok": "**Merci pour votre rapport de bug!** Je vais essayer de corriger ceci dès que possible !\n\n> *Si vous voulez voir si votre bug été corrigé, visitez le serveur de support et faites une demande, nous vous répondrons bien sûr!*",
     "error": "Uhh... Une erreur s'est produite.\nVeuillez réessayer",
@@ -30,10 +31,12 @@
     "about_cast": "- **Greep#3022** : idée originale\n- **Ajam#3536** : Contributeur & quelques bonnes idées pour le Royaume de Corona",
     "about_tech": "Informations techniques :",
     "about_libary": "Bibliothèque utilisé :",
+    "about_nodeversion": "Version of Node.js:",
     "about_delay": "Délai entre le serveur du bot et Discord :",
     "about_os": "Type de système d'exploitation :",
     "about_ram": "Mémoire RAM utilisée :",
     "about_links": "Liens utiles :",
+    "about_invitebot": "Invite the bot in your server",
     "about_support": "Serveur de support",
     "about_github": "Code source du bot sur GitHub",
     "about_supportlink": "Soutenir le bot",
@@ -43,5 +46,7 @@
     "gtn_win": "**__Félicitations!__**\n\nVous avez deviné le nombre correct en ${try} tentatives !\nUn nouveau numéro a été généré pour vous. Bonne chance !",
     "gtn_please": "Veuillez entrer un numéro !",
     "gtn_notstarted": "Vous n'avez pas commencé une partie de GTN. Veuillez taper `${prefix}gtnstart`",
-    "gtn_statsresetmsg": "Bonjour, vos statistiques pour le jeu Guess The Number ont été réinitialisées par le propriétaire, merci !\n> Si vous voulez en savoir plus, demandez à Greep#3022 dans le serveur de support"
+    "gtn_statsresetmsg": "Bonjour, vos statistiques pour le jeu Guess The Number ont été réinitialisées par le propriétaire, merci !\n> Si vous voulez en savoir plus, demandez à Greep#3022 dans le serveur de support",
+    "invite_title": "Oh! A new Disney fan, right?",
+    "invite_desc": "I am very happy that you are part of the family!\nEmbark on a magical world on your Discord server!\nAnd, as Walt Disney said: \"If you can dream it, you can do it.\""
 }
