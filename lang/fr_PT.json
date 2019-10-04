@@ -46,7 +46,7 @@
     "gtn_win": "**__ok maintenant je te dis plus rien!__**\n\n${try} tentatives ! C'est naze...\nBtw je t'ai relancé une nouvelle game",
     "gtn_please": "Veuillez entrer un numéro, au pire met des lettres, ehh non fais le pas en fait",
     "gtn_notstarted": "Veuillez taper `${prefix}gtnstart` avant toute chose",
-    "gtn_statsresetmsg": "Hello, your stats for the Guess The Number game has been reseted by the owner, thanks!\n> If you want to know more, ask Greep#3022 in the bot support server",
-    "invite_title": "Oh! A new Disney fan, right?",
-    "invite_desc": "I am very happy that you are part of the family!\nEmbark on a magical world on your Discord server!\nAnd, as Walt Disney said: \"If you can dream it, you can do it.\""
+    "gtn_statsresetmsg": "Bonjour, vous avez essayé de tricher dans le jeu Guess The Number et donc comme sentance, on vous à réinitialisées les données par le propriétaire, en autre thermes, on veut pas de cheats ici !\n> Si vous voulez en savoir plus, demandez à Greep#3022 dans le serveur de support",
+    "invite_title": "ALORS LA, ON VA ÊTRE AMIS !",
+    "invite_desc": "Je suis très heureux que vous fassiez partie de la famille !\nEmbarquez sur un monde magique sur votre serveur Discord !\nEt, comme Walt Disney l'a dit: \"Si vous pouvez le rêver, vous pouvez le faire.\""
 }
