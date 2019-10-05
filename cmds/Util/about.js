@@ -18,7 +18,7 @@ async function about(message, client, prefix, lang, langtext) {
             var discordjsver = shell.exec('npm view discord.js version', {silent:true}).stdout.replace('\n','')
             if (!discordjsver) var discordjsver = 'not found'
             var nodever = shell.exec('node -v', {silent:true}).stdout.replace('v','').replace('\n','')
-            if (!nodever) var discordjsver = 'not found'
+            if (!nodever) var nodever = 'not found'
 
             let aboutembed = new Discord.RichEmbed()
             aboutembed.setColor("#9C01C4")

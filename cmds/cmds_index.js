@@ -76,6 +76,9 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     const help = require('./Other/help.js');
     help(message, client, prefix, lang);
 
+    const serverping = require('./Other/serverping.js');
+    serverping(message, client, prefix)
+
     const bug = require('./Other/bug.js');
     bug(message, client, prefix, lang);
 
