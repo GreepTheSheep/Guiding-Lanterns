@@ -2,10 +2,10 @@ const Discord = require('discord.js');
 const fs = require("fs");
 
 function givelist(){
-    const readdb = fs.readdirSync('./data/movies/').filter(file => file.endsWith('fanarts.json').replace("-", " "))
+    const readdb = fs.readdirSync('./data/movies/').filter(file => file.endsWith('fanarts.json'))
     const listarray = [];
     for (var file of readdb){
-        var movie = file.replace("_fanarts.json", "")
+        var movie = file.split('-').join(' ').replace("_fanarts.json", "")
         listarray.push(movie.charAt(0).toUpperCase() + movie.slice(1))
     }
     return listarray.join("\`\n- \`")
