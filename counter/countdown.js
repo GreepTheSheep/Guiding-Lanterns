@@ -32,12 +32,6 @@ const countdown = (param) => {
     };
 };
 module.exports = {
-    tangled_s3: countdown({
-        date : "October 07 2019 12:00:00 EST",
-        output: (d,h,m,s) => `${d}d ${h}h ${m}m ${s}s`,
-        end:   "SEASON 3 IS OUT!",
-        timeout: 1000
-    }),
     frozen2: countdown({
         date : "November 22 2019 00:00:00 EST",
         output: (d,h,m,s) => `${d}d ${h}h ${m}m ${s}s`,

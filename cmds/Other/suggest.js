@@ -20,8 +20,10 @@ function suggest(message, client, prefix, lang) {
             .setDescription('\`\`\`' + args2 + '\`\`\`')
             .setTimestamp()
             
-        botsuggestchannel.send(embed).then(m=>
-        message.reply(lang.suggest_ok + "\n> https://discord.gg/BPqvrkY"))
+        botsuggestchannel.send(embed).then(m=>{
+        message.reply(lang.suggest_ok + "\n> https://discord.gg/Nzherng")
+        logchannel.send(`Suggest: ${m.url}\nGuild ID: ${message.guild.id}\nAuthor ID: ${message.author.id}`)
+        })
         .catch(err=>{
             message.reply(lang.error);
             console.log(err)

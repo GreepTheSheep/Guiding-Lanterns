@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-function bug(message, client, prefix, lang) {
+function bug(message, client, prefix, lang, logchannel) {
 
     if (message.content.startsWith(prefix + 'bug')) {
 
@@ -20,8 +20,10 @@ function bug(message, client, prefix, lang) {
             .setDescription('\`\`\`' + args2 + '\`\`\`')
             .setTimestamp()
 
-        reportchannel.send(embed).then(m=>
-        message.reply(lang.bug_ok + "\n> https://discord.gg/Nzherng"))
+        reportchannel.send(embed).then(m=>{
+        message.reply(lang.bug_ok + "\n> https://discord.gg/Nzherng")
+        logchannel.send(`Bug report: ${m.url}\nGuild ID: ${message.guild.id}\nAuthor ID: ${message.author.id}`)
+        })
         .catch(err=>{
             message.reply(lang.error);
             console.log(err)
