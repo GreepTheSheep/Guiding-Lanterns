@@ -80,10 +80,10 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     serverping(message, client, prefix)
 
     const bug = require('./Other/bug.js');
-    bug(message, client, prefix, lang);
+    bug(message, client, prefix, lang, getlogchannel());
 
     const suggest = require('./Other/suggest.js');
-    suggest(message, client, prefix, lang);
+    suggest(message, client, prefix, lang, getlogchannel());
 
 
     /*--------------------------------
