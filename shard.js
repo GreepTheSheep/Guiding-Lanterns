@@ -16,6 +16,6 @@ getlogchannel().send('Shard Manager started')
 shard.spawn()
 
 shard.on('launch', (shard) => {
-    console.log(`[SHARD] Shard ID #${shard.id} launched` )
-    getlogchannel().send(`Shard ID #${shard.id} launched` )
+    console.log(`[SHARD] Shard ID #${shard.id}/${shard.totalShards} launched` )
+    getlogchannel().send(`Shard ID #${shard.id}/${shard.totalShards} launched` )
 })
