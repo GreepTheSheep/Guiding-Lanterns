@@ -1,9 +1,8 @@
 const Discord = require("discord.js")
 const config = require('./data/config.json')
-const bot = new Discord.Client({
-    autoReconnect: true,
-    disableEveryone: true
-})
+const logchannel = '589337734754336781' //Set a channel for logging
+const getlogchannel = () => client.channels.get(logchannel)
+
 // ------------- Shard Management ------------------
 
 const shard = new Discord.ShardingManager("./bot.js", {
@@ -12,8 +11,11 @@ const shard = new Discord.ShardingManager("./bot.js", {
     totalShards: "auto", // "auto" or number
 })
 
+console.log('Shard Manager started');
+getlogchannel().send('Shard Manager started')
 shard.spawn()
 
 shard.on('launch', (shard) => {
-    console.log(`⬇ [SHARD] Shard ID #${shard.id} ⬇` )
+    console.log(`[SHARD] Shard ID #${shard.id} launched` )
+    getlogchannel().send(`Shard ID #${shard.id} launched` )
 })
