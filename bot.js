@@ -87,9 +87,9 @@ client.on('ready', () => { // If bot was connected:
     const autopull = new Promise(function() { // Automatic GitHub pull
         setInterval(function() {
             getlogchannel().send('Pulling changes from GitHub...')
-            .then(shell.exec('git pull'), function(code, stdout, stderr){
-                if (code !== 0) return getlogchannel().send(`Error during pulling: \`\`\`${stderr}\`\`\``)
-                getlogchannel().send(`\`\`\`${stdout}\`\`\` :white_check_mark:`)
+            .then(m=>shell.exec('git pull'), function(code, stdout, stderr){
+                if (code != 0) return m.edit(`Error during pulling: \`\`\`${stderr}\`\`\``)
+                m.edit(`\`\`\`${stdout}\`\`\` :white_check_mark:`)
             })
         }, 8.64e+7); // Do this every day
     }).catch(err=>getlogchannel().send('Error during auto pull: ' + err))
