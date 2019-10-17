@@ -13,7 +13,7 @@ const shard = new Discord.ShardingManager("./bot.js", {
 
 console.log('Shard Manager started');
 getlogchannel().send('Shard Manager started')
-shard.spawn()
+shard.spawn(2)
 
 shard.on('launch', (shard) => {
     console.log(`[SHARD] Shard ID #${shard.id}/${shard.totalShards} launched` )
