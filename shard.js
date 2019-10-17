@@ -1,4 +1,5 @@
 const Discord = require("discord.js")
+const client = new Discord.Client();
 const config = require('./data/config.json')
 const logchannel = '589337734754336781' //Set a channel for logging
 const getlogchannel = () => client.channels.get(logchannel)
