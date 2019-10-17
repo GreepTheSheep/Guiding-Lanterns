@@ -184,5 +184,3 @@ dbl.webhook.on('vote', vote => {
     console.log(votelog);
     getlogchannel().send(votelog)
 });
-
-client.login(config.token); // Login to Discord using token
