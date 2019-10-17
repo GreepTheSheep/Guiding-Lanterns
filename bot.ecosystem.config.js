@@ -1,7 +1,7 @@
 module.exports = {
   apps : [{
     name: 'GL',
-    script: 'shard.js',
+    script: 'bot.js',
 
     // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
     autorestart: true,
