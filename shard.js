@@ -16,5 +16,5 @@ console.log('Shard Manager started');
 shard.spawn(2)
 
 shard.on('launch', (shard) => {
-    console.log(`[SHARD] Shard ID #${shard.id}/${shard.totalShards} launched` )
+    console.log(`[SHARD] Shard ID #${shard.id} launched` )
 })
