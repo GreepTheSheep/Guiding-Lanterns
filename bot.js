@@ -1,8 +1,6 @@
 const Discord = require('discord.js'); // Defines the Discord.js library
 const {Attachment} = require('discord.js') // Defines attachment config (for sending files)
 const client = new Discord.Client({
-  shardId: process.argv[1],
-  shardCount: process.argv[2],
   fetchAllMembers: true
 });
 const fs = require('fs');
