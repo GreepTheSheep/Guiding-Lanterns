@@ -1,20 +1,12 @@
-const Discord = require("discord.js")
-const client = new Discord.Client();
 const config = require('./data/config.json')
-const logchannel = '589337734754336781' //Set a channel for logging
-const getlogchannel = () => client.channels.get(logchannel)
 
-// ------------- Shard Management ------------------
+const { ShardingManager } = require('discord.js');
+const shard = new ShardingManager('./bot.js', {
+  token: config.token,
+  autoSpawn: true
+});
 
-const shard = new Discord.ShardingManager("./bot.js", {
-    autoSpawn: true,
-    token: config.token,
-    totalShards: "auto", // "auto" or number
-})
+shard.spawn(2);
 
-console.log('Shard Manager started');
-shard.spawn(2)
+shard.on('launch', shard => console.log(`[SHARD] Shard ${shard.id}/${shard.totalShards}`));
 
-shard.on('launch', (shard) => {
-    console.log(`[SHARD] Shard ID #${shard.id} launched` )
-})

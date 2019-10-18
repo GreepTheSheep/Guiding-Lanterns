@@ -1,6 +1,10 @@
 const Discord = require('discord.js'); // Defines the Discord.js library
 const {Attachment} = require('discord.js') // Defines attachment config (for sending files)
-const client = new Discord.Client(); // Makes him say it's for a Discord client (the bot)
+const client = new Discord.Client({
+  shardId: process.argv[1],
+  shardCount: process.argv[2],
+  fetchAllMembers: true
+});
 const fs = require('fs');
 const configfile = "./data/config.json";
 const config = JSON.parse(fs.readFileSync(configfile, "utf8")); // Retrieves the contents of the configuration file (the prefix and the login token)
@@ -184,3 +188,5 @@ dbl.webhook.on('vote', vote => {
     console.log(votelog);
     getlogchannel().send(votelog)
 });
+
+client.login(config.token)
