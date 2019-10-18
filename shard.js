@@ -1,17 +1,12 @@
-const Discord = require("discord.js")
 const config = require('./data/config.json')
 
-// ------------- Shard Management ------------------
+const { ShardingManager } = require('discord.js');
+const shard = new ShardingManager('./app.js', {
+  token: config.token,
+  autoSpawn: true
+});
 
-const shard = new Discord.ShardingManager("./bot.js", {
-    autoSpawn: true,
-    token: config.token,
-    totalShards: "auto", // "auto" or number
-})
+shard.spawn(2);
 
-console.log('Shard Manager started');
-shard.spawn(2)
+shard.on('launch', shard => console.log(`[SHARD] Shard ${shard.id}/${shard.totalShards}`));
 
-shard.on('launch', (shard) => {
-    console.log(`[SHARD] Shard ID #${shard.id} launched` )
-})
