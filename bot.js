@@ -1,7 +1,9 @@
+try{
 const Discord = require('discord.js'); // Defines the Discord.js library
 const {Attachment} = require('discord.js') // Defines attachment config (for sending files)
 const client = new Discord.Client({
-  fetchAllMembers: true
+  fetchAllMembers: true,
+  autoReconnect: true
 });
 const fs = require('fs');
 const configfile = "./data/config.json";
@@ -13,7 +15,7 @@ const inviteTracker = require('./invite-track.js'); // Define the invite tracker
 const shell = require('shelljs'); // Require for executing shell commands (such as git)
 
 const DBL = require("dblapi.js");
-const dbl = new DBL(config.dbl_token, {webhookPort: 5000, statsInterval: 3600000});
+const dbl = new DBL(config.dbl_token);
 
 const Enmap = require("enmap"); // Define enmap, a database integrated with the bot
 const guildPrefix = new Enmap({name: "guildPrefix"}); // Define a new table for custom prefixes
@@ -67,10 +69,10 @@ const lant_ver = () => ver(client, channel_id.version);
 const lant_frozen_II = () => countdown.frozen2(client, channel_id.frozen2);
 
 client.on('ready', () => { // If bot was connected:
-    const readylog = `Logged in as ${client.user.tag}!\nOn ${functiondate(0)} at ${functiontime(0)}` //Set a text who is said I'm connected!
+    const readylog = `Logged in as ${client.user.tag}\nOn ${functiondate(0)} at ${functiontime(0)}` //Set a text who is said I'm connected!
     console.log(readylog); // Send the text in the console
     dbl.postStats(client.guilds.size)
-    getlogchannel().send(readylog); // Send the text in the logging channel
+    getlogchannel().send(readylog).catch(); // Send the text in the logging channel
     lant_num_members_guild(); //Set the Member count
     lant_num_users();
     lant_num_guilds(); //Set the guilds count
@@ -177,14 +179,8 @@ dbl.on('error', e => {
     getlogchannel().send(errmsg)
 })
 
-dbl.webhook.on('ready', hook => {
-    console.log(`Webhook running at http://${hook.hostname}:${hook.port}${hook.path}`);
-});
-
-dbl.webhook.on('vote', vote => {
-    const votelog = `:arrow_up_small: User ${vote.user.tag} ID ${vote.user.id} just voted!`
-    console.log(votelog);
-    getlogchannel().send(votelog)
-});
-
 client.login(config.token)
+
+}catch(e){
+//console.log(e)
+}
