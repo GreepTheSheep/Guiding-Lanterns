@@ -30,7 +30,7 @@
         "discord.js": "^11.5.1",
         "enmap": "^5.2.1",
         "fluent-ffmpeg": "^2.1.2",
-        "fs": "0.0.1-security",
+        "fs": "0.0.2",
         "fs-extra": "^8.1.0",
         "google-images": "^2.1.0",
         "os": "^0.1.1",
