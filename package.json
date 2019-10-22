@@ -28,7 +28,7 @@
         "dblapi.js": "^2.3.0",
         "discord-emoji": "^1.1.1",
         "discord.js": "^11.5.1",
-        "enmap": "^5.1.2",
+        "enmap": "^5.2.1",
         "fluent-ffmpeg": "^2.1.2",
         "fs": "0.0.1-security",
         "fs-extra": "^8.1.0",
