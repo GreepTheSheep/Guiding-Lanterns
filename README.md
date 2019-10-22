@@ -5,6 +5,8 @@
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FGuiding-Lanterns%2FGuiding-Lanterns.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FGuiding-Lanterns%2FGuiding-Lanterns?ref=badge_shield) [![license](https://img.shields.io/github/license/Guiding-Lanterns/Guiding-Lanterns)](https://github.com/Guiding-Lanterns/Guiding-Lanterns/blob/master/LICENSE)   ![Size](https://img.shields.io/github/repo-size/Guiding-Lanterns/Guiding-Lanterns)   [![Discord](https://img.shields.io/discord/570024448371982373)](https://discord.gg/5QCQpr9)   [![Star](https://img.shields.io/github/stars/Guiding-Lanterns/Guiding-lanterns)](https://github.com/Guiding-Lanterns/Guiding-Lanterns/stargazers)
 
+[![Depfu](https://badges.depfu.com/badges/fdfd3e1e7b95b82a0220ed6d95373ca8/status.svg)](https://depfu.com) [![Depfu](https://badges.depfu.com/badges/fdfd3e1e7b95b82a0220ed6d95373ca8/overview.svg)](https://depfu.com/github/Guiding-Lanterns/Guiding-Lanterns?project_id=9861) [![Depfu](https://badges.depfu.com/badges/fdfd3e1e7b95b82a0220ed6d95373ca8/count.svg)](https://depfu.com/github/Guiding-Lanterns/Guiding-Lanterns?project_id=9861)
+
 ---
 Click on the picture down to invite the bot in your server!
   [![icon](icon1.png)](https://discordapp.com/oauth2/authorize?client_id=569624646475972608&scope=bot&permissions=67488968)
