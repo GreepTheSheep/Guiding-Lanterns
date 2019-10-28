@@ -38,6 +38,7 @@
     "about_links": "Useful links:",
     "about_invitebot": "Invite the bot in your server",
     "about_support": "Support server",
+    "about_statuspage": "Status page",
     "about_github": "Bot source code on GitHub",
     "about_supportlink": "Support the bot",
     "gtn_startdesc": "You started a game of Guess The Number,\nyou will have to guess a number between ${min} and ${max}.\nYou have no time limit, and you can resume at any time.\n\nTo give your number that you guessed, type `${prefix}gtnguess <Your number>`,\nI'll answer you by \"lower\" or \"higher\".\n\nGood Luck!",
