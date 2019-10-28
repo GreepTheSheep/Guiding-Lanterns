@@ -32,7 +32,7 @@ function servericon(message, client, prefix, cooldowns){
 
 
         if (message.member.roles.find(r => r.name === "KEY (The Guiding Lanterns)")) { //Override cooldown
-            timestamps.delete(message.author.id);
+            timestamps.delete(message.guild.id);
         }
         // End of cooldown implement
 
@@ -57,7 +57,7 @@ function servericon(message, client, prefix, cooldowns){
             embed.setTitle('New server icon set randomly')
             .setImage(pic)
             .setColor('RANDOM')
-            .setFooter(`New picture set by ${message.author.displayName} (${message.author.tag})`)
+            .setFooter(`New picture set by ${message.author.tag}`)
         
             message.channel.send(embed)
         })
