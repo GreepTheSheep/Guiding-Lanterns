@@ -19,11 +19,22 @@ async function about(message, client, prefix, lang, langtext) {
             if (!discordjsver) var discordjsver = 'not found'
             var nodever = shell.exec('node -v', {silent:true}).stdout.replace('v','').replace('\n','')
             if (!nodever) var nodever = 'not found'
+            var sysuptime = shell.exec('uptime --pretty', {silent:true}).stdout.replace('up ','').replace('\n','')
+            if (!nodever) var sysuptime = 'not found'
+
+            let totalSeconds = (client.uptime) / 1000;
+            let weeks = Math.floor(totalSeconds / 604800)
+            let days = Math.floor(totalSeconds / 86400);
+            let hours = Math.floor(totalSeconds / 3600);
+            totalSeconds %= 3600;
+            let minutes = Math.floor(totalSeconds / 60);
+            let seconds = totalSeconds % 60;
 
             let aboutembed = new Discord.RichEmbed()
             aboutembed.setColor("#9C01C4")
             .setTitle('About ' + client.user.tag)
             .addField('Changelog - ' + package.version, translatedchangelog, true)
+            .addField('Uptime:', `Bot: ${weeks} weeks, ${days} days, ${hours} hours, ${minutes} minutes\nOperating System: ${sysuptime}`, true)
             .addField("Cast:", lang.about_cast, true)
             .addField(lang.about_tech, `${lang.about_libary} [Discord.js](https://discord.js.org) (Version ${discordjsver})\n${lang.about_nodeversion} ${nodever}\n${lang.about_delay} ${Math.round(client.ping)} ms\n${lang.about_os} ${os.type}: ${os.release}\n${lang.about_ram} ${Math.round(os.freemem() / 1024 / 1000)}/${Math.round(os.totalmem() / 1024 / 1000)} MB [${(Math.round(os.freemem() / 1024 / 1000) * 100 / Math.round(os.totalmem() / 1024 / 1000)).toFixed(0)}%] (${client.user.username} : ${Math.round(process.memoryUsage().rss / 1024 / 1000)} MB [${(Math.round(process.memoryUsage().rss / 1024 / 1000) * 100 / Math.round(os.totalmem() / 1024 / 1000)).toFixed(0)}%])`)
             .addField(lang.about_links, `**__[${lang.about_invitebot}](https://discordapp.com/oauth2/authorize?client_id=${client.user.id}&scope=bot&permissions=67488968)__**\n[**${lang.about_support}**](https://discord.gg/5QCQpr9)\n[${lang.about_github}](https://github.com/Guiding-Lanterns/Guiding-Lanterns)\n[${lang.about_supportlink}](https://donatebot.io/checkout/570024448371982373?buyer=${message.author.id})`, true)
