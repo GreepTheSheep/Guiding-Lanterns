@@ -11,7 +11,7 @@ const config = JSON.parse(fs.readFileSync(configfile, "utf8")); // Retrieves the
 const cooldowns = new Discord.Collection(); //Stores cooldown info for screenshot()
 const logchannel = '589337734754336781' //Set a channel for logging
 const getlogchannel = () => client.channels.get(logchannel)
-const inviteTracker = require('./invite-track.js'); // Define the invite tracker plugin
+const inviteTracker = require('./events/invite-track.js'); // Define the invite tracker plugin
 const shell = require('shelljs'); // Require for executing shell commands (such as git)
 
 const DBL = require("dblapi.js");
@@ -128,7 +128,7 @@ client.on('message', message => { // If any message was recived
 
 client.on('guildMemberAdd', member => { // If any member join a server (or guild in Discord language)
     if (member.guild.id === '562602234265731080'|| member.guild.id === '570024448371982373') { // If the member join Kingdom of Corona, do the welcome script
-        const welcome = require('./welcome.js');
+        const welcome = require('./events/welcome.js');
         welcome(member, client);
         if (member.guild.id === '562602234265731080') inviteTracker.track(member);
         console.log(`\n${member.user.tag} joined ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who joined
@@ -138,7 +138,7 @@ client.on('guildMemberAdd', member => { // If any member join a server (or guild
 
 client.on('guildMemberRemove', member => { // If any member leave a server (or guild in Discord language)
     if (member.guild.id === '562602234265731080' || member.guild.id === '570024448371982373') { // If the member leave Kingdom of Corona, do the goodbye script
-        const goodbye = require('./goodbye.js');
+        const goodbye = require('./events/goodbye.js');
         goodbye(member, client);
         console.log(`\n${member.user.tag} left ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who left
     }
