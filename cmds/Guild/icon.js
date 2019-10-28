@@ -17,7 +17,7 @@ function servericon(message, client, prefix, cooldowns){
             const expirationTime = timestamps.get(message.guild.id) + cooldownAmount;
 
             if (now < expirationTime) {
-                let totalSeconds = (expirationTime - now / 1000);
+                let totalSeconds = (expirationTime - now) / 1000;
                 let days = Math.floor(totalSeconds / 86400);
                 let hours = Math.floor(totalSeconds / 3600);
                 totalSeconds %= 3600;
