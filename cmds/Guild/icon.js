@@ -13,19 +13,19 @@ function servericon(message, client, prefix, cooldowns){
         const timestamps = cooldowns.get(prefix + 'randomicon');
         const cooldownAmount = 4 * 60 * 60 * 1000; // 4 hours cooldown
 
-        if (timestamps.has(message.author.id)) {
-            const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+        if (timestamps.has(message.guild.id)) {
+            const expirationTime = timestamps.get(message.guild.id) + cooldownAmount;
 
             if (now < expirationTime) {
-                const timeLeftsec = (expirationTime - now) / 1000 % 60*2;
-                const timeLeftmin = (expirationTime - now) / 60 / 1000 % 60;
+                const timeLeftsec = (expirationTime - now) / 1000 % 60*2+1000;
+                const timeLeftmin = (expirationTime - now) / 60 / 1000 % 60*2;
                 const timeLefthours = (expirationTime - now) / 60 / 60 / 1000;
                 return message.reply(`please wait ${timeLefthours.toFixed(0)} hour(s), ${timeLeftmin.toFixed(0)} minute(s) and ${timeLeftsec.toFixed(0)} second(s) before reusing the \`${prefix+'randomicon'}\` command.`)
             }
         }
 
-        timestamps.set(message.author.id, now);
-        setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+        timestamps.set(message.guild.id, now);
+        setTimeout(() => timestamps.delete(message.guild.id), cooldownAmount);
 
 
         if (message.member.roles.find(r => r.name === "KEY (The Guiding Lanterns)")) { //Override cooldown
@@ -54,7 +54,7 @@ function servericon(message, client, prefix, cooldowns){
             embed.setTitle('New server icon set randomly')
             .setImage(pic)
             .setColor('RANDOM')
-            .setFooter(`New picture set by ${message.author.displayname} (${message.author.tag})`)
+            .setFooter(`New picture set by ${message.author.displayName} (${message.author.tag})`)
         
             message.channel.send(embed)
         })
