@@ -17,10 +17,13 @@ function servericon(message, client, prefix, cooldowns){
             const expirationTime = timestamps.get(message.guild.id) + cooldownAmount;
 
             if (now < expirationTime) {
-                const timeLeftsec = (expirationTime - now) / 1000 % 60*2+1000;
-                const timeLeftmin = (expirationTime - now) / 60 / 1000 % 60*2;
-                const timeLefthours = (expirationTime - now) / 60 / 60 / 1000;
-                return message.reply(`please wait ${timeLefthours.toFixed(0)} hour(s), ${timeLeftmin.toFixed(0)} minute(s) and ${timeLeftsec.toFixed(0)} second(s) before reusing the \`${prefix+'randomicon'}\` command.`)
+                let totalSeconds = (expirationTime - now / 1000);
+                let days = Math.floor(totalSeconds / 86400);
+                let hours = Math.floor(totalSeconds / 3600);
+                totalSeconds %= 3600;
+                let minutes = Math.floor(totalSeconds / 60);
+                let seconds = totalSeconds % 60;
+                return message.reply(`please wait ${hours.toFixed(0)} hour(s), ${minutes.toFixed(0)} minute(s) and ${seconds.toFixed(0)} second(s) before reusing the \`${prefix+'randomicon'}\` command.`)
             }
         }
 
