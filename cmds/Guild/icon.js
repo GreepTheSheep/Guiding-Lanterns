@@ -17,10 +17,10 @@ function servericon(message, client, prefix, cooldowns){
             const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
 
             if (now < expirationTime) {
-                const timeLeftsec = (expirationTime - now) / 1000;
-                const timeLeftmin = (expirationTime - now) / 60 / 1000;
+                const timeLeftsec = (expirationTime - now) / 1000 % 60*2;
+                const timeLeftmin = (expirationTime - now) / 60 / 1000 % 60;
                 const timeLefthours = (expirationTime - now) / 60 / 60 / 1000;
-                return message.reply(`please wait ${timeLefthours.toFixed(0)} hour(s), ${timeLeftmin.toFixed(0)} minute(s) and ${timeLeftsec.toFixed(0)} second(s) before reusing the \`${prefix+'randomicon'}\` command.`).then(m=>m.delete(5000))
+                return message.reply(`please wait ${timeLefthours.toFixed(0)} hour(s), ${timeLeftmin.toFixed(0)} minute(s) and ${timeLeftsec.toFixed(0)} second(s) before reusing the \`${prefix+'randomicon'}\` command.`)
             }
         }
 
