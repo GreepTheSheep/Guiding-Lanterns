@@ -1,7 +1,7 @@
 {
     "name": "guiding-lanterns",
-    "version": "2.5.0",
-    "changelog": "Add a Guess The Number game",
+    "version": "2.5.2",
+    "changelog": "Little modifications on about command",
     "description": "",
     "main": "bot.js",
     "repository": {
