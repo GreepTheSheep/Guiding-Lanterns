@@ -15,7 +15,7 @@ const twitter = new Twitter(twitter_tokens)
 
 async function twitter_starboard (client, reaction, logchannel, date, time){
     try{
-        if (reaction.emoji.name === '⭐' && reaction.count === 3) {
+        if (reaction.emoji.name === '⭐' && reaction.count === 1) {
 
             // We use the this.extension function to see if there is anything attached to the message.
             const image = reaction.message.attachments.size > 0 ? await this.extension(reaction, message.attachments.array()[0].url) : ''; 
