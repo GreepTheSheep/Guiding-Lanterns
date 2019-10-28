@@ -38,6 +38,7 @@
     "about_links": "Liens utiles :",
     "about_invitebot": "Invitez le bot dans votre serveur",
     "about_support": "Serveur de support",
+    "about_statuspage": "Status page",
     "about_github": "Code source du bot sur GitHub",
     "about_supportlink": "Soutenir le bot",
     "gtn_startdesc": "Vous avez commencé une partie de Guess The Number,\nvous devrez deviner un nombre entre ${min} et ${max}.\nVous n'avez pas de limite de temps, et vous pouvez reprendre à tout moment.\n\nPour donner votre numéro que vous avez deviné, tapez `${prefix}gtnguess <Votre nombre>`,\nJe vais vous répondre par \"inférieur\" ou \"supérieur\".\n\nBonne chance!",
