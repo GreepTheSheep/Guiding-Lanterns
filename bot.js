@@ -159,6 +159,11 @@ client.on('guildDelete', guild => { // If the bot leave a server
     lant_num_guilds(); // Change the servers count (-1)
 })
 
+client.on('messageReactionAdd', reaction => {
+    const twitter_starboard = require('./events/twitter-starboard.js')
+    twitter_starboard(client, reaction, getlogchannel(), functiondate, functiontime)
+})
+
 client.on('disconnect', event => {
     var eventcodemsg = 'Event Code Message not set for this code'
     if (event = '1000') eventcodemsg = 'Normal closure'

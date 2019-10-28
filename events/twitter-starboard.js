@@ -13,8 +13,16 @@ const twitter_tokens = {
 };
 const twitter = new Twitter(twitter_tokens)
 
-function twitter_starboard (message, client, getlogchannel){
-
+function twitter_starboard (client, reaction, logchannel, date, time){
+    try{
+        if (reaction.emoji.name === '⭐' && reaction.count === 3) {
+            
+        }
+    } catch (err) {
+        const errmsg = `Twitter Starboard POST error : ${err}`
+        console.log(`[${date} - ${time}] ${errmsg}`)
+        logchannel.send(errmsg)
+    }
 }
 
 module.exports = twitter_starboard
