@@ -18,11 +18,10 @@ function twitter_settings(message, client, prefix, lang, logchannel){
             if (tweets_setting.get(message.guild.id) === false){
                 tweets_setting.set(message.guild.id, true)
                 message.channel.send(lang.twitter_send)
-            }
-            if (tweets_setting.get(message.guild.id) === true){
+            } else if (tweets_setting.get(message.guild.id) === true){
                 tweets_setting.set(message.guild.id, false)
                 message.channel.send(lang.twitter_no_send)
-            }
+            } else return;
         }
     }
 }
