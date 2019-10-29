@@ -47,7 +47,7 @@ function twitter_starboard (client, reaction, logchannel, date, time){
                                         let embed = new Discord.RichEmbed
                                         embed.setTitle('Twitter Starboard')
                                         .setColor('#5EA9DD')
-                                        .setDescription(`${reactions} ⭐ on [this message](https://discordapp.com/channels/${reaction.message.guild.id}/${reaction.message.id})`)
+                                        .setDescription(`${reactions} ⭐ on [this message](https://discordapp.com/channels/${reaction.message.guild.id}/${reaction.message.channel.id}/${reaction.message.id})`)
                                         .setFooter(`!twitter for more info`)
                                         reaction.message.channel.send(embed)
                                         .then(m=>reaction.message.channel.send(`https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`)
@@ -69,7 +69,7 @@ function twitter_starboard (client, reaction, logchannel, date, time){
                             let embed = new Discord.RichEmbed
                             embed.setTitle('Twitter Starboard')
                             .setColor('#5EA9DD')
-                            .setDescription(`${reactions} ⭐ on [this message](https://discordapp.com/channels/${reaction.message.guild.id}/${reaction.message.id})`)
+                            .setDescription(`${reactions} ⭐ on [this message](https://discordapp.com/channels/${reaction.message.guild.id}/${reaction.message.channel.id}/${reaction.message.id})`)
                             .setFooter(`!twitter for more info`)
                             reaction.message.channel.send(embed)
                             .then(m=>reaction.message.channel.send(`https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`))
