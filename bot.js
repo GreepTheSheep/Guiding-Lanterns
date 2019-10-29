@@ -106,7 +106,6 @@ client.on('message', message => { // If any message was recived
     if (message.channel.type === 'text') var langtext = getUserLang(message); // Gets the user language from the database
     if (message.channel.type === 'text') var lang = giveUserLang(message); // Gets the user language from the database
     if (message.author.bot) return; // If is a bot, do nothing
-    message.content = message.content.toLowerCase()
 
     //Check if user has supported
     const PatreonCheck = require('./support/support_check.js');
