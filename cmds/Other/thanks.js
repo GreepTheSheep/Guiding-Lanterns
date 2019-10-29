@@ -14,7 +14,7 @@ const responses = [
 ]
 
 function replyToThanks(message, client, prefix){
-    if(message.content.toLowerCase().includes(`thanks <@${client.user.id}>`) || message.content.toLowerCase().includes(`thanks <@!${client.user.id}>`) || message.content.toLowerCase().includes(`thanks lantern`)){
+    if(message.content.toLowerCase().includes(`thanks <@${client.user.id}>`) || message.content.toLowerCase().includes(`thanks <@!${client.user.id}>`) || message.content.toLowerCase().includes(`thank lantern`) || message.content.toLowerCase().includes(`thank eugene`)){
         
         function randomItem(array) {
             return array[Math.floor(Math.random() * array.length)];
