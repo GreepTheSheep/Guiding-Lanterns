@@ -106,7 +106,7 @@ client.on('message', message => { // If any message was recived
     if (message.channel.type === 'text') var langtext = getUserLang(message); // Gets the user language from the database
     if (message.channel.type === 'text') var lang = giveUserLang(message); // Gets the user language from the database
     if (message.author.bot) return; // If is a bot, do nothing
-    message.content.toLowerCase()
+    message.content = message.content.toLowerCase()
 
     //Check if user has supported
     const PatreonCheck = require('./support/support_check.js');
@@ -157,6 +157,11 @@ client.on('guildDelete', guild => { // If the bot leave a server
     console.log(`[${functiondate(0)} - ${functiontime(0)}]\n${botleftguildlog}`)
     getlogchannel().send(botleftguildlog)
     lant_num_guilds(); // Change the servers count (-1)
+})
+
+client.on('messageReactionAdd', reaction => {
+    const twitter_starboard = require('./events/twitter-starboard.js')
+    twitter_starboard(client, reaction, getlogchannel(), functiondate(), functiontime())
 })
 
 client.on('disconnect', event => {

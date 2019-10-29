@@ -1,7 +1,7 @@
 {
     "name": "guiding-lanterns",
-    "version": "2.5.2",
-    "changelog": "Little modifications on about command",
+    "version": "2.7.0",
+    "changelog": "Add a starboard to Twitter: https://twitter.com/GuidingLanterns",
     "description": "",
     "main": "bot.js",
     "repository": {
@@ -28,16 +28,21 @@
         "dblapi.js": "^2.3.0",
         "discord-emoji": "^1.1.1",
         "discord.js": "^11.5.1",
+        "download": "^7.1.0",
         "enmap": "^5.2.1",
         "fluent-ffmpeg": "^2.1.2",
         "fs": "0.0.2",
         "fs-extra": "^8.1.0",
         "google-images": "^2.1.0",
+        "http": "0.0.0",
+        "https": "^1.0.0",
+        "node-fetch": "^2.6.0",
         "os": "^0.1.1",
         "request": "^2.88.0",
         "shelljs": "^0.8.3",
         "translate": "^1.1.0",
         "twitter": "^1.7.1",
+        "url": "^0.11.0",
         "wolfram-alpha-api": "https://products.wolframalpha.com/api/libraries/javascript/wolfram-alpha-api-1.0.0-rc.1.tgz"
     }
 }

@@ -7,7 +7,6 @@ const config = JSON.parse(fs.readFileSync(configfile, "utf8"));
 const cooldowns = new Discord.Collection();
 const logchannel = '589337521553539102'
 const getlogchannel = () => client.channels.get(logchannel)
-const inviteTracker = require('./invite-track.js');
 const dbl = undefined
 const guildPrefix = undefined
 
@@ -68,16 +67,19 @@ client.on('ready', () => {
         }, 3600000);
     }).catch(err=>getlogchannel().send('Error during sending the log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot_nightly.log', '')))
     interval
-    inviteTracker.ready(client);
 });
 
 client.on('guildMemberAdd', member => {
     lant_num_members_guild();
-    inviteTracker.track(member);
 });
 client.on('guildMemberRemove', member => {
     lant_num_members_guild();
 });
+
+client.on('messageReactionAdd', reaction => {
+    const twitter_starboard = require('./events/twitter-starboard.js')
+    twitter_starboard(client, reaction, getlogchannel(), functiondate(), functiontime())
+})
 
 client.on('message', message => {
     const prefix = config.prefix_nightly;
