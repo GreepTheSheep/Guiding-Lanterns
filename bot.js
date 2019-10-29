@@ -161,7 +161,7 @@ client.on('guildDelete', guild => { // If the bot leave a server
 
 client.on('messageReactionAdd', reaction => {
     const twitter_starboard = require('./events/twitter-starboard.js')
-    twitter_starboard(client, reaction, getlogchannel(), functiondate, functiontime)
+    twitter_starboard(client, reaction, getlogchannel(), functiondate(), functiontime())
 })
 
 client.on('disconnect', event => {
