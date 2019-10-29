@@ -1,7 +1,7 @@
 {
     "name": "guiding-lanterns",
-    "version": "2.5.0",
-    "changelog": "Add a Guess The Number game",
+    "version": "2.7.0",
+    "changelog": "Add a starboard to Twitter: https://twitter.com/GuidingLanterns",
     "description": "",
     "main": "bot.js",
     "repository": {
