@@ -49,5 +49,8 @@
     "gtn_notstarted": "Veuillez taper `${prefix}gtnstart` avant toute chose",
     "gtn_statsresetmsg": "Bonjour, vous avez essayé de tricher dans le jeu Guess The Number et donc comme sentance, on vous à réinitialisées les données par le propriétaire, en autre thermes, on veut pas de cheats ici !\n> Si vous voulez en savoir plus, demandez à Greep#3022 dans le serveur de support",
     "invite_title": "ALORS LA, ON VA ÊTRE AMIS !",
-    "invite_desc": "Je suis très heureux que vous fassiez partie de la famille !\nEmbarquez sur un monde magique sur votre serveur Discord !\nEt, comme Walt Disney l'a dit: \"Si vous pouvez le rêver, vous pouvez le faire.\""
+    "invite_desc": "Je suis très heureux que vous fassiez partie de la famille !\nEmbarquez sur un monde magique sur votre serveur Discord !\nEt, comme Walt Disney l'a dit: \"Si vous pouvez le rêver, vous pouvez le faire.\"",
+    "twitter_info": "The bot uses a very different starboard system than traditional starboards. Indeed, Discord messages that contain at least 3 ⭐ reactions are automatically sent to a Twitter account provided for this purpose.\nDon't worry, only the text and, if you have sent one, an image will be sent on Twitter.\n\nThis parameter is set by default to send, but you can tell it not to send by doing the command `${prefix}twitter set`",
+    "twitter_send": "The bot will now send all messages that contain at least 3 star reactions on Twitter",
+    "twitter_no_send": "The bot will **no longer** send all messages that contain at least 3 star reactions on Twitter"
 }
