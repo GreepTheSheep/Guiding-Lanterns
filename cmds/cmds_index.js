@@ -63,6 +63,9 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     const setLanguage = require('./Util/language.js')
     setLanguage(message, client, prefix, userLang, lang, langtext);
 
+    const twitter_settings = require('./Util/tweets_settings.js')
+    twitter_settings(message, client, prefix, lang, getlogchannel())
+
     const geturlofattachment = require('./Util/geturlofattach.js')
     geturlofattachment(message, client, prefix, lang);
 
