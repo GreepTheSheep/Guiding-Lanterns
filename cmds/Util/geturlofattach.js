@@ -13,7 +13,7 @@ function geturlofattachment(message, client, prefix, lang) {
                 .setDescription(`${attachurl}`)
                 if (isimage == true) embed.setThumbnail(attachurl)
             message.channel.send(embed)
-        } else  {
+        } else {
             let embed1 = new Discord.RichEmbed
             embed1.setColor('RANDOM')
             .setTitle(`${prefix}geturl : ` + lang.geturl_title)
