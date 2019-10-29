@@ -85,6 +85,9 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     const suggest = require('./Other/suggest.js');
     suggest(message, client, prefix, lang, getlogchannel());
 
+    const replyToThanks = require('./Other/thanks.js')
+    replyToThanks(message, client, prefix)
+
 
     /*--------------------------------
     --------- Guild-specific ---------
