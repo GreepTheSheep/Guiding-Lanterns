@@ -38,7 +38,7 @@ function chatbot(message, client, prefix, donor, date, time, logchannel){
 
     if (message.channel.type === 'dm'){
         try {
-        //if (!donor) return;
+        if (!donor) return;
         if (!chatbotdb.has("KEY")){
             message.channel.send('Error :frowning: The report has been sent')
             console.log(`SimSimi error: NO API KEY`)
