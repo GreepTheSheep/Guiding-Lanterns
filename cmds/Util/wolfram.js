@@ -27,12 +27,13 @@ const waApi = WolframAlphaAPI(wolfID);
                      return;
                 }
                 const pods = queryresult.pods;
-                const embed = (m,src,alt) => message.channel.send(new RichEmbed().setImage(src)
-                                                                                 .setDescription(alt));
+                const embed = (m,src,alt,title) => message.channel.send(new RichEmbed().setImage(src)
+                                                                                 .setDescription(alt)
+                                                                                 .setTitle(title)
+                                                                                 );
                 for (i in pods) {
-                    await message.channel.send(`${pods[i].title}`);
                     for (j in pods[i].subpods) {
-                        await embed(message,pods[i].subpods[j].img.src,pods[i].subpods[j].img.alt);
+                        await embed(message,pods[i].subpods[j].img.src,pods[i].subpods[j].img.alt,pods[i].title);
                     }   
                 }
             }
