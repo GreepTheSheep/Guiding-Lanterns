@@ -1,21 +1,23 @@
 const Discord = require('discord.js')
 const request = require('request');
+const download = require('download')
 const fs = require('fs');
 const configfile = "./data/config.json";
 const config = JSON.parse(fs.readFileSync(configfile, "utf8"));
 
-function removebgscr(message, client, prefix, logchannel, date, time, lang){
+async function removebgscr(message, client, prefix, logchannel, date, time, lang){
     const args = message.content.split(/ +/).slice(1);
     var attachurl
     if (args.length > 0) attachurl = args[0]
     if (message.attachments.size > 0) attachurl = message.attachments.array()[0].url
     if (!attachurl) return message.reply('you have not given a image')
-    let valid = attachurl.endsWith('.png')
-    if (!valid) return message.reply('only .png images are supported. Use https://cloudconvert.com/ if you want to')
+    let valid = attachurl.endsWith('.jpg') || attachurl.endsWith('.png') || attachurl.endsWith('.gif')
+    if (!valid) return message.reply('files types must be:\`\`\`.jpg\n.png\n.gif\`\`\`')
+    await download(attachurl, `./data/${message.guild.id}/original.${attachurl.substr(attachurl.length - 3)}`)
     request.post({
         url: 'https://api.remove.bg/v1.0/removebg',
         formData: {
-            image_file: attachurl,
+            image_file: fs.readFileSync(`./data/${message.guild.id}/original.${attachurl.substr(attachurl.length - 3)}`),
             size: 'auto',
         },
         headers: {
