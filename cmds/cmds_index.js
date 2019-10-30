@@ -69,8 +69,9 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     const geturlofattachment = require('./Util/geturlofattach.js')
     geturlofattachment(message, client, prefix, lang);
 
-    const removebg = require('./Util/removebg.js')
-    removebg(message, client, prefix, getlogchannel(), functiondate, functiontime, lang, dbl)
+    // Remove.bg suspended because of no responce API
+    //const removebg = require('./Util/removebg.js')
+    //removebg(message, client, prefix, getlogchannel(), functiondate, functiontime, lang, dbl)
 
     const speedtest = require('./Util/speedtest.js')
     speedtest(message, client, prefix, getlogchannel(), dbl)
