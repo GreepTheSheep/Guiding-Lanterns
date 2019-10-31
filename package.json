@@ -23,6 +23,7 @@
         "better-sqlite-pool": "^0.2.2",
         "better-sqlite3": "^5.4.3",
         "bufferutil": "^4.0.1",
+        "canvas": "^2.6.0",
         "country-data": "0.0.31",
         "dateformat": "^3.0.3",
         "dblapi.js": "^2.3.0",
