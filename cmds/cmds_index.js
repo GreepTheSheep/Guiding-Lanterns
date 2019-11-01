@@ -23,20 +23,20 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     --------------------------------*/
 
     const quotes = require('./Worlds/quotes.js');
-    quotes(message, client, prefix, functiondate, functiontime, getlogchannel());
+    quotes(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns);
 
     const picture = require('./Worlds/pics.js')
-    picture(message, client, prefix, functiondate, functiontime, getlogchannel())
+    picture(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns)
 
     const fanart = require('./Worlds/fanart.js')
-    fanart(message, client, prefix, functiondate, functiontime, getlogchannel())
+    fanart(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns)
 
     /*--------------------------------
     --------------- Fun --------------
     --------------------------------*/
 
     const eight_ball = require('./Fun/8ball.js');
-    eight_ball(message, client, prefix, functiondate, functiontime, getlogchannel());
+    eight_ball(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns);
 
     const bot_ping = require('./Fun/ping.js');
     bot_ping(message, client, prefix);
@@ -46,16 +46,16 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     --------------------------------*/
 
     const wolfram_short = require('./Util/wolfram_short.js');
-    wolfram_short(message, client, prefix);
+    wolfram_short(message, client, prefix, cooldowns);
 
     const voted = require('./Util/voted.js');
-    voted(message, client, prefix, dbl, lang);
+    voted(message, client, prefix, dbl, lang, cooldowns);
 
     const image_search_request = require('./Util/img_search.js')
-    image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel(), dbl)
+    image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel(), dbl, cooldowns)
 
     const about = require('./Util/about.js');
-    about(message, client, prefix, lang, langtext);
+    about(message, client, prefix, lang, langtext, cooldowns);
 
     const setPrefix = require('./Util/prefix.js')
     setPrefix(message, client, prefix, guildPrefix, lang);
@@ -81,7 +81,7 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     --------------------------------*/
 
     const help = require('./Other/help.js');
-    help(message, client, prefix, lang);
+    help(message, client, prefix, lang, cooldowns);
 
     const serverping = require('./Other/serverping.js');
     serverping(message, client, prefix)
@@ -102,7 +102,7 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
 
     if (message.guild.id == '562602234265731080') { // Kingdom of Corona
         const lantern = require('./Guild/lantern.js');
-        lantern(message, client, prefix, getlogchannel());
+        lantern(message, client, prefix, getlogchannel(), cooldowns);
 
         const screenshot = require('./Guild/screenshot.js');
         screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel(), dbl);
