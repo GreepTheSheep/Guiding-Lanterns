@@ -11,9 +11,40 @@ function givelist(){
     return listarray.join("\`\n- \`")
 }
 
-function picture(message, client, prefix, functiondate, functiontime, getlogchannel){
+function picture(message, client, prefix, functiondate, functiontime, getlogchannel, cooldowns){
     if(message.content.startsWith(prefix + "picture")){
         try {
+            //Implement cooldown
+    if (!cooldowns.has(prefix + 'picture')) {
+        cooldowns.set(prefix + 'picture', new Discord.Collection());
+    }
+
+    const now = Date.now();
+    const timestamps = cooldowns.get(prefix + 'picture');
+    const cooldownAmount = 90000;
+
+    if (timestamps.has(message.author.id)) {
+        const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+
+        if (now < expirationTime) {
+            let totalSeconds = (expirationTime - now) / 1000;
+            let days = Math.floor(totalSeconds / 86400);
+            let hours = Math.floor(totalSeconds / 3600);
+            totalSeconds %= 3600;
+            let minutes = Math.floor(totalSeconds / 60);
+            let seconds = totalSeconds % 60;
+            return message.reply('Please wait again ' + minutes + ' minutes and ' + seconds + ' seconds before seeing a new picture of your movie.').then(m=>{m.delete(10000) ; message.delete(10000)})
+        }
+    }
+
+    timestamps.set(message.author.id, now);
+    setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+
+
+    if (message.member.roles.find(r => r.name === "KEY (The Guiding Lanterns)")) { //Override cooldown
+        timestamps.delete(message.author.id);
+    }
+    // End of cooldown implement
         let args = message.content.split(" ")
         args.shift()
         if (args.length < 1 || args[0] === 'list') {

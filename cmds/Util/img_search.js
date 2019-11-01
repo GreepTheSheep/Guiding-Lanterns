@@ -44,8 +44,40 @@ function image_search(message, client, prefix, functiondate, functiontime, getlo
 }
 
 
-function image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel, dbl) {
+function image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel, dbl, cooldowns) {
     if (message.content.startsWith(prefix + 'googleimage')) {
+    //Implement cooldown
+    if (!cooldowns.has(prefix + 'googleimage')) {
+        cooldowns.set(prefix + 'googleimage', new Discord.Collection());
+    }
+
+    const now = Date.now();
+    const timestamps = cooldowns.get(prefix + 'googleimage');
+    const cooldownAmount = 2 * 60000;
+
+    if (timestamps.has(message.author.id)) {
+        const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
+
+        if (now < expirationTime) {
+            let totalSeconds = (expirationTime - now) / 1000;
+            let days = Math.floor(totalSeconds / 86400);
+            let hours = Math.floor(totalSeconds / 3600);
+            totalSeconds %= 3600;
+            let minutes = Math.floor(totalSeconds / 60);
+            let seconds = totalSeconds % 60;
+            return message.reply('calm down! You can resume the command in ' + minutes + ' minutes and ' + seconds + ' seconds')
+        }
+    }
+
+    timestamps.set(message.author.id, now);
+    setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
+
+
+    if (message.member.roles.find(r => r.name === "KEY (The Guiding Lanterns)")) { //Override cooldown
+        timestamps.delete(message.author.id);
+    }
+    // End of cooldown implement
+    
     if (client.user.id == '577477992608038912') return image_search(message, client, prefix, functiondate, functiontime, getlogchannel);
     
     image_search(message, client, prefix, functiondate, functiontime, getlogchannel);
