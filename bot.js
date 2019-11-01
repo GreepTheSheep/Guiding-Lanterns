@@ -67,6 +67,7 @@ const lant_num_guilds = () => num_guilds(client, channel_id.guilds);
 const lant_ver = () => ver(client, channel_id.version);
 
 const lant_frozen_II = () => countdown.frozen2(client, channel_id.frozen2);
+const lant_xmas = () => countdown.xmas(client, channel_id.xmas);
 
 client.on('ready', () => { // If bot was connected:
     const readylog = `Logged in as ${client.user.tag}\nOn ${functiondate(0)} at ${functiontime(0)}` //Set a text who is said I'm connected!
@@ -78,6 +79,7 @@ client.on('ready', () => { // If bot was connected:
     lant_num_guilds(); //Set the guilds count
     lant_ver(); //Set version number in the version number channel
     lant_frozen_II(); //Frozen 2 countdown
+    lant_xmas();
     inviteTracker.ready(client); // Starts the invite tracker plugin
     const loginterval = new Promise(function() { // Automatic log file recreator function
         setInterval(function() {
