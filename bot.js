@@ -10,7 +10,7 @@ const configfile = "./data/config.json";
 const config = JSON.parse(fs.readFileSync(configfile, "utf8")); // Retrieves the contents of the configuration file (the prefix and the login token)
 const cooldowns = new Discord.Collection(); //Stores cooldown info for screenshot()
 const logchannel = '589337734754336781' //Set a channel for logging
-const getlogchannel = () => client.channels.get(logchannel)
+const getlogchannel = () => client.guilds.find('id', '570024448371982373').channels.find('id', logchannel)
 const inviteTracker = require('./events/invite-track.js'); // Define the invite tracker plugin
 const shell = require('shelljs'); // Require for executing shell commands (such as git)
 
