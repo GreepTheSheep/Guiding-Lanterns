@@ -1,6 +1,4 @@
 {
-    "didivote_yes": "Ouais, enfin j'crois...",
-    "didivote_no": "Hmm... J'te vois pas dans la liste. Essaye de remplir la liste avec ça: https://discordbots.org/bot/569624646475972608/vote",
     "lang_check": "Ton langage est définie à `${langtext}`.\nTu peux la changer avec `${prefix}lang list` mais j'crois pas que t'en auras besoin",
     "lang_ok": "Bon bah au revoir, ce fut un plaisir qu'on soit vu avec ce language. Dis bonjour à `${args[0]}` de ma part",
     "lang_usage": "Utilisez ${prefix}lang <votre langue> pour définir votre langue, mais je suis toujours ton ami 🛩️",

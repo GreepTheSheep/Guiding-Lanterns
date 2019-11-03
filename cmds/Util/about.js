@@ -9,8 +9,40 @@ const config = JSON.parse(fs.readFileSync(configfile, "utf8"));
 translate.engine = 'yandex'
 translate.key = config.translate_key
 
-async function about(message, client, prefix, lang, langtext) {
+async function about(message, client, prefix, lang, langtext, cooldowns) {
     if (message.content.startsWith(prefix + 'about')) {
+        //Implement cooldown
+        if (!cooldowns.has(prefix + 'about')) {
+            cooldowns.set(prefix + 'about', new Discord.Collection());
+        }
+
+        const now = Date.now();
+        const timestamps = cooldowns.get(prefix + 'about');
+        const cooldownAmount = 60000;
+
+        if (timestamps.has(message.guild.id)) {
+            const expirationTime = timestamps.get(message.guild.id) + cooldownAmount;
+
+            if (now < expirationTime) {
+                let totalSeconds = (expirationTime - now) / 1000;
+                let days = Math.floor(totalSeconds / 86400);
+                let hours = Math.floor(totalSeconds / 3600);
+                totalSeconds %= 3600;
+                let minutes = Math.floor(totalSeconds / 60);
+                let seconds = totalSeconds % 60;
+                return;
+            }
+        }
+
+        timestamps.set(message.guild.id, now);
+        setTimeout(() => timestamps.delete(message.guild.id), cooldownAmount);
+
+
+        if (message.member.roles.find(r => r.name === "KEY (The Guiding Lanterns)")) { //Override cooldown
+            timestamps.delete(message.guild.id);
+        }
+        // End of cooldown implement
+
         var translatedlang = langtext.charAt(0).toLowerCase() + langtext.charAt(1).toLowerCase()
         var translatedchangelog = await translate(package.changelog, {from: 'en', to: translatedlang})
 

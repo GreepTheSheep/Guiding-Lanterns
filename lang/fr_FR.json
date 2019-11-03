@@ -1,15 +1,13 @@
 {
-    "didivote_yes": "Oui, tu as bien voté !",
-    "didivote_no": "Non, tu ne l'as pas fait.\nJe te donne le lien: https://discordbots.org/bot/569624646475972608/vote",
     "lang_check": "Votre langue est définie à `${langtext}`.\nVous pouvez changer votre langue avec `${prefix}lang list`",
     "lang_ok": "Votre langue est défini sur `${args[0]}`.",
     "lang_usage": "Utilisez ${prefix}lang <votre langue> pour définir votre langue",
     "lang_list_title": "Liste des langues",
     "lang_notonlist": "Cette langue n'est pas dans la liste. Veuillez vérifier !",
     "help_title": "Vous vous sentez perdu ? Ne vous inquiétez pas :wink:\n\nListe des commandes :",
-    "help_kingdomofcorona": "`${prefix}screenshot` : Take a screenshot from the movie or the series\nSends lanterns! Use this emote: <:Lantern:570822664789426186> and see how much lanterns sent with `${prefix}lanterns`\n`${prefix}randomicon`: Generate a new random icon for this server",
+    "help_kingdomofcorona": "`${prefix}screenshot` : Prenez une capture d'écran du film ou de la série\nEnvoyez des lanternes ! Utilisez cet emote: <:Lantern:570822664789426186> et voyez combien de lanternes sont envoyées avec `${prefix}lanterns`\n`${prefix}randomicon`: Change l'icône du serveur en mettant une aléatoirement",
     "help_disney": "`${prefix}quote` : Envoyez une citation aléatoire de votre film\n`${prefix}picture`: Envoyez une image aléatoire (ou GIF) de votre film\n`${prefix}fanart`: Envoyez un fanart aléatoire de votre film 🎨",
-    "help_util": "`${prefix}wolfram` : What would you like to know about ?\n*`${prefix}full-wolfram` : What would you like to know about ? (Get full answer)\n*`${prefix}setgame` : Sets a \"Playing ...\" status\n*`${prefix}setwatch` : same as setgame but is \"Watching ...\"\n*`${prefix}setlisten` : Same as setgame but is \"Listening to ...\"\n`${prefix}googleimage` : Input your search and he will returns an image\n`${prefix}speedtest`: Run a bot speedtest\n`${prefix}prefix`: changes the server's prefix\n`${prefix}lang`: Changes the language of your favorite bot\n`${prefix}twitter`: Uses the public starboard on Twitter (use this command for more info)",
+    "help_util": "`${prefix}wolfram` : Qu'aimeriez-vous savoir ?\n*`${prefix}full-wolfram` : Qu'aimeriez-vous savoir ? (Obtenir une réponse complète)\n*`${prefix}setgame` : Définit l'état \"Joue à ...\".\n*`${prefix}setwatch` : identique à setgame mais c'est \"Regarde ...\"\n*`${prefix}setlisten` : Identique à setgame mais c'est \"Écoute ...\"\n`${prefix}googleimage` : Entrez votre recherche et il vous retournera une image\n`${prefix}speedtest`: Exécuter un test de vitesse du serveur du bot\n`${prefix}prefix`: modifie le préfixe du serveur\n`${prefix}lang`: Modifie la langue de votre bot favori\n`${prefix}twitter`: Utilise le tableau des favoris publique sur Twitter (Utilisez cette commande pour plus d'infos)",
     "help_fun": "`${prefix}8ball` : Poser une question et il répondra.\n*`${prefix}say` : fait parler le bot !",
     "help_game": "`${prefix}guessthenumber` : Démarre une partie du célèbre Guess The Number",
     "help_anyproblems": "Si vous avez des problèmes :",
@@ -38,7 +36,7 @@
     "about_links": "Liens utiles :",
     "about_invitebot": "Invitez le bot dans votre serveur",
     "about_support": "Serveur de support",
-    "about_statuspage": "Status page",
+    "about_statuspage": "Page de statut",
     "about_github": "Code source du bot sur GitHub",
     "about_supportlink": "Soutenir le bot",
     "gtn_startdesc": "Vous avez commencé une partie de Guess The Number,\nvous devrez deviner un nombre entre ${min} et ${max}.\nVous n'avez pas de limite de temps, et vous pouvez reprendre à tout moment.\n\nPour donner votre numéro que vous avez deviné, tapez `${prefix}gtnguess <Votre nombre>`,\nJe vais vous répondre par \"inférieur\" ou \"supérieur\".\n\nBonne chance!",
@@ -50,7 +48,7 @@
     "gtn_statsresetmsg": "Bonjour, vos statistiques pour le jeu Guess The Number ont été réinitialisées par le propriétaire, merci !\n> Si vous voulez en savoir plus, demandez à Greep#3022 dans le serveur de support",
     "invite_title": "Oh! Un nouveau fan Disney, n'est-ce pas ?",
     "invite_desc": "Je suis très heureux que vous fassiez partie de la famille !\nEmbarquez sur un monde magique sur votre serveur Discord !\nEt, comme Walt Disney l'a dit: \"Si vous pouvez le rêver, vous pouvez le faire.\"",
-    "twitter_info": "The bot uses a very different starboard system than traditional starboards. Indeed, Discord messages that contain at least 3 ⭐ reactions are automatically sent to a Twitter account provided for this purpose.\nDon't worry, only the text and, if you have sent one, an image will be sent on Twitter.\n\nThis parameter is set by default to send, but you can tell it not to send by doing the command `${prefix}twitter set`",
-    "twitter_send": "The bot will now send all messages that contain at least 3 star reactions on Twitter",
-    "twitter_no_send": "The bot will **no longer** send all messages that contain at least 3 star reactions on Twitter"
+    "twitter_info": "Le bot utilise un système de tableau très différent de celui des tableaux traditionnels. En effet, les messages Discord qui contiennent au moins 3 réactions ⭐ sont automatiquement envoyés sur le compte Twitter du bot.\nNe vous inquiétez pas, seul le texte et, si vous en avez envoyé, une image sera envoyée sur Twitter.\n\nCe paramètre est défini par défaut à envoyer, mais vous pouvez lui dire de ne pas envoyer en faisant la commande `${prefix}twitter set`",
+    "twitter_send": "Le bot va maintenant envoyer tous les messages contenant au moins 3 étoiles sur Twitter",
+    "twitter_no_send": "Le bot n'enverra **plus** tous les messages contenant au moins 3 étoiles sur Twitter"
 }
