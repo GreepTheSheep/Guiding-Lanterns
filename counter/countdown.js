@@ -34,13 +34,13 @@ const countdown = (param) => {
 module.exports = {
     frozen2: countdown({
         date : "November 22 2019 00:00:00 EST",
-        output: (d,h,m,s) => `${d}d ${h}h ${m}m ${s}s`,
-        end:   "FROZEN 2 IS OUT!",
+        output: (d,h,m,s) => `❄ Frozen 2: ${d}d ${h}h`,
+        end:   "❄ FROZEN 2 IS OUT!",
         timeout: 1000
     }),
     xmas: countdown({
         date : "December 25 2019 00:00:00 EST",
-        output: (d,h,m,s) => `🎅 ${d}d ${h}h ${m}m`,
+        output: (d,h,m,s) => `🎅 ${d}d ${h}h`,
         end:   "HAPPY CHRISTMAS! 🎅",
         timeout: 1000
     })
