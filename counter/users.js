@@ -12,7 +12,7 @@ function users_count(client, channel_id) {
     const members = total - bots
 
     channel.setName(`Users: ${members}`).catch(err => console.log(err));
-    }, 15000)
+    }, 1 * 60 * 1000)
     
 }
 
