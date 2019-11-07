@@ -10,7 +10,7 @@ const configfile = "./data/config.json";
 const config = JSON.parse(fs.readFileSync(configfile, "utf8")); // Retrieves the contents of the configuration file (the prefix and the login token)
 const cooldowns = new Discord.Collection(); //Stores cooldown info for screenshot()
 const logchannel = '589337734754336781' //Set a channel for logging
-const getlogchannel = () => client.guilds.find('id', '570024448371982373').channels.find('id', logchannel)
+const getlogchannel = () => client.shard.broadcastEval(client.guilds.get('570024448371982373').channels.get(logchannel))
 const inviteTracker = require('./events/invite-track.js'); // Define the invite tracker plugin
 const shell = require('shelljs'); // Require for executing shell commands (such as git)
 
@@ -69,10 +69,11 @@ const lant_ver = () => ver(client, channel_id.version);
 const lant_frozen_II = () => countdown.frozen2(client, channel_id.frozen2);
 const lant_xmas = () => countdown.xmas(client, channel_id.xmas);
 
-client.on('ready', () => { // If bot was connected:
+client.on('ready', async () => { // If bot was connected:
     const readylog = `Logged in as ${client.user.tag}\nOn ${functiondate(0)} at ${functiontime(0)}` //Set a text who is said I'm connected!
     console.log(readylog); // Send the text in the console
-    dbl.postStats(client.guilds.size)
+    const totalguildsize = await client.shard.fetchClientValues('guilds.size')
+    dbl.postStats(totalguildsize)
     getlogchannel().send(readylog).catch(); // Send the text in the logging channel
     lant_num_members_guild(); //Set the Member count
     lant_num_users();
