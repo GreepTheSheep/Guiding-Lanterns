@@ -73,7 +73,7 @@ client.on('ready', async () => { // If bot was connected:
     const readylog = `Logged in as ${client.user.tag}\nOn ${functiondate(0)} at ${functiontime(0)}` //Set a text who is said I'm connected!
     console.log(readylog); // Send the text in the console
     const totalguildsize = await client.shard.fetchClientValues('guilds.size')
-    dbl.postStats(totalguildsize)
+    dbl.postStats(totalguildsize.reduce((prev, val) => prev + val, 0))
     getlogchannel().send(readylog).catch(); // Send the text in the logging channel
     lant_num_members_guild(); //Set the Member count
     lant_num_users();
