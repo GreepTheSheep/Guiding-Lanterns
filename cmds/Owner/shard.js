@@ -8,10 +8,8 @@ async function shardcommands(message, client, prefix){
             let embed = new Discord.RichEmbed
             embed.setTitle(`You are on shard ${client.shard.id}/${client.shard.count}`)
             .setColor('RANDOM')
-            for(var everyShard in shard){
-                const guildsPerShard = await shard.eval(client.guilds.count)
-                embed.addField(`Shard ${shard.id}`, `Guilds: ${guildsPerShard}`)
-            }
+            embed.addField(`Shard ${shard.id}`, `Guilds: ${guildsPerShard}`)
+            
 
 
             message.channel.send(embed)
