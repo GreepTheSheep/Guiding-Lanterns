@@ -1,6 +1,8 @@
 try{
 const Discord = require('discord.js'); // Defines the Discord.js library
 const {Attachment} = require('discord.js') // Defines attachment config (for sending files)
+const shardManager = new Discord.ShardingManager('bot.js')
+const shard = new Discord.Shard(shardManager, client.shard.id)
 const client = new Discord.Client({
   fetchAllMembers: true,
   autoReconnect: true
@@ -70,11 +72,9 @@ const lant_frozen_II = () => countdown.frozen2(client, channel_id.frozen2);
 const lant_xmas = () => countdown.xmas(client, channel_id.xmas);
 
 client.on('ready', async () => { // If bot was connected:
-    const readylog = `Logged in as ${client.user.tag}\nOn ${functiondate(0)} at ${functiontime(0)}` //Set a text who is said I'm connected!
-    console.log(readylog); // Send the text in the console
     const totalguildsize = await client.shard.fetchClientValues('guilds.size')
     dbl.postStats(totalguildsize.reduce((prev, val) => prev + val, 0))
-    getlogchannel().send(readylog).catch(); // Send the text in the logging channel
+    getlogchannel().send('Main process logged!').catch(); // Send the text in the logging channel
     lant_num_members_guild(); //Set the Member count
     lant_num_users();
     lant_num_guilds(); //Set the guilds count
@@ -102,6 +102,23 @@ client.on('ready', async () => { // If bot was connected:
     }).catch(err=>getlogchannel().send('Error during auto pull: ' + err))
     autopull
 }); // End
+
+shard.on('ready', () => {
+    const readylog = `[${functiondate(0)} - ${functiontime(0)} -- Shard ${shard.id}/${client.shard.count}] Logged in as ${client.user.tag}` //Set a text who is said I'm connected!
+    console.log(readylog); // Send the text in the console
+    getlogchannel().send(readylog).catch(); // Send the text in the logging channel
+})
+
+shard.on('death', process => {
+    const deathlog = `[${functiondate(0)} - ${functiontime(0)} -- Shard ${shard.id}] Process exited: ${process}`
+    console.log(deathlog);
+    getlogchannel().send(deathlog).catch();
+})
+
+shard.on('reconnecting', () => {
+    const eventmsg = `[${functiondate(0)} - ${functiontime(0)} -- Shard ${shard.id}] reconnecting to WebSocket`
+    console.log(eventmsg)
+})
 
 client.on('message', message => { // If any message was recived
     try {
@@ -176,8 +193,8 @@ client.on('disconnect', event => {
 })
 
 client.on('reconnecting', () => {
-    const eventmsg = `reconnecting to WebSocket`
-    console.log(`[${functiondate(0)} - ${functiontime(0)}] ` + eventmsg)
+    const eventmsg = `[${functiondate(0)} - ${functiontime(0)} -- MAIN] reconnecting to WebSocket`
+    console.log(eventmsg)
 })
 
 dbl.on('error', e => {
