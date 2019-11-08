@@ -10,7 +10,7 @@ async function shardcommands(message, client, prefix){
             .setColor('RANDOM')
             for(var everyShard in shard){
                 const guildsPerShard = await shard.eval(client.guilds.count)
-                embed.addField(`Shard ${everyShard.id}`, `Guilds: ${guildsPerShard}`)
+                embed.addField(`Shard ${shard.id}`, `Guilds: ${guildsPerShard}`)
             }
 
 
