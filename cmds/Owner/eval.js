@@ -1,4 +1,6 @@
 const Discord = require("discord.js");
+const fs = require('fs');
+const { Attachment } = require('discord.js');
 
  function clean(text) {
     if (typeof(text) === "string")
