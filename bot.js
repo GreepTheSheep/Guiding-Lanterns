@@ -12,7 +12,6 @@ client.login(config.token)
 const cooldowns = new Discord.Collection(); //Stores cooldown info for screenshot()
 const logchannel = '589337734754336781' //Set a channel for logging
 const getlogchannel = () => client.guilds.get('570024448371982373').channels.get(logchannel)
-if (!getlogchannel()) console.log('ERROR: the bot will not send logs in Discord')
 const inviteTracker = require('./events/invite-track.js'); // Define the invite tracker plugin
 const shell = require('shelljs'); // Require for executing shell commands (such as git)
 
@@ -74,6 +73,7 @@ const lant_xmas = () => countdown.xmas(client, channel_id.xmas);
 client.on('ready', async () => { // If bot was connected:
     const totalguildsize = await client.shard.fetchClientValues('guilds.size')
     dbl.postStats(totalguildsize.reduce((prev, val) => prev + val, 0))
+    console.log('Main process loged in')
     getlogchannel().send('Main process logged!').catch(); // Send the text in the logging channel
     lant_num_members_guild(); //Set the Member count
     lant_num_users();
