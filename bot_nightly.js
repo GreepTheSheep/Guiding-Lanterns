@@ -56,6 +56,7 @@ client.on('ready', () => {
     console.log(readylog);
     getlogchannel().send(readylog);
     client.user.setStatus('dnd');
+    client.user.setActivity('with the fire of the lantern');
     lant_num_members_guild();
     lant_num_guilds();
     const interval = new Promise(function() {
