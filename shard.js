@@ -9,7 +9,6 @@ const shard = new Discord.ShardingManager("./bot.js", {
 })
   
 async function launch (shard){
-  shard.spawn().catch(e=>console.error(e))
 
   await shard.on('launch', (shard) => {
     console.log(`⬇ [SHARD] Shard #${shard.id} ⬇` )
