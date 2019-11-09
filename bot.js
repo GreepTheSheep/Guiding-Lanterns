@@ -206,5 +206,5 @@ dbl.on('error', e => {
 client.login(config.token)
 
 }catch(e){
-//console.log(e)
+console.log(e)
 }
