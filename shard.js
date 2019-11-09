@@ -1,10 +1,5 @@
-const config = require('./data/config.json')
-
 const { ShardingManager } = require('discord.js');
-const shard = new ShardingManager('./bot.js', {
-  token: config.token,
-  autoSpawn: true
-});
+const shard = new ShardingManager('./bot.js');
 
 shard.spawn(2);
 
