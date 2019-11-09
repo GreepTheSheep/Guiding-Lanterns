@@ -1,18 +1,17 @@
 try{
 const Discord = require('discord.js'); // Defines the Discord.js library
 const {Attachment} = require('discord.js') // Defines attachment config (for sending files)
-const shardManager = new Discord.ShardingManager('bot.js')
-const shard = new Discord.Shard(shardManager, client.shard.id)
 const client = new Discord.Client({
-  fetchAllMembers: true,
-  autoReconnect: true
-});
-const fs = require('fs');
-const configfile = "./data/config.json";
-const config = JSON.parse(fs.readFileSync(configfile, "utf8")); // Retrieves the contents of the configuration file (the prefix and the login token)
+    fetchAllMembers: true,
+    autoReconnect: true
+  });
+  const fs = require('fs');
+  const configfile = "./data/config.json";
+  const config = JSON.parse(fs.readFileSync(configfile, "utf8")); // Retrieves the contents of the configuration file (the prefix and the login token)
+client.login(config.token)
 const cooldowns = new Discord.Collection(); //Stores cooldown info for screenshot()
 const logchannel = '589337734754336781' //Set a channel for logging
-const getlogchannel = () => client.shard.broadcastEval(client.guilds.get('570024448371982373').channels.get(logchannel))
+const getlogchannel = () => client.guilds.find('id', '570024448371982373').channels.find('id', logchannel)
 const inviteTracker = require('./events/invite-track.js'); // Define the invite tracker plugin
 const shell = require('shelljs'); // Require for executing shell commands (such as git)
 
@@ -103,22 +102,6 @@ client.on('ready', async () => { // If bot was connected:
     autopull
 }); // End
 
-shard.on('ready', () => {
-    const readylog = `[${functiondate(0)} - ${functiontime(0)} -- Shard ${shard.id}/${client.shard.count}] Logged in as ${client.user.tag}` //Set a text who is said I'm connected!
-    console.log(readylog); // Send the text in the console
-    getlogchannel().send(readylog).catch(); // Send the text in the logging channel
-})
-
-shard.on('death', process => {
-    const deathlog = `[${functiondate(0)} - ${functiontime(0)} -- Shard ${shard.id}] Process exited: ${process}`
-    console.log(deathlog);
-    getlogchannel().send(deathlog).catch();
-})
-
-shard.on('reconnecting', () => {
-    const eventmsg = `[${functiondate(0)} - ${functiontime(0)} -- Shard ${shard.id}] reconnecting to WebSocket`
-    console.log(eventmsg)
-})
 
 client.on('message', message => { // If any message was recived
     try {
@@ -202,8 +185,6 @@ dbl.on('error', e => {
     console.log(`[${functiondate(0)} - ${functiontime(0)}] ` + errmsg)
     getlogchannel().send(errmsg)
 })
-
-client.login(config.token)
 
 }catch(e){
 console.log(e)

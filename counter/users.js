@@ -6,7 +6,7 @@ async function users_count(client, channel_id) {
         console.log(`Channel: ${channel_id} cannot be found`);
         return;
     }
-    setInterval(function(){
+    setInterval(async function(){
     const total = await client.shard.fetchClientValues('users.size');
     const bots = await client.shard.fetchClientValues('users.filter(m => m.bot).size')
     const members = total.reduce((prev, val) => prev + val, 0) - bots.reduce((prev, val) => prev + val, 0)
