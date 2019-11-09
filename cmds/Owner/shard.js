@@ -10,9 +10,9 @@ async function shardcommands(message, client, prefix){
             if(!shardManager) return message.reply('shardManager is not set').then(m=>m.delete(7000))
             const shard = new Discord.Shard(shardManager, client.shard.id)
             let embed = new Discord.RichEmbed
-            embed.setTitle(`You are on shard ${client.shard.id}/${client.shard.count}`)
+            embed.setTitle(`You are on shard ${client.shard.id}/${client.shard.count - 1}`)
             .setColor('RANDOM')
-            for (i = 0; i <= client.shard.count; i++){
+            for (i = 0; i < client.shard.count; i++){
                 const guildinshard = await client.shard.fetchClientValues('guilds.size')
                 embed.addField(`Shard #${shard.id}`, `${guildinshard} servers`, true)
                 var totalguilds = guildinshard.reduce((prev, val) => prev + val, 0)
