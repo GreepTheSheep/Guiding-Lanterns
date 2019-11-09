@@ -5,8 +5,8 @@ async function shardcommands(message, client, prefix){
     if (message.author.id === '330030648456642562'  || message.author.id === "460348027463401472"){
         if(message.content.startsWith(prefix + 'shardinfo')){
             var shardManager 
-            if (client.user.id == '577477992608038912') shardManager = new Discord.ShardingManager('../../bot_nigthly.js')
-            if (client.user.id == '569624646475972608') shardManager = new Discord.ShardingManager('../../bot.js')
+            if (client.user.id == '577477992608038912') shardManager = new Discord.ShardingManager('./bot_nigthly.js')
+            if (client.user.id == '569624646475972608') shardManager = new Discord.ShardingManager('./bot.js')
             if(!shardManager) return message.reply('shardManager is not set').then(m=>m.delete(7000))
             const shard = new Discord.Shard(shardManager, client.shard.id)
             let embed = new Discord.RichEmbed
