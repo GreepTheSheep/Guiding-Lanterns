@@ -11,7 +11,8 @@ const client = new Discord.Client({
 client.login(config.token)
 const cooldowns = new Discord.Collection(); //Stores cooldown info for screenshot()
 const logchannel = '589337734754336781' //Set a channel for logging
-const getlogchannel = () => client./*guilds.find(function(id){return id == '570024448371982373'}).*/channels.find(function(id){return id == logchannel})
+const getlogchannel = () => client.guilds.find(function(id){return id == '570024448371982373'}).channels.find(function(id){return id == logchannel})
+if (!getlogchannel()) console.log('ERROR: the bot will not send logs in Discord')
 const inviteTracker = require('./events/invite-track.js'); // Define the invite tracker plugin
 const shell = require('shelljs'); // Require for executing shell commands (such as git)
 
