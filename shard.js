@@ -1,10 +1,6 @@
 try{
 const Discord = require("discord.js")
 const config = require('./data/config.json')
-const bot = new Discord.Client({
-    autoReconnect: true,
-    disableEveryone: true
-})
 // ------------- Shard Management ------------------
 const shard = new Discord.ShardingManager("./bot.js", {
     autoSpawn: true,
@@ -12,11 +8,15 @@ const shard = new Discord.ShardingManager("./bot.js", {
     totalShards: "auto", // "auto" or number
 })
   
-shard.spawn()
+async function launch (shard){
+  shard.spawn().catch(e=>console.error(e))
 
-shard.on('launch', (shard) => {
-  console.log(`⬇ [SHARD] Shard #${shard.id} ⬇` )
-})
+  await shard.on('launch', (shard) => {
+    console.log(`⬇ [SHARD] Shard #${shard.id} ⬇` )
+  })
+}
+
+launch(shard)
 
 
 }catch(e){
