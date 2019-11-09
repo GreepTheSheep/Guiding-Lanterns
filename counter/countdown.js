@@ -14,7 +14,7 @@ const msCountdown = date => Date.parse(date) - Date.parse(new Date());
 
 const countdown = (param) => {
     return (client,channel_id) => {
-        const channel = client.shard.broadcastEval(client.channels.get(channel_id));
+        const channel = client.channels.find(channel_id);
         if (!channel) {
             console.log(`Channel: ${channel_id} cannot be found`);
             return;

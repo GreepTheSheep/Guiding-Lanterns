@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
 async function guilds_count(client, channel_id) {
-    const channel = client.shard.broadcastEval(client.channels.get(channel_id));
+    const channel = client.channels.find('id', channel_id);
     if (!channel) {
         console.log(`Channel: ${channel_id} cannot be found`);
         return;
