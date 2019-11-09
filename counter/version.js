@@ -4,7 +4,7 @@ const packagefile = "./package.json";
 const package = JSON.parse(fs.readFileSync(packagefile, "utf8"));
 
 function message_count(client, channel_id) {
-    const channel = client.channels.find(function(id){return id == channel_id});
+    const channel = client.channels.get(channel_id);
     if (!channel) {
         console.log(`Channel: ${channel_id} cannot be found`);
         return;
