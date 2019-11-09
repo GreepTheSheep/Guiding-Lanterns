@@ -1,7 +1,7 @@
 const config = require('./data/config.json')
 
 const { ShardingManager } = require('discord.js');
-const shard = new ShardingManager('./app.js', {
+const shard = new ShardingManager('./bot.js', {
   token: config.token,
   autoSpawn: true
 });
