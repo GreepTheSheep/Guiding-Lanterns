@@ -74,7 +74,6 @@ client.on('ready', async () => { // If bot was connected:
     const totalguildsize = await client.shard.fetchClientValues('guilds.size')
     dbl.postStats(totalguildsize.reduce((prev, val) => prev + val, 0))
     console.log('Main process loged in')
-    getlogchannel().send('Main process logged!').catch(); // Send the text in the logging channel
     lant_num_members_guild(); //Set the Member count
     lant_num_users();
     lant_num_guilds(); //Set the guilds count
