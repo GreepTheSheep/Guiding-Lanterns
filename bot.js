@@ -59,12 +59,10 @@ const channel_id = require('./data/channel_ids.json');
 
 const num_members_guild = require('./counter/guild-member.js');
 const countdown = require('./counter/countdown.js');
-const num_members = require('./counter/users.js')
 const num_guilds = require('./counter/guilds.js');
 const ver = require('./counter/version.js')
 
 const lant_num_members_guild = () => num_members_guild(client, "562602234265731080", channel_id.members);
-const lant_num_users = () => num_members(client, channel_id.users)
 const lant_num_guilds = () => num_guilds(client, channel_id.guilds);
 const lant_ver = () => ver(client, channel_id.version);
 
@@ -77,7 +75,6 @@ client.on('ready', async () => { // If bot was connected:
     console.log(`[Client] connected in shard ${client.shard.id}`)
     //getlogchannel().send(`${client.user.tag} is connected in shard ${client.shard.id}`)
     lant_num_members_guild(); //Set the Member count
-    lant_num_users();
     lant_num_guilds(); //Set the guilds count
     lant_ver(); //Set version number in the version number channel
     lant_frozen_II(); //Frozen 2 countdown
