@@ -1,7 +1,7 @@
 {
     "name": "guiding-lanterns",
-    "version": "2.7.0",
-    "changelog": "Add a starboard to Twitter: https://twitter.com/GuidingLanterns",
+    "version": "2.8.0",
+    "changelog": "Shard update",
     "description": "",
     "main": "bot.js",
     "repository": {
