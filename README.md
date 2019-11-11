@@ -1,4 +1,4 @@
-# [The Guiding Lanterns](https://Guiding-Lanterns.github.io/Guiding-Lanterns/)
+# [The Guiding Lanterns](https://Guiding-Lanterns.github.io/)
 ## (formerly known as Corona's Lanterns)
 ### Official Discord bot of r/tangled
 ![Version](https://img.shields.io/github/package-json/v/Guiding-Lanterns/Guiding-Lanterns) [![Status](https://discordbots.org/api/widget/status/569624646475972608.svg?noavatar=true)](https://discordbots.org/bot/569624646475972608)  [![Lib](https://discordbots.org/api/widget/lib/569624646475972608.svg?noavatar=true)](https://discord.js.org)  [![Upvotes](https://discordbots.org/api/widget/upvotes/569624646475972608.svg?noavatar=true)](https://discordbots.org/bot/569624646475972608/vote) [![Crowdin](https://badges.crowdin.net/guiding-lanterns/localized.svg)](https://crowdin.com/project/guiding-lanterns)
