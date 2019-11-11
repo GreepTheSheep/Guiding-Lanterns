@@ -11,7 +11,8 @@ const client = new Discord.Client({
 client.login(config.token)
 const cooldowns = new Discord.Collection(); //Stores cooldown info for screenshot()
 const logchannel = '589337734754336781' //Set a channel for logging
-const getlogchannel = () => client.guilds.get('570024448371982373').channels.get(logchannel)
+var getlogchannel = () => client.guilds.get('570024448371982373').channels.get(logchannel)
+if (!getlogchannel) getlogchannel = () => undefined
 const inviteTracker = require('./events/invite-track.js'); // Define the invite tracker plugin
 const shell = require('shelljs'); // Require for executing shell commands (such as git)
 
