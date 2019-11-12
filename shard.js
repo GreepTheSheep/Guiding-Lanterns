@@ -8,6 +8,7 @@ shard.spawn().then(function(){
   if (shard.totalShards == 'auto') console.log('[SHARD] Number of shards set to auto')
   else console.log(`[SHARD] ${shard.totalShards} total shards will start...`)
 })
+.catch(e=>console.error(e))
 
 shard.on('launch', shard => console.log(`[SHARD] Shard ${shard.id} started`));
 
