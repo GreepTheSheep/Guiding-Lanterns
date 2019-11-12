@@ -12,7 +12,10 @@ client.login(config.token)
 const cooldowns = new Discord.Collection(); //Stores cooldown info for screenshot()
 const logchannel = '589337734754336781' //Set a channel for logging
 var getlogchannel = () => client.guilds.get('570024448371982373').channels.get(logchannel)
-if (!getlogchannel) getlogchannel = () => undefined
+if (!getlogchannel) {
+    console.error('Discord log channel not found.')
+    getlogchannel = () =>  undefined
+}
 const inviteTracker = require('./events/invite-track.js'); // Define the invite tracker plugin
 const shell = require('shelljs'); // Require for executing shell commands (such as git)
 
@@ -73,7 +76,7 @@ client.on('ready', async () => { // If bot was connected:
     const totalguildsize = await client.shard.fetchClientValues('guilds.size')
     dbl.postStats(totalguildsize.reduce((prev, val) => prev + val, 0))
     console.log(`[Client] connected in shard ${client.shard.id}`)
-    //getlogchannel().send(`${client.user.tag} is connected in shard ${client.shard.id}`)
+    getlogchannel().send(`${client.user.tag} is connected in shard ${client.shard.id}`)
     lant_num_members_guild(); //Set the Member count
     lant_num_guilds(); //Set the guilds count
     lant_ver(); //Set version number in the version number channel
