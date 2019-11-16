@@ -1,8 +1,6 @@
 const Discord = require('discord.js')
 const Enmap = require('enmap')
 
-const bal = new Enmap({name:"cur_balance"})
-
 function claim(message, client, prefix, cooldowns, dbl, cur_json){
     if(message.content.startsWith(prefix + "claim")) {
 
@@ -37,6 +35,7 @@ function claim(message, client, prefix, cooldowns, dbl, cur_json){
             timestamps.delete(message.author.id);
         }
         // End of cooldown implement
+        const bal = new Enmap({name:"cur_balance"})
 
         let embed = new Discord.RichEmbed
         embed.setTitle(cur_json.name[1])

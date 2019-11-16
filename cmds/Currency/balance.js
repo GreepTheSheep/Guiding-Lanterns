@@ -1,8 +1,6 @@
 const Discord = require('discord.js')
 const Enmap = require('enmap')
 
-const bal = new Enmap({name:"cur_balance"})
-
 function balance(message, client, prefix, cooldowns, cur_json){
     if(message.content.startsWith(prefix + "balance") || message.content.startsWith(prefix + "bal")) {
 
@@ -37,6 +35,7 @@ function balance(message, client, prefix, cooldowns, cur_json){
             timestamps.delete(message.author.id);
         }
         // End of cooldown implement
+        const bal = new Enmap({name:"cur_balance"})
 
         if (!bal.has(message.author.id)) bal.set(message.author.id, 0)
        
