@@ -38,15 +38,9 @@ function balance(message, client, prefix, cooldowns, cur_json){
         }
         // End of cooldown implement
 
-        let embed = new Discord.RichEmbed
-        embed.setTitle(cur_json.name[1])
-            .setColor('RANDOM')
-
         if (!bal.has(message.author.id)) bal.set(message.author.id, 0)
-        
-        embed.setDescription(`You have ${bal.get(message.author.id)} ${cur_json.cur.symbol} in ${cur_json.name[1]}.`)
        
-        message.channel.send(embed);
+        message.reply(`You have ${bal.get(message.author.id)} ${cur_json.cur.symbol} in ${cur_json.name[1]}.`);
       }
 }
 
