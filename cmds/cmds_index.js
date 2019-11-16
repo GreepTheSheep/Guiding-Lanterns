@@ -19,6 +19,13 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     worldsmanager(message, client, prefix, functiondate, functiontime, getlogchannel())
 
     /*--------------------------------
+    ------------ Currency ------------
+    --------------------------------*/
+    
+    const currency_cmds = require('./Currency/cur_index.js');
+    currency_cmds(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext);
+    
+    /*--------------------------------
     ------------- Worlds -------------
     --------------------------------*/
 
