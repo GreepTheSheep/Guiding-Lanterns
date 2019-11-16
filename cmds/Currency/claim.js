@@ -44,16 +44,20 @@ function claim(message, client, prefix, cooldowns, dbl, cur_json){
 
         if (!bal.has(message.author.id)) bal.set(message.author.id, 0)
         
-        dbl.hasVoted(message.author.id).then(voted => {
-            if (voted) {
-                bal.set(message.author.id, bal.get(message.author.id) + 100)
-                embed.setDescription(`You\'re voted before, so you have 100 ${cur_json.cur.symbol} instead of 10 ${cur_json.cur.symbol}.`)
-            } else {
-                bal.set(message.author.id, bal.get(message.author.id) + 10)
-                embed.setDescription(`You got your daily 10 ${cur_json.cur.symbol}.`)
-            }
-        })
-       
+        if (dbl === undefined){
+            bal.set(message.author.id, bal.get(message.author.id) + 10)
+            embed.setDescription(`You got your daily 10 ${cur_json.cur.symbol}.`)
+        } else {
+            dbl.hasVoted(message.author.id).then(voted => {
+                if (voted) {
+                    bal.set(message.author.id, bal.get(message.author.id) + 100)
+                    embed.setDescription(`You\'re voted before, so you have 100 ${cur_json.cur.symbol} instead of 10 ${cur_json.cur.symbol}.`)
+                } else {
+                    bal.set(message.author.id, bal.get(message.author.id) + 10)
+                    embed.setDescription(`You got your daily 10 ${cur_json.cur.symbol}.`)
+                }
+            })
+        }
         message.channel.send(embed);
       }
 }
