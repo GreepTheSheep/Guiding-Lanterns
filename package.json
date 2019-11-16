@@ -20,6 +20,7 @@
     "author": "Greep",
     "license": "Apache-2.0",
     "dependencies": {
+        "@discordjs/uws": "^11.149.1",
         "better-sqlite-pool": "^0.2.2",
         "better-sqlite3": "^5.4.3",
         "bufferutil": "^4.0.1",
