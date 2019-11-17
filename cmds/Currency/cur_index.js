@@ -10,6 +10,9 @@ function currency_cmds(message, client, prefix, functiondate, functiontime, cool
     const balance = require('./balance.js')
     balance(message, client, prefix, cooldowns, cur_json);
 
+    const market = require('./market.js')
+    market(message, client, prefix, cooldowns, cur_json);
+
 }
 
 module.exports = currency_cmds;
