@@ -1,5 +1,7 @@
 const Discord = require('discord.js')
 const Enmap = require('enmap')
+const fs = require('fs');
+const supportfile = './data/support_db.json'
 
 function claim(message, client, prefix, cooldowns, dbl, cur_json){
     if(message.content.startsWith(prefix + "claim")) {
@@ -35,6 +37,10 @@ function claim(message, client, prefix, cooldowns, dbl, cur_json){
             timestamps.delete(message.author.id);
         }
         // End of cooldown implement
+
+        const support_db = JSON.parse(fs.readFileSync(supportfile, "utf8"))
+        const donor = support_db[message.author.id]
+
         const bal = new Enmap({name:"cur_balance"})
 
         let embed = new Discord.RichEmbed
@@ -44,16 +50,31 @@ function claim(message, client, prefix, cooldowns, dbl, cur_json){
         if (!bal.has(message.author.id)) bal.set(message.author.id, 0)
         
         if (dbl === undefined){
-            bal.set(message.author.id, bal.get(message.author.id) + 10)
-            embed.setDescription(`You got your daily 10 ${cur_json.cur.symbol}.`)
+            if (!donor){
+                bal.set(message.author.id, bal.get(message.author.id) + 10)
+                embed.setDescription(`You got your daily 10 ${cur_json.cur.symbol}.`)
+            } else if (donor) {
+                bal.set(message.author.id, bal.get(message.author.id) + 200)
+                embed.setDescription(`You're a supporter! So you got your daily 200 ${cur_json.cur.symbol}.`)
+            }
         } else {
             dbl.hasVoted(message.author.id).then(voted => {
                 if (voted) {
-                    bal.set(message.author.id, bal.get(message.author.id) + 100)
-                    embed.setDescription(`You\'re voted before, so you have 100 ${cur_json.cur.symbol} instead of 10 ${cur_json.cur.symbol}.`)
+                    if (!donor){
+                        bal.set(message.author.id, bal.get(message.author.id) + 100)
+                        embed.setDescription(`You\'re voted before, so you have 100 ${cur_json.cur.symbol} instead of 10 ${cur_json.cur.symbol}.`)
+                    } else if (donor){
+                        bal.set(message.author.id, bal.get(message.author.id) + 500)
+                        embed.setDescription(`You\'re voted before, and you're a supporter! So you have 500 ${cur_json.cur.symbol} instead of 200 ${cur_json.cur.symbol}.`)
+                    }
                 } else {
-                    bal.set(message.author.id, bal.get(message.author.id) + 10)
-                    embed.setDescription(`You got your daily 10 ${cur_json.cur.symbol}.`)
+                    if (!donor){
+                        bal.set(message.author.id, bal.get(message.author.id) + 10)
+                        embed.setDescription(`You got your daily 10 ${cur_json.cur.symbol}.`)
+                    } else if (donor) {
+                        bal.set(message.author.id, bal.get(message.author.id) + 200)
+                        embed.setDescription(`You're a supporter! So you got your daily 200 ${cur_json.cur.symbol}.`)
+                    }
                 }
             })
         }
