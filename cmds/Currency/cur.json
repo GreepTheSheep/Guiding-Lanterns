@@ -8,14 +8,16 @@
         "symbol": "G$",
         "name": "Guiding Coins"
     },
-    "item":{
-        "1":{
+    "item":[
+        {
+            "id": 0,
             "name": "Lantern",
             "cost": 200
         },
-        "2":{
+        {
+            "id": 1,
             "name": "Sword",
             "cost": 1000
         }
-    }
+    ]
 }
