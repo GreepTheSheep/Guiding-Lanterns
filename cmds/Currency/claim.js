@@ -63,23 +63,27 @@ function claim(message, client, prefix, cooldowns, dbl, cur_json){
                     if (!donor){
                         bal.set(message.author.id, bal.get(message.author.id) + 100)
                         embed.setDescription(`You\'re voted before, so you have 100 ${cur_json.cur.symbol} instead of 10 ${cur_json.cur.symbol}.`)
+                        embed.setFooter('Thanks for voting!')
                     } else if (donor){
                         bal.set(message.author.id, bal.get(message.author.id) + 500)
                         embed.setDescription(`You\'re voted before, and you're a supporter! So you have 500 ${cur_json.cur.symbol} instead of 200 ${cur_json.cur.symbol}.`)
+                        embed.setFooter('Thanks for supporting the bot!')
                     }
                 } else {
                     if (!donor){
                         bal.set(message.author.id, bal.get(message.author.id) + 10)
                         embed.setDescription(`You got your daily 10 ${cur_json.cur.symbol}.`)
+                        embed.setFooter('Tip: vote for the bot and get more money')
                     } else if (donor) {
                         bal.set(message.author.id, bal.get(message.author.id) + 200)
                         embed.setDescription(`You're a supporter! So you got your daily 200 ${cur_json.cur.symbol}.`)
+                        embed.setFooter('Tip: vote for the bot and get more and more money')
                     }
                 }
             })
         }
         message.channel.send(embed);
-      }
+    }
 }
 
 module.exports = claim
