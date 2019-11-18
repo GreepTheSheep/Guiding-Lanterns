@@ -92,6 +92,17 @@ client.on('ready', async () => { // If bot was connected:
     }).catch(err=>getlogchannel().send('Error during sending the weekly log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot.log', '')))
     loginterval
 
+    const depsupdate = new Promise(function() { // Automatic npm updates
+        setInterval(function() {
+            getlogchannel().send('Updating npm dependencies...')
+            .then(m=>shell.exec('npm install'), function(code, stdout, stderr){
+                if (code != 0) return m.edit(`Error during updating: \`\`\`${stderr}\`\`\``)
+                m.edit(`\`\`\`${stdout}\`\`\` :white_check_mark:`)
+            })
+        }, 8.64e+7); // Do this every day
+    }).catch(err=>getlogchannel().send('Error during auto pull: ' + err))
+    depsupdate
+
     const autopull = new Promise(function() { // Automatic GitHub pull
         setInterval(function() {
             getlogchannel().send('Pulling changes from GitHub...')
