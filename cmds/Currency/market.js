@@ -3,8 +3,10 @@ const Enmap = require('enmap')
 
 function itemList(cur_json){
     const array = [];
+    var id = 0
     for (var item of cur_json.item){
-        array.push(`[ ${item.id} ] ${item.name} - 📥 ${item.cost} ${cur_json.cur.symbol} - 📤 ${item.sell} ${cur_json.cur.symbol}`)
+        array.push(`[ ${id} ] ${item.name} - 📥 ${item.cost} ${cur_json.cur.symbol} - 📤 ${item.sell} ${cur_json.cur.symbol}`)
+        id++
     }
     return array.join('\n')
 }
@@ -56,7 +58,20 @@ function market(message, client, prefix, cooldowns, cur_json){
                 .addField("Avialble items:", itemList(cur_json))
                 .setFooter(`Your balance: ${bal.get(message.author.id)} ${cur_json.cur.symbol}\n📥 is the price of buying, 📤 is the price of selling\nUsage: ${prefix}market <buy|sell> <ID>`)
             return message.channel.send(listembed)
-        }
+        } else if (args [0] === 'buy' || args[0] === 'sell'){
+            if (!args[1]) return message.reply(`Usage: ${prefix}market <buy|sell> <ID> [count]`)
+            if (isNaN(args[1])) return message.reply('You have not given a correct ID, check with \`' + prefix + 'market list\`')
+            const inv = new Enmap({name:"cur_inventory"})
+            var count;
+            if (!args[2]){
+                count = 1
+            } else if (args[2]) {
+                if (isNaN(args[1])) count = 1
+                else if (!isNaN(args[1])) count = args[2]
+            }
+            if (!inv.has(`${message.author.id}_${args[1]}`)) inv.set(`${message.author.id}_${args[1]}`, 1)
+
+        } else return message.reply(`Usage: ${prefix}market <buy|sell> <ID> [count]`)
     }
 }
 

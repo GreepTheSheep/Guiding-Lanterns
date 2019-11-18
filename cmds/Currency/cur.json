@@ -10,19 +10,16 @@
     },
     "item":[
         {
-            "id": 0,
             "name": "🏮 Lantern",
             "cost": 200,
             "sell": 100
         },
         {
-            "id": 1,
             "name": "🍳 Frying pan",
             "cost": 500,
             "sell": 250
         },
         {
-            "id": 2,
             "name": "⚔️ Sword",
             "cost": 1000,
             "sell": 300
