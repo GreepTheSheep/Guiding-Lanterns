@@ -181,8 +181,8 @@ client.on('messageReactionAdd', reaction => {
 
 client.on('disconnect', event => {
     var eventcodemsg = 'Event Code Message not set for this code'
-    if (event = '1000') eventcodemsg = 'Normal closure'
-    if (event = '1001') eventcodemsg = 'Can\'t connect to WebSocket'
+    if (event === '1000') eventcodemsg = 'Normal closure'
+    if (event === '1001') eventcodemsg = 'Can\'t connect to WebSocket'
     const eventmsg = `Bot down : code ${event}: "${eventcodemsg}"`
     console.log(`[${functiondate(0)} - ${functiontime(0)}] ` + eventmsg)
     getlogchannel().send(eventmsg)
