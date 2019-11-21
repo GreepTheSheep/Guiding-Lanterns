@@ -8,7 +8,8 @@ function givelist(){
         var langs = file.replace(".json", "")
         listarray.push(langs)
     }
-    return listarray.join("\`\n- \`")
+    var list = listarray.join("\`\n- \`")
+    return list
 }
 
 function setLanguage(message, client, prefix, userLang, lang, langtext){
