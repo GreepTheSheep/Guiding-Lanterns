@@ -32,7 +32,7 @@ const waApi = WolframAlphaAPI(wolfID);
                                                                                  .setTitle(title)
                                                                                  );
                 for (var i in pods) {
-                    for (j in pods[i].subpods) {
+                    for (var j in pods[i].subpods) {
                         await embed(message,pods[i].subpods[j].img.src,pods[i].subpods[j].img.alt,pods[i].title);
                     }   
                 }
