@@ -71,11 +71,14 @@ function market(message, client, prefix, cooldowns, cur_json){
             }
             
             if (args[0] === 'buy'){
-                if (!inv.has(`${message.author.id}_${args[1]}`)) inv.set(`${message.author.id}_${args[1]}`, count)
-                else if (inv.has(`${message.author.id}_${args[1]}`)) inv.set(`${message.author.id}_${args[1]}`, inv.get(message.author.id) + count)
-    
                 if (bal.get(message.author.id) < cur_json.item[args[1]].cost) return message.reply('you don\'t have enough money to buy that.')
 
+                if (!inv.has(`${message.author.id}_${args[1]}`)) inv.set(`${message.author.id}_${args[1]}`, count)
+                else if (inv.has(`${message.author.id}_${args[1]}`)) inv.set(`${message.author.id}_${args[1]}`, inv.get(message.author.id) + count)
+                
+                bal.set(message.author.id, bal.get(message.author.id) - cur_json.item[args[1]].cost)
+
+                message.reply(`You just bought a *__${cur_json.item[args[1]].name}__** for **${cur_json.item[args[1]].cost} ${cur_json.cur.symbol}**, enjoy!`)
 
             } else if (args[0] === 'sell'){
 
