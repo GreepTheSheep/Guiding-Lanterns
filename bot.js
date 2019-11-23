@@ -12,7 +12,10 @@ client.login(config.token)
 const cooldowns = new Discord.Collection(); //Stores cooldown info for screenshot()
 const logchannel = '589337734754336781' //Set a channel for logging
 var getlogchannel = () => client.guilds.get('570024448371982373').channels.get(logchannel)
-if (!getlogchannel) getlogchannel = () => undefined
+if (!getlogchannel) {
+    console.error('Discord log channel not found.')
+    getlogchannel = () =>  undefined
+}
 const inviteTracker = require('./events/invite-track.js'); // Define the invite tracker plugin
 const shell = require('shelljs'); // Require for executing shell commands (such as git)
 
@@ -59,12 +62,10 @@ const channel_id = require('./data/channel_ids.json');
 
 const num_members_guild = require('./counter/guild-member.js');
 const countdown = require('./counter/countdown.js');
-const num_members = require('./counter/users.js')
 const num_guilds = require('./counter/guilds.js');
 const ver = require('./counter/version.js')
 
 const lant_num_members_guild = () => num_members_guild(client, "562602234265731080", channel_id.members);
-const lant_num_users = () => num_members(client, channel_id.users)
 const lant_num_guilds = () => num_guilds(client, channel_id.guilds);
 const lant_ver = () => ver(client, channel_id.version);
 
@@ -75,9 +76,8 @@ client.on('ready', async () => { // If bot was connected:
     const totalguildsize = await client.shard.fetchClientValues('guilds.size')
     dbl.postStats(totalguildsize.reduce((prev, val) => prev + val, 0))
     console.log(`[Client] connected in shard ${client.shard.id}`)
-    //getlogchannel().send(`${client.user.tag} is connected in shard ${client.shard.id}`)
+    getlogchannel().send(`${client.user.tag} is connected in shard ${client.shard.id}`)
     lant_num_members_guild(); //Set the Member count
-    lant_num_users();
     lant_num_guilds(); //Set the guilds count
     lant_ver(); //Set version number in the version number channel
     lant_frozen_II(); //Frozen 2 countdown
@@ -91,6 +91,17 @@ client.on('ready', async () => { // If bot was connected:
         }, 8.64e+7); // do this every day
     }).catch(err=>getlogchannel().send('Error during sending the weekly log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot.log', '')))
     loginterval
+
+    const depsupdate = new Promise(function() { // Automatic npm updates
+        setInterval(function() {
+            getlogchannel().send('Updating npm dependencies...')
+            .then(m=>shell.exec('npm install'), function(code, stdout, stderr){
+                if (code != 0) return m.edit(`Error during updating: \`\`\`${stderr}\`\`\``)
+                m.edit(`\`\`\`${stdout}\`\`\` :white_check_mark:`)
+            })
+        }, 8.64e+7); // Do this every day
+    }).catch(err=>getlogchannel().send('Error during auto pull: ' + err))
+    depsupdate
 
     const autopull = new Promise(function() { // Automatic GitHub pull
         setInterval(function() {
@@ -170,8 +181,8 @@ client.on('messageReactionAdd', reaction => {
 
 client.on('disconnect', event => {
     var eventcodemsg = 'Event Code Message not set for this code'
-    if (event = '1000') eventcodemsg = 'Normal closure'
-    if (event = '1001') eventcodemsg = 'Can\'t connect to WebSocket'
+    if (event === '1000') eventcodemsg = 'Normal closure'
+    if (event === '1001') eventcodemsg = 'Can\'t connect to WebSocket'
     const eventmsg = `Bot down : code ${event}: "${eventcodemsg}"`
     console.log(`[${functiondate(0)} - ${functiontime(0)}] ` + eventmsg)
     getlogchannel().send(eventmsg)

@@ -10,7 +10,7 @@ module.exports = {
         wait(1000);
 
         // Load all invites for all guilds and save them to the cache.
-        client.shard.broadcastEval(client.guilds.forEach(async g => {
+        client.guilds.forEach(async g => {
             try {
                 if (g == '562602234265731080'){
                     const guildInvites = await g.fetchInvites();
@@ -19,7 +19,7 @@ module.exports = {
             } catch (e) {
                 console.log(`Invite fetch failed for ${g.id}`)
             };
-        }))
+        })
     },
     track: async (member) => {
 	/*
@@ -29,7 +29,7 @@ module.exports = {
         When a member joins a guild, the bot compare the current invites with the cached ones
 	*/
         try {
-            const logchannel = member.client.shard.broadcastEval(member.client.channels.get("562607103337037834"))
+            const logchannel = member.client.channels.get("562607103337037834")
             const guildInvites = await member.guild.fetchInvites();
 
             //Update cached invites
@@ -42,8 +42,12 @@ module.exports = {
                 if (!checkInvite) return false;
                 return (checkInvite.uses < i.uses);
             });
+            if (!logchannel) return console.log('Invite tracker channel not found');
             if (invite) {
-                const inviter = member.client.shard.broadcastEval(member.client.users.get(invite.inviter.id))
+                const inviter = member.client.users.get(invite.inviter.id)
+                if (!inviter) return logchannel.send(
+                    `${member.user.tag} joined using invite code ${invite.code} from a unknown inviter. Invite was used ${invite.uses} times since its creation.`
+                );
                 return logchannel.send(
                     `${member.user.tag} joined using invite code ${invite.code} from ${inviter.tag}. Invite was used ${invite.uses} times since its creation.`
                 );

@@ -8,7 +8,8 @@ function givelist(){
         var langs = file.replace(".json", "")
         listarray.push(langs)
     }
-    return listarray.join("\`\n- \`")
+    var list = listarray.join("\`\n- \`")
+    return list
 }
 
 function setLanguage(message, client, prefix, userLang, lang, langtext){
@@ -33,9 +34,9 @@ function setLanguage(message, client, prefix, userLang, lang, langtext){
             var langs = file.replace(".json", "")
             listarray.push(langs)
         }
-        listarray.join("\`\n- \`")
+        var list = listarray.join("\`\n- \`")        
 
-        if (listarray.indexOf(args[0]) >= 0){
+        if (list.indexOf(args[0]) >= 0){
             userLang.set(message.author.id, args[0])
             message.channel.send(lang.lang_ok.replace('${args[0]}', args[0]))
         } else {
