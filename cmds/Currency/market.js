@@ -69,7 +69,18 @@ function market(message, client, prefix, cooldowns, cur_json){
                 if (isNaN(args[1])) count = 1
                 else if (!isNaN(args[1])) count = args[2]
             }
-            if (!inv.has(`${message.author.id}_${args[1]}`)) inv.set(`${message.author.id}_${args[1]}`, 1)
+            
+            if (args[0] === 'buy'){
+                if (!inv.has(`${message.author.id}_${args[1]}`)) inv.set(`${message.author.id}_${args[1]}`, count)
+                else if (inv.has(`${message.author.id}_${args[1]}`)) inv.set(`${message.author.id}_${args[1]}`, inv.get(message.author.id) + count)
+    
+                if (bal.get(message.author.id) < cur_json.item[args[1]].cost) return message.reply('you don\'t have enough money to buy that.')
+
+
+            } else if (args[0] === 'sell'){
+
+            }
+            
 
         } else return message.reply(`Usage: ${prefix}market <buy|sell> <ID> [count]`)
     }
