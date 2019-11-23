@@ -12,17 +12,20 @@
         {
             "name": "🏮 Lantern",
             "cost": 200,
-            "sell": 100
+            "sell": 100,
+            "use": "You will throw a lantern, that's beautiful 🤩 https://media.giphy.com/media/5x2Rs659kZWvu/giphy.gif"
         },
         {
             "name": "🍳 Frying pan",
             "cost": 500,
-            "sell": 250
+            "sell": 250,
+            "use": "Ouch 🤕 https://media.giphy.com/media/xjHj7TPdbCN8I/giphy.gif"
         },
         {
             "name": "⚔️ Sword",
             "cost": 1000,
-            "sell": 300
+            "sell": 300,
+            "use": "Take that sword! https://media.giphy.com/media/AxVvkbMOgXZiPlTiXS/giphy.gif"
         }
     ]
 }
