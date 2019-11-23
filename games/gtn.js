@@ -3,7 +3,7 @@ const Enmap = require('enmap');
 const GTN_db = new Enmap({name: "gtn"})
 
 const min=1; 
-const max=100000;
+const max=100;
 
 function gtn(message, client, prefix, functiondate, functiontime, getlogchannel, lang) {
     if (message.content == prefix + 'guessthenumber' || message.content == prefix + 'gtnstart'){
