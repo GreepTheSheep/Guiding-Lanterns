@@ -51,8 +51,8 @@ function claim(message, client, prefix, cooldowns, dbl, cur_json){
         
         if (dbl === undefined){
             if (!donor){
-                bal.set(message.author.id, bal.get(message.author.id) + 10)
-                embed.setDescription(`You got your daily 10 ${cur_json.cur.symbol}.`)
+                bal.set(message.author.id, bal.get(message.author.id) + 100)
+                embed.setDescription(`You got your daily 100 ${cur_json.cur.symbol}.`)
             } else if (donor) {
                 bal.set(message.author.id, bal.get(message.author.id) + 200)
                 embed.setDescription(`You're a supporter! So you got your daily 200 ${cur_json.cur.symbol}.`)
@@ -61,8 +61,8 @@ function claim(message, client, prefix, cooldowns, dbl, cur_json){
             dbl.hasVoted(message.author.id).then(voted => {
                 if (voted) {
                     if (!donor){
-                        bal.set(message.author.id, bal.get(message.author.id) + 100)
-                        embed.setDescription(`You\'re voted before, so you have 100 ${cur_json.cur.symbol} instead of 10 ${cur_json.cur.symbol}.`)
+                        bal.set(message.author.id, bal.get(message.author.id) + 200)
+                        embed.setDescription(`You\'re voted before, so you have 200 ${cur_json.cur.symbol} instead of 10 ${cur_json.cur.symbol}.`)
                         embed.setFooter('Thanks for voting!')
                     } else if (donor){
                         bal.set(message.author.id, bal.get(message.author.id) + 500)
@@ -71,12 +71,12 @@ function claim(message, client, prefix, cooldowns, dbl, cur_json){
                     }
                 } else {
                     if (!donor){
-                        bal.set(message.author.id, bal.get(message.author.id) + 10)
-                        embed.setDescription(`You got your daily 10 ${cur_json.cur.symbol}.`)
+                        bal.set(message.author.id, bal.get(message.author.id) + 100)
+                        embed.setDescription(`You got your daily 100 ${cur_json.cur.symbol}.`)
                         embed.setFooter('Tip: vote for the bot and get more money')
                     } else if (donor) {
-                        bal.set(message.author.id, bal.get(message.author.id) + 200)
-                        embed.setDescription(`You're a supporter! So you got your daily 200 ${cur_json.cur.symbol}.`)
+                        bal.set(message.author.id, bal.get(message.author.id) + 400)
+                        embed.setDescription(`You're a supporter! So you got your daily 400 ${cur_json.cur.symbol}.`)
                         embed.setFooter('Tip: vote for the bot and get more and more money')
                     }
                 }
