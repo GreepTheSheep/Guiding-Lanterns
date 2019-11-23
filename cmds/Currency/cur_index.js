@@ -13,6 +13,8 @@ function currency_cmds(message, client, prefix, functiondate, functiontime, cool
     const market = require('./market.js')
     market(message, client, prefix, cooldowns, cur_json);
 
+    const inventory = require('./inventory.js')
+    inventory(message, client, prefix, cooldowns, cur_json);
 }
 
 module.exports = currency_cmds;
