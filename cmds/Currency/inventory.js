@@ -9,7 +9,7 @@ function itemList(message, cur_json){
     var id = 0
     totalItems = 0
     for (var item of cur_json.item){
-        if (!inv.has(`${message.author.id}_${id}`) || inv.get(`${message.author.id}_${id}`) !== Number) inv.set(`${message.author.id}_${id}`, 0)
+        if (!inv.has(`${message.author.id}_${id}`)) inv.set(`${message.author.id}_${id}`, 0)
         if (inv.get(`${message.author.id}_${id}`) > 0) array.push(`${id} - ${item.name} x${inv.get(`${message.author.id}_${id}`)}`)
         totalItems = totalItems + inv.get(`${message.author.id}_${id}`)
         id++
