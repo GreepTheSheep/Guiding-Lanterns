@@ -80,7 +80,7 @@ function inventory(message, client, prefix, cooldowns, cur_json){
                 .setDescription(itemList(message, cur_json))
                 .setFooter(`Your balance: ${bal.get(message.author.id)} ${cur_json.cur.symbol}`)
             return message.channel.send(listembed)
-        } else if (args[0].startsWith(`<`).endsWith('>')){
+        } else if (args[0].startsWith(`<`) && args[0].endsWith(`>`)){
             const rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]))
             listembed.setTitle(`Inventory of ${rUser.user.username}`)
                 .setColor("#0567DA")
