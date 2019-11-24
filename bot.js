@@ -77,6 +77,8 @@ client.on('ready', async () => { // If bot was connected:
     dbl.postStats(totalguildsize.reduce((prev, val) => prev + val, 0))
     console.log(`[Client] connected in shard ${client.shard.id}`)
     getlogchannel().send(`${client.user.tag} is connected in shard ${client.shard.id}`)
+    const versionCheck = require('./events/ver-check.js');
+    versionCheck(client);
     lant_num_members_guild(); //Set the Member count
     lant_num_guilds(); //Set the guilds count
     lant_ver(); //Set version number in the version number channel
