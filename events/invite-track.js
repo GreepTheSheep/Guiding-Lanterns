@@ -1,3 +1,4 @@
+
 //Invite tracking
 const invites = {};
 //Delay without blocking whole script
@@ -21,7 +22,7 @@ module.exports = {
             };
         })
     },
-    track: async (member) => {
+    track: async (client, member) => {
 	/*
         WARNING: This is error prone and can lead to misinformation
 	^^ There is no way to get around this. There is no event for invites (neither creation or change)
@@ -29,7 +30,7 @@ module.exports = {
         When a member joins a guild, the bot compare the current invites with the cached ones
 	*/
         try {
-            const logchannel = member.client.channels.get("562607103337037834")
+            const logchannel = client.channels.get("562607103337037834")
             const guildInvites = await member.guild.fetchInvites();
 
             //Update cached invites

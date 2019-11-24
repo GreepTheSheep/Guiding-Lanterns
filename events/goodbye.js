@@ -33,7 +33,7 @@ function goodbye(member, client) {
     }
     if (member.guild.id === '570024448371982373'){
         let embed = new Discord.RichEmbed()
-        embed.setColor("#01B023")
+        embed.setColor("#910002")
         .setTimestamp()
         .addField(`${msg}`, `**${member.user.username}**`)
         .setImage(`${img}`)

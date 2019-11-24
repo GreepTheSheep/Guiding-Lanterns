@@ -114,8 +114,10 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
         const screenshot = require('./Guild/screenshot.js');
         screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel(), dbl);
 
+        /*
         const servericon = require('./Guild/icon.js');
         servericon(message, client, prefix, cooldowns)
+        */
     }
 
     //-----------------------------------------------------------------------------------------------

@@ -77,6 +77,8 @@ client.on('ready', async () => { // If bot was connected:
     dbl.postStats(totalguildsize.reduce((prev, val) => prev + val, 0))
     console.log(`[Client] connected in shard ${client.shard.id}`)
     getlogchannel().send(`${client.user.tag} is connected in shard ${client.shard.id}`)
+    const versionCheck = require('./events/ver-check.js');
+    versionCheck(client);
     lant_num_members_guild(); //Set the Member count
     lant_num_guilds(); //Set the guilds count
     lant_ver(); //Set version number in the version number channel
@@ -145,7 +147,7 @@ client.on('guildMemberAdd', member => { // If any member join a server (or guild
     if (member.guild.id === '562602234265731080'|| member.guild.id === '570024448371982373') { // If the member join Kingdom of Corona, do the welcome script
         const welcome = require('./events/welcome.js');
         welcome(member, client);
-        if (member.guild.id === '562602234265731080') inviteTracker.track(member);
+        if (member.guild.id === '562602234265731080') inviteTracker.track(client, member);
         console.log(`\n${member.user.tag} joined ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who joined
     }
     lant_num_members_guild(); //Change the members count (+1)
