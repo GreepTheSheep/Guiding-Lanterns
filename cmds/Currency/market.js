@@ -62,7 +62,8 @@ function market(message, client, prefix, cooldowns, cur_json){
             return message.channel.send(listembed)
         } else if (args [0] === 'buy' || args[0] === 'sell'){
             if (!args[1]) return message.reply(`Usage: ${prefix}market <buy|sell> <ID> [count]`)
-            if (('' + args[1]).match(/^[\d.]+%$/)) return message.reply('You have not given a correct ID, check with \`' + prefix + 'market list\`')
+            if (isNaN(Number(args[1]))) return message.reply('You have not given a correct ID, check with \`' + prefix + 'market list\`')
+            if (!cur_json.item[Number(args[1])]) return message.reply('This item does not exist')
             const inv = new Enmap({name:"cur_inventory"})
             var count;
             

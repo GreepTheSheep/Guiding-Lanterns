@@ -9,7 +9,7 @@ function itemList(message, cur_json){
     var id = 0
     totalItems = 0
     for (var item of cur_json.item){
-        if (!inv.has(`${message.author.id}_${id}`)) inv.set(`${message.author.id}_${id}`, 0)
+        if (!inv.has(`${message.author.id}_${id}`) || inv.get(`${message.author.id}_${id}`) !== Number) inv.set(`${message.author.id}_${id}`, 0)
         if (inv.get(`${message.author.id}_${id}`) > 0) array.push(`${id} - ${item.name} x${inv.get(`${message.author.id}_${id}`)}`)
         totalItems = totalItems + inv.get(`${message.author.id}_${id}`)
         id++
@@ -66,8 +66,9 @@ function inventory(message, client, prefix, cooldowns, cur_json){
                 .setDescription(itemList(message, cur_json))
                 .setFooter(`Your balance: ${bal.get(message.author.id)} ${cur_json.cur.symbol}`)
             return message.channel.send(listembed)
-        } else if (args[0] == 'reload'){
-            message.channel.send('Coming soon...')
+        } else if (args[0].startsWith(`<@`).endsWith('>')){
+            
+        }
         } else {
             let listembed = new Discord.RichEmbed()
             listembed.setTitle(`Inventory of ${message.author.username}`)
