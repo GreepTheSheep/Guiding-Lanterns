@@ -18,6 +18,21 @@ function itemList(message, cur_json){
     return array.join('\n')
 }
 
+function userItemList(rUser, cur_json){
+    const inv = new Enmap({name:"cur_inventory"})
+    const array = [];
+    var id = 0
+    totalItems = 0
+    for (var item of cur_json.item){
+        if (!inv.has(`${rUser.id}_${id}`) || inv.get(`${rUser.id}_${id}`) !== Number) inv.set(`${rUser.id}_${id}`, 0)
+        if (inv.get(`${rUser.id}_${id}`) > 0) array.push(`${id} - ${item.name} x${inv.get(`${rUser.id}_${id}`)}`)
+        totalItems = totalItems + inv.get(`${rUser.id}_${id}`)
+        id++
+    }
+    array.push(`Total number of items ${rUser.user.username} have: ${totalItems}`)
+    return array.join('\n')
+}
+
 function inventory(message, client, prefix, cooldowns, cur_json){
     if(message.content.startsWith(prefix + "inventory") || message.content.startsWith(prefix + "inv")) {
 
@@ -56,22 +71,23 @@ function inventory(message, client, prefix, cooldowns, cur_json){
         const inv = new Enmap({name:"cur_inventory"})
 
         if (!bal.has(message.author.id)) bal.set(message.author.id, 0)
-       
+        let listembed = new Discord.RichEmbed()
         let args = message.content.split(" ")
         args.shift()
         if (args.length < 1 || args[0] === 'list') {
-            let listembed = new Discord.RichEmbed()
             listembed.setTitle(`Inventory of ${message.author.username}`)
                 .setColor("#0567DA")
                 .setDescription(itemList(message, cur_json))
                 .setFooter(`Your balance: ${bal.get(message.author.id)} ${cur_json.cur.symbol}`)
             return message.channel.send(listembed)
         } else if (args[0].startsWith(`<`).endsWith('>')){
-            const user = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]))
-            
-        }
+            const rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]))
+            listembed.setTitle(`Inventory of ${rUser.user.username}`)
+                .setColor("#0567DA")
+                .setDescription(itemList(rUser, cur_json))
+                .setFooter(`His/Her balance: ${bal.get(rUser.id)} ${cur_json.cur.symbol}`)
+            return message.channel.send(listembed)
         } else {
-            let listembed = new Discord.RichEmbed()
             listembed.setTitle(`Inventory of ${message.author.username}`)
                 .setColor("#0567DA")
                 .setDescription(itemList(message, cur_json))
