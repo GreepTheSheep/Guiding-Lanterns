@@ -24,7 +24,7 @@ function userItemList(rUser, cur_json){
     var id = 0
     totalItems = 0
     for (var item of cur_json.item){
-        if (!inv.has(`${rUser.id}_${id}`) || inv.get(`${rUser.id}_${id}`) !== Number) inv.set(`${rUser.id}_${id}`, 0)
+        if (!inv.has(`${rUser.id}_${id}`)) inv.set(`${rUser.id}_${id}`, 0)
         if (inv.get(`${rUser.id}_${id}`) > 0) array.push(`${id} - ${item.name} x${inv.get(`${rUser.id}_${id}`)}`)
         totalItems = totalItems + inv.get(`${rUser.id}_${id}`)
         id++
