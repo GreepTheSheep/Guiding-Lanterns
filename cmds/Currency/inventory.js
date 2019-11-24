@@ -84,7 +84,7 @@ function inventory(message, client, prefix, cooldowns, cur_json){
             const rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]))
             listembed.setTitle(`Inventory of ${rUser.user.username}`)
                 .setColor("#0567DA")
-                .setDescription(itemList(rUser, cur_json))
+                .setDescription(userItemList(rUser, cur_json))
                 .setFooter(`His/Her balance: ${bal.get(rUser.id)} ${cur_json.cur.symbol}`)
             return message.channel.send(listembed)
         } else {
