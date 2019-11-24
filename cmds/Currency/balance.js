@@ -44,6 +44,7 @@ function balance(message, client, prefix, cooldowns, cur_json){
             if (!bal.has(message.author.id)) bal.set(message.author.id, 0)
             message.reply(`You have ${bal.get(message.author.id)} ${cur_json.cur.symbol} in ${cur_json.name[1]}.`);
         } else {
+            if (rUser.user.bot) return message.reply('Bots can\'t have money')
             if (!bal.has(rUser.id)) bal.set(rUser.id, 0)
             message.channel.send(`${rUser.user.username} has ${bal.get(rUser.id)} ${cur_json.cur.symbol} in ${cur_json.name[1]}.`);
         }

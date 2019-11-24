@@ -82,6 +82,7 @@ function inventory(message, client, prefix, cooldowns, cur_json){
                 .setFooter(`Your balance: ${bal.get(message.author.id)} ${cur_json.cur.symbol}`)
             return message.channel.send(listembed)
         } else {
+            if (rUser.user.bot) return message.reply('Bots can\'t have items')
             if (!bal.has(rUser.id)) bal.set(rUser.id, 0)
             listembed.setTitle(`Inventory of ${rUser.user.username}`)
                 .setColor("#0567DA")

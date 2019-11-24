@@ -13,6 +13,7 @@ function cur_owner(message, client, prefix, cooldowns, cur_json){
             let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
             if (!rUser) return message.react('❌')
             if (!args[1]) return message.react('❌')
+            if (rUser.user.bot) return message.react('❌')
             bal.set(rUser.id, Number(args[1]))
             message.react('✅')
         }
