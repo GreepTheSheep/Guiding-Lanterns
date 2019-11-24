@@ -36,10 +36,18 @@ function balance(message, client, prefix, cooldowns, cur_json){
         }
         // End of cooldown implement
         const bal = new Enmap({name:"cur_balance"})
+        let args = message.content.split(" ")
+        args.shift()
+        const rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]))
 
-        if (!bal.has(message.author.id)) bal.set(message.author.id, 0)
-       
-        message.reply(`You have ${bal.get(message.author.id)} ${cur_json.cur.symbol} in ${cur_json.name[1]}.`);
+        if (!rUser){
+            if (!bal.has(message.author.id)) bal.set(message.author.id, 0)
+            message.reply(`You have ${bal.get(message.author.id)} ${cur_json.cur.symbol} in ${cur_json.name[1]}.`);
+        } else {
+            if (!bal.has(rUser.id)) bal.set(rUser.id, 0)
+            message.channel.send(`${rUser.user.username} has ${bal.get(rUser.id)} ${cur_json.cur.symbol} in ${cur_json.name[1]}.`);
+        }
+        
       }
 }
 
