@@ -14,15 +14,15 @@ function versionCheck(client) {
     const verCheckfile = "./data/ver-to-check.txt"
     const verCheck = fs.readFileSync(verCheckfile, 'utf8')
 
-    if (!verCheck) fs.writeFile(verCheckfile, package.version.slice(0, package.version.indexOf('.', package.version.indexOf('.') + 1) + 1), function(){
+    if (!verCheck) fs.writeFile(verCheckfile, package.version.slice(0, package.version.indexOf('.', package.version.indexOf('.') + 1)), function(){
         console.log(verCheckfile + ' doesn\'t exist, writing...')
     })
 
     if (package.version == verCheck) return
 
     if (package.version != verCheck) {
-        fs.writeFileSync(verCheckfile, package.version.slice(0, package.version.indexOf('.', package.version.indexOf('.') + 1) + 1))
-        if (package.version.slice(0, package.version.indexOf('.', package.version.indexOf('.') + 1) + 1) =! verCheck) {
+        fs.writeFileSync(verCheckfile, package.version.slice(0, package.version.indexOf('.', package.version.indexOf('.') + 1)))
+        if (package.version.slice(0, package.version.indexOf('.', package.version.indexOf('.') + 1)) =! verCheck) {
             channel.send(`<@&627499119153512479> 
             > **__New version: ${package.version}__
             > What's new: *${package.changelog}***
