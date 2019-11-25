@@ -33,20 +33,45 @@ function help(message, client, prefix, lang, cooldowns) {
             timestamps.delete(message.guild.id);
         }
         // End of cooldown implement        
+
+        const modules = [
+            "Disney",
+            "Util",
+            "Fun",
+            "Games",
+            "Other"
+        ]
         
         let embed = new Discord.RichEmbed()
-        
+
+        let args = message.content.split(" ")
+        args.shift()
         embed.setTitle(lang.help_title)
             .setColor("#9C01C4")
-        if (message.guild.id == '562602234265731080') embed.addField("**__Kingdom of Corona: ☀__**", lang.help_kingdomofcorona.split('${prefix}').join(prefix));
-        embed.addField("**°o° Disney:**", lang.help_disney.split('${prefix}').join(prefix), true)
-            .addField("Util:", lang.help_util.split('${prefix}').join(prefix), true)
-            .addField("Fun:", lang.help_fun.split('${prefix}').join(prefix), true)
-            .addField("Games:", lang.help_game.split('${prefix}').join(prefix), true)
-            .addField(lang.help_anyproblems, lang.help_problems2.split('${prefix}').join(prefix), true)
-            .addField('Other:', lang.help_other.split('${prefix}').join(prefix), true)
             .setFooter(lang.help_footer, client.user.displayAvatarURL)
-        message.channel.send(embed)
+        
+        if (args.length < 1 || args[0].toLowerCase() === 'list') {
+            if (message.guild.id == '562602234265731080') embed.addField("**__Kingdom of Corona: ☀__**", lang.help_kingdomofcorona.split('${prefix}').join(prefix));
+            embed.addField("Modules:", `\`${modules.join("\`\n- \`")}\``)
+                .addField("Usage:", `\`${prefix}help <module>\``)
+                .addField(lang.help_anyproblems, lang.help_problems2.split('${prefix}').join(prefix), true)
+            return message.channel.send(embed)
+        } else if (args[0].toLowerCase() == modules[0].toLowerCase()){
+            embed.addField("**°o° Disney:**", lang.help_disney.split('${prefix}').join(prefix), true)
+            return message.channel.send(embed)
+        } else if (args[0].toLowerCase() == modules[1].toLowerCase()){
+            embed.addField("Util:", lang.help_util.split('${prefix}').join(prefix), true)
+            return message.channel.send(embed)
+        } else if (args[0].toLowerCase() == modules[2].toLowerCase()){
+            embed.addField("Fun:", lang.help_fun.split('${prefix}').join(prefix), true)
+            return message.channel.send(embed)
+        } else if (args[0].toLowerCase() == modules[3].toLowerCase()){
+            embed.addField("Games:", lang.help_game.split('${prefix}').join(prefix), true)
+            return message.channel.send(embed)
+        } else if (args[0].toLowerCase() == modules[4].toLowerCase()){
+            embed.addField('Other:', lang.help_other.split('${prefix}').join(prefix), true)
+            return message.channel.send(embed)
+        }
     }
 }
 

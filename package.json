@@ -1,7 +1,7 @@
 {
     "name": "guiding-lanterns",
-    "version": "2.8.0",
-    "changelog": "Shard update",
+    "version": "2.9.0",
+    "changelog": "New disposition of help command",
     "description": "",
     "main": "bot.js",
     "repository": {
