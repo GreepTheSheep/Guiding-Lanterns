@@ -33,7 +33,7 @@ function userItemList(rUser, cur_json){
     return array.join('\n')
 }
 
-function inventory(message, client, prefix, cooldowns, cur_json){
+function inventory(message, client, prefix, cooldowns, cur_json, lang){
     if(message.content.startsWith(prefix + "inventory") || message.content.startsWith(prefix + "inv")) {
 
         //Implement cooldown

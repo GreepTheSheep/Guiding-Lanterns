@@ -8,19 +8,19 @@ function currency_cmds(message, client, prefix, functiondate, functiontime, cool
     cur_owner(message, client, prefix, cooldowns, cur_json);
     
     const claim = require('./claim.js')
-    claim(message, client, prefix, cooldowns, dbl, cur_json);
+    claim(message, client, prefix, cooldowns, dbl, cur_json, lang);
 
     const balance = require('./balance.js')
-    balance(message, client, prefix, cooldowns, cur_json);
+    balance(message, client, prefix, cooldowns, cur_json, lang);
 
     const market = require('./market.js')
-    market(message, client, prefix, cooldowns, cur_json);
+    market(message, client, prefix, cooldowns, cur_json, lang);
 
     const inventory = require('./inventory.js')
-    inventory(message, client, prefix, cooldowns, cur_json);
+    inventory(message, client, prefix, cooldowns, cur_json, lang);
 
     const use = require('./use.js')
-    use(message, client, prefix, cooldowns, cur_json);
+    use(message, client, prefix, cooldowns, cur_json, lang);
 }
 
 module.exports = currency_cmds;

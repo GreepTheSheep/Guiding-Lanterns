@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 const Enmap = require('enmap')
 
-function use(message, client, prefix, cooldowns, cur_json){
+function use(message, client, prefix, cooldowns, cur_json, lang){
     if(message.content.startsWith(prefix + "use")) {
 
         //Implement cooldown

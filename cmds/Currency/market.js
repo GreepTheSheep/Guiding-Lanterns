@@ -13,7 +13,7 @@ function itemList(message, cur_json){
     return array.join('\n')
 }
 
-function market(message, client, prefix, cooldowns, cur_json){
+function market(message, client, prefix, cooldowns, cur_json, lang){
     if(message.content.startsWith(prefix + "market") || message.content.startsWith(prefix + "shop")) {
 
         //Implement cooldown
@@ -58,12 +58,12 @@ function market(message, client, prefix, cooldowns, cur_json){
             listembed.setTitle(cur_json.name[2])
                 .setColor("#0567DA")
                 .addField("Avialble items:", itemList(message, cur_json))
-                .setFooter(`Your balance: ${bal.get(message.author.id)} ${cur_json.cur.symbol}\n📦 is the number on your inventory, 📥 is the price of buying, 📤 is the price of selling\nUsage: ${prefix}market <buy|sell> <ID>`)
+                .setFooter(lang.shop_list_footer.split('${bal}').join(`${bal.get(message.author.id)} ${cur_json.cur.symbol}`) + `\nUsage: ${prefix}market <buy|sell> <ID>`)
             return message.channel.send(listembed)
         } else if (args [0] === 'buy' || args[0] === 'sell'){
             if (!args[1]) return message.reply(`Usage: ${prefix}market <buy|sell> <ID> [count]`)
-            if (isNaN(Number(args[1]))) return message.reply('You have not given a correct ID, check with \`' + prefix + 'market list\`')
-            if (!cur_json.item[Number(args[1])]) return message.reply('This item does not exist')
+            if (isNaN(Number(args[1]))) return message.reply(lang.shop_not_correct_id.split('${command}').join(`\`${prefix}market list\``))
+            if (!cur_json.item[Number(args[1])]) return message.reply(lang.shop_not_exist)
             const inv = new Enmap({name:"cur_inventory"})
             var count;
             
@@ -72,13 +72,13 @@ function market(message, client, prefix, cooldowns, cur_json){
             } else if (args[2]) {
                 if (isNaN(Number(args[2]))) count = 1
                 else if (!isNaN(Number(args[2]))) {
-                    if (Number(args[2]) === 0) return message.reply('Your [count] argument is invalid, check your arguments.')
+                    if (Number(args[2]) === 0) return message.reply(lang.shop_invalid_args)
                     count = Number(args[2])
                 }
             }
             
             if (args[0] === 'buy'){
-                if (bal.get(message.author.id) < cur_json.item[args[1]].cost * count) return message.reply(`you don\'t have enough money to buy ${count} ${cur_json.item[args[1]].name}.`)
+                if (bal.get(message.author.id) < cur_json.item[args[1]].cost * count) return message.reply(lang.shop_buy_not_enough.split('${item}').join(`${count} ${cur_json.item[args[1]].name}.`))
 
                 if (!inv.has(`${message.author.id}_${args[1]}`)) inv.set(`${message.author.id}_${args[1]}`, count)
 
@@ -86,18 +86,18 @@ function market(message, client, prefix, cooldowns, cur_json){
                 
                 bal.set(message.author.id, bal.get(message.author.id) - cur_json.item[args[1]].cost * count)
 
-                message.reply(`You just bought __${count} **${cur_json.item[args[1]].name}__** for **${cur_json.item[args[1]].cost * count} ${cur_json.cur.symbol}**, enjoy!`)
+                message.reply(lang.shop_buy_sucess.replace('${item}', `${count} ${cur_json.item[args[1]].name}`).replace('${money}', `${cur_json.item[args[1]].cost * count} ${cur_json.cur.symbol}`))
 
             } else if (args[0] === 'sell'){
                 if (!inv.has(`${message.author.id}_${args[1]}`)) inv.set(`${message.author.id}_${args[1]}`, 0)
 
-                if (inv.get(`${message.author.id}_${args[1]}`) <= 0) return message.reply(`you can't sell what you don't have, it makes sense to me too.`)
+                if (inv.get(`${message.author.id}_${args[1]}`) <= 0) return message.reply(lang.shop_sell_nothing)
                 
                 if (count > inv.get(`${message.author.id}_${args[1]}`)) count = inv.get(`${message.author.id}_${args[1]}`)
                 
                 inv.set(`${message.author.id}_${args[1]}`, inv.get((`${message.author.id}_${args[1]}`) - count))
                 bal.set(message.author.id, bal.get(message.author.id) + cur_json.item[args[1]].sell * count)
-                message.reply(`You just sold __${count} **${cur_json.item[args[1]].name}__** for **${cur_json.item[args[1]].sell * count} ${cur_json.cur.symbol}**!`)  
+                message.reply(lang.shop_sell_sucess.replace('${item}', `${count} ${cur_json.item[args[1]].name}`).replace('${money}', `${cur_json.item[args[1]].cost * count} ${cur_json.cur.symbol}`))  
             }
         } else return message.reply(`Usage: ${prefix}market <buy|sell> <ID> [count]`)
     }

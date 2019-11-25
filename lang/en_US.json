@@ -49,5 +49,13 @@
     "invite_desc": "I am very happy that you are part of the family!\nEmbark on a magical world on your Discord server!\nAnd, as Walt Disney said: \"If you can dream it, you can do it.\"",
     "twitter_info" : "The bot uses a very different starboard system than traditional starboards. Indeed, Discord messages that contain at least 3 ⭐ reactions are automatically sent to a Twitter account provided for this purpose.\nDon't worry, only the text and, if you have sent one, an image will be sent on Twitter.\n\nThis parameter is set by default to send, but you can tell it not to send by doing the command `${prefix}twitter set`",
     "twitter_send" : "The bot will now send all messages that contain at least 3 star reactions on Twitter",
-    "twitter_no_send" : "The bot will **no longer** send all messages that contain at least 3 star reactions on Twitter"
+    "twitter_no_send" : "The bot will **no longer** send all messages that contain at least 3 star reactions on Twitter",
+    "shop_list_footer": "Your balance: ${bal}\n📦 is the number on your inventory, 📥 is the price of buying, 📤 is the price of selling",
+    "shop_not_correct_id": "You have not given a correct ID, check with ${command}",
+    "shop_not_exist": "This item does not exist",
+    "shop_invalid_args": "Your [count] argument is invalid, check your arguments.",
+    "shop_buy_not_enough": "you don't have enough money to buy ${item}",
+    "shop_buy_sucess": "You just bought ${item} for ${money}, enjoy!",
+    "shop_sell_nothing": "you can't sell what you don't have, it makes sense to me too.",
+    "shop_sell_sucess": "You just sell ${item} for ${money}, enjoy!"
 }

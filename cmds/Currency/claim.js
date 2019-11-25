@@ -3,7 +3,7 @@ const Enmap = require('enmap')
 const fs = require('fs');
 const supportfile = './data/support_db.json'
 
-function claim(message, client, prefix, cooldowns, dbl, cur_json){
+function claim(message, client, prefix, cooldowns, dbl, cur_json, lang){
     if(message.content.startsWith(prefix + "claim")) {
 
         //Implement cooldown

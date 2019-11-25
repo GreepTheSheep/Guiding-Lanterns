@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 const Enmap = require('enmap')
 
-function balance(message, client, prefix, cooldowns, cur_json){
+function balance(message, client, prefix, cooldowns, cur_json, lang){
     if(message.content.startsWith(prefix + "balance") || message.content.startsWith(prefix + "bal")) {
 
         //Implement cooldown
