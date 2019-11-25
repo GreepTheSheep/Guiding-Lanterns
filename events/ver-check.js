@@ -20,7 +20,7 @@ function versionCheck(client) {
 
     if (package.version == verCheck) return
 
-    if (package.version =! verCheck) {
+    if (package.version != verCheck) {
         fs.writeFileSync(verCheckfile, package.version)
         if (package.version.slice(0, package.version.indexOf('.', package.version.indexOf('.')) + 1) =! verCheck.slice(0, verCheck.indexOf('.', verCheck.indexOf('.')) + 1)) {
             channel.send(`<@&627499119153512479> 
