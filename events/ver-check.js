@@ -22,7 +22,7 @@ function versionCheck(client) {
 
     if (package.version =! verCheck) {
         fs.writeFileSync(verCheckfile, package.version)
-        if (package.version.slice(0, package.version.indexOf('.', package.version.search('.') + 1)) =! verCheck.slice(0, verCheck.indexOf('.', verCheck.search('.') + 1))) {
+        if (package.version.slice(0, package.version.indexOf('.', package.version.indexOf('.')) + 1) =! verCheck.slice(0, verCheck.indexOf('.', verCheck.indexOf('.')) + 1)) {
             channel.send(`<@&627499119153512479> 
             > **__New version: ${package.version}__
             > What's new: *${package.changelog}***
