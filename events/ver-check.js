@@ -20,16 +20,14 @@ function versionCheck(client) {
 
     if (package.version == verCheck) return
 
-    if (package.version != verCheck) {
+    if (package.version.slice(0, package.version.indexOf('.', package.version.indexOf('.') + 1)) != verCheck) {
         fs.writeFileSync(verCheckfile, package.version.slice(0, package.version.indexOf('.', package.version.indexOf('.') + 1)))
-        if (package.version.slice(0, package.version.indexOf('.', package.version.indexOf('.') + 1)) =! verCheck) {
             channel.send(`<@&627499119153512479> 
             > **__New version: ${package.version}__
             > What's new: *${package.changelog}***
             
             Type \`!botnotif\` to get notified of new features (you can disable by typing \`!disablebotnotif\``)
 
-        }
     }
 
 }
