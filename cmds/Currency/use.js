@@ -42,11 +42,11 @@ function use(message, client, prefix, cooldowns, cur_json, lang){
        
         let args = message.content.split(" ")
         args.shift()
-        if (args.length < 1) return message.reply(`Usage: \`${prefix}use <ID of the item you want to use>\``)
-        if (isNaN(args[0])) return message.reply(`Usage: \`${prefix}use <ID of the item you want to use>\``)
-        if (!cur_json.item[Number(args[0])].use) return message.channel.send('Hmm... You can\'t do anything with this item, sorry!')
-        if (!cur_json.item[Number(args[0])]) return message.reply('This item does not exist')
-        if (inv.get(`${message.author.id}_${args[0]}`) <= 0) return message.reply(`you can't use what you don't have, it makes sense to me too.`)
+        if (args.length < 1) return message.reply(`Usage: \`${prefix}use <${lang.use_usage}>\``)
+        if (isNaN(args[0])) return message.reply(`Usage: \`${prefix}use <${lang.use_usage}>\``)
+        if (!cur_json.item[Number(args[0])]) return message.reply(lang.shop_not_exist)
+        if (!cur_json.item[Number(args[0])].use) return message.channel.send(lang.use_impossible)
+        if (inv.get(`${message.author.id}_${args[0]}`) <= 0) return message.reply(lang.use_nothing)
         
         inv.set(`${message.author.id}_${args[0]}`, inv.get(`${message.author.id}_${args[0]}`) - 1)
         message.channel.send(cur_json.item[Number(args[0])].use)

@@ -42,11 +42,11 @@ function balance(message, client, prefix, cooldowns, cur_json, lang){
 
         if (!rUser){
             if (!bal.has(message.author.id)) bal.set(message.author.id, 0)
-            message.reply(`You have ${bal.get(message.author.id)} ${cur_json.cur.symbol} in ${cur_json.name[1]}.`);
+            message.reply(`${lang.bal_your} ${bal.get(message.author.id)} ${cur_json.cur.name}.`);
         } else {
-            if (rUser.user.bot) return message.reply('Bots can\'t have money')
+            if (rUser.user.bot) return message.reply(lang.bal_bot_err)
             if (!bal.has(rUser.id)) bal.set(rUser.id, 0)
-            message.channel.send(`${rUser.user.username} has ${bal.get(rUser.id)} ${cur_json.cur.symbol} in ${cur_json.name[1]}.`);
+            message.channel.send(`${lang.bal_his} ${bal.get(rUser.id)} ${cur_json.cur.name}.`);
         }
         
       }

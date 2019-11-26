@@ -4,7 +4,7 @@ const fs = require('fs');
 const supportfile = './data/support_db.json'
 
 function claim(message, client, prefix, cooldowns, dbl, cur_json, lang){
-    if(message.content.startsWith(prefix + "claim")) {
+    if(message.content.startsWith(prefix + "claim") || message.content.startsWith(prefix + "daily")) {
 
         //Implement cooldown
         if (!cooldowns.has(prefix + 'claim')) {
@@ -52,32 +52,32 @@ function claim(message, client, prefix, cooldowns, dbl, cur_json, lang){
         if (dbl === undefined){
             if (!donor){
                 bal.set(message.author.id, bal.get(message.author.id) + 100)
-                embed.setDescription(`You got your daily 100 ${cur_json.cur.symbol}.`)
+                embed.setDescription(lang.claim_normal.replace('${money}', `100 ${cur_json.cur.symbol}`))
             } else if (donor) {
                 bal.set(message.author.id, bal.get(message.author.id) + 200)
-                embed.setDescription(`You're a supporter! So you got your daily 200 ${cur_json.cur.symbol}.`)
+                embed.setDescription(lang.claim_support.replace('${money}', `200 ${cur_json.cur.symbol}`))
             }
         } else {
             dbl.hasVoted(message.author.id).then(voted => {
                 if (voted) {
                     if (!donor){
                         bal.set(message.author.id, bal.get(message.author.id) + 200)
-                        embed.setDescription(`You\'re voted before, so you have 200 ${cur_json.cur.symbol} instead of 10 ${cur_json.cur.symbol}.`)
-                        embed.setFooter('Thanks for voting!')
+                        embed.setDescription(lang.claim_vote1.replace('${money1}', `200 ${cur_json.cur.symbol}`).replace('${money2}', `100 ${cur_json.cur.symbol}`))
+                        embed.setFooter(lang.claim_thanks_vote)
                     } else if (donor){
                         bal.set(message.author.id, bal.get(message.author.id) + 500)
-                        embed.setDescription(`You\'re voted before, and you're a supporter! So you have 500 ${cur_json.cur.symbol} instead of 200 ${cur_json.cur.symbol}.`)
-                        embed.setFooter('Thanks for supporting the bot!')
+                        embed.setDescription(lang.claim_vote2.replace('${money1}', `500 ${cur_json.cur.symbol}`).replace('${money2}', `400 ${cur_json.cur.symbol}`))
+                        embed.setFooter(lang.claim_thanks_support)
                     }
                 } else {
                     if (!donor){
                         bal.set(message.author.id, bal.get(message.author.id) + 100)
-                        embed.setDescription(`You got your daily 100 ${cur_json.cur.symbol}.`)
-                        embed.setFooter('Tip: vote for the bot and get more money')
+                        embed.setDescription(lang.claim_normal.replace('${money}', `100 ${cur_json.cur.symbol}`))
+                        embed.setFooter(lang.claim_tip)
                     } else if (donor) {
                         bal.set(message.author.id, bal.get(message.author.id) + 400)
-                        embed.setDescription(`You're a supporter! So you got your daily 400 ${cur_json.cur.symbol}.`)
-                        embed.setFooter('Tip: vote for the bot and get more and more money')
+                        embed.setDescription(lang.claim_support.replace('${money}', `400 ${cur_json.cur.symbol}`))
+                        embed.setFooter(lang.claim_tip)
                     }
                 }
             })

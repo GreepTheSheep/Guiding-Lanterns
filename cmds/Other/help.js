@@ -37,6 +37,7 @@ function help(message, client, prefix, lang, cooldowns) {
         const modules = [
             "Disney",
             "Util",
+            "Currency",
             "Fun",
             "Games",
             "Other"
@@ -52,26 +53,23 @@ function help(message, client, prefix, lang, cooldowns) {
         
         if (args.length < 1 || args[0].toLowerCase() === 'list') {
             if (message.guild.id == '562602234265731080') embed.addField("**__Kingdom of Corona: ☀__**", lang.help_kingdomofcorona.split('${prefix}').join(prefix));
-            embed.addField("Modules:", `\`${modules.join("\`\n- \`")}\``)
+            embed.addField("Modules:", `- \`${modules.join("\`\n- \`")}\``)
                 .addField("Usage:", `\`${prefix}help <module>\``)
                 .addField(lang.help_anyproblems, lang.help_problems2.split('${prefix}').join(prefix), true)
-            return message.channel.send(embed)
         } else if (args[0].toLowerCase() == modules[0].toLowerCase()){
             embed.addField("**°o° Disney:**", lang.help_disney.split('${prefix}').join(prefix), true)
-            return message.channel.send(embed)
         } else if (args[0].toLowerCase() == modules[1].toLowerCase()){
             embed.addField("Util:", lang.help_util.split('${prefix}').join(prefix), true)
-            return message.channel.send(embed)
         } else if (args[0].toLowerCase() == modules[2].toLowerCase()){
-            embed.addField("Fun:", lang.help_fun.split('${prefix}').join(prefix), true)
-            return message.channel.send(embed)
+            embed.addField("Currency:", lang.help_cur.split('${prefix}').join(prefix), true)
         } else if (args[0].toLowerCase() == modules[3].toLowerCase()){
-            embed.addField("Games:", lang.help_game.split('${prefix}').join(prefix), true)
-            return message.channel.send(embed)
+            embed.addField("Fun:", lang.help_fun.split('${prefix}').join(prefix), true)
         } else if (args[0].toLowerCase() == modules[4].toLowerCase()){
+            embed.addField("Games:", lang.help_game.split('${prefix}').join(prefix), true)
+        } else if (args[0].toLowerCase() == modules[5].toLowerCase()){
             embed.addField('Other:', lang.help_other.split('${prefix}').join(prefix), true)
-            return message.channel.send(embed)
         }
+        message.channel.send(embed)
     }
 }
 
