@@ -31,6 +31,19 @@ function cur_owner(message, client, prefix, cooldowns, cur_json){
             inv.set(`${rUser.id}_${args[1]}`, inv.get(`${rUser.id}_${args[1]}`) + count)
             message.react('✅')
         }
+        if(message.content.startsWith(prefix + "clearinventory")) {
+            let args = message.content.split(" ")
+            args.shift()
+            if (args.length < 1) return message.react('❌')
+            let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
+            if (!rUser) return message.react('❌')
+            if (rUser.user.bot) return message.react('❌')
+            for (item in cur_json.item){
+                
+            }
+            inv.set(`${rUser.id}_${args[1]}`, inv.get(`${rUser.id}_${args[1]}`) + count)
+            message.react('✅')
+        }
     }
 }
 
