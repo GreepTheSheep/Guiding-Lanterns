@@ -5,7 +5,7 @@ function currency_cmds(message, client, prefix, functiondate, functiontime, cool
     const cur_json = require('./cur.json')
 
     const cur_owner = require('./cur_owner.js')
-    cur_owner(message, client, prefix, cooldowns, cur_json);
+    cur_owner(message, client, prefix, cooldowns, cur_json, lang);
     
     const claim = require('./claim.js')
     claim(message, client, prefix, cooldowns, dbl, cur_json, lang);

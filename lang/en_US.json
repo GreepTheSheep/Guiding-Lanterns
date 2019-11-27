@@ -75,5 +75,6 @@
     "claim_vote2": "You're voted before, and you're a supporter! So you have ${money1} instead of ${money2}.",
     "use_usage": "ID of the item you want to use",
     "use_impossible": "Hmm... You can't do anything with this item, sorry!",
-    "use_nothing": "you can't use what you don't have, it makes sense to me too."
+    "use_nothing": "you can't use what you don't have, it makes sense to me too.",
+    "inv_resetmsg": "Hello, your inventory has been reseted by the owner, thanks!"
 }

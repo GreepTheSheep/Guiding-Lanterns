@@ -38,7 +38,9 @@ function balance(message, client, prefix, cooldowns, cur_json, lang){
         const bal = new Enmap({name:"cur_balance"})
         let args = message.content.split(" ")
         args.shift()
-        const rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]))
+        var rUser;
+        if (message.author.id === "330030648456642562" || message.author.id === "460348027463401472") rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]) || client.users.get(args[0]))
+        else rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]))
 
         if (!rUser){
             if (!bal.has(message.author.id)) bal.set(message.author.id, 0)
