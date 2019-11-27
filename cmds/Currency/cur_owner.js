@@ -10,10 +10,14 @@ function cur_owner(message, client, prefix, cooldowns, cur_json, lang){
             let args = message.content.split(" ")
             args.shift()
             if (args.length < 1) return message.react('❌')
-            let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]) || client.users.get(args[0]))
+            let rUser = message.guild.member(message.mentions.users.first() || client.users.get(args[0]))
             if (!rUser) return message.react('❌')
             if (!args[1]) return message.react('❌')
-            if (rUser.user.bot) return message.react('❌')
+            if (rUser != client.users.get(args[0])){
+                if (rUser.user.bot) return message.react('❌')
+            } else {
+                if (rUser.bot) return message.react('❌')
+            }
             bal.set(rUser.id, Number(args[1]))
             message.react('✅')
         }
@@ -21,10 +25,14 @@ function cur_owner(message, client, prefix, cooldowns, cur_json, lang){
             let args = message.content.split(" ")
             args.shift()
             if (args.length < 1) return message.react('❌')
-            let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]) || client.users.get(args[0]))
+            let rUser = message.guild.member(message.mentions.users.first() || client.users.get(args[0]))
             if (!rUser) return message.react('❌')
             if (!args[1]) return message.react('❌')
-            if (rUser.user.bot) return message.react('❌')
+            if (rUser != client.users.get(args[0])){
+                if (rUser.user.bot) return message.react('❌')
+            } else {
+                if (rUser.bot) return message.react('❌')
+            }
             var count;
             if (args[2]) count = Number(args[2])
             else if (!args[2]) count = 1
@@ -35,9 +43,13 @@ function cur_owner(message, client, prefix, cooldowns, cur_json, lang){
             let args = message.content.split(" ")
             args.shift()
             if (args.length < 1) return message.react('❌')
-            let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]) || client.users.get(args[0]))
+            let rUser = message.guild.member(message.mentions.users.first() || client.users.get(args[0]))
             if (!rUser) return message.react('❌')
-            if (rUser.user.bot) return message.react('❌')
+            if (rUser != client.users.get(args[0])){
+                if (rUser.user.bot) return message.react('❌')
+            } else {
+                if (rUser.bot) return message.react('❌')
+            }
             var id = 0;
             for (item in cur_json.item){
                 inv.set(`${rUser.id}_${id}`, 0)

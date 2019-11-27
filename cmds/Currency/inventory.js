@@ -18,7 +18,7 @@ function itemList(message, cur_json, lang){
     return array.join('\n')
 }
 
-function userItemList(rUser, cur_json, lang){
+function userItemList(client, args, rUser, cur_json, lang){
     const inv = new Enmap({name:"cur_inventory"})
     const array = [];
     var id = 0
@@ -29,7 +29,11 @@ function userItemList(rUser, cur_json, lang){
         totalItems = totalItems + inv.get(`${rUser.id}_${id}`)
         id++
     }
-    array.push(`\n${lang.inv_total_number2.replace('${user}', rUser.user.username)} ${totalItems}`)
+    if (rUser === client.users.get(args[0])){
+        array.push(`\n${lang.inv_total_number2.replace('${user}', rUser.username)} ${totalItems}`)
+    } else {
+        array.push(`\n${lang.inv_total_number2.replace('${user}', rUser.user.username)} ${totalItems}`)
+    }
     return array.join('\n')
 }
 
@@ -74,8 +78,11 @@ function inventory(message, client, prefix, cooldowns, cur_json, lang){
         let args = message.content.split(" ")
         args.shift()
         var rUser;
-        if (message.author.id === "330030648456642562" || message.author.id === "460348027463401472") rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]) || client.users.get(args[0]))
-        else rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]))
+        if (message.author.id === "330030648456642562" || message.author.id === "460348027463401472") {
+            rUser =  message.guild.member(message.mentions.users.first()) || client.users.get(args[0])
+        } else {
+            rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]))
+        }
         if (!rUser) {
             if (!bal.has(message.author.id)) bal.set(message.author.id, 0)
             listembed.setTitle(lang.inv_title.replace('${user}', message.author.username))
@@ -84,11 +91,17 @@ function inventory(message, client, prefix, cooldowns, cur_json, lang){
                 .setFooter(`${lang.bal_your} ${bal.get(message.author.id)} ${cur_json.cur.symbol}`)
             return message.channel.send(listembed)
         } else {
-            if (rUser.user.bot) return message.reply(lang.inv_bot_err)
+            if (rUser === client.users.get(args[0])){
+                if (rUser.bot) return message.reply(lang.inv_bot_err)
+                listembed.setTitle(lang.inv_title.replace('${user}', rUser.username))
+            } else {
+                if (rUser.user.bot) return message.reply(lang.inv_bot_err)
+                listembed.setTitle(lang.inv_title.replace('${user}', rUser.user.username)) 
+            }
             if (!bal.has(rUser.id)) bal.set(rUser.id, 0)
-            listembed.setTitle(lang.inv_title.replace('${user}', rUser.user.username))
-                .setColor("#0567DA")
-                .setDescription(userItemList(rUser, cur_json, lang))
+
+            listembed.setColor("#0567DA")
+                .setDescription(userItemList(client, args, rUser, cur_json, lang))
                 .setFooter(`${lang.bal_his} ${bal.get(rUser.id)} ${cur_json.cur.symbol}`)
             return message.channel.send(listembed)
         }

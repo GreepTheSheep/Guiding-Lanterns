@@ -39,14 +39,21 @@ function balance(message, client, prefix, cooldowns, cur_json, lang){
         let args = message.content.split(" ")
         args.shift()
         var rUser;
-        if (message.author.id === "330030648456642562" || message.author.id === "460348027463401472") rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]) || client.users.get(args[0]))
-        else rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]))
+        if (message.author.id === "330030648456642562" || message.author.id === "460348027463401472") {
+            rUser = message.guild.member(message.mentions.users.first()) || client.users.get(args[0])
+        } else {
+            rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]))
+        }
 
         if (!rUser){
             if (!bal.has(message.author.id)) bal.set(message.author.id, 0)
             message.reply(`${lang.bal_your} ${bal.get(message.author.id)} ${cur_json.cur.name}.`);
         } else {
-            if (rUser.user.bot) return message.reply(lang.bal_bot_err)
+            if (rUser != client.users.get(args[0])){
+                if (rUser.user.bot) return message.reply(lang.bal_bot_err)
+            } else {
+                if (rUser.bot) return message.reply(lang.bal_bot_err)
+            }
             if (!bal.has(rUser.id)) bal.set(rUser.id, 0)
             message.channel.send(`${lang.bal_his} ${bal.get(rUser.id)} ${cur_json.cur.name}.`);
         }
