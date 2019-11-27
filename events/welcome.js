@@ -30,7 +30,7 @@ function welcome(member, client) {
         .addField(`${welcomemsg}`, `<@${member.user.id}>`)
         .setImage(`${welcomeimg}`)
         .setFooter(`${member.user.username} just landed in the Kingdom of Corona!`, `${member.user.displayAvatarURL}`)
-        client.guilds.get('562602234265731080').channels.get('562611657419784202').send(embed);
+        client.guilds.get('562602234265731080').channels.get('615236807478607921').send(embed);
     }
     if (member.guild.id === '570024448371982373'){
         let embed = new Discord.RichEmbed()
