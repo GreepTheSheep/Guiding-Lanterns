@@ -76,5 +76,6 @@
     "use_usage": "ID of the item you want to use",
     "use_impossible": "Hmm... You can't do anything with this item, sorry!",
     "use_nothing": "you can't use what you don't have, it makes sense to me too.",
+    "use_title": "You used a ${item}",
     "inv_resetmsg": "Hello, your inventory has been reseted by the owner, thanks!"
 }

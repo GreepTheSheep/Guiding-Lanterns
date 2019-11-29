@@ -53,7 +53,12 @@ function use(message, client, prefix, cooldowns, cur_json, lang){
         }
         
         inv.set(`${message.author.id}_${args[0]}`, inv.get(`${message.author.id}_${args[0]}`) - 1)
-        message.channel.send(randomItem(cur_json.item[Number(args[0])].use).text)
+        let embed = new Discord.RichEmbed;
+        embed.setTitle(lang.use_title.replace('${item}', cur_json.item[Number(args[0])].name))
+        .setColor('#339966')
+        .setDescription(randomItem(cur_json.item[Number(args[0])].use).text)
+        .setImage(randomItem(cur_json.item[Number(args[0])].use).img)
+        message.channel.send(embed)
     }
 }
 
