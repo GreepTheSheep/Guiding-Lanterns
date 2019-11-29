@@ -37,13 +37,21 @@ function twitter_starboard (client, reaction, logchannel, date, time){
                             if (!error) {
                                 // Lets tweet it
                                 var status = {
-                                    status: reaction.message.content.slice(0, 280),
+                                    status: reaction.message.content,
                                     media_ids: media.media_id_string // Pass the media id string
                                 }
 
                                 twitter.post('statuses/update', status, function(error, tweet, response) {
                                     if (!error) {
                                         logchannel.send(`New tweet posted: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`)
+                                        let starboardembed = new Discord.RichEmbed
+                                        starboardembed.setAuthor(reaction.message.author.username, reaction.message.author.displayAvatarURL)
+                                        .setDescription(reaction.message.content)
+                                        .setImage(reaction.message.attachments.array()[0].url)
+                                        .setTimestamp(reaction.message.editedTimestamp)
+                                        if (reaction.message.guild.channels.find(c => c.name.includes('starboard'))){
+                                            reaction.message.guild.channels.find(c => c.name.includes('starboard')).send(starboardembed) 
+                                        }
                                         let embed = new Discord.RichEmbed
                                         embed.setTitle('Twitter Starboard')
                                         .setColor('#5EA9DD')
@@ -62,9 +70,17 @@ function twitter_starboard (client, reaction, logchannel, date, time){
                         });
                     })    
                 } else {
-                    twitter.post('statuses/update', {status: reaction.message.content.slice(0, 280)}, function(error, tweet, response) {
+                    twitter.post('statuses/update', {status: reaction.message.content}, function(error, tweet, response) {
                         if (!error) {
                             logchannel.send(`New tweet posted: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`)
+
+                            let starboardembed = new Discord.RichEmbed
+                            starboardembed.setAuthor(reaction.message.author.username, reaction.message.author.displayAvatarURL)
+                            .setDescription(reaction.message.content)
+                            .setTimestamp(reaction.message.editedTimestamp)
+                            if (reaction.message.guild.channels.find(c => c.name.includes('starboard'))){
+                                reaction.message.guild.channels.find(c => c.name.includes('starboard')).send(starboardembed) 
+                            }
 
                             let embed = new Discord.RichEmbed
                             embed.setTitle('Twitter Starboard')
