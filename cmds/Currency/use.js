@@ -53,7 +53,7 @@ function use(message, client, prefix, cooldowns, cur_json, lang){
         }
         
         inv.set(`${message.author.id}_${args[0]}`, inv.get(`${message.author.id}_${args[0]}`) - 1)
-        message.channel.send(randomItem(cur_json.item[Number(args[0])].use))
+        message.channel.send(randomItem(cur_json.item[Number(args[0])].use).text)
     }
 }
 

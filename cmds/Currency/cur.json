@@ -14,45 +14,78 @@
             "cost": 200,
             "sell": 100,
             "use": [
-                "You will throw a lantern, that's beautiful 🤩 https://media.giphy.com/media/5x2Rs659kZWvu/giphy.gif",
-                "And at last I see the light 🏮 https://media.giphy.com/media/7vtlxB8hrJzIA/giphy.gif",
-                "*And at last I see the light* 🏮 https://media.giphy.com/media/sgODlrvwt0bfy/giphy.gif"
+                {
+                    "text": "You will throw a lantern, that's beautiful 🤩",
+                    "img": "https://media.giphy.com/media/5x2Rs659kZWvu/giphy.gif"
+                }
+                ,{
+                    "text": "And at last I see the light 🏮",
+                    "img": "https://media.giphy.com/media/7vtlxB8hrJzIA/giphy.gif" 
+                }
+                ,{
+                    "text": "*And at last I see the light*",
+                    "img": "https://media.giphy.com/media/sgODlrvwt0bfy/giphy.gif"
+                }
             ]
-        },
-        {
+        }
+        ,{
             "name": "🍳 Frying pan",
             "cost": 500,
             "sell": 250,
             "use": [
-                "Ouch 🤕 https://media.giphy.com/media/xjHj7TPdbCN8I/giphy.gif",
-                "You hit yourself, ouch... 🤕 https://media.giphy.com/media/W5yshKbH5wrwA/giphy.gif",
-                "Don't distrub me! https://media.giphy.com/media/453uXLWE9u6u4/giphy.gif"
+                {
+                    "text": "Ouch 🤕",
+                    "img": "https://media.giphy.com/media/xjHj7TPdbCN8I/giphy.gif"
+                }
+                ,{
+                    "text": "You hit yourself, ouch... 🤕",
+                    "img": "https://media.giphy.com/media/W5yshKbH5wrwA/giphy.gif"
+                }
+                ,{
+                    "text": "Don't distrub me!",
+                    "img": "https://media.giphy.com/media/453uXLWE9u6u4/giphy.gif"
+                }
             ]
-        },
-        {
+        }
+        ,{
             "name": "⚔️ Sword",
             "cost": 1000,
             "sell": 300,
             "use": [
-                "Take that sword! https://media.giphy.com/media/AxVvkbMOgXZiPlTiXS/giphy.gif"
+                {
+                    "text": "Take that sword!",
+                    "img": "https://media.giphy.com/media/AxVvkbMOgXZiPlTiXS/giphy.gif"
+                }
             ]
-        },
-        {
+        }
+        ,{
             "name": "📷 Photo camera",
             "cost": 800,
             "sell": 300,
             "use": [
-                "Taking... https://media.giphy.com/media/Pcmc6KhxNL6hi/giphy.gif"
+                {
+                    "text": "Taking picture...",
+                    "img": "https://media.giphy.com/media/Pcmc6KhxNL6hi/giphy.gif"
+                }
             ]
-        },
-        {
+        }
+        ,{
             "name": "🍎 Apple",
             "cost": 25,
             "sell": 25,
             "use": [
-                "Delicious! https://media.giphy.com/media/XnIo4sWkkREs0/giphy.gif",
-                "Hmm... https://media.giphy.com/media/TVfkCqAtbSndu/giphy.gif",
-                "Oop, you ate a poisoned apple https://media.giphy.com/media/R7orKHnkEBZoA/giphy.gif"
+                {
+                    "text": "Delicious!",
+                    "img": "https://media.giphy.com/media/XnIo4sWkkREs0/giphy.gif"
+                }
+                ,{
+                    "text": "Hmm...",
+                    "img": "https://media.giphy.com/media/TVfkCqAtbSndu/giphy.gif"
+                }
+                ,{
+                    "text": "Oop, you ate a poisoned apple",
+                    "img": "https://media.giphy.com/media/R7orKHnkEBZoA/giphy.gif"
+                }
             ]
         }
     ]
