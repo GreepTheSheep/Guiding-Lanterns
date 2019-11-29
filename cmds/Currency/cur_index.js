@@ -20,7 +20,7 @@ function currency_cmds(message, client, prefix, functiondate, functiontime, cool
     inventory(message, client, prefix, cooldowns, cur_json, lang);
 
     const use = require('./use.js')
-    use(message, client, prefix, cooldowns, cur_json, lang);
+    use(message, client, prefix, cooldowns, cur_json, lang, langtext);
 }
 
 module.exports = currency_cmds;

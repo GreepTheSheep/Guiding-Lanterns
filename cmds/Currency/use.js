@@ -1,7 +1,13 @@
 const Discord = require('discord.js')
 const Enmap = require('enmap')
+const translate = require('translate')
+const fs = require('fs')
+const configfile = "./data/config.json";
+const config = JSON.parse(fs.readFileSync(configfile, "utf8"));
+translate.engine = 'yandex'
+translate.key = config.translate_key
 
-function use(message, client, prefix, cooldowns, cur_json, lang){
+function use(message, client, prefix, cooldowns, cur_json, lang, langtext){
     if(message.content.startsWith(prefix + "use")) {
 
         //Implement cooldown
@@ -51,13 +57,18 @@ function use(message, client, prefix, cooldowns, cur_json, lang){
         function randomItem(array) {
             return array[Math.floor(Math.random() * array.length)];
         }
+        const selectedItem = randomItem(cur_json.item[Number(args[0])])
+
+        var translatedlang = langtext.charAt(0).toLowerCase() + langtext.charAt(1).toLowerCase()
+        var translateddesc = await translate(selectedItem.text, {from: 'en', to: translatedlang})
         
         inv.set(`${message.author.id}_${args[0]}`, inv.get(`${message.author.id}_${args[0]}`) - 1)
+        
         let embed = new Discord.RichEmbed;
         embed.setTitle(lang.use_title.replace('${item}', cur_json.item[Number(args[0])].name))
         .setColor('#339966')
-        .setDescription(randomItem(cur_json.item[Number(args[0])].use).text)
-        .setImage(randomItem(cur_json.item[Number(args[0])].use).img)
+        .setDescription(translateddesc)
+        .setImage(selectedItem.img)
         message.channel.send(embed)
     }
 }
