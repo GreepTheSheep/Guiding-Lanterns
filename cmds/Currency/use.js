@@ -54,16 +54,14 @@ function use(message, client, prefix, cooldowns, cur_json, lang, langtext){
         if (!cur_json.item[Number(args[0])].use) return message.channel.send(lang.use_impossible)
         if (inv.get(`${message.author.id}_${args[0]}`) <= 0) return message.reply(lang.use_nothing)
 
-        function randomItem(array) {
-            return array[Math.floor(Math.random() * array.length)];
-        }
-        const selectedItem = randomItem(cur_json.item[Number(args[0])])
+        var selecteduse = Math.floor(Math.random() * cur_json.item[Number(args[0])].use.length)
+        var selectedItem = cur_json.item[Number(args[0])].use[selecteduse]
 
         var translatedlang = langtext.charAt(0).toLowerCase() + langtext.charAt(1).toLowerCase()
         var translateddesc = await translate(selectedItem.text, {from: 'en', to: translatedlang})
         
         inv.set(`${message.author.id}_${args[0]}`, inv.get(`${message.author.id}_${args[0]}`) - 1)
-        
+
         let embed = new Discord.RichEmbed;
         embed.setTitle(lang.use_title.replace('${item}', cur_json.item[Number(args[0])].name))
         .setColor('#339966')
