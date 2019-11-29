@@ -92,6 +92,26 @@ function twitter_starboard (client, reaction, logchannel, date, time){
                         }
                     });
                 }
+            } else {
+                if (reaction.message.attachments.size > 0){
+                    logchannel.send(`New tweet posted: https://twitter.com/${tweet.user.screen_name}/status/${tweet.id_str}`)
+                    let starboardembed = new Discord.RichEmbed
+                    starboardembed.setAuthor(reaction.message.author.username, reaction.message.author.displayAvatarURL)
+                    .setDescription(reaction.message.content)
+                    .setImage(reaction.message.attachments.array()[0].url)
+                    .setTimestamp(reaction.message.editedTimestamp)
+                    if (reaction.message.guild.channels.find(c => c.name.includes('starboard'))){
+                        reaction.message.guild.channels.find(c => c.name.includes('starboard')).send(starboardembed) 
+                    }
+                } else {
+                    let starboardembed = new Discord.RichEmbed
+                    starboardembed.setAuthor(reaction.message.author.username, reaction.message.author.displayAvatarURL)
+                    .setDescription(reaction.message.content)
+                    .setTimestamp(reaction.message.editedTimestamp)
+                    if (reaction.message.guild.channels.find(c => c.name.includes('starboard'))){
+                        reaction.message.guild.channels.find(c => c.name.includes('starboard')).send(starboardembed) 
+                    }
+                }
             }
         }
     } catch (err) {
