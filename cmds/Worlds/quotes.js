@@ -4,11 +4,14 @@ const fs = require("fs");
 function givelist(){
     const readdb = fs.readdirSync('./data/movies/').filter(file => file.endsWith('quotes.json'))
     const listarray = [];
+    var totalcount = 0;
     for (var file of readdb){
         var movie = file.split('-').join(' ').replace("_quotes.json", "")
-        listarray.push(`${movie.charAt(0).toUpperCase() + movie.slice(1)} (${file.length} quotes)`)
+        listarray.push(`- \`${movie.charAt(0).toUpperCase() + movie.slice(1)}\` (${file.length} quotes)`)
+        totalcount = totalcount + file.length
     }
-    return listarray.join("\`\n- \`")
+    listarray.push(`\nTotal quotes found: ${totalcount}`)
+    return listarray.join("\n")
 }
 
 function quotes(message, client, prefix, date, time, logchannel, cooldowns) {

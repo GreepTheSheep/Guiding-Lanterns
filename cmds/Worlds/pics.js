@@ -4,11 +4,14 @@ const fs = require("fs");
 function givelist(){
     const readdb = fs.readdirSync('./data/movies/').filter(file => file.endsWith('pics.json'))
     const listarray = [];
+    var totalcount = 0;
     for (var file of readdb){
         var movie = file.split('-').join(' ').replace("_pics.json", "")
-        listarray.push(`${movie.charAt(0).toUpperCase() + movie.slice(1)} (${file.length} pictures)`)
+        listarray.push(`- \`${movie.charAt(0).toUpperCase() + movie.slice(1)}\` (${file.length} pictures)`)
+        totalcount = totalcount + file.length
     }
-    return listarray.join("\`\n- \`")
+    listarray.push(`\nTotal pictures found: ${totalcount}`)
+    return listarray.join("\n")
 }
 
 function picture(message, client, prefix, functiondate, functiontime, getlogchannel, cooldowns){
