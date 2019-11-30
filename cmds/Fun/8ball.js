@@ -53,7 +53,7 @@ function eight_ball(message, client, prefix, date, time, logchannel, cooldowns){
                 totalSeconds %= 3600;
                 let minutes = Math.floor(totalSeconds / 60);
                 let seconds = totalSeconds % 60;
-                return message.reply('I need to reload the toy! Please wait again ' + seconds + ' seconds if it\'s possible to you!').then(m=>{m.delete(10000) ; message.delete(10000)})
+                return message.reply('I need to reload the toy! Please wait again ' + seconds.toFixed(0) + ' seconds if it\'s possible to you!').then(m=>{m.delete(10000) ; message.delete(10000)})
             }
         }
 
