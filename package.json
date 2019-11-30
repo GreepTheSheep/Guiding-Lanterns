@@ -1,6 +1,6 @@
 {
     "name": "guiding-lanterns",
-    "version": "2.9.2",
+    "version": "2.9.4",
     "changelog": "New disposition of help command",
     "description": "",
     "main": "bot.js",
