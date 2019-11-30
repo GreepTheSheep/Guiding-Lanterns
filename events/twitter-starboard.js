@@ -22,6 +22,7 @@ function twitter_starboard (client, reaction, logchannel, date, time){
     try{
         if (reaction.emoji.name === '⭐' && reaction.count === reactions) {
 
+            if (reaction.message.channel.name.includes('starboard')) return;
             if (!tweets_setting.has(reaction.message.guild.id)) tweets_setting.set(reaction.message.guild.id, true)
 
             if (tweets_setting.get(reaction.message.guild.id) === true){
