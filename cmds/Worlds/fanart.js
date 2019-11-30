@@ -36,7 +36,7 @@ function fanart(message, client, prefix, functiondate, functiontime, getlogchann
             totalSeconds %= 3600;
             let minutes = Math.floor(totalSeconds / 60);
             let seconds = totalSeconds % 60;
-            return message.reply('Please wait again ' + minutes + ' minutes and ' + seconds + ' seconds before seeing a new fanart of your movie.').then(m=>{m.delete(10000) ; message.delete(10000)})
+            return message.reply('Please wait ' + seconds.toFixed(0) + ' seconds before seeing a new fanart of your movie.').then(m=>{m.delete(10000) ; message.delete(10000)})
         }
     }
 
@@ -61,17 +61,14 @@ function fanart(message, client, prefix, functiondate, functiontime, getlogchann
         fs.readFile(picsfile, "utf8",function read(err, data){
             if (err) return message.channel.send("Hmm... I don't found the movie. *Maybe it was eaten, I don't know...*")
             
-            var pics = JSON.parse(data);
-            function randomItem(array) {
-                return array[Math.floor(Math.random() * array.length)];
-            }
-            let pic = randomItem(pics)
+            var pics = JSON.parse(data);          
+            let random = Math.floor(Math.random() * pics.length)
 
             let embed = new Discord.RichEmbed;
             embed.setAuthor(`No image? Click here!`, message.author.displayAvatarURL, pic)
-            .setImage(pic)
+            .setImage(pics[random])
             .setColor('RANDOM')
-            .setFooter(`If you want to add your own picture, type ${prefix}addfanart`, message.author.displayAvatarURL)
+            .setFooter(`Fanart ${random}/${pics.length} | If you want to add your own picture, type ${prefix}addfanart`, message.author.displayAvatarURL)
             
              message.channel.send(embed)
         })

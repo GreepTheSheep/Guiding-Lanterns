@@ -62,15 +62,12 @@ function quotes(message, client, prefix, date, time, logchannel, cooldowns) {
             if (err) return message.channel.send("Hmm... I don't found the movie. *Maybe it was eaten, I don't know...*")
             
             var quotes = JSON.parse(data);
-            function randomItem(array) {
-                return array[Math.floor(Math.random() * array.length)];
-            }
-            let rquote = randomItem(quotes);
+            let random = Math.floor(Math.random() * quotes.length)
     
             let embed = new Discord.RichEmbed()
                 embed.setColor("RANDOM")
-                    .addField(`Random ${args[0].charAt(0).toUpperCase() + args[0].slice(1)} quote :`, `${rquote}`)
-                    .setFooter(`Another? ${prefix}quote ${args[0]}`, `${client.user.avatarURL}`)
+                    .addField(`Random ${args[0].charAt(0).toUpperCase() + args[0].slice(1).toLowerCase()} quote :`, `${quotes[random]}`)
+                    .setFooter(`Quote ${random}/${quotes.length} | Another? ${prefix}quote ${args[0]}`, `${client.user.avatarURL}`)
             message.channel.send(embed)
         });
         } catch(err) {
