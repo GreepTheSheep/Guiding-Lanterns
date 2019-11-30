@@ -65,7 +65,7 @@ function image_search_request(message, client, prefix, functiondate, functiontim
             totalSeconds %= 3600;
             let minutes = Math.floor(totalSeconds / 60);
             let seconds = totalSeconds % 60;
-            return message.reply('calm down! You can resume the command in ' + minutes + ' minutes and ' + seconds + ' seconds')
+            return message.reply('calm down! You can resume the command in ' + seconds.toFixed(0) + ' seconds')
         }
     }
 

@@ -30,7 +30,7 @@ const waApi = WolframAlphaAPI(wolfID);
             totalSeconds %= 3600;
             let minutes = Math.floor(totalSeconds / 60);
             let seconds = totalSeconds % 60;
-            return message.reply('Please wait again ' + seconds + ' seconds').then(m=>{m.delete(10000) ; message.delete(10000)})
+            return message.reply('Please wait again ' + seconds.toFixed(0) + ' seconds').then(m=>{m.delete(10000) ; message.delete(10000)})
         }
     }
 
