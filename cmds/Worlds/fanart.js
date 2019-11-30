@@ -1,14 +1,17 @@
 const Discord = require('discord.js');
 const fs = require("fs");
 
+var totalcount
+
 function givelist(){
     const readdb = fs.readdirSync('./data/movies/').filter(file => file.endsWith('fanarts.json'))
     const listarray = [];
-    var totalcount = 0;
+    totalcount = 0;
     for (var file of readdb){
         var movie = file.split('-').join(' ').replace("_fanarts.json", "")
-        listarray.push(`- \`${movie.charAt(0).toUpperCase() + movie.slice(1)}\` (${file.length} fanarts)`)
-        totalcount = totalcount + file.length
+        var selectedFile = JSON.parse(fs.readFileSync(`./data/movies/${file}`, 'utf8'))
+        listarray.push(`- \`${movie.charAt(0).toUpperCase() + movie.slice(1)}\` (${selectedFile.length} fanarts)`)
+        totalcount = totalcount + selectedFile.length
     }
     listarray.push(`\nTotal fanarts found: ${totalcount}`)
     return listarray.join("\n")
