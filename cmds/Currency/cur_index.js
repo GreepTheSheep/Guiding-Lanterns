@@ -10,6 +10,9 @@ function currency_cmds(message, client, prefix, functiondate, functiontime, cool
     const claim = require('./claim.js')
     claim(message, client, prefix, cooldowns, dbl, cur_json, lang);
 
+    const loot = require('./loot.js')
+    loot(message, client, prefix, cooldowns, cur_json, lang);
+
     const balance = require('./balance.js')
     balance(message, client, prefix, cooldowns, cur_json, lang);
 
