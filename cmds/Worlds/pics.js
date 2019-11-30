@@ -6,7 +6,7 @@ function givelist(){
     const listarray = [];
     for (var file of readdb){
         var movie = file.split('-').join(' ').replace("_pics.json", "")
-        listarray.push(movie.charAt(0).toUpperCase() + movie.slice(1))
+        listarray.push(`${movie.charAt(0).toUpperCase() + movie.slice(1)} (${file.length} pictures)`)
     }
     return listarray.join("\`\n- \`")
 }
