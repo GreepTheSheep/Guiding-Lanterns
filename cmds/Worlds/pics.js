@@ -65,7 +65,7 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
             let random = Math.floor(Math.random() * pics.length)
 
             let embed = new Discord.RichEmbed;
-            embed.setAuthor(`No image? Click here!`, message.author.displayAvatarURL, pic)
+            embed.setAuthor(`No image? Click here!`, message.author.displayAvatarURL, pics[random])
             .setImage(pics[random])
             .setColor('RANDOM')
             .setFooter(`Fanart ${random}/${pics.length} | If you want to add your own picture, type ${prefix}addfanart`, message.author.displayAvatarURL)
