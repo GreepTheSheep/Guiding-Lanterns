@@ -88,5 +88,20 @@
                 }
             ]
         }
+        ,{
+            "name": "👑 Crown",
+            "cost": 5000,
+            "sell": 4000,
+            "use": [
+                {
+                    "text": "You're a future princess!",
+                    "img": "https://media.giphy.com/media/oddK5aURsUeqs/giphy.gif"
+                }
+                ,{
+                    "text": "Kiss your prince 💖",
+                    "img": "https://media.giphy.com/media/r3jcREk4qYka4/giphy.gif"
+                }
+            ]
+        }
     ]
 }
