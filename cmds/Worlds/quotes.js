@@ -70,7 +70,7 @@ function quotes(message, client, prefix, date, time, logchannel, cooldowns) {
             let embed = new Discord.RichEmbed()
                 embed.setColor("RANDOM")
                     .addField(`Random ${args[0].charAt(0).toUpperCase() + args[0].slice(1).toLowerCase()} quote :`, `${quotes[random]}`)
-                    .setFooter(`Quote ${random}/${quotes.length} | Another? ${prefix}quote ${args[0]}`, `${client.user.avatarURL}`)
+                    .setFooter(`Quote ${random + 1}/${quotes.length} | Another? ${prefix}quote ${args[0]}`, `${client.user.avatarURL}`)
             message.channel.send(embed)
         });
         } catch(err) {
