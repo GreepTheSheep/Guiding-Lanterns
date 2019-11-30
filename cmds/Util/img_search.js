@@ -53,7 +53,7 @@ function image_search_request(message, client, prefix, functiondate, functiontim
 
     const now = Date.now();
     const timestamps = cooldowns.get(prefix + 'googleimage');
-    const cooldownAmount = 2 * 60000;
+    const cooldownAmount = 30000;
 
     if (timestamps.has(message.author.id)) {
         const expirationTime = timestamps.get(message.author.id) + cooldownAmount;

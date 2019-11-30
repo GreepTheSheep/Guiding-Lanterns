@@ -1,14 +1,20 @@
 const Discord = require('discord.js');
 const fs = require("fs");
 
+var totalcount
+
 function givelist(){
     const readdb = fs.readdirSync('./data/movies/').filter(file => file.endsWith('quotes.json'))
     const listarray = [];
+    totalcount = 0;
     for (var file of readdb){
         var movie = file.split('-').join(' ').replace("_quotes.json", "")
-        listarray.push(movie.charAt(0).toUpperCase() + movie.slice(1))
+        var selectedFile = JSON.parse(fs.readFileSync(`./data/movies/${file}`, 'utf8'))
+        listarray.push(`- \`${movie.charAt(0).toUpperCase() + movie.slice(1)}\` (${selectedFile.length} quotes)`)
+        totalcount = totalcount + selectedFile.length
     }
-    return listarray.join("\`\n- \`")
+    listarray.push(`\nTotal quotes found: ${totalcount}`)
+    return listarray.join("\n")
 }
 
 function quotes(message, client, prefix, date, time, logchannel, cooldowns) {
@@ -21,7 +27,7 @@ function quotes(message, client, prefix, date, time, logchannel, cooldowns) {
 
     const now = Date.now();
     const timestamps = cooldowns.get(prefix + 'quote');
-    const cooldownAmount = 90000;
+    const cooldownAmount = 15000;
 
     if (timestamps.has(message.author.id)) {
         const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
@@ -50,7 +56,7 @@ function quotes(message, client, prefix, date, time, logchannel, cooldowns) {
         if (args.length < 1 || args[0] === 'list') {
             let listembed = new Discord.RichEmbed()
             listembed.setColor("#0567DA")
-                .addField("Avialble movies are:", `- \`${givelist()}\``)
+                .addField("Avialble movies are:", givelist())
                 .setFooter(`Usage: ${prefix}quote <movie>`)
             return message.channel.send(listembed)
         }
@@ -59,15 +65,12 @@ function quotes(message, client, prefix, date, time, logchannel, cooldowns) {
             if (err) return message.channel.send("Hmm... I don't found the movie. *Maybe it was eaten, I don't know...*")
             
             var quotes = JSON.parse(data);
-            function randomItem(array) {
-                return array[Math.floor(Math.random() * array.length)];
-            }
-            let rquote = randomItem(quotes);
+            let random = Math.floor(Math.random() * quotes.length)
     
             let embed = new Discord.RichEmbed()
                 embed.setColor("RANDOM")
-                    .addField(`Random ${args[0].charAt(0).toUpperCase() + args[0].slice(1)} quote :`, `${rquote}`)
-                    .setFooter(`Another? ${prefix}quote ${args[0]}`, `${client.user.avatarURL}`)
+                    .addField(`Random ${args[0].charAt(0).toUpperCase() + args[0].slice(1).toLowerCase()} quote :`, `${quotes[random]}`)
+                    .setFooter(`Quote ${random + 1}/${quotes.length} | Another? ${prefix}quote ${args[0]}`, `${client.user.avatarURL}`)
             message.channel.send(embed)
         });
         } catch(err) {

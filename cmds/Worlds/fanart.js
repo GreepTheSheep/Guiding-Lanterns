@@ -1,14 +1,20 @@
 const Discord = require('discord.js');
 const fs = require("fs");
 
+var totalcount
+
 function givelist(){
     const readdb = fs.readdirSync('./data/movies/').filter(file => file.endsWith('fanarts.json'))
     const listarray = [];
+    totalcount = 0;
     for (var file of readdb){
         var movie = file.split('-').join(' ').replace("_fanarts.json", "")
-        listarray.push(movie.charAt(0).toUpperCase() + movie.slice(1))
+        var selectedFile = JSON.parse(fs.readFileSync(`./data/movies/${file}`, 'utf8'))
+        listarray.push(`- \`${movie.charAt(0).toUpperCase() + movie.slice(1)}\` (${selectedFile.length} fanarts)`)
+        totalcount = totalcount + selectedFile.length
     }
-    return listarray.join("\`\n- \`")
+    listarray.push(`\nTotal fanarts found: ${totalcount}`)
+    return listarray.join("\n")
 }
 
 function fanart(message, client, prefix, functiondate, functiontime, getlogchannel, cooldowns){
@@ -21,7 +27,7 @@ function fanart(message, client, prefix, functiondate, functiontime, getlogchann
 
     const now = Date.now();
     const timestamps = cooldowns.get(prefix + 'fanart');
-    const cooldownAmount = 90000;
+    const cooldownAmount = 15000;
 
     if (timestamps.has(message.author.id)) {
         const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
@@ -33,7 +39,7 @@ function fanart(message, client, prefix, functiondate, functiontime, getlogchann
             totalSeconds %= 3600;
             let minutes = Math.floor(totalSeconds / 60);
             let seconds = totalSeconds % 60;
-            return message.reply('Please wait again ' + minutes + ' minutes and ' + seconds + ' seconds before seeing a new fanart of your movie.').then(m=>{m.delete(10000) ; message.delete(10000)})
+            return message.reply('Please wait ' + seconds.toFixed(0) + ' seconds before seeing a new fanart of your movie.').then(m=>{m.delete(10000) ; message.delete(10000)})
         }
     }
 
@@ -50,7 +56,7 @@ function fanart(message, client, prefix, functiondate, functiontime, getlogchann
         if (args.length < 1 || args[0] === 'list') {
             let listembed = new Discord.RichEmbed()
             listembed.setColor("#0567DA")
-                .addField("Avialble movies are:", `- \`${givelist()}\``)
+            .addField("Avialble movies are:", givelist())
                 .setFooter(`Usage: ${prefix}fanart <movie>`)
             return message.channel.send(listembed)
         }
@@ -58,17 +64,14 @@ function fanart(message, client, prefix, functiondate, functiontime, getlogchann
         fs.readFile(picsfile, "utf8",function read(err, data){
             if (err) return message.channel.send("Hmm... I don't found the movie. *Maybe it was eaten, I don't know...*")
             
-            var pics = JSON.parse(data);
-            function randomItem(array) {
-                return array[Math.floor(Math.random() * array.length)];
-            }
-            let pic = randomItem(pics)
+            var pics = JSON.parse(data);          
+            let random = Math.floor(Math.random() * pics.length)
 
             let embed = new Discord.RichEmbed;
-            embed.setAuthor(`No image? Click here!`, message.author.displayAvatarURL, pic)
-            .setImage(pic)
+            embed.setAuthor(`No image? Click here!`, message.author.displayAvatarURL, pics[random])
+            .setImage(pics[random])
             .setColor('RANDOM')
-            .setFooter(`If you want to add your own picture, type ${prefix}addfanart`, message.author.displayAvatarURL)
+            .setFooter(`Fanart ${random + 1}/${pics.length} | If you want to add your own picture, type ${prefix}addfanart`, message.author.displayAvatarURL)
             
              message.channel.send(embed)
         })

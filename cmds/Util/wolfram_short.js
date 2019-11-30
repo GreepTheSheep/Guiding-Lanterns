@@ -18,7 +18,7 @@ const waApi = WolframAlphaAPI(wolfID);
 
     const now = Date.now();
     const timestamps = cooldowns.get(prefix + 'wolf');
-    const cooldownAmount = 60000;
+    const cooldownAmount = 15000;
 
     if (timestamps.has(message.author.id)) {
         const expirationTime = timestamps.get(message.author.id) + cooldownAmount;

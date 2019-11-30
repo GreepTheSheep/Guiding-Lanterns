@@ -1,14 +1,20 @@
 const Discord = require('discord.js');
 const fs = require("fs");
 
+var totalcount
+
 function givelist(){
     const readdb = fs.readdirSync('./data/movies/').filter(file => file.endsWith('pics.json'))
     const listarray = [];
+    totalcount = 0;
     for (var file of readdb){
         var movie = file.split('-').join(' ').replace("_pics.json", "")
-        listarray.push(movie.charAt(0).toUpperCase() + movie.slice(1))
+        var selectedFile = JSON.parse(fs.readFileSync(`./data/movies/${file}`, 'utf8'))
+        listarray.push(`- \`${movie.charAt(0).toUpperCase() + movie.slice(1)}\` (${selectedFile.length} pictures)`)
+        totalcount = totalcount + selectedFile.length
     }
-    return listarray.join("\`\n- \`")
+    listarray.push(`\nTotal pictures found: ${totalcount}`)
+    return listarray.join("\n")
 }
 
 function picture(message, client, prefix, functiondate, functiontime, getlogchannel, cooldowns){
@@ -21,7 +27,7 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
 
     const now = Date.now();
     const timestamps = cooldowns.get(prefix + 'picture');
-    const cooldownAmount = 90000;
+    const cooldownAmount = 15000;
 
     if (timestamps.has(message.author.id)) {
         const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
@@ -50,7 +56,7 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
         if (args.length < 1 || args[0] === 'list') {
             let listembed = new Discord.RichEmbed()
             listembed.setColor("#0567DA")
-                .addField("Avialble movies are:", `- \`${givelist()}\``)
+                .addField("Avialble movies are:", givelist())
                 .setFooter(`Usage: ${prefix}picture <movie>`)
             return message.channel.send(listembed)
         }
@@ -59,16 +65,13 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
             if (err) return message.channel.send("Hmm... I don't found the movie. *Maybe it was eaten, I don't know...*")
             
             var pics = JSON.parse(data);
-            function randomItem(array) {
-                return array[Math.floor(Math.random() * array.length)];
-            }
-            let pic = randomItem(pics)
+            let random = Math.floor(Math.random() * pics.length)
 
             let embed = new Discord.RichEmbed;
-            embed.setAuthor(`No image? Click here!`, message.author.displayAvatarURL, pic)
-            .setImage(pic)
+            embed.setAuthor(`No image? Click here!`, message.author.displayAvatarURL, pics[random])
+            .setImage(pics[random])
             .setColor('RANDOM')
-            .setFooter(`If you want to add your own picture, type ${prefix}addpicture`, message.author.displayAvatarURL)
+            .setFooter(`Picture ${random + 1}/${pics.length} | If you want to add your own picture, type ${prefix}addpicture`, message.author.displayAvatarURL)
             
              message.channel.send(embed)
         })
