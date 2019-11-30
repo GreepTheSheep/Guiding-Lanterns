@@ -68,7 +68,7 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
             embed.setAuthor(`No image? Click here!`, message.author.displayAvatarURL, pics[random])
             .setImage(pics[random])
             .setColor('RANDOM')
-            .setFooter(`Fanart ${random}/${pics.length} | If you want to add your own picture, type ${prefix}addfanart`, message.author.displayAvatarURL)
+            .setFooter(`Picture ${random}/${pics.length} | If you want to add your own picture, type ${prefix}addpicture`, message.author.displayAvatarURL)
             
              message.channel.send(embed)
         })
