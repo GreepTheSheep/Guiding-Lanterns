@@ -53,7 +53,7 @@ function quotes(message, client, prefix, date, time, logchannel, cooldowns) {
         if (args.length < 1 || args[0] === 'list') {
             let listembed = new Discord.RichEmbed()
             listembed.setColor("#0567DA")
-                .addField("Avialble movies are:", `- \`${givelist()}\``)
+                .addField("Avialble movies are:", givelist())
                 .setFooter(`Usage: ${prefix}quote <movie>`)
             return message.channel.send(listembed)
         }
