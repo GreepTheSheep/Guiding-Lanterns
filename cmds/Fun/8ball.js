@@ -41,7 +41,7 @@ function eight_ball(message, client, prefix, date, time, logchannel, cooldowns){
 
         const now = Date.now();
         const timestamps = cooldowns.get(prefix + '8ball');
-        const cooldownAmount = 60000;
+        const cooldownAmount = 30000;
 
         if (timestamps.has(message.author.id)) {
             const expirationTime = timestamps.get(message.author.id) + cooldownAmount;

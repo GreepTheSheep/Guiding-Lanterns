@@ -21,7 +21,7 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
 
     const now = Date.now();
     const timestamps = cooldowns.get(prefix + 'picture');
-    const cooldownAmount = 90000;
+    const cooldownAmount = 15000;
 
     if (timestamps.has(message.author.id)) {
         const expirationTime = timestamps.get(message.author.id) + cooldownAmount;

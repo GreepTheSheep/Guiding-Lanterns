@@ -21,7 +21,7 @@ function quotes(message, client, prefix, date, time, logchannel, cooldowns) {
 
     const now = Date.now();
     const timestamps = cooldowns.get(prefix + 'quote');
-    const cooldownAmount = 90000;
+    const cooldownAmount = 15000;
 
     if (timestamps.has(message.author.id)) {
         const expirationTime = timestamps.get(message.author.id) + cooldownAmount;

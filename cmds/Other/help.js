@@ -9,7 +9,7 @@ function help(message, client, prefix, lang, cooldowns) {
 
         const now = Date.now();
         const timestamps = cooldowns.get(prefix + 'help');
-        const cooldownAmount = 30000;
+        const cooldownAmount = 5000;
 
         if (timestamps.has(message.guild.id)) {
             const expirationTime = timestamps.get(message.guild.id) + cooldownAmount;
