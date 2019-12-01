@@ -51,7 +51,7 @@ function cur_owner(message, client, prefix, cooldowns, cur_json, lang){
                 if (rUser.bot) return message.react('❌')
             }
             var id = 0;
-            for (item in cur_json.item){
+            for (var item in cur_json.item){
                 inv.set(`${rUser.id}_${id}`, 0)
                 id++
             }
