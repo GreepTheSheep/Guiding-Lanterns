@@ -49,8 +49,8 @@ function twitter_starboard (client, reaction, logchannel, date, time){
                                         starboardembed.setAuthor(reaction.message.author.username, reaction.message.author.displayAvatarURL)
                                         if (!reaction.message.content) starboardembed.setDescription(`[Link to message](https://discordapp.com/channels/${reaction.message.guild.id}/${reaction.message.channel.id}/${reaction.message.id})`)
                                         else starboardembed.setDescription(reaction.message.content + `\n\n[Link to message](https://discordapp.com/channels/${reaction.message.guild.id}/${reaction.message.channel.id}/${reaction.message.id})`)
-                                        .setImage(reaction.message.attachments.array()[0].url)
-                                        .setTimestamp(reaction.message.createdTimestamp)
+                                        starboardembed.setImage(reaction.message.attachments.array()[0].url)
+                                        starboardembed.setTimestamp(reaction.message.createdTimestamp)
                                         if (reaction.message.guild.channels.find(c => c.name.includes('starboard'))){
                                             reaction.message.guild.channels.find(c => c.name.includes('starboard')).send(starboardembed) 
                                         }
@@ -80,7 +80,7 @@ function twitter_starboard (client, reaction, logchannel, date, time){
                             starboardembed.setAuthor(reaction.message.author.username, reaction.message.author.displayAvatarURL)
                             if (!reaction.message.content) starboardembed.setDescription(`[Link to message](https://discordapp.com/channels/${reaction.message.guild.id}/${reaction.message.channel.id}/${reaction.message.id})`)
                             else starboardembed.setDescription(reaction.message.content + `\n\n[Link to message](https://discordapp.com/channels/${reaction.message.guild.id}/${reaction.message.channel.id}/${reaction.message.id})`)
-                            .setTimestamp(reaction.message.createdTimestamp)
+                            starboardembed.setTimestamp(reaction.message.createdTimestamp)
                             if (reaction.message.guild.channels.find(c => c.name.includes('starboard'))){
                                 reaction.message.guild.channels.find(c => c.name.includes('starboard')).send(starboardembed) 
                             }
@@ -101,8 +101,8 @@ function twitter_starboard (client, reaction, logchannel, date, time){
                     starboardembed.setAuthor(reaction.message.author.username, reaction.message.author.displayAvatarURL)
                     if (!reaction.message.content) starboardembed.setDescription(`[Link to message](https://discordapp.com/channels/${reaction.message.guild.id}/${reaction.message.channel.id}/${reaction.message.id})`)
                     else starboardembed.setDescription(reaction.message.content + `\n\n[Link to message](https://discordapp.com/channels/${reaction.message.guild.id}/${reaction.message.channel.id}/${reaction.message.id})`)
-                    .setImage(reaction.message.attachments.array()[0].url)
-                    .setTimestamp(reaction.message.createdTimestamp)
+                    starboardembed.setImage(reaction.message.attachments.array()[0].url)
+                    starboardembed.setTimestamp(reaction.message.createdTimestamp)
                     if (reaction.message.guild.channels.find(c => c.name.includes('starboard'))){
                         reaction.message.guild.channels.find(c => c.name.includes('starboard')).send(starboardembed) 
                     }
@@ -111,7 +111,7 @@ function twitter_starboard (client, reaction, logchannel, date, time){
                     starboardembed.setAuthor(reaction.message.author.username, reaction.message.author.displayAvatarURL)
                     if (!reaction.message.content) starboardembed.setDescription(`[Link to message](https://discordapp.com/channels/${reaction.message.guild.id}/${reaction.message.channel.id}/${reaction.message.id})`)
                     else starboardembed.setDescription(reaction.message.content + `\n\n[Link to message](https://discordapp.com/channels/${reaction.message.guild.id}/${reaction.message.channel.id}/${reaction.message.id})`)
-                    .setTimestamp(reaction.message.createdTimestamp)
+                    starboardembed.setTimestamp(reaction.message.createdTimestamp)
                     if (reaction.message.guild.channels.find(c => c.name.includes('starboard'))){
                         reaction.message.guild.channels.find(c => c.name.includes('starboard')).send(starboardembed) 
                     }
