@@ -57,6 +57,7 @@ function claim(message, client, prefix, cooldowns, dbl, cur_json, lang){
                 bal.set(message.author.id, bal.get(message.author.id) + 200)
                 embed.setDescription(lang.claim_support.replace('${money}', `200 ${cur_json.cur.symbol}`))
             }
+            message.channel.send(embed);
         } else {
             dbl.hasVoted(message.author.id).then(voted => {
                 if (voted) {
@@ -80,9 +81,9 @@ function claim(message, client, prefix, cooldowns, dbl, cur_json, lang){
                         embed.setFooter(lang.claim_tip)
                     }
                 }
+                message.channel.send(embed);
             })
         }
-        message.channel.send(embed);
     }
 }
 
