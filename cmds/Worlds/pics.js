@@ -90,9 +90,8 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
         
         if (args.length < 1) return message.react('❌').then(message.reply(`Usage:\`\`\`${prefix}addpicture <movie> <URL>\`\`\`URLs must ends with:\`\`\`.jpg\n.jpeg\.png\n.gif\`\`\`If you have a picture on your device, use \`${prefix}geturl\` and follow the instructions for get your URL of your image`));
         
-        let url = args[1].endsWith('.jpg') || args[1].endsWith('.png') || args[1].endsWith('.gif') ||  args[1].endsWith('.jpeg')
         
-        if (url){
+        if (args[1].endsWith('.jpg') || args[1].endsWith('.png') || args[1].endsWith('.gif') ||  args[1].endsWith('.jpeg')){
         if (message.member.roles.find(r=>r.id === '611908442944176140')) {
             var picsfile = `./data/movies/${args[0].toLowerCase()}_pics.json`
             var pictures = JSON.parse(fs.readFileSync(picsfile, 'utf8'))
