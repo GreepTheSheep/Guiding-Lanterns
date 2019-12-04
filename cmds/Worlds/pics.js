@@ -89,7 +89,7 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
         const args = message.content.split(/ +/).slice(1);
         
         const usage = `Usage:\`\`\`${prefix}addpicture <movie> <URL>\`\`\`If your movie name contains spaces, do a " - " instread of spaces.\n\nURLs must ends with:\`\`\`.jpg\n.jpeg\n.png\n.gif\`\`\`If you have a picture on your device, use \`${prefix}geturl\` and follow the instructions for get your URL of your image`
-        if (args.length < 2) return message.react('❌').then(message.reply(usage));
+        if (!args[0]) return message.react('❌').then(message.reply(usage));
         
         if (args[0].endsWith('.jpg') || args[0].endsWith('.png') || args[0].endsWith('.gif') ||  args[0].endsWith('.jpeg')){
             if (!args[1]) return message.react('❌')
