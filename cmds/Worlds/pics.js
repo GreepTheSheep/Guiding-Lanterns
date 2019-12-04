@@ -95,7 +95,7 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
             if (!args[1]) return message.react('❌')
             .then(message.reply(`I need the movie name!\n${usage}`));
             else return message.react('❌')
-            .then(message.reply(`The movie name must be set before!\nUsage:\`\`\`${prefix}addpicture <movie> <URL>\`\`\`URLs must ends with:\`\`\`.jpg\n.jpeg\n.png\n.gif\`\`\`If you have a picture on your device, use \`${prefix}geturl\` and follow the instructions for get your URL of your image`));
+            .then(message.reply(`The movie name must be set before!\n${usage}`));
         }
         if (args[1].endsWith('.jpg') || args[1].endsWith('.png') || args[1].endsWith('.gif') ||  args[1].endsWith('.jpeg')){
         if (message.member.roles.find(r=>r.id === '611908442944176140')) {
