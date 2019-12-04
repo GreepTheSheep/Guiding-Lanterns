@@ -18,6 +18,7 @@ function bug(message, client, prefix, lang, logchannel) {
             .setAuthor("A bug report has been posted !", message.author.displayAvatarURL)
             .setTitle(`Bug Report by ${message.author.tag}`)
             .setDescription('\`\`\`' + args2 + '\`\`\`')
+            .setFooter(`ID: ${message.author.id}`)
             .setTimestamp()
 
         reportchannel.send(embed).then(m=>{

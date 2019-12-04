@@ -18,6 +18,7 @@ function suggest(message, client, prefix, lang) {
             .setAuthor("A suggestion has been posted!", message.author.displayAvatarURL)
             .setTitle(`Suggest by ${message.author.tag}`)
             .setDescription('\`\`\`' + args2 + '\`\`\`')
+            .setFooter(`ID: ${message.author.id}`)
             .setTimestamp()
             
         botsuggestchannel.send(embed).then(m=>{
