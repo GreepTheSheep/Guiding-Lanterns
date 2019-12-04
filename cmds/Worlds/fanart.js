@@ -88,7 +88,15 @@ function fanart(message, client, prefix, functiondate, functiontime, getlogchann
         try {
         const args = message.content.split(/ +/).slice(1);
         
-        if (args.length < 1) return message.react('❌').then(message.reply(`Usage:\`\`\`${prefix}addpicture <movie> <URL>\`\`\`URLs must ends with:\`\`\`.jpg\n.jpeg\.png\n.gif\`\`\`If you have a picture on your device, use \`${prefix}geturl\` and follow the instructions for get your URL of your image`));
+        const usage = `Usage:\`\`\`${prefix}addpicture <movie> <URL>\`\`\`If your movie name contains spaces, do a " - " instread of spaces.\n\nURLs must ends with:\`\`\`.jpg\n.jpeg\n.png\n.gif\`\`\`If you have a picture on your device, use \`${prefix}geturl\` and follow the instructions for get your URL of your image`
+        if (args.length < 2) return message.react('❌').then(message.reply(usage));
+        
+        if (args[0].endsWith('.jpg') || args[0].endsWith('.png') || args[0].endsWith('.gif') ||  args[0].endsWith('.jpeg')){
+            if (!args[1]) return message.react('❌')
+            .then(message.reply(`I need the movie name!\n${usage}`));
+            else return message.react('❌')
+            .then(message.reply(`The movie name must be set before!\nUsage:\`\`\`${prefix}addpicture <movie> <URL>\`\`\`URLs must ends with:\`\`\`.jpg\n.jpeg\n.png\n.gif\`\`\`If you have a picture on your device, use \`${prefix}geturl\` and follow the instructions for get your URL of your image`));
+        }
         
         if (args[1].endsWith('.jpg') || args[1].endsWith('.png') || args[1].endsWith('.gif') ||  args[1].endsWith('.jpeg')){
         if (message.member.roles.find(r=>r.id === '611908442944176140')) {
@@ -114,7 +122,7 @@ function fanart(message, client, prefix, functiondate, functiontime, getlogchann
         } else message.react('❌').then(message.reply('Sorry, URLs must ends with:\`\`\`.jpg\n.jpeg\n.png\n.gif\`\`\`'));;
         } catch(err) {
             message.reply('Hmm... Something went wrong. Don\'t worry, the report has been send!');
-            const errmsg = `New Tangled Picture request error: ${err}`;
+            const errmsg = `New fanart request error: ${err}`;
             console.log(`[${functiondate(0)} - ${functiontime(0)}] ${errmsg}`);
             getlogchannel.send(errmsg);
         }
