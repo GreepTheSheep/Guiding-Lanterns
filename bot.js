@@ -83,36 +83,22 @@ client.on('ready', async () => { // If bot was connected:
     lant_ver(); //Set version number in the version number channel
     lant_xmas();
     inviteTracker.ready(client); // Starts the invite tracker plugin
-    const loginterval = new Promise(function() { // Automatic log file recreator function
-        setInterval(function() {
-            const attachment = new Attachment('./logs/bot.log') // Defines the log file to send
-            getlogchannel().send('Daily log file:', attachment) // Send the file
-            .then(m=>fs.writeFileSync('./logs/bot.log', '')) // Recreates the log file
-        }, 8.64e+7); // do this every day
-    }).catch(err=>getlogchannel().send('Error during sending the weekly log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot.log', '')))
-    loginterval
-
-    const depsupdate = new Promise(function() { // Automatic npm updates
-        setInterval(function() {
-            getlogchannel().send('Updating npm dependencies...')
-            .then(m=>shell.exec('npm install'), function(code, stdout, stderr){
-                if (code != 0) return m.edit(`Error during updating: \`\`\`${stderr}\`\`\``)
-                m.edit(`\`\`\`${stdout}\`\`\` :white_check_mark:`)
-            })
-        }, 8.64e+7); // Do this every day
-    }).catch(err=>getlogchannel().send('Error during auto pull: ' + err))
-    depsupdate
-
-    const autopull = new Promise(function() { // Automatic GitHub pull
-        setInterval(function() {
-            getlogchannel().send('Pulling changes from GitHub...')
-            .then(m=>shell.exec('git pull'), function(code, stdout, stderr){
-                if (code != 0) return m.edit(`Error during pulling: \`\`\`${stderr}\`\`\``)
-                m.edit(`\`\`\`${stdout}\`\`\` :white_check_mark:`)
-            })
-        }, 8.64e+7); // Do this every day
-    }).catch(err=>getlogchannel().send('Error during auto pull: ' + err))
-    autopull
+    function loginterval() { // send automatic log file
+        const attachment = new Attachment('./logs/bot.log') // Defines the log file to send
+        await getlogchannel().send('Daily log file:', attachment) // Send the file
+        fs.writeFileSync('./logs/bot.log', '') // Recreates the log file
+        .catch(err=>getlogchannel().send('Error during sending the weekly log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot.log', '')))
+    }
+    function autopull() { // automatic pull git changes
+        const m = await getlogchannel().send('Pulling changes from GitHub...')
+        shell.exec('git pull'), function(code, stdout, stderr){
+            if (code != 0) return m.edit(`Error during pulling: \`\`\`${stderr}\`\`\``)
+            m.edit(`\`\`\`${stdout}\`\`\` :white_check_mark:`)
+        }
+        .catch(err=>getlogchannel().send('Error during pulling git changes: ' + err))
+    }
+    
+    setInterval(loginterval().then(autopull()), 8.64e+7); // do this every day    
 }); // End
 
 
