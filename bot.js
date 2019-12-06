@@ -106,11 +106,10 @@ client.on('ready', async () => { // If bot was connected:
         .catch(err=>getlogchannel().send('Error during pulling git changes: ' + err))
     }
     var dailythings = new Promise(function(resolve, reject) {
-        setInterval(
+        setInterval(function(){
             loginterval()
-            .then(
-                autopull()
-            ), 8.64e+7); // do this every day    
+            autopull()
+        }, 8.64e+7); // do this every day    
       });
     dailythings
 }); // End
