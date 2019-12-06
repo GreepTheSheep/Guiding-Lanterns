@@ -83,17 +83,24 @@ client.on('ready', async () => { // If bot was connected:
     lant_ver(); //Set version number in the version number channel
     lant_xmas();
     inviteTracker.ready(client); // Starts the invite tracker plugin
-    
-    async function loginterval() { // send automatic log file
+
+    function loginterval() { // send automatic log file
+        console.log(`[ ${functiondate()} - ${functiontime()} ] Sending log file...`)
         const attachment = new Attachment('./logs/bot.log') // Defines the log file to send
-        await getlogchannel().send('Daily log file:', attachment) // Send the file
-        fs.writeFileSync('./logs/bot.log', '') // Recreates the log file
+        getlogchannel().send('Daily log file:', attachment) // Send the file
+        .then(function(){
+            console.log(`[ ${functiondate()} - ${functiontime()} ] Log file sent, erasing old file...`)
+            fs.unlinkSync('./logs/bot.log')
+            .then(console.log(`[ ${functiondate()} - ${functiontime()} ] Old log file succefully erased!`))
+        }) // Recreates the log file
         .catch(err=>getlogchannel().send('Error during sending the weekly log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot.log', '')))
     }
     async function autopull() { // automatic pull git changes
-        const m = await getlogchannel().send('Pulling changes from GitHub...')
+        const firstlog = 'Pulling changes from GitHub...'
+        console.log(`[ ${functiondate()} - ${functiontime()} ] ${firstlog}`)
+        const m = await getlogchannel().send(firstlog)
         shell.exec('git pull'), function(code, stdout, stderr){
-            if (code != 0) return m.edit(`Error during pulling: \`\`\`${stderr}\`\`\``)
+            if (code != 0) return m.edit(`Error during pulling git changes: \`\`\`${stderr}\`\`\``)
             m.edit(`\`\`\`${stdout}\`\`\` :white_check_mark:`)
         }
         .catch(err=>getlogchannel().send('Error during pulling git changes: ' + err))
