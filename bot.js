@@ -90,7 +90,7 @@ client.on('ready', async () => { // If bot was connected:
         getlogchannel().send('Daily log file:', attachment) // Send the file
         .then(function(){
             console.log(`[ ${functiondate()} - ${functiontime()} ] Log file sent, erasing old file...`)
-            fs.unlinkSync('./logs/bot.log')
+            fs.writeFileSync('./logs/bot.log', '')
             .then(console.log(`[ ${functiondate()} - ${functiontime()} ] Old log file succefully erased!`))
         }) // Recreates the log file
         .catch(err=>getlogchannel().send('Error during sending the weekly log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot.log', '')))
