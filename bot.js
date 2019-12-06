@@ -83,13 +83,13 @@ client.on('ready', async () => { // If bot was connected:
     lant_ver(); //Set version number in the version number channel
     lant_xmas();
     inviteTracker.ready(client); // Starts the invite tracker plugin
-    function loginterval() { // send automatic log file
+    async function loginterval() { // send automatic log file
         const attachment = new Attachment('./logs/bot.log') // Defines the log file to send
         await getlogchannel().send('Daily log file:', attachment) // Send the file
         fs.writeFileSync('./logs/bot.log', '') // Recreates the log file
         .catch(err=>getlogchannel().send('Error during sending the weekly log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot.log', '')))
     }
-    function autopull() { // automatic pull git changes
+    async function autopull() { // automatic pull git changes
         const m = await getlogchannel().send('Pulling changes from GitHub...')
         shell.exec('git pull'), function(code, stdout, stderr){
             if (code != 0) return m.edit(`Error during pulling: \`\`\`${stderr}\`\`\``)
