@@ -1,6 +1,6 @@
 {
     "name": "guiding-lanterns",
-    "version": "2.10.1",
+    "version": "2.10.3",
     "changelog": "Add currency system, !help currency",
     "description": "",
     "main": "bot.js",
