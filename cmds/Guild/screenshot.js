@@ -34,10 +34,7 @@ function video_id_str() {
 
 function scr_msg(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel) {
     const usage = `\nThe proper usage would be: \n\`${prefix+SCR} <video_id> <timestamp>\`\nThe timestamp may be a number (in seconds), a percentage (eg. \`50%\`) or in a format \`hh:mm:ss.xxx\` (where hours, minutes and milliseconds are optional)\nType \`${prefix+SCR} list\` to get a list of Video IDs`
-    const doclink = "https://Guiding-Lanterns.github.io/Guiding-Lanterns/screenshot.html"
-    const functioncalledlog = `\n[${functiondate(0)} - ${functiontime(0)}] Function screenshot() called by ${message.author.tag}`
-    console.log(functioncalledlog);
-    getlogchannel.send(functioncalledlog);
+    const doclink = "https://Guiding-Lanterns.github.io/screenshot.html"
     const args = message.content.split(/ +/).slice(1);
     if (args[0] === 'list') {
         let embed = new Discord.RichEmbed()
@@ -54,9 +51,6 @@ function scr_msg(message, client, prefix, functiondate, functiontime, cooldowns,
     }
     var filename = episode_to_filename(args[0]);
     if (filename === undefined) {
-        const invalididlog = `Invalid video ID: ${args[0]}`
-        console.log(invalididlog)
-        getlogchannel.send(invalididlog)
         let embed = new Discord.RichEmbed()
         embed.setTitle('ERROR!')
             .setColor('#ff0000')
@@ -67,16 +61,11 @@ function scr_msg(message, client, prefix, functiondate, functiontime, cooldowns,
         return;
     }
     if (args[1].split(':').some(isNaN) && !('' + args[1]).match(/^[\d.]+%$/)) {
-        const invalidtimestamplog = `Invalid Timestamp: ${args[1]}`
-        console.log(invalidtimestamplog)
-        getlogchannel.send(invalidtimestamplog)
         let reply = `That is not a valid timestamp, ${message.author}!`
         message.channel.send(`${reply}${usage}\n\n More info: ${doclink}`);
         return;
     }
     message.channel.startTyping()
-    console.log(filename);
-    getlogchannel.send(filename);
 
     //Implement cooldown
     if (!cooldowns.has(prefix + SCR)) {
@@ -92,9 +81,6 @@ function scr_msg(message, client, prefix, functiondate, functiontime, cooldowns,
 
         if (now < expirationTime) {
             const timeLeft = (expirationTime - now) / 1000;
-            const cooldownlog = `COOLDOWN : Wait ${timeLeft} sec`
-            console.log(cooldownlog);
-            getlogchannel.send(cooldownlog);
             return message.reply(`please wait ${timeLeft.toFixed(0)} more second(s) before reusing the \`${prefix+SCR}\` command.`)
             .then(m=>message.channel.stopTyping(true));
         }
@@ -122,15 +108,12 @@ function upload_scr_png(message, filename, timemark, displayid, prefix, getlogch
     const ffmpeg = require('fluent-ffmpeg');
     ffmpeg(filename)
         .on('end', function() {
-            const scrtakenlog = '[PNG] Screenshots taken, sending...'
-            console.log(scrtakenlog);
-            getlogchannel.send(scrtakenlog);
             const attachment = new Attachment('./data/screenshot.png');
             message.channel.send(`${message.author}\nScreenshot of ${displayid} taken at ${timemark}`, attachment)
             .then(m=>message.channel.stopTyping(true));
         })
         .on('error', function(err) {
-            const errlog = 'an error happened: ' + err.message
+            const errlog = 'Tangled screencap [PNG] error : ' + err.message
             console.log(errlog);
             getlogchannel.send(errlog);
             let embed = new Discord.RichEmbed()
@@ -153,15 +136,12 @@ function upload_scr_jpg(message, filename, timemark, displayid, prefix, getlogch
     const ffmpeg = require('fluent-ffmpeg');
     ffmpeg(filename)
         .on('end', function() {
-            const scrtakenlog = '[JPG] Screenshots taken, sending...'
-            console.log(scrtakenlog);
-            getlogchannel.send(scrtakenlog);
             const attachment = new Attachment('./data/screenshot.jpg');
             message.channel.send(`${message.author}\nScreenshot of ${displayid} taken at ${timemark}`, attachment)
             .then(m=>message.channel.stopTyping(true));
         })
         .on('error', function(err) {
-            const errlog = 'an error happened: ' + err.message
+            const errlog = 'Tangled screencap [JPG] error : ' + err.message
             console.log(errlog);
             getlogchannel.send(errlog);
             let embed = new Discord.RichEmbed()
