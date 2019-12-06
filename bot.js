@@ -84,15 +84,13 @@ client.on('ready', async () => { // If bot was connected:
     lant_xmas();
     inviteTracker.ready(client); // Starts the invite tracker plugin
 
-    function loginterval() { // send automatic log file
+    async function loginterval() { // send automatic log file
         console.log(`[ ${functiondate()} - ${functiontime()} ] Sending log file...`)
         const attachment = new Attachment('./logs/bot.log') // Defines the log file to send
-        getlogchannel().send('Daily log file:', attachment) // Send the file
-        .then(function(){
-            console.log(`[ ${functiondate()} - ${functiontime()} ] Log file sent, erasing old file...`)
-            fs.writeFileSync('./logs/bot.log', '')
-            .then(console.log(`[ ${functiondate()} - ${functiontime()} ] Old log file succefully erased!`))
-        }) // Recreates the log file
+        await getlogchannel().send('Daily log file:', attachment) // Send the file
+        console.log(`[ ${functiondate()} - ${functiontime()} ] Log file sent, erasing old file...`)
+        fs.writeFileSync('./logs/bot.log', '') // Recreates the log file
+        .then(console.log(`[ ${functiondate()} - ${functiontime()} ] Old log file succefully erased!`)) 
         .catch(err=>getlogchannel().send('Error during sending the weekly log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot.log', '')))
     }
     async function autopull() { // automatic pull git changes
