@@ -83,6 +83,7 @@ client.on('ready', async () => { // If bot was connected:
     lant_ver(); //Set version number in the version number channel
     lant_xmas();
     inviteTracker.ready(client); // Starts the invite tracker plugin
+    
     async function loginterval() { // send automatic log file
         const attachment = new Attachment('./logs/bot.log') // Defines the log file to send
         await getlogchannel().send('Daily log file:', attachment) // Send the file
@@ -97,8 +98,14 @@ client.on('ready', async () => { // If bot was connected:
         }
         .catch(err=>getlogchannel().send('Error during pulling git changes: ' + err))
     }
-    
-    setInterval(loginterval().then(autopull()), 8.64e+7); // do this every day    
+    var dailythings = new Promise(function(resolve, reject) {
+        setInterval(
+            loginterval()
+            .then(
+                autopull()
+            ), 8.64e+7); // do this every day    
+      });
+    dailythings
 }); // End
 
 
