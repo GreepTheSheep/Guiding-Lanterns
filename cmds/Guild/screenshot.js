@@ -23,30 +23,57 @@ function episode_to_filename(epi) {
     }
 }
 
-function video_id_str() {
+function video_id_str(s) {
     const episode = JSON.parse(fs.readFileSync(episodefile, "utf8"))
+    const s_comp = s.toUpperCase().replace(/S0/, 'S')
     const video_ids = [];
-    for (var epNojson in episode) {
-        video_ids.push(epNojson);
+    for (var sNojson in episode) {
+        var sNojson_comp = sNojson.toUpperCase().replace(/S0/, 'S')
+        video_ids.push(sNojson_comp);
     }
     return video_ids.join("\`\n- \`");
 }
 
+function video_id_str_other() {
+    const episode = JSON.parse(fs.readFileSync(episodefile, "utf8"))
+    const video_ids = [];
+    for (var sNojson in episode) {
+        var sNojson_comp = sNojson.toUpperCase().split(/S0/).split(/E0/)
+        video_ids.push(sNojson_comp);
+    }
+    return video_ids.join("\`\n- \`");
+}
+
+
 function scr_msg(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel) {
-    const usage = `\nThe proper usage would be: \n\`${prefix+SCR} <video_id> <timestamp>\`\nThe timestamp may be a number (in seconds), a percentage (eg. \`50%\`) or in a format \`hh:mm:ss.xxx\` (where hours, minutes and milliseconds are optional)\nType \`${prefix+SCR} list\` to get a list of Video IDs`
+    const usage = `\nThe proper usage would be: \n\`${prefix+SCR} <video_id> <timestamp>\`\nThe timestamp may be a number (in seconds), a percentage (eg. \`50%\`) or in a format \`hh:mm:ss.xxx\` (where hours, minutes and milliseconds are optional)\nType \`${prefix+SCR} list <season>\` to get a list of Video IDs`
     const doclink = "https://Guiding-Lanterns.github.io/screenshot.html"
     const args = message.content.split(/ +/).slice(1);
-    if (args[0] === 'list') {
-        let embed = new Discord.RichEmbed()
-        embed.addField("Available video ids are:", `- \`${video_id_str()}\``)
-            .addField("More info:", `[See the documentation about screenshots here](${doclink})`)
-            .setFooter(`The proper usage would be: "${prefix+SCR} <video_id> <timestamp>"`, `${message.author.displayAvatarURL}`)
-        message.reply(embed)
+    if (!args[0]) {
+        let reply = `You didn't provide enough arguments, ${message.author}!`
+        message.channel.send(`${reply}${usage}\n\n> More info: ${doclink}`);
         return;
+    }    
+    if (args[0] === 'list') {
+        if (!args[1]){
+            let embed = new Discord.RichEmbed()
+            embed.addField("Available video ids are:", `- \`${video_id_str_other()}\``)
+                .addField("More info:", `[See the documentation about screenshots here](${doclink})`)
+                .setFooter(`The proper usage would be: "${prefix+SCR} <video_id> <timestamp>"`, `${message.author.displayAvatarURL}`)
+            message.reply(embed)
+            return;
+        } else {
+            let embed = new Discord.RichEmbed()
+            embed.addField("Available video ids are:", `- \`${video_id_str(args[1])}\``)
+                .addField("More info:", `[See the documentation about screenshots here](${doclink})`)
+                .setFooter(`The proper usage would be: "${prefix+SCR} <video_id> <timestamp>"`, `${message.author.displayAvatarURL}`)
+            message.reply(embed)
+            return;
+        }
     }
     if (args.length < 2) {
         let reply = `You didn't provide enough arguments, ${message.author}!`
-        message.channel.send(`${reply}${usage}\n\n More info: ${doclink}`);
+        message.channel.send(`${reply}${usage}\n\n> More info: ${doclink}`);
         return;
     }
     var filename = episode_to_filename(args[0]);
@@ -54,7 +81,7 @@ function scr_msg(message, client, prefix, functiondate, functiontime, cooldowns,
         let embed = new Discord.RichEmbed()
         embed.setTitle('ERROR!')
             .setColor('#ff0000')
-            .addField("I don\'t have that video id!", `Available video ids are:\n- \`${video_id_str()}\``)
+            .addField("I don\'t have that video id!", `Available video ids are:\n- \`${video_id_str_other()}\``)
             .setThumbnail("https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061132_960_720.png")
             .setFooter(`Type "${prefix}bug <details of your bug>" to send at the devs`, `${message.author.displayAvatarURL}`)
         message.reply(embed)
