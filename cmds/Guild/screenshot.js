@@ -29,7 +29,9 @@ function video_id_str(s) {
     const video_ids = [];
     for (var sNojson in episode) {
         var sNojson_comp = sNojson.toUpperCase().replace(/S0/, 'S')
-        video_ids.push(sNojson_comp);
+        if (s_comp === sNojson_comp) {
+            video_ids.push(sNojson_comp);
+        }
     }
     return video_ids.join("\`\n- \`");
 }
@@ -38,7 +40,7 @@ function video_id_str_other() {
     const episode = JSON.parse(fs.readFileSync(episodefile, "utf8"))
     const video_ids = [];
     for (var sNojson in episode) {
-        var sNojson_comp = sNojson.toUpperCase().split(/S0/).split(/E0/)
+        var sNojson_comp = sNojson.toUpperCase().split(/S0/).join('').split(/E0/).join('')
         video_ids.push(sNojson_comp);
     }
     return video_ids.join("\`\n- \`");
