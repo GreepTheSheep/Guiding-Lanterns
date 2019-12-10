@@ -64,7 +64,7 @@
     "inv_bot_err": "Les bots ne peuvent pas avoir d'objets",
     "inv_title": "Inventaire de ${user}",
     "bal_your": "Votre solde :",
-    "bal_his": "His balance:",
+    "bal_his": "Balance:",
     "bal_bot_err": "Les bots ne peuvent pas avoir d'argent",
     "claim_thanks_vote": "Merci pour votre vote!",
     "claim_thanks_support": "Merci de votre soutien pour le bot !",
