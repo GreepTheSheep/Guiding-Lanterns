@@ -37,5 +37,11 @@ module.exports = {
         output: (d,h,m,s) => `🎅 ${d}d ${h}h`,
         end:   "HAPPY CHRISTMAS! 🎅",
         timeout: 1 * 60 * 60 * 1000
+    }),
+    pascal: countdown({
+        date : "January 12 2020 07:05:00 EST",
+        output: (d,h,m,s) => `🐉 ${d}d ${h}h`,
+        end:   "🐉 Pascal's Dragon!",
+        timeout: 1 * 60 * 60 * 1000
     })
 }
