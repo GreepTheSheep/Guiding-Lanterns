@@ -119,6 +119,9 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
 
     //-----------------------------------------------------------------------------------------------
 
+    const msgCollector = require('./msgCollector.js');
+    msgCollector(message, client, prefix, getlogchannel(), cooldowns);
+
 }
 
 module.exports = cmds_index;
