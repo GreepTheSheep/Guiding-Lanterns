@@ -5,19 +5,22 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     /*--------------------------------
     -------------- Owner -------------
     --------------------------------*/
-
+    if (message.author.id === '330030648456642562'  || message.author.id === "460348027463401472"){
     const eval_cmd = require('./Owner/eval.js');
     eval_cmd(message, client, prefix);
 
     const command = require('./Owner/shell.js');
     command(message, client, prefix);
 
+    const testCommands = require('./Owner/test-cmds.js');
+    testCommands(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns);
+
     const claimlog = require('./Owner/log.js');
     claimlog(message, client, prefix);
 
     const worldsmanager = require('./Owner/worlds.js')
     worldsmanager(message, client, prefix, functiondate, functiontime, getlogchannel())
-
+    }
     /*--------------------------------
     ------------ Currency ------------
     --------------------------------*/
@@ -118,9 +121,6 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     }
 
     //-----------------------------------------------------------------------------------------------
-
-    const msgCollector = require('./msgCollector.js');
-    msgCollector(message, client, prefix, getlogchannel(), cooldowns);
 
 }
 

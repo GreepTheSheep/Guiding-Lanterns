@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-function msgCollector(message, client, prefix){
+function testCommands(message, client, prefix, date, time, logchannel, cooldowns){
     if (message.content.startsWith(prefix + "awaitmsg")) {
         message.channel.send('Awaiting message...')
         const filter = m => message.author == m.author;
@@ -16,4 +16,4 @@ function msgCollector(message, client, prefix){
         });
     }
 }
-module.exports = msgCollector;
+module.exports = testCommands;
