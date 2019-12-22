@@ -32,15 +32,15 @@ function gtn(message, client, prefix, functiondate, functiontime, getlogchannel,
             const args = message.content.split(/ +/).slice(1);
             if (args.length < 1) return message.reply(lang.gtn_please)
             var dbnumber = GTN_db.get(message.author.id+'_number')
-            if (args[0] < dbnumber) {
+            if (Number(args[0]) < dbnumber) {
                 message.reply(lang.gtn_lower).then(m=>m.delete(5000))
                 GTN_db.set(message.author.id+'_try', GTN_db.get(message.author.id+'_try')+1)
             } else
-            if (args[0] > dbnumber) {
+            if (Number(args[0]) > dbnumber) {
                 message.reply(lang.gtn_higher).then(m=>m.delete(5000))
                 GTN_db.set(message.author.id+'_try', GTN_db.get(message.author.id+'_try')+1)
             } else
-            if (args[0] = dbnumber) {
+            if (Number(args[0]) = dbnumber) {
                 var tryes = GTN_db.get(message.author.id+'_try')
                 GTN_db.set(message.author.id+'_wins', GTN_db.get(message.author.id+'_wins')+1)
                 const congratsembed = new Discord.RichEmbed
