@@ -1,7 +1,7 @@
 {
     "name": "guiding-lanterns",
-    "version": "2.10.7",
-    "changelog": "Add currency system, !help currency",
+    "version": "2.10.8",
+    "changelog": "Fix GTN higher-lower bug",
     "description": "",
     "main": "bot.js",
     "repository": {
