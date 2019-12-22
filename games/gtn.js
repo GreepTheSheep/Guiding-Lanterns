@@ -9,7 +9,7 @@ function gtn(message, client, prefix, functiondate, functiontime, getlogchannel,
     if (message.content == prefix + 'guessthenumber' || message.content == prefix + 'gtnstart'){
         try{
         var randomnum = Math.random() * (+max - +min) + +min;
-        GTN_db.set(message.author.id+'_number', randomnum.toFixed(0))
+        GTN_db.set(message.author.id+'_number', Number(randomnum.toFixed(0)))
         GTN_db.set(message.author.id+'_try', 0)
         if (!GTN_db.has(message.author.id+'_wins')) GTN_db.set(message.author.id+'_wins', 0)
         const startembed = new Discord.RichEmbed
@@ -52,7 +52,7 @@ function gtn(message, client, prefix, functiondate, functiontime, getlogchannel,
                 message.channel.send(congratsembed)
                 GTN_db.set(message.author.id+'_try', 0)
                 var randomnum = Math.random() * (+max - +min) + +min;
-                GTN_db.set(message.author.id+'_number', randomnum.toFixed(0))
+                GTN_db.set(message.author.id+'_number', Number(randomnum.toFixed(0)))
             } else return;
         }catch(err){
             message.channel.send(lang.error_reported)
@@ -77,7 +77,7 @@ function gtn(message, client, prefix, functiondate, functiontime, getlogchannel,
             let rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]));
             if (!rUser) return message.react('❌')
             var randomnum = Math.random() * (+max - +min) + +min;
-            GTN_db.set(rUser.id+'_number', randomnum.toFixed(0))
+            GTN_db.set(rUser.id+'_number', Number(randomnum.toFixed(0)))
             GTN_db.set(rUser.id+'_try', 0)
             GTN_db.set(rUser.id+'_wins', 0)
             client.users.get(rUser.id).send(lang.gtn_statsresetmsg + ': https://discord.gg/Nzherng')
