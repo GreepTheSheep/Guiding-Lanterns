@@ -12,10 +12,7 @@ function SupportCheck (message, client, prefix, functiondate, functiontime, cool
 
     const donor = db[message.author.id]
 
-    const chatbot = require('../events/chatbot.js')
-    chatbot(message, client, prefix, donor, functiondate, functiontime, getlogchannel())
-
-
+    
     if (message.channel.type !== 'dm'){
     const status = require('../cmds/Util/status.js');
     status(message, client, prefix, donor, donorsonly);
