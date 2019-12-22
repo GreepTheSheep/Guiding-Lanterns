@@ -15,6 +15,9 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     const testCommands = require('./Owner/test-cmds.js');
     testCommands(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns);
 
+    const status = require('./Owner/status.js');
+    status(message, client, prefix);
+
     const claimlog = require('./Owner/log.js');
     claimlog(message, client, prefix);
 

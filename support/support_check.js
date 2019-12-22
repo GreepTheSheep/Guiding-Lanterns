@@ -12,10 +12,8 @@ function SupportCheck (message, client, prefix, functiondate, functiontime, cool
 
     const donor = db[message.author.id]
 
-    
+
     if (message.channel.type !== 'dm'){
-    const status = require('../cmds/Util/status.js');
-    status(message, client, prefix, donor, donorsonly);
 
     const say = require('../cmds/Fun/say.js');
     say(message, client, prefix, donor, donorsonly);
