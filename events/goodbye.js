@@ -23,7 +23,7 @@ function goodbye(member, client) {
         embed.setColor("#910002")
         .setTimestamp()
         .addField(`${msg}`, `Goodbye **${member.user.username}** :sob:`)
-        .setImage('http://www.youloveit.com/uploads/posts/2017-11/1511021113_youloveit_com_tangled_the_series_animated_gifs_emotions09.gif')
+        .setThumbnail('http://www.youloveit.com/uploads/posts/2017-11/1511021113_youloveit_com_tangled_the_series_animated_gifs_emotions09.gif')
         .setFooter(`${member.user.tag} left the Kingdom of Corona! We are now ${members} in the server`, `${member.user.displayAvatarURL}`)
         client.guilds.get('562602234265731080').channels.get('615236807478607921').send(embed);
     }

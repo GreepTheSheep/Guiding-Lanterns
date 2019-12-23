@@ -25,19 +25,33 @@ function welcome(member, client) {
 
     if (member.guild.id === '562602234265731080'){
         let embed = new Discord.RichEmbed()
-        embed.setColor("#01B023")
-        .setTimestamp()
-        .addField(`${welcomemsg}`, `Hey, **say welcome to __${member.user.username}__** 🙌`)
-        .setImage('https://78.media.tumblr.com/2efc44413cbd084b56d0215eb91ebcfd/tumblr_ouakbtM2WY1vm5s4to1_500.gif')
-        .setFooter(`${member.user.tag} just landed in the Kingdom of Corona! We are now ${members} in the server`, `${member.user.displayAvatarURL}`)
+        if (!member.user.bot){
+            embed.setColor("#01B023")
+            .setTimestamp()
+            .addField(`${welcomemsg}`, `Hey, **say welcome to __${member.user.username}__** 🙌`)
+            .setThumbnail('https://78.media.tumblr.com/2efc44413cbd084b56d0215eb91ebcfd/tumblr_ouakbtM2WY1vm5s4to1_500.gif')
+            .setFooter(`${member.user.tag} just landed in the Kingdom of Corona! We are now ${members} in the server`, `${member.user.displayAvatarURL}`)
+        } else if (member.user.bot){
+            embed.setColor("#01B023")
+            .setTimestamp()
+            .addField(`${welcomemsg}`, `Hey, **say welcome to... Wait a second, that's a bot!**`)
+            .setFooter(`${member.user.tag} just landed in the Kingdom of Corona! We are now ${bots} bots in the server`, `${member.user.displayAvatarURL}`)
+        }
         client.guilds.get('562602234265731080').channels.get('615236807478607921').send(embed);
     }
     if (member.guild.id === '570024448371982373'){
         let embed = new Discord.RichEmbed()
-        embed.setColor("#01B023")
-        .setTimestamp()
-        .addField(`Welcome to the Guiding Lanterns support server!`, `<@${member.user.id}>`)
-        .setFooter(`${member.user.tag} just landed in the Guiding Lanterns support server! We are now ${members} in the server`, `${member.user.displayAvatarURL}`)
+        if (!member.user.bot){
+            embed.setColor("#01B023")
+            .setTimestamp()
+            .addField(`Welcome to the Guiding Lanterns support server!`, `<@${member.user.id}>`)
+            .setFooter(`${member.user.tag} just landed in the Guiding Lanterns support server! We are now ${members} in the server`, `${member.user.displayAvatarURL}`)
+        } else if (member.user.bot){
+            embed.setColor("#01B023")
+            .setTimestamp()
+            .addField(`A bot joined the Guiding Lanterns support server!`, `<@${member.user.id}>`)
+            .setFooter(`${member.user.tag} just landed in the Guiding Lanterns support server! We are now ${bots} bots in the server`, `${member.user.displayAvatarURL}`)
+        }
         client.guilds.get('570024448371982373').channels.get('591219640315674641').send(embed);
     }
 }
