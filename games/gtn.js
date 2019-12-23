@@ -3,7 +3,7 @@ const Enmap = require('enmap');
 const GTN_db = new Enmap({name: "gtn"})
 
 const min=1; 
-const max=100;
+const max=100000;
 
 function gtn(message, client, prefix, functiondate, functiontime, getlogchannel, lang) {
     if (message.content == prefix + 'guessthenumber' || message.content == prefix + 'gtnstart'){
@@ -32,15 +32,15 @@ function gtn(message, client, prefix, functiondate, functiontime, getlogchannel,
             const args = message.content.split(/ +/).slice(1);
             if (args.length < 1) return message.reply(lang.gtn_please)
             var dbnumber = GTN_db.get(message.author.id+'_number')
-            if (Number(args[0]) < dbnumber) {
+            if (args[0] < dbnumber) {
                 message.reply(lang.gtn_lower).then(m=>m.delete(5000))
                 GTN_db.set(message.author.id+'_try', GTN_db.get(message.author.id+'_try')+1)
             } else
-            if (Number(args[0]) > dbnumber) {
+            if (args[0] > dbnumber) {
                 message.reply(lang.gtn_higher).then(m=>m.delete(5000))
                 GTN_db.set(message.author.id+'_try', GTN_db.get(message.author.id+'_try')+1)
             } else
-            if (Number(args[0]) = dbnumber) {
+            if (args[0] = dbnumber) {
                 var tryes = GTN_db.get(message.author.id+'_try')
                 GTN_db.set(message.author.id+'_wins', GTN_db.get(message.author.id+'_wins')+1)
                 const congratsembed = new Discord.RichEmbed
