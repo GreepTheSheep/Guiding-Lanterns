@@ -12,7 +12,6 @@ async function title() {
     console.log('┌─────────────────────────────────┐')
     console.log('│       The Guiding Lanterns      │')
     console.log('│                                 │')
-    console.log('│          Version ' + package.version + '         │')
     console.log('│             By ' + package.author + '            │')
     console.log('└─────────────────────────────────┘')
     console.log(package.repository.url)
@@ -25,7 +24,7 @@ async function os_check(){
     await wait(5000)
 
     // Check OS
-    console.log('Checking Operating System...')
+    console.log('# Checking Operating System...')
     await wait(2000)
     console.log(os.type())
     await wait(500)
@@ -51,15 +50,13 @@ async function os_check(){
         prompt.delimiter = '';
         prompt.start();
         prompt.get(schema, function (err, result) {
-            if (result.validate.toLowerCase() == 'no'){
+            if (!result.validate.toLowerCase().includes('yes')){
+                console.error(colors.red('Please run the script on Linux'))
                 console.error(colors.red('Exiting...'))
                 process.exit(1)
-            } else if (result.validate.toLowerCase() == 'yes'){
+            } else if (result.validate.toLowerCase().includes('yes')){
                 console.log(colors.cyan('okay, be careful!'))
                 check_commands()
-            } else if (result.validate.toLowerCase() != 'no' || result.validate.toLowerCase() != 'yes'){
-                console.error(colors.red('Exiting...'))
-                process.exit(1)
             }
           });
     } else {
@@ -74,7 +71,7 @@ async function check_commands(){
 
     // Check commands
 
-    console.log('Checking if git is installed...')
+    console.log('# Checking if git is installed...')
     await wait(2000)
     shell.exec('git --version',{silent: true}, function(code, stdout, stder){
         if (code != 0){
