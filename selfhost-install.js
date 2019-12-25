@@ -348,7 +348,123 @@ async function config(){
                 process.exit(11)
             } else {
                 console.log(colors.green('Sucess!'))
+                final_things()
             }
         });
     });
+}
+
+async function final_things(){
+    console.log('\n# Finalizing some files and add some examples...')
+    await wait(1000);
+
+    fs.mkdir(`./data/movies`, async function(err){
+        if (err){
+            if (err.code != 'EEXIST') {
+                console.error(colors.red('----- ERROR: ------'))
+                console.error(`We\'re unable to create data/movies/ folder`)
+                console.error('Please check your permissions!')
+                console.error('And then restart the installation script')
+                console.error(colors.red('-------------------'))
+                process.exit(4)
+            }
+        }
+    })
+
+    request({url: 'https://pastebin.com/raw/0jecr6fw'}, async function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+            fs.writeFile('./data/movies/example_pics.json', body, async function(x){
+                if (x) {
+                    console.error(colors.red('----- ERROR: ------'))
+                    console.error(`We\'re unable to create example JSON file`)
+                    console.error('Details:')
+                    console.error(x)
+                    console.error(colors.red('-------------------'))
+                }
+            })
+        } else {
+            console.error(colors.red('----- ERROR: ------'))
+            console.error(`We\'re unable to reach the host to create example JSON file`)
+            console.error('Please check your permissions!')
+            console.error('And then restart the installation script')
+            console.error(colors.red('-------------------'))
+        }
+    })
+
+    request({url: 'https://pastebin.com/raw/HFKCHkgY'}, async function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+            fs.writeFile('./data/movies/example_fanarts.json', body, async function(x){
+                if (x) {
+                    console.error(colors.red('----- ERROR: ------'))
+                    console.error(`We\'re unable to create example JSON file`)
+                    console.error('Details:')
+                    console.error(x)
+                    console.error(colors.red('-------------------'))
+                }
+            })
+        } else {
+            console.error(colors.red('----- ERROR: ------'))
+            console.error(`We\'re unable to reach the host to create example JSON file`)
+            console.error('Please check your permissions!')
+            console.error('And then restart the installation script')
+            console.error(colors.red('-------------------'))
+        }
+    })
+
+    request({url: 'https://pastebin.com/raw/a2zAGLua'}, async function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+            fs.writeFile('./data/movies/example_quotes.json', body, async function(x){
+                if (x) {
+                    console.error(colors.red('----- ERROR: ------'))
+                    console.error(`We\'re unable to create example JSON file`)
+                    console.error('Details:')
+                    console.error(x)
+                    console.error(colors.red('-------------------'))
+                }
+            })
+        } else {
+            console.error(colors.red('----- ERROR: ------'))
+            console.error(`We\'re unable to reach the host to create example JSON file`)
+            console.error('Please check your permissions!')
+            console.error('And then restart the installation script')
+            console.error(colors.red('-------------------'))
+        }
+    })
+
+    request({url: 'https://pastebin.com/raw/dVx1iPrV'}, async function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+            fs.writeFile('./data/selfhost-readme.txt', body, async function(x){
+                if (x) {
+                    console.error(colors.red('----- ERROR: ------'))
+                    console.error(`We\'re unable to create readme file`)
+                    console.error('Details:')
+                    console.error(x)
+                    console.error(colors.red('-------------------'))
+                }
+            })
+        } else {
+            console.error(colors.red('----- ERROR: ------'))
+            console.error(`We\'re unable to reach the host to create readme file`)
+            console.error('Please check your permissions!')
+            console.error('And then restart the installation script')
+            console.error(colors.red('-------------------'))
+        }
+    })
+    end()
+}
+
+async function end(){
+    await wait(2000)
+
+    console.log('\n')
+    console.log(colors.rainbow('┌─────────────────────────────────┐'))
+    console.log(colors.rainbow('|             ✅ Done! ✅           |'))
+    console.log(colors.rainbow('└─────────────────────────────────┘'))
+    console.log('')
+    console.log('Installation finished! Thanks for your patience')
+    console.log(colors.red(colors.bold(colors.underline('IMPORTANT: Before starting, please take a look at data/selfhost-readme.txt\n'))))
+    console.log('You can start the script using pm2: ' + colors.blue('pm2 start bot.ecosystem.config.js'))
+    console.log(colors.green('\nThanks for using The Guiding Lanterns 💙'))
+    console.log('')
+    process.exit(0)
 }
