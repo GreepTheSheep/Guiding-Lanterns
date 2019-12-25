@@ -164,6 +164,7 @@ async function create_folder(){
     fs.mkdir(`./data`, async function(err){
         if (!err){
             console.log(colors.green(`Succefully created data/ folder!`))
+            support()
         } else {
             if (err.code == 'EEXIST') {
                 console.log(colors.yellow('data/ folder already exists!'))
