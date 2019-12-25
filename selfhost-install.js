@@ -11,9 +11,10 @@ title()
 
 async function title() {
     console.log('┌─────────────────────────────────┐')
-    console.log('│       The Guiding Lanterns      │')
+    console.log('│       ' + colors.bold(colors.rainbow('The Guiding Lanterns')) + '      │')
     console.log('│                                 │')
-    console.log('│             By ' + package.author + '            │')
+    console.log('│       Selfhost installation     │')
+    console.log('│             By Greep            │')
     console.log('└─────────────────────────────────┘')
     console.log(colors.grey(package.repository.url))
     os_check();
@@ -77,10 +78,11 @@ async function check_commands(){
         if (code != 0){
             console.error(colors.red('----- ERROR: ------'))
             console.error('Git is not installed, please install git')
-            if (os.type() == 'Linux') console.error('please execute the command: apt install git')
+            if (os.type() == 'Linux') console.error('please execute the command: ' + colors.bold('apt install -y git'))
             else if (os.type() == 'Windows_NT') console.log('please install git at https://git-scm.com/download/win')
-            else console.log('please install git')
+            else console.log(colors.bold('please install git'))
             console.error('And retry the installation after')
+            console.error(colors.red('-------------------'))
             process.exit(code)
         } else {
             console.log(colors.green('Git is installed!') + ' Version: ' + stdout.replace('git version ', ''))
@@ -93,7 +95,6 @@ async function version_check(){
     await wait(5000)
 
     console.log('# Checking versions...')
-    await wait(2000)
     
     var packageurl = 'https://raw.githubusercontent.com/Guiding-Lanterns/Guiding-Lanterns/master/package.json'
     request({
@@ -101,15 +102,45 @@ async function version_check(){
         json: true
     }, async function (error, response, body) {
         console.log('Current local version: ' + package.version)
-        await wait(1000)
+        await wait(3000)
         if (!error && response.statusCode === 200) {
             console.log('Current remote version ' + body.version)
+            await wait(1000)
             if (package.version == body.version) console.log(colors.green('Great!') + ' No pull required\nYou can pull manually by executing the command: git pull')
             else if (package.version != body.version){
-                console.log(colors.yellow('A pull is required!') + ' I\'ll pull for you')
-                shell.exec('git pull', {silent: true}, async function(code, stdout, stderr){
-                    if (code != 0){
-                        
+                console.log(colors.yellow('A pull is required!'))
+
+                var schema = {
+                    properties: {
+                      validate: {
+                        description: colors.white(colors.underline('Do you want to pull changes?') + ' (yes/no):'),
+                        type: 'string',
+                        pattern: /^\w+$/,
+                        default: 'yes',
+                        required: true
+                      }
+                    }
+                };
+                prompt.message = '';
+                prompt.delimiter = '';
+                prompt.start();
+                prompt.get(schema, function (err, result) {
+                    if (!result.validate.toLowerCase().includes('yes')){
+                        console.log(colors.yellow('okay! I\'ll not pull changes!'))
+                    } else if (result.validate.toLowerCase().includes('yes')){
+                        console.log(colors.cyan('okay, now pulling changes from GitHub!'))
+                        shell.exec('git pull', {silent: true}, async function(code, stdout, stderr){
+                            if (code != 0){
+                                console.log(colors.green('Succefully pulled!') + colors.underline(colors.bold('Please restart the installation script!')))
+                                process.exit(0)
+                            } else {
+                                console.error(colors.red('----- ERROR: ------'))
+                                console.error('We\'re unable to pull changes')
+                                console.error('Git output: ' + stderr + stdout)
+                                console.error(colors.underline(colors.bold('Please restart the installation script!')))
+                                console.error(colors.red('-------------------'))
+                            }
+                        })
                     }
                 })
             }
