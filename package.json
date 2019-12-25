@@ -5,7 +5,7 @@
     "description": "",
     "main": "bot.js",
     "repository": {
-        "url": "https://github.com/GreepTheSheep/Guiding-Lanterns"
+        "url": "https://github.com/Guiding-Lanterns/Guiding-Lanterns"
     },
     "private": true,
     "scripts": {
