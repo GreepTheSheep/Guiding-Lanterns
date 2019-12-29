@@ -69,7 +69,6 @@ const lant_num_members_guild = () => num_members_guild(client, "5626022342657310
 const lant_num_guilds = () => num_guilds(client, channel_id.guilds);
 const lant_ver = () => ver(client, channel_id.version);
 
-const lant_xmas = () => countdown.xmas(client, channel_id.xmas);
 const lant_pascal = () => countdown.pascal(client, channel_id.pascal);
 
 client.on('ready', async () => { // If bot was connected:
@@ -82,7 +81,6 @@ client.on('ready', async () => { // If bot was connected:
     lant_num_members_guild(); //Set the Member count
     lant_num_guilds(); //Set the guilds count
     lant_ver(); //Set version number in the version number channel
-    lant_xmas();
     lant_pascal();
     inviteTracker.ready(client); // Starts the invite tracker plugin
 
