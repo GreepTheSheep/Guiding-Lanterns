@@ -10,9 +10,9 @@ function getRandom(){
     const max3=100;
     var num = Math.random();
     var output;
-    if (num < 0.93) output = 0;  //probability 0.93 (93%) to get 0
-    else if (num < 0.97) output = Math.random() * (+max1 - +min1) + +min1; //probability 0.04 (4%) to get between 1 and 10
-    else if (num < 0.99) output = Math.random() * (+max2 - +min2) + +min2; // probability 0.02 (2%) to get between 11 and 49
+    if (num < 0.86) output = 0;  //probability 0.87 (87%) to get 0
+    else if (num < 0.96) output = Math.random() * (+max1 - +min1) + +min1; //probability 0.10 (10%) to get between 1 and 10
+    else if (num < 0.99) output = Math.random() * (+max2 - +min2) + +min2; // probability 0.03 (3%) to get between 11 and 49
     else output = Math.random() * (+max3 - +min3) + +min3;  //probability 0.01 (1%) to get between 50 and 100
     return output.toFixed(0)
   }
