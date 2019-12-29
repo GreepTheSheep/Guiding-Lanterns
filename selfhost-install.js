@@ -372,6 +372,26 @@ async function final_things(){
         }
     })
 
+    request({url: 'https://pastebin.com/raw/0umNnK7Z'}, async function (error, response, body) {
+        if (!error && response.statusCode === 200) {
+            fs.writeFile('./data/movies/channel_ids.json', body, async function(x){
+                if (x) {
+                    console.error(colors.red('----- ERROR: ------'))
+                    console.error(`We\'re unable to create channel IDs JSON file`)
+                    console.error('Details:')
+                    console.error(x)
+                    console.error(colors.red('-------------------'))
+                }
+            })
+        } else {
+            console.error(colors.red('----- ERROR: ------'))
+            console.error(`We\'re unable to reach the host to create channel IDs JSON file`)
+            console.error('Please check your permissions!')
+            console.error('And then restart the installation script')
+            console.error(colors.red('-------------------'))
+        }
+    })
+
     request({url: 'https://pastebin.com/raw/0jecr6fw'}, async function (error, response, body) {
         if (!error && response.statusCode === 200) {
             fs.writeFile('./data/movies/example_pics.json', body, async function(x){
