@@ -77,10 +77,6 @@ client.on('guildMemberRemove', member => {
     lant_num_members_guild();
 });
 
-client.on('messageReactionAdd', reaction => {
-    const twitter_starboard = require('./events/twitter-starboard.js')
-    twitter_starboard(client, reaction, getlogchannel(), functiondate(), functiontime())
-})
 
 client.on('message', message => {
     const prefix = config.prefix_nightly;

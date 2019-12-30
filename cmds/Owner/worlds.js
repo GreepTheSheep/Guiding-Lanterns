@@ -22,7 +22,6 @@ function worlds(message, client, prefix, date, time, logchannel) {
                     m.delete(15000)
                     fs.writeFile(path+'_pics.json', '[]', function(err){ if (err) {errorgenerating(message, err, date, time, logchannel)}})
                     fs.writeFile(path+'_quotes.json', '[]', function(err){ if (err) {errorgenerating(message, err, date, time, logchannel)}})
-                    fs.writeFile(path+'_fanarts.json', '[]', function(err){ if (err) {errorgenerating(message, err, date, time, logchannel)}})
                     m.edit('Files successfully generated!')
                     const filesoklog = `New world added by owner: ${args[0].charAt(0).toUpperCase() + args.join(" ").slice(1)}`
                     logchannel.send(filesoklog)
