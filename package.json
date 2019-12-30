@@ -1,7 +1,7 @@
 {
     "name": "guiding-lanterns",
-    "version": "2.10.8",
-    "changelog": "Fix GTN higher-lower bug",
+    "version": "2.11.0",
+    "changelog": "Removed the fanart command due to copyright issues, fixed many bugs, and added the possibility to host the bot yourself",
     "description": "",
     "main": "bot.js",
     "repository": {

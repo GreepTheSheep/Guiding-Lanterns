@@ -41,9 +41,6 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     const picture = require('./Worlds/pics.js')
     picture(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns)
 
-    const fanart = require('./Worlds/fanart.js')
-    fanart(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns)
-
     /*--------------------------------
     --------------- Fun --------------
     --------------------------------*/

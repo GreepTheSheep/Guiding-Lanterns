@@ -88,7 +88,7 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
         try {
         const args = message.content.split(/ +/).slice(1);
         
-        const usage = `Usage:\`\`\`${prefix}addpicture <movie> <URL>\`\`\`If your movie name contains spaces, do a " - " instread of spaces.\n\nURLs must ends with:\`\`\`.jpg\n.jpeg\n.png\n.gif\`\`\`If you have a picture on your device, use \`${prefix}geturl\` and follow the instructions for get your URL of your image`
+        const usage = `Usage:\`\`\`${prefix}addpicture <movie> <URL or attachment>\`\`\`If your movie name contains spaces, do a " \`-\` " instread of spaces.\n\nURLs must ends with:\`\`\`.jpg\n.jpeg\n.png\n.gif\`\`\`If you have a picture on your device, use \`${prefix}geturl\` and follow the instructions for get your URL of your image`
         if (!args[0]) return message.react('❌').then(message.reply(usage));
         
         if (args[0].endsWith('.jpg') || args[0].endsWith('.png') || args[0].endsWith('.gif') ||  args[0].endsWith('.jpeg')){
@@ -96,6 +96,18 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
             .then(message.reply(`I need the movie name!\n${usage}`));
             else return message.react('❌')
             .then(message.reply(`The movie name must be set before!\n${usage}`));
+        }
+        if (!args[1]){
+            // Check if there has an attachment
+            if (message.attachments.size > 0) {
+                let attachurl = message.attachments.array()[0].url
+                if (message.attachments.array()[0].width > 0 && message.attachments.array()[0].height > 0) args[1] = attachurl
+                else return message.react('❌')
+                .then(message.reply(`Your file is not a image!\n${usage}`));
+            } else {
+                return message.react('❌')
+                    .then(message.reply(`Please set an URL or send an image with this command\n${usage}`));
+            }
         }
         if (args[1].endsWith('.jpg') || args[1].endsWith('.png') || args[1].endsWith('.gif') ||  args[1].endsWith('.jpeg')){
         if (message.member.roles.find(r=>r.id === '611908442944176140')) {
