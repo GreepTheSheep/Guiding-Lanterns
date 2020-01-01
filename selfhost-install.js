@@ -19,7 +19,28 @@ async function title() {
     console.log('│             By Greep            │')
     console.log('└─────────────────────────────────┘')
     console.log(colors.grey(package.repository.url))
-    os_check();
+    root_check();
+}
+
+async function root_check(){
+    if (os.type() === 'Linux'){
+        console.log('')
+        console.log('# Checking if user is root...')
+        await wait(2000)
+        shell.exec('whoami',{silent: true}, function(code, stdout, stderr){
+            if (!stdout.includes('root')){
+                console.log(colors.yellow(stdout).replace('\n', ''))
+                console.error(colors.red('----- ERROR: ------'))
+                console.error('You\'re not running as root')
+                console.error('Please retry with sudo or execute with root user')
+                console.error(colors.red('-------------------'))
+                process.exit(2)
+            } else {
+                console.log(colors.green(stdout).replace('\n',''))
+                os_check()
+            }
+        })
+    } else os_check()
 }
 
 async function os_check(){
@@ -77,15 +98,52 @@ async function check_commands(){
     shell.exec('git --version',{silent: true}, function(code, stdout, stderr){
         if (code != 0){
             console.error(colors.red('----- ERROR: ------'))
-            console.error('Git is not installed, please install git')
-            if (os.type() == 'Linux') console.error('please execute the command: ' + colors.bold('apt install -y git'))
-            else if (os.type() == 'Windows_NT') console.log('please install git at https://git-scm.com/download/win')
-            else console.log(colors.bold('please install git'))
+            console.error('Git is not installed')
+            if (os.type() == 'Linux') {
+                console.error('Trying to installing it for you...')
+                shell.exec('apt install -y git',{silent: false}, function(code, stdout, stderr){
+                    if (code != 0){
+                        console.error(colors.red('Unable to install git'))
+                        console.error(stderr)
+                        console.error('please install git:' + colors.bold('apt install -y git'))
+                        console.error(colors.red('-------------------'))
+                        process.exit(2)
+                    } else {
+                        console.log(colors.green('Git succefully installed!'))
+                        install_deps()
+                    }
+                })
+            } else {
+            if (os.type() == 'Windows_NT') console.error('please install git at https://git-scm.com/download/win')
+            else console.error(colors.bold('please install git'))
+            console.error('And retry the installation after')
+            console.error(colors.red('-------------------'))
+            process.exit(2)
+            }
+        } else {
+            console.log(colors.green('Git is installed!') + ' Version: ' + stdout.replace('git version ', ''))
+            install_deps()
+        }
+    })
+}
+
+async function install_deps(){
+    console.log('')
+
+    // Check commands
+
+    console.log('# Installing / upgrading npm dependencies (This might take a while)')
+    await wait(2000)
+    shell.exec('npm install',{silent: false}, function(code, stdout, stderr){
+        if (code != 0){
+            console.error(colors.red('----- ERROR: ------'))
+            console.error('Can\'t install dependencies')
+            if (os.type() == 'Linux') console.error('please retry as sudo')
+            else console.log('Check your permissions, and retry')
             console.error('And retry the installation after')
             console.error(colors.red('-------------------'))
             process.exit(2)
         } else {
-            console.log(colors.green('Git is installed!') + ' Version: ' + stdout.replace('git version ', ''))
             version_check()
         }
     })
