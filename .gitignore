@@ -82,3 +82,6 @@ logs/*
 
 # Translation api key
 crowdin.yml
+
+# binary files
+bin/*
