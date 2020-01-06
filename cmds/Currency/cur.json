@@ -103,5 +103,28 @@
                 }
             ]
         }
+        ,{
+            "name": "❄️ Elsa's hand",
+            "cost": 10000,
+            "sell": 20000,
+            "use": [
+                {
+                    "text": "Let it go! 🙌",
+                    "img": "https://media.giphy.com/media/119SFXjoMsax6o/giphy.gif"
+                }
+                ,{
+                    "text": "You can't handle cold...",
+                    "img": "https://media.giphy.com/media/3oFyDcytkLS4bjZ2NO/giphy.gif"
+                }
+                ,{
+                    "text": "Giving some snow 😋",
+                    "img": "https://media.giphy.com/media/jUKA0iWV50aj6PuRho/giphy.gif"
+                }
+                ,{
+                    "text": "Fighting fire! 🔥",
+                    "img": "https://media.giphy.com/media/C8o70UEXbZJWfUOTF7/giphy.gif"
+                }
+            ]
+        }
     ]
 }
