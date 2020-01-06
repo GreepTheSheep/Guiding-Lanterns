@@ -14,6 +14,9 @@ Click on the picture down to invite the bot in your server!
   [![icon](icon1.png)](https://discordapp.com/oauth2/authorize?client_id=569624646475972608&scope=bot&permissions=67488968)
 
   [![Join the Kingdom of Corona server](https://discordapp.com/api/guilds/562602234265731080/embed.png?style=banner1)](https://discord.gg/BunQeKh)  [![Join the developemnt server](https://discordapp.com/api/guilds/570024448371982373/embed.png?style=banner1)](https://discord.gg/5QCQpr9)
+  
+## Self-hosting
+**This code is for reference-only and most of it is not up-to-date. This is not functional and we do not offer any support for self-hosting at this moment. Anyway, if you want to self-host this bot you can access [here](https://github.com/Guiding-Lanterns/Guiding-Lanterns/wiki/Selfhosting) (Warning, reminder: this is at this moment for reference-only and many errors can be displayed as self-host)**
 
 
 ## License
