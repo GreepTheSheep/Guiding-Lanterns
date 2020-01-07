@@ -10,11 +10,11 @@ const client = new Discord.Client({
   const config = JSON.parse(fs.readFileSync(configfile, "utf8")); // Retrieves the contents of the configuration file (the prefix and the login token)
 client.login(config.token)
 const cooldowns = new Discord.Collection(); //Stores cooldown info for screenshot()
-const logchannel = '589337734754336781' //Set a channel for logging
-var getlogchannel = () => client.guilds.get('570024448371982373').channels.get(logchannel)
+const logchannel = config.log_channel //Set a channel for logging
+var getlogchannel = () => client.channels.get(logchannel)
 if (!getlogchannel) {
-    console.error('Discord log channel not found.')
-    getlogchannel = () =>  undefined
+    console.error('Discord log channel not found. Sending log errors in the console (there might be in double)')
+    getlogchannel().send = (text) =>  console.log(text)
 }
 const inviteTracker = require('./events/invite-track.js'); // Define the invite tracker plugin
 const shell = require('shelljs'); // Require for executing shell commands (such as git)
@@ -65,53 +65,57 @@ const countdown = require('./counter/countdown.js');
 const num_guilds = require('./counter/guilds.js');
 const ver = require('./counter/version.js')
 
-const lant_num_members_guild = () => num_members_guild(client, "562602234265731080", channel_id.members);
-const lant_num_guilds = () => num_guilds(client, channel_id.guilds);
-const lant_ver = () => ver(client, channel_id.version);
-
-const lant_pascal = () => countdown.pascal(client, channel_id.pascal);
-
 client.on('ready', async () => { // If bot was connected:
-    const totalguildsize = await client.shard.fetchClientValues('guilds.size')
-    dbl.postStats(totalguildsize.reduce((prev, val) => prev + val, 0))
+
     console.log(`[Client] connected in shard ${client.shard.id}`)
     getlogchannel().send(`${client.user.tag} is connected in shard ${client.shard.id}`)
-    const versionCheck = require('./events/ver-check.js');
-    versionCheck(client);
-    lant_num_members_guild(); //Set the Member count
-    lant_num_guilds(); //Set the guilds count
-    lant_ver(); //Set version number in the version number channel
-    lant_pascal();
-    inviteTracker.ready(client); // Starts the invite tracker plugin
+    
+    if (client.user.id == config.public){
+        const lant_num_members_guild = () => num_members_guild(client, "562602234265731080", channel_id.members);
+        const lant_num_guilds = () => num_guilds(client, channel_id.guilds);
+        const lant_ver = () => ver(client, channel_id.version);
+    
+        const lant_pascal = () => countdown.pascal(client, channel_id.pascal);
+    
+        const totalguildsize = await client.shard.fetchClientValues('guilds.size')
+        dbl.postStats(totalguildsize.reduce((prev, val) => prev + val, 0))
+        const versionCheck = require('./events/ver-check.js');
+        versionCheck(client);
+        lant_num_members_guild(); //Set the Member count
+        lant_num_guilds(); //Set the guilds count
+        lant_ver(); //Set version number in the version number channel
+        lant_pascal();
+        inviteTracker.ready(client); // Starts the invite tracker plugin
 
-    const loginterval = function() { // send automatic log file
-        console.log(`[ ${functiondate()} - ${functiontime()} ] Sending log file...`)
-        const attachment = new Attachment('./logs/bot.log') // Defines the log file to send
-        getlogchannel().send('Daily log file:', attachment) // Send the file
-        .then(function(){
-            console.log(`[ ${functiondate()} - ${functiontime()} ] Log file sent, erasing old file...`)
-            fs.writeFileSync('./logs/bot.log', '') // Recreates the log file
-            console.log(`[ ${functiondate()} - ${functiontime()} ] Old log file succefully erased!`)
-        })
-        .catch(err=>getlogchannel().send('Error during sending the weekly log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot.log', '')))
-    }
-    const autopull = function() { // automatic pull git changes
-        const firstlog = 'Pulling changes from GitHub...'
-        console.log(`[ ${functiondate()} - ${functiontime()} ] ${firstlog}`)
-        getlogchannel().send(firstlog)
-        .then(m=>shell.exec('git pull'), function(code, stdout, stderr){
-            if (code != 0) return m.edit(`Error during pulling git changes: \`\`\`${stderr}\`\`\``)
-            m.edit(`\`\`\`${stdout}\`\`\` :white_check_mark:`)
-        })
-        .catch(err=>getlogchannel().send('Error during pulling git changes: ' + err))
-    }
-    var dailythings = new Promise(function(resolve, reject) {
-        setInterval(function(){
-            loginterval()
-            autopull()
-        }, 8.64e+7); // do this every day    
-      });
-    dailythings
+        const loginterval = function() { // send automatic log file
+            console.log(`[ ${functiondate()} - ${functiontime()} ] Sending log file...`)
+            const attachment = new Attachment('./logs/bot.log') // Defines the log file to send
+            getlogchannel().send('Daily log file:', attachment) // Send the file
+            .then(function(){
+                console.log(`[ ${functiondate()} - ${functiontime()} ] Log file sent, erasing old file...`)
+                fs.writeFileSync('./logs/bot.log', '') // Recreates the log file
+                console.log(`[ ${functiondate()} - ${functiontime()} ] Old log file succefully erased!`)
+            })
+            .catch(err=>getlogchannel().send('Error during sending the weekly log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot.log', '')))
+        }
+        const autopull = function() { // automatic pull git changes
+            const firstlog = 'Pulling changes from GitHub...'
+            console.log(`[ ${functiondate()} - ${functiontime()} ] ${firstlog}`)
+            getlogchannel().send(firstlog)
+            .then(m=>shell.exec('git pull && pm2 reload GL'), function(code, stdout, stderr){
+                if (code != 0) return m.edit(`Error during pulling git changes: \`\`\`${stderr}\`\`\``)
+                m.edit(`\`\`\`${stdout}\`\`\` :white_check_mark:`)
+            })
+            .catch(err=>getlogchannel().send('Error during pulling git changes: ' + err))
+        }
+        var dailythings = new Promise(function(resolve, reject) {
+            setInterval(function(){
+                loginterval()
+                autopull()
+            }, 8.64e+7); // do this every day    
+          });
+        dailythings
+    } 
 }); // End
 
 
