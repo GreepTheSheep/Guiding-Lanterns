@@ -114,7 +114,7 @@ client.on('guildDelete', guild => {
 })
 
 client.on('debug', (debugevent) => {
-    console.log(`[${functiondate(0)} - ${functiontime(0)}] : ${debugevent}`)
+    if (!debugevent.includes('Sending a heartbeat') && !debugevent.includes('Heartbeat acknowledged')) console.log(`[${functiondate(0)} - ${functiontime(0)}] : ${debugevent}`)
 })
 
 client.login(config.token_nightly);
