@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 
 const wait = require('util').promisify(setTimeout);
 const min=1000; 
-const max=5000;
+const max=10000;
 
 const responses = [
     'No problems :wink:',
