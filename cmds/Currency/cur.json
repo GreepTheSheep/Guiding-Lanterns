@@ -105,8 +105,8 @@
         }
         ,{
             "name": "❄️ Elsa's hand",
-            "cost": 10000,
-            "sell": 20000,
+            "cost": 20000,
+            "sell": 15000,
             "use": [
                 {
                     "text": "Let it go! 🙌",
