@@ -44,7 +44,7 @@
         "readline": "^1.3.0",
         "request": "^2.88.0",
         "shelljs": "^0.8.3",
-        "translate": "^1.1.0",
+        "translate": "^1.1.1",
         "twitter": "^1.7.1",
         "url": "^0.11.0",
         "wolfram-alpha-api": "https://products.wolframalpha.com/api/libraries/javascript/wolfram-alpha-api-1.0.0-rc.1.tgz"
