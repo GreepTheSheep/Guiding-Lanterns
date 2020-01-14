@@ -9,6 +9,9 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     const eval_cmd = require('./Owner/eval.js');
     eval_cmd(message, client, prefix);
 
+    const update = require('./Owner/update.js');
+    update(message, client, prefix);
+
     const command = require('./Owner/shell.js');
     command(message, client, prefix);
 
