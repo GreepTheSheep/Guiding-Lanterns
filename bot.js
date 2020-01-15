@@ -11,6 +11,7 @@ const client = new Discord.Client({
 const execArgs = process.argv.slice(2);
 if (execArgs[0] == 'nightly') client.login(config.token_nightly)
 else if (!execArgs[0] || execArgs[0] != 'nightly') client.login(config.token)
+console.log = (text) => client.shard.send(text)
 const cooldowns = new Discord.Collection(); //Stores cooldown info for screenshot()
 const nightly = '577477992608038912'
 if (client.user.id == config.public) const logchannel = config.log_channel //Set a channel for logging
