@@ -4,18 +4,32 @@ Syntax:
 * = commands for supporters
 ¤ = need a vote to https://top.gg/bot/569624646475972608/vote before trigger
 ^ = commands for owner
+// = disabled
 
 Arguments:
 [ ] = need a argument
 { } = optional argument
+? = dynamic number or text
+
+------------ Only for /r/tangled ------------ https://discord.gg/yFD42Zy
+
+!scr [movie/tbea/tea/s?e?] [timestamp MM:SS] : sends a screenshot of Tangled; Tangled Before Ever After; Tangled Ever After; or the series (more info at https://guiding-lanterns.greep.cf/screenshot.html)
+!lanterns : shows the number of lanterns thrown with :Lantern: emoji on the server
+// !randomicon = generates a new icon from Tangled list on data
 
 ------------ Disney-related ------------
 
 !quote [movie]: Send a random quote from your movie
+^ !addquote [movie] [text] : add a new quote on the quotes data
 !picture [movie]: Send a random picture (or GIF) from your movie
+!addpicture [movie] [URL or attachment] : Send suggestion for a new picture on a movie. Verificator role on server adds the file directely
+^ !addworld [movie]: Creates files for new data
 
 ------------ Utility ------------
 
+!about : Informations of bot (versions, uptime...)
+!geturl [attachment] : Sends a direct URL link to your attachment
+!didivote : Check if you're voted on top.gg. Bot reacts with emoji 👍 or 👎. If bot not registed on top.gg sends 😢
 !wolfram [question] : What would you like to know about ?
 * !full-wolfram [question] : What would you like to know about ? (Get full answer)
 !googleimage [input] : Input your search and he will returns an image
@@ -31,6 +45,9 @@ Arguments:
 !use [ID]: Uses your item.
 !claim : Get your daily money reward
 !loot : Win a chance to get money
+^ !setmoney [User mention or ID] [money] : Sets specific number of money
+^ !additem [User mention or ID] [Item ID] {count} : Add item to user
+^ !clearinventory [User mention or ID] : Clears inventory of user
 
 ------------ Fun ------------
 
@@ -40,6 +57,9 @@ Arguments:
 ------------ Games ------------
 
 !guessthenumber : Starts a game of the famous Guess The Number
+!gtnguess [number] : Guess the number on GTN
+^ !gtnstats [User mention or ID] : Stats of user's current game on GTN
+^ !gtnreset [User mention or ID] : Resets all stats of user on GTN
 
 ------------ Other ------------
 
@@ -47,3 +67,18 @@ Arguments:
 !invite : Invite the bot in your server
 !bug : Send a link to GitHub issue & Support server
 !suggest [suggestion]: Suggest an improvement
+
+------------ Without prefix ------------
+
+@mention : Send random messages from list located at cmds/Fun/ping_answers.json
+@mention help : Shows this help menu
+@mention prefix : Shows server's prefix
+thanks @mention : you're welcome!
+
+------------ Owner ------------
+
+^ !eval [JS script] : evaluate JavaScript
+^ !ssh [command] : execute shell command to computer
+^ !log : send log file (clears every 24h)
+^ !setstatus [play/watch/listen/stream] : await status of bot
+^ !update : git pull && npm install && restart bot
