@@ -8,7 +8,9 @@ const client = new Discord.Client({
   const fs = require('fs');
   const configfile = "./data/config.json";
   const config = JSON.parse(fs.readFileSync(configfile, "utf8")); // Retrieves the contents of the configuration file (the prefix and the login token)
-client.login(config.token)
+const execArgs = process.argv.slice(2);
+if (execArgs[0] == 'nightly') client.login(config.token_nightly)
+else if (!execArgs[0] || execArgs[0] != 'nightly') client.login(config.token)
 const cooldowns = new Discord.Collection(); //Stores cooldown info for screenshot()
 const nightly = '577477992608038912'
 if (client.user.id == config.public) const logchannel = config.log_channel //Set a channel for logging
