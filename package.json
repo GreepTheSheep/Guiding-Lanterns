@@ -1,7 +1,7 @@
 {
     "name": "guiding-lanterns",
-    "version": "2.11.2",
-    "changelog": "Removed the fanart command due to copyright issues, fixed many bugs, and added the possibility to host the bot yourself",
+    "version": "2.11.5",
+    "changelog": "New help menu, directely on https://guiding-lanterns.greep.cf/cmds.html",
     "description": "",
     "main": "bot.js",
     "repository": {
