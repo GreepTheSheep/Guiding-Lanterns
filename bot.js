@@ -9,18 +9,26 @@ const client = new Discord.Client({
   const configfile = "./data/config.json";
   const config = JSON.parse(fs.readFileSync(configfile, "utf8")); // Retrieves the contents of the configuration file (the prefix and the login token)
 const execArgs = process.argv.slice(2);
-if (execArgs[0] == 'nightly') client.login(config.token_nightly)
-else if (!execArgs[0] || execArgs[0] != 'nightly') client.login(config.token)
-console.log = (text) => client.shard.send(text)
+if (execArgs.includes('shard')) {
+    console.log('Started with shard')
+    console.log = (text) => client.shard.send(text)
+}
+else {
+    console.log('Started without shard')
+}
+if (execArgs.includes('nightly')) {
+    console.log('Started as nightly')
+    client.login(config.token_nightly)
+}
+else {
+    console.log('Started as normal')
+    client.login(config.token)
+}
+var getlogchannel
 const cooldowns = new Discord.Collection(); //Stores cooldown info for screenshot()
 const nightly = '577477992608038912'
-if (client.user.id == config.public) const logchannel = config.log_channel //Set a channel for logging
-else if (client.user.id == nightly) const logchannel = '589337521553539102' // if nightly send to log nightly
-var getlogchannel = () => client.channels.get(logchannel)
-if (!getlogchannel) {
-    console.error('Discord log channel not found. Sending log in the console (there might be in double)')
-    getlogchannel().send = (text) =>  console.log(text)
-}
+var logchannel
+
 const inviteTracker = require('./events/invite-track.js'); // Define the invite tracker plugin
 const shell = require('shelljs'); // Require for executing shell commands (such as git)
 
@@ -66,16 +74,26 @@ function functiontime() { // The function it gives a time (here the current time
 
 client.on('ready', async () => { // If bot was connected:
 
-    console.log(`[Client] connected in shard ${client.shard.id}`)
-    getlogchannel().send(`${client.user.tag} is connected in shard ${client.shard.id}`)
+    if (client.user.id == config.public) logchannel = config.log_channel //Set a channel for logging
+    else if (client.user.id == nightly) logchannel = '589337521553539102' // if nightly send to log nightly
+    getlogchannel = () => client.channels.get(logchannel)
+    const channel_id = require('./data/channel_ids.json');
+    const num_members_guild = require('./counter/guild-member.js');
+    const countdown = require('./counter/countdown.js');
+    const num_guilds = require('./counter/guilds.js');
+    const ver = require('./counter/version.js')
 
-    if (client.user.id == config.public || client.user.id == nightly){
-        const channel_id = require('./data/channel_ids.json');
+    if (!getlogchannel) {
+        console.error('Discord log channel not found. Sending log in the console (there might be in double)')
+        getlogchannel().send = (text) =>  console.log(text)
+    }
 
-        const num_members_guild = require('./counter/guild-member.js');
-        const countdown = require('./counter/countdown.js');
-        const num_guilds = require('./counter/guilds.js');
-        const ver = require('./counter/version.js')
+    if (!client.shard) {
+        console.log(`[Client] connected as ${client.user.tag}`)
+        getlogchannel().send(`${client.user.tag} is connected`)
+    } else {
+        console.log(`[Client] connected as ${client.user.tag} in shard ${client.shard.id}`)
+        getlogchannel().send(`${client.user.tag} is connected in shard ${client.shard.id}`) 
     }
 
     if (client.user.id == config.public){
@@ -135,7 +153,9 @@ client.on('ready', async () => { // If bot was connected:
 
 client.on('message', message => { // If any message was recived
     try {
-    if (message.channel.type === 'text') var prefix = getGuildPrefix(message); // Gets the server prefix from the database
+    var prefix
+    if (client.user.id != nightly && message.channel.type === 'text') prefix = getGuildPrefix(message); // Gets the server prefix from the database
+    else if (client.user.id == nightly && message.channel.type === 'text') prefix = '?'
     if (message.channel.type === 'text') var langtext = getUserLang(message); // Gets the user language from the database
     if (message.channel.type === 'text') var lang = giveUserLang(message); // Gets the user language from the database
 
@@ -211,6 +231,12 @@ client.on('disconnect', event => {
 client.on('reconnecting', () => {
     const eventmsg = `[${functiondate(0)} - ${functiontime(0)} -- MAIN] reconnecting to WebSocket`
     console.log(eventmsg)
+})
+
+client.on('debug', text => {
+    if (execArgs.includes('nightly')) {
+        console.log(text)
+    }
 })
 
 dbl.on('error', e => {
