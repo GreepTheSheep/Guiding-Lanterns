@@ -62,7 +62,7 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     wolfram_short(message, client, prefix, cooldowns);
 
     const voted = require('./Util/voted.js');
-    voted(message, client, prefix, dbl, lang, cooldowns);
+    voted(message, client, prefix, dbl, cooldowns);
 
     const image_search_request = require('./Util/img_search.js')
     image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel(), dbl, cooldowns)
