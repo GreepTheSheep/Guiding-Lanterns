@@ -27,7 +27,7 @@
         "colors": "^1.4.0",
         "country-data": "0.0.31",
         "dateformat": "^3.0.3",
-        "dblapi.js": "^2.3.0",
+        "dblapi.js": "^2.3.1",
         "discord-emoji": "^1.1.1",
         "discord.js": "^11.5.1",
         "download": "^7.1.0",
