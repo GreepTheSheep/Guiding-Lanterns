@@ -19,6 +19,7 @@ function goodbye(member, client) {
     var members = total - bots;
     
     if (member.guild.id === '562602234265731080'){
+        if (member.user.bot) return
         let embed = new Discord.RichEmbed()
         embed.setColor("#910002")
         .setTimestamp()
