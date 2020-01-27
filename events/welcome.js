@@ -29,7 +29,7 @@ function welcome(member, client) {
             embed.setColor("#01B023")
             .setTimestamp()
             .addField(`${welcomemsg}`, `Hey, **say welcome to __${member.user.username}__** 🙌`)
-            .setThumbnail('https://78.media.tumblr.com/2efc44413cbd084b56d0215eb91ebcfd/tumblr_ouakbtM2WY1vm5s4to1_500.gif')
+            .setThumbnail('http://www.youloveit.com/uploads/posts/2017-11/1511021094_youloveit_com_tangled_the_series_animated_gifs_emotions03.gif')
             .setFooter(`${member.user.tag} just landed in the Kingdom of Corona! We are now ${members} in the server`, `${member.user.displayAvatarURL}`)
         } else if (member.user.bot) return
         client.guilds.get('562602234265731080').channels.get('615236807478607921').send(embed);
