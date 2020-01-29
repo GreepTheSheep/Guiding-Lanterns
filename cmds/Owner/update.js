@@ -4,7 +4,6 @@ const fs = require('fs');
 
 function update(message, client, prefix) {
     if (message.content.startsWith(prefix + 'update')) {
-        if (message.author.id === '330030648456642562'  || message.author.id === "460348027463401472"){
         try {
             message.channel.startTyping()
             if (client.user.id == '569624646475972608') shell.exec('git pull && npm install && pm2 reload bot.ecosystem.config.js', {silent:false}, function(code, stdout, stderr) {
@@ -18,7 +17,6 @@ function update(message, client, prefix) {
             message.reply(`EVAL **__ERROR__**\n\`\`\`xl\n'pm2 stop GL && git pull && npm install && pm2 start GL'\`\`\``);
             message.channel.stopTyping(true)
         }
-        }else return;
     }
 }
 

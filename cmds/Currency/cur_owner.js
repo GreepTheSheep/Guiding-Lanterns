@@ -1,8 +1,8 @@
 const Discord = require('discord.js')
 const Enmap = require('enmap')
 
-function cur_owner(message, client, prefix, cooldowns, cur_json, lang){
-    if (message.author.id === "330030648456642562" || message.author.id === "460348027463401472") {
+function cur_owner(message, client, prefix, cooldowns, cur_json, lang, config){
+    if (message.author.id === config.owner) {
         const bal = new Enmap({name:"cur_balance"})
         const inv = new Enmap({name:"cur_inventory"})
 

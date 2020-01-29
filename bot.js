@@ -169,7 +169,7 @@ client.on('message', message => { // If any message was recived
 
     //All commands listed in cmds_index.js
     const cmds_index = require('./cmds/cmds_index.js');
-    cmds_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext);
+    cmds_index(message, client, prefix, config, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext);
 
     //Lists of mini-games
     const games_index = require('./games/games_index.js');

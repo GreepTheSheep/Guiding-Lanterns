@@ -1,13 +1,13 @@
 // All commands listed here
 
-function cmds_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext){
+function cmds_index(message, client, prefix, config, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext){
     if (message.channel.type === 'dm') return
     /*--------------------------------
     -------------- Owner -------------
     --------------------------------*/
-    if (message.author.id === '330030648456642562'  || message.author.id === "460348027463401472"){
+    if (message.author.id === config.owner){
     const eval_cmd = require('./Owner/eval.js');
-    eval_cmd(message, client, prefix);
+    eval_cmd(message, client, prefix, getlogchannel());
 
     const update = require('./Owner/update.js');
     update(message, client, prefix);
@@ -22,7 +22,7 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     status(message, client, prefix);
 
     const claimlog = require('./Owner/log.js');
-    claimlog(message, client, prefix);
+    claimlog(message, client, prefix, config);
 
     const worldsmanager = require('./Owner/worlds.js')
     worldsmanager(message, client, prefix, functiondate, functiontime, getlogchannel())
@@ -32,17 +32,17 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     --------------------------------*/
     
     const currency_cmds = require('./Currency/cur_index.js');
-    currency_cmds(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext);
+    currency_cmds(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext, config);
     
     /*--------------------------------
     ------------- Worlds -------------
     --------------------------------*/
 
     const quotes = require('./Worlds/quotes.js');
-    quotes(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns);
+    quotes(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns, config);
 
     const picture = require('./Worlds/pics.js')
-    picture(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns)
+    picture(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns, config)
 
     /*--------------------------------
     --------------- Fun --------------
@@ -52,14 +52,14 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     eight_ball(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns);
 
     const bot_ping = require('./Fun/ping.js');
-    bot_ping(message, client, prefix);
+    bot_ping(message, client, prefix, config);
 
     /*--------------------------------
     --------------- Util -------------
     --------------------------------*/
 
-    const wolfram_short = require('./Util/wolfram_short.js');
-    wolfram_short(message, client, prefix, cooldowns);
+    const wolfram = require('./Util/wolfram.js');
+    wolfram(message, client, prefix, cooldowns);
 
     const voted = require('./Util/voted.js');
     voted(message, client, prefix, dbl, cooldowns);
@@ -71,17 +71,13 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     about(message, client, prefix, lang, langtext, cooldowns);
 
     const setPrefix = require('./Util/prefix.js')
-    setPrefix(message, client, prefix, guildPrefix, lang);
+    setPrefix(message, client, prefix, guildPrefix, lang, config);
 
     const setLanguage = require('./Util/language.js')
     setLanguage(message, client, prefix, userLang, lang, langtext);
 
     const geturlofattachment = require('./Util/geturlofattach.js')
     geturlofattachment(message, client, prefix, lang);
-
-    // Remove.bg suspended because of no responce API
-    //const removebg = require('./Util/removebg.js')
-    //removebg(message, client, prefix, getlogchannel(), functiondate, functiontime, lang, dbl)
 
     const speedtest = require('./Util/speedtest.js')
     speedtest(message, client, prefix, getlogchannel(), dbl)
@@ -99,9 +95,6 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
     const bug = require('./Other/bug.js');
     bug(message, client, prefix, lang, getlogchannel());
 
-    const suggest = require('./Other/suggest.js');
-    suggest(message, client, prefix, lang, getlogchannel());
-
     const replyToThanks = require('./Other/thanks.js')
     replyToThanks(message, client, prefix)
 
@@ -117,10 +110,6 @@ function cmds_index(message, client, prefix, functiondate, functiontime, cooldow
         const screenshot = require('./Guild/screenshot.js');
         screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel(), dbl);
 
-        /*
-        const servericon = require('./Guild/icon.js');
-        servericon(message, client, prefix, cooldowns)
-        */
     }
 
     //-----------------------------------------------------------------------------------------------

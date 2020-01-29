@@ -17,7 +17,7 @@ function givelist(){
     return listarray.join("\n")
 }
 
-function picture(message, client, prefix, functiondate, functiontime, getlogchannel, cooldowns){
+function picture(message, client, prefix, functiondate, functiontime, getlogchannel, cooldowns, config){
     if(message.content.startsWith(prefix + "picture")){
         try {
             //Implement cooldown
@@ -86,6 +86,7 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
     
     if (message.content.startsWith(prefix + "addpicture")){
         try {
+            if (client.user.id !== config.public) return
         const args = message.content.split(/ +/).slice(1);
         
         const usage = `Usage:\`\`\`${prefix}addpicture <movie> <URL or attachment>\`\`\`If your movie name contains spaces, do a " \`-\` " instread of spaces.\n\nURLs must ends with:\`\`\`.jpg\n.jpeg\n.png\n.gif\`\`\`If you have a picture on your device, use \`${prefix}geturl\` and follow the instructions for get your URL of your image`

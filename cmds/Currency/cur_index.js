@@ -1,11 +1,11 @@
 // All currency commands
 
-function currency_cmds(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext){
+function currency_cmds(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext, config){
 
     const cur_json = require('./cur.json')
 
     const cur_owner = require('./cur_owner.js')
-    cur_owner(message, client, prefix, cooldowns, cur_json, lang);
+    cur_owner(message, client, prefix, cooldowns, cur_json, lang, config);
     
     const claim = require('./claim.js')
     claim(message, client, prefix, cooldowns, dbl, cur_json, lang);
