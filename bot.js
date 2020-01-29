@@ -191,6 +191,8 @@ client.on('guildMemberAdd', member => { // If any member join a server (or guild
         if (member.guild.id === '562602234265731080') inviteTracker.track(client, member);
         console.log(`\n${member.user.tag} joined ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who joined
     }
+    const num_members_guild = require('./counter/guild-member.js');
+    const lant_num_members_guild = () => num_members_guild(client, "570024448371982373", channel_id.nightly_members);
     if (client.user.id == config.public || client.user.id == nightly) lant_num_members_guild(); //Change the members count (+1)
 })
 
@@ -200,6 +202,8 @@ client.on('guildMemberRemove', member => { // If any member leave a server (or g
         goodbye(member, client);
         console.log(`\n${member.user.tag} left ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who left
     }
+    const num_members_guild = require('./counter/guild-member.js');
+    const lant_num_members_guild = () => num_members_guild(client, "570024448371982373", channel_id.nightly_members);
     if (client.user.id == config.public || client.user.id == nightly) lant_num_members_guild(); //Change the members count (-1)
 })
 
