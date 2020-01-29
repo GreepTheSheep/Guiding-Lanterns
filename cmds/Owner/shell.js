@@ -12,7 +12,6 @@ function clean(text) {
 
 function command(message, client, prefix) {
     if (message.content.startsWith(prefix + 'ssh')) {
-        if (message.author.id === '330030648456642562'  || message.author.id === "460348027463401472"){
         try {
             let args = message.content.split(" ")
             args.shift()
@@ -44,7 +43,6 @@ function command(message, client, prefix) {
             message.reply(`EVAL **__ERROR__**\n\`\`\`xl\n${args.join(" ")}\`\`\`\nNode Result: \`${clean(err)}\``);
             message.channel.stopTyping(true)
         }
-        }else return;
     }
 }
 

@@ -17,7 +17,7 @@ function givelist(){
     return listarray.join("\n")
 }
 
-function quotes(message, client, prefix, date, time, logchannel, cooldowns) {
+function quotes(message, client, prefix, date, time, logchannel, cooldowns, config) {
     if (message.content.startsWith(prefix + 'quote')) {
         try{
             //Implement cooldown
@@ -81,7 +81,7 @@ function quotes(message, client, prefix, date, time, logchannel, cooldowns) {
     }
     if (message.content.startsWith(prefix + "addquote")){
         try {      
-        if (message.author.id == '330030648456642562') {
+        if (message.author.id == config.owner) {
             const args = message.content.split(" ");
             args.shift()
             message.delete(10000)

@@ -6,8 +6,10 @@ async function guilds_count(client, channel_id) {
         console.log(`Channel: ${channel_id} cannot be found`);
         return;
     }
-    const total = await client.shard.fetchClientValues('guilds.size')
-    channel.setName(`Servers: ${total.reduce((prev, val) => prev + val, 0)}`).catch(err => console.log(err));
+    var total
+    if (!client.shard) total = await client.guilds.size
+    else total = await client.shard.fetchClientValues('guilds.size')
+    channel.setName(`Servers: ${client.shard ? total.reduce((prev, val) => prev + val, 0) : total}`).catch(err => console.log(err));
 }
 
 module.exports = guilds_count

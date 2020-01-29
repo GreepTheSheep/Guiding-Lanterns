@@ -6,6 +6,7 @@ const fs = require('fs');
 const os = require('os');
 const package = JSON.parse(fs.readFileSync("./package.json", "utf8"));
 const request = require('request')
+const Enmap = require('enmap')
 
 console.log('\033[2J');
 
@@ -19,28 +20,7 @@ async function title() {
     console.log('│             By Greep            │')
     console.log('└─────────────────────────────────┘')
     console.log(colors.grey(package.repository.url))
-    root_check();
-}
-
-async function root_check(){
-    if (os.type() === 'Linux'){
-        console.log('')
-        console.log('# Checking if user is root...')
-        await wait(2000)
-        shell.exec('whoami',{silent: true}, function(code, stdout, stderr){
-            if (!stdout.includes('root')){
-                console.log(colors.yellow(stdout).replace('\n', ''))
-                console.error(colors.red('----- ERROR: ------'))
-                console.error('You\'re not running as root')
-                console.error('Please retry with sudo or execute with root user')
-                console.error(colors.red('-------------------'))
-                process.exit(2)
-            } else {
-                console.log(colors.green(stdout).replace('\n',''))
-                os_check()
-            }
-        })
-    } else os_check()
+    os_check();
 }
 
 async function os_check(){
@@ -110,7 +90,7 @@ async function check_commands(){
                         process.exit(2)
                     } else {
                         console.log(colors.green('Git succefully installed!'))
-                        install_deps()
+                        version_check()
                     }
                 })
             } else {
@@ -122,28 +102,6 @@ async function check_commands(){
             }
         } else {
             console.log(colors.green('Git is installed!') + ' Version: ' + stdout.replace('git version ', ''))
-            install_deps()
-        }
-    })
-}
-
-async function install_deps(){
-    console.log('')
-
-    // Check commands
-
-    console.log('# Installing / upgrading npm dependencies (This might take a while)')
-    await wait(2000)
-    shell.exec('npm install',{silent: false}, function(code, stdout, stderr){
-        if (code != 0){
-            console.error(colors.red('----- ERROR: ------'))
-            console.error('Can\'t install dependencies')
-            if (os.type() == 'Linux') console.error('please retry as sudo')
-            else console.log('Check your permissions, and retry')
-            console.error('And retry the installation after')
-            console.error(colors.red('-------------------'))
-            process.exit(2)
-        } else {
             version_check()
         }
     })
@@ -211,6 +169,7 @@ async function version_check(){
             if (error !== null) console.error(error)
             console.error('Status Code : ' + response.statusCode)
             console.error(colors.red('-------------------'))
+            create_folder
         }
     })
 }
@@ -241,51 +200,15 @@ async function create_folder(){
 }
 
 async function support(){
-    console.log(`\n# Making support data file`)
+    console.log(`\n# Making support data `)
     await wait(2000)
 
-    fs.access('./data/support_db.json', fs.constants.F_OK, (err) => {
-        if (!err) {
-            console.log(colors.yellow(`Support data file exists!`));
-            var schema = {
-                properties: {
-                  validate: {
-                    description: colors.white(colors.underline('Do you want to recreate the file?') + ' (yes/no):'),
-                    type: 'string',
-                    pattern: /^\w+$/,
-                    default: 'no',
-                    required: true
-                  }
-                }
-            };
-            prompt.message = '';
-            prompt.delimiter = '';
-            prompt.start();
-            prompt.get(schema, function (err, result) {
-                if (!result.validate.toLowerCase().includes('no')){
-                    console.log(colors.cyan('okay, recreating the file'))
-                    fs.writeFileSync('./data/support_db.json', '{}')
-                    var array = {};
-                
-                    console.log('> You can add first your ID and Tag firstly to the database')
-                    support_prompt(array)
-                } else if (result.validate.toLowerCase().includes('no')){
-                    console.log(colors.cyan('okay, adding members to the file!'))
-                    var array = JSON.parse(fs.readFileSync('./data/support_db.json', 'utf8'));
-                    support_prompt(array)
-                }
-            });
-        } else if (err){  
-            fs.writeFileSync('./data/support_db.json', '{}')
-            var array = {};
-                
-            console.log('> You can add first your ID and Tag firstly to the database')
-            support_prompt(array)
-        }
-    });
+    const support_db = new Enmap({name: "support"})
+    support_prompt()
+
 }
 
-async function support_prompt(array){
+async function support_prompt(){
     var schema = {
         properties: {
           id: {
@@ -315,42 +238,29 @@ async function support_prompt(array){
             await wait(2000)
             config()
         }
-        array[result.id] = {
-            "name" : result.tag
+        support_db.set(result.id, result.tag)
+        console.log(colors.green('Sucess!'))
+        var schema = {
+            properties: {
+                validate: {
+                    description: colors.white(colors.underline('Do you want to add another person in the support data?') + ' (yes/no):'),
+                    type: 'string',
+                    pattern: /^\w+$/,
+                    default: 'no',
+                    required: true
+                }
+            }
         };
-        fs.writeFile('./data/support_db.json', JSON.stringify(array), async function(x){
-            if (x) {
-                console.error(colors.red('----- ERROR: ------'))
-                console.error(`We\'re unable to create support data`)
-                console.error('Details:')
-                console.error(x)
-                console.error(colors.red('-------------------'))
-                process.exit(10)
-            } else {
-                console.log(colors.green('Sucess!'))
-                var schema = {
-                    properties: {
-                      validate: {
-                        description: colors.white(colors.underline('Do you want to add another person in the support data?') + ' (yes/no):'),
-                        type: 'string',
-                        pattern: /^\w+$/,
-                        default: 'no',
-                        required: true
-                      }
-                    }
-                };
-                prompt.message = '';
-                prompt.delimiter = '';
-                prompt.start();
-                prompt.get(schema, async function (err, result) {
-                    if (!result.validate.toLowerCase().includes('yes')){
-                        console.log('Exiting support data creator...')
-                        await wait(2000)
-                        config()
-                    } else if (result.validate.toLowerCase().includes('yes')){
-                        return support_prompt(array)
-                    }
-                });
+        prompt.message = '';
+        prompt.delimiter = '';
+        prompt.start();
+        prompt.get(schema, async function (err, result) {
+            if (!result.validate.toLowerCase().includes('yes')){
+                console.log('Exiting support data creator...')
+                await wait(2000)
+                config()
+            } else if (result.validate.toLowerCase().includes('yes')){
+                return support_prompt()
             }
         });
     });
@@ -387,15 +297,39 @@ async function config(){
             default: '!',
             required: true
           },
-        }
+          owner: {
+            description: colors.white(colors.underline('Enter your user ID:')),
+            type: 'string',
+            pattern: /^[0-9]+$/,
+            message: 'ID must be only numbers',
+            default: '330030648456642562',
+            required: true
+          },
+          log_channel: {
+            description: colors.white(colors.underline('Enter a channel ID where the bot can send logs:')),
+            type: 'string',
+            pattern: /^[0-9]+$/,
+            message: 'ID must be only numbers',
+            default: '589337734754336781',
+            required: true
+          }
+        },
+        
     };
     prompt.message = '';
     prompt.delimiter = '';
     prompt.start();
     prompt.get(schema, function (err, result) {
         array = {
+            "owner" : result.owner,
             "token" : result.token,
-            "prefix": result.prefix
+            "prefix": result.prefix,
+            "log_channel": result.log_channel,
+            "public": "569624646475972608",
+            "wolfID": "WEQLYA-T33Q3GWHT5",
+            "googleimage_CSEID": "016091169773522829941:uoganhdsa5m",
+            "googleimage_APIKEY": "AIzaSyDPk3X_sR-YJsY1VU2yBX0w3hf3RegfIsM",
+            "translate_key": "trnsl.1.1.20190929T145137Z.b3f4f491a0c58783.4b13e601dfb6e4622fcaf00520ef08b9bdaba23a"
         };
         fs.writeFile('./data/config.json', JSON.stringify(array), async function(x){
             if (x) {
@@ -522,7 +456,7 @@ async function end(){
     console.log('')
     console.log('Installation finished! Thanks for your patience')
     console.log(colors.red(colors.bold(colors.underline('IMPORTANT: Before starting, please take a look at data/selfhost-readme.txt\n'))))
-    console.log('You can start the script using pm2: ' + colors.blue('pm2 start bot.ecosystem.config.js'))
+    console.log('You can start the bot with the command: ' + colors.blue('npm start'))
     console.log(colors.green('\nThanks for using The Guiding Lanterns 💙'))
     console.log('')
     process.exit(0)

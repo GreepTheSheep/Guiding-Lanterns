@@ -16,4 +16,14 @@ module.exports = {
       NODE_ENV: 'production'
     }
   }],
+  "deploy" : {
+     // "production" is the environment name
+     "production" : {
+       "user" : "root",
+       "host" : ["192.168.1.59"],
+       "ref"  : "origin/master",
+       "repo" : "git@github.com:Guiding-Lanterns/Guiding-Lanterns.git",
+       "post-deploy" : "npm install; pm2 restart GL"
+      },
+   }
 };

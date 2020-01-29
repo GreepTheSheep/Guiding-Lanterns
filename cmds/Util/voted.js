@@ -33,7 +33,7 @@ function voted(message, client, prefix, dbl, cooldowns) {
         timestamps.delete(message.author.id);
     }
     // End of cooldown implement
-        if (dbl == undefined) return message.react('😢')
+        if (dbl == undefined || !dbl) return message.react('😢')
         
         dbl.hasVoted(message.author.id).then(voted => {
             if (voted) {

@@ -10,8 +10,6 @@ const { Attachment } = require('discord.js');
 }
 
  function eval_cmd(message, client, prefix, getlogchannel) {
-
-    if (message.author.id === "330030648456642562" || message.author.id === "460348027463401472") {
     if (message.content.startsWith(prefix + "eval")) {
         try {
             const args = message.content.split(" ").slice(1);
@@ -40,7 +38,6 @@ const { Attachment } = require('discord.js');
             message.reply(`EVAL **__ERROR__**\n\`\`\`javascript\n${code}\`\`\`\nNode Result: \`${clean(err)}\``);
         }
     }
-    } else return;
  }
 
  module.exports = eval_cmd;
