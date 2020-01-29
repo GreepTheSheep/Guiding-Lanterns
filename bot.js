@@ -24,6 +24,10 @@ else {
     console.log('Started as normal')
     client.login(config.token)
 }
+
+const channel_id = require('./data/channel_ids.json');
+const num_members_guild = require('./counter/guild-member.js');
+
 var getlogchannel
 const cooldowns = new Discord.Collection(); //Stores cooldown info for screenshot()
 const nightly = '577477992608038912'
@@ -80,8 +84,6 @@ client.on('ready', async () => { // If bot was connected:
     if (client.user.id == config.public) logchannel = config.log_channel //Set a channel for logging
     else if (client.user.id == nightly) logchannel = '589337521553539102' // if nightly send to log nightly
     getlogchannel = () => client.channels.get(logchannel)
-    const channel_id = require('./data/channel_ids.json');
-    const num_members_guild = require('./counter/guild-member.js');
     const countdown = require('./counter/countdown.js');
     const num_guilds = require('./counter/guilds.js');
     const ver = require('./counter/version.js')
@@ -191,7 +193,6 @@ client.on('guildMemberAdd', member => { // If any member join a server (or guild
         if (member.guild.id === '562602234265731080') inviteTracker.track(client, member);
         console.log(`\n${member.user.tag} joined ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who joined
     }
-    const num_members_guild = require('./counter/guild-member.js');
     const lant_num_members_guild = () => num_members_guild(client, "570024448371982373", channel_id.nightly_members);
     if (client.user.id == config.public || client.user.id == nightly) lant_num_members_guild(); //Change the members count (+1)
 })
@@ -202,7 +203,6 @@ client.on('guildMemberRemove', member => { // If any member leave a server (or g
         goodbye(member, client);
         console.log(`\n${member.user.tag} left ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who left
     }
-    const num_members_guild = require('./counter/guild-member.js');
     const lant_num_members_guild = () => num_members_guild(client, "570024448371982373", channel_id.nightly_members);
     if (client.user.id == config.public || client.user.id == nightly) lant_num_members_guild(); //Change the members count (-1)
 })
