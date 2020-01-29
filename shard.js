@@ -13,7 +13,7 @@ shard.on('launch', shard => console.log(`[SHARD] Shard ${shard.id} started`));
 
 shard.on('message', (shard, message) => {
   if (message._eval){
-    console.log(`Shard[${shard.id + 1}] : ${message._eval} : ${message._result}`);
+    console.log(`Shard #${shard.id} : ${message._eval} : ${message._result}`);
     console.log(message._result)
   } else {
     console.log(message)
