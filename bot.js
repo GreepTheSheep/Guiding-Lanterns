@@ -32,8 +32,10 @@ var logchannel
 const inviteTracker = require('./events/invite-track.js'); // Define the invite tracker plugin
 const shell = require('shelljs'); // Require for executing shell commands (such as git)
 
+if (config.dbl_token){
 const DBL = require("dblapi.js");
 const dbl = new DBL(config.dbl_token);
+} else const dbl = undefined;
 
 const Enmap = require("enmap"); // Define enmap, a database integrated with the bot
 const guildPrefix = new Enmap({name: "guildPrefix"}); // Define a new table for custom prefixes
@@ -165,7 +167,7 @@ client.on('message', message => { // If any message was recived
 
     //Check if user has supported
     const SupportCheck = require('./support/support_check.js');
-    if (client.user.id == config.public) SupportCheck(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl)
+    if (client.user.id == config.public) SupportCheck(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, config)
 
     //All commands listed in cmds_index.js
     const cmds_index = require('./cmds/cmds_index.js');
