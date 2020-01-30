@@ -202,13 +202,12 @@ async function create_folder(){
 async function support(){
     console.log(`\n# Making support data `)
     await wait(2000)
-
-    const support_db = new Enmap({name: "support"})
     support_prompt()
 
 }
 
 async function support_prompt(){
+    const support_db = new Enmap({name: "support"})
     var schema = {
         properties: {
           id: {
