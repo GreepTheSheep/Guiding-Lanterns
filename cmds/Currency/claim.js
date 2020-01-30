@@ -1,7 +1,6 @@
 const Discord = require('discord.js')
 const Enmap = require('enmap')
 const fs = require('fs');
-const supportfile = './data/support_db.json'
 
 function claim(message, client, prefix, cooldowns, dbl, cur_json, lang){
     if(message.content.startsWith(prefix + "claim") || message.content.startsWith(prefix + "daily")) {
@@ -32,14 +31,10 @@ function claim(message, client, prefix, cooldowns, dbl, cur_json, lang){
         timestamps.set(message.author.id, now);
         setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
-
-        if (message.author.id === '330030648456642562') { //Override cooldown
-            timestamps.delete(message.author.id);
-        }
         // End of cooldown implement
 
-        const support_db = JSON.parse(fs.readFileSync(supportfile, "utf8"))
-        const donor = support_db[message.author.id]
+        const support_db = new Enmap({name: "support"})
+        const donor = support_db.get(message.author.id)
 
         const bal = new Enmap({name:"cur_balance"})
 
