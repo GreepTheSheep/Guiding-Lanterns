@@ -126,5 +126,24 @@
                 }
             ]
         }
+        ,{
+            "name": "🖌 Paintbrush",
+            "cost": 20000,
+            "sell": 15000,
+            "use": [
+                {
+                    "text": "Painting your wall!",
+                    "img": "https://media.giphy.com/media/GkqnCFAVQOj6M/giphy.gif"
+                }
+                ,{
+                    "text": "Painting your wall!",
+                    "img": "https://media.giphy.com/media/VzUoUH0Vxpqow/giphy.gif"
+                }
+                ,{
+                    "text": "Paintseption",
+                    "img": "https://media.giphy.com/media/322W3VduHG5elXisAh/giphy.gif"
+                }
+            ]
+        }
     ]
 }

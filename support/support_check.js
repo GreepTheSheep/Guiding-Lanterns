@@ -26,13 +26,7 @@ function SupportCheck (message, client, prefix, functiondate, functiontime, cool
         if (message.author.id == config.owner) {
             let args = message.content.split(" ");
             args.shift();
-            let mention = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0])) || client.users.get(args[0]);
-
-            if (mention != client.users.get(args[0])){
-                if (mention.user.bot) return message.react('❌')
-            } else {
-                if (mention.bot) return message.react('❌')
-            }
+            let mention = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]))
 
             if(!mention) return message.react('❌')
             support_db.set(mention.user.id, mention.user.tag)
