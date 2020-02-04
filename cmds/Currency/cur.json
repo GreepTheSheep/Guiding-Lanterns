@@ -128,8 +128,8 @@
         }
         ,{
             "name": "🖌 Paintbrush",
-            "cost": 20000,
-            "sell": 15000,
+            "cost": 100,
+            "sell": 70,
             "use": [
                 {
                     "text": "Painting your wall!",
