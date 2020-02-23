@@ -33,9 +33,9 @@ const countdown = (param) => {
 };
 module.exports = {
     pascal: countdown({
-        date : "February 23 2020 07:00:00 EST",
-        output: (d,h,m,s) => `🍸 ${d}d ${h}h`,
-        end:  "🔰 Once a Handmaiden...",
+        date : "March 01 2020 07:00:00 EST",
+        output: (d,h,m,s) => `🌚 ${d}d ${h}h ${m}m`,
+        end:  "🌝 Final Eclipse. The End.",
         timeout: 1 * 60 * 60 * 1000
     })
 }
