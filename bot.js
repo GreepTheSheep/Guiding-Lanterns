@@ -107,8 +107,6 @@ client.on('ready', async () => { // If bot was connected:
         const lant_num_guilds = () => num_guilds(client, channel_id.guilds);
         const lant_ver = () => ver(client, channel_id.version);
     
-        const lant_pascal = () => countdown.pascal(client, channel_id.pascal);
-    
         const totalguildsize = await client.shard.fetchClientValues('guilds.size')
         dbl.postStats(totalguildsize.reduce((prev, val) => prev + val, 0))
         const versionCheck = require('./events/ver-check.js');
@@ -116,7 +114,6 @@ client.on('ready', async () => { // If bot was connected:
         lant_num_members_guild(); //Set the Member count
         lant_num_guilds(); //Set the guilds count
         lant_ver(); //Set version number in the version number channel
-        lant_pascal();
         inviteTracker.ready(client); // Starts the invite tracker plugin
 
         const loginterval = function() { // send automatic log file
