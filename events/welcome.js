@@ -28,11 +28,11 @@ function welcome(member, client) {
         if (!member.user.bot){
             embed.setColor("#01B023")
             .setTimestamp()
-            .addField(`${welcomemsg}`, `Hey, **say welcome to __${member.user.username}__** 🙌`)
+            .addField(`${welcomemsg}`, `Hey, **say welcome to __${member.user.username}__** 🙌\nType \`!hello\` to access more channels and roles!`)
             .setThumbnail('http://www.youloveit.com/uploads/posts/2017-11/1511021094_youloveit_com_tangled_the_series_animated_gifs_emotions03.gif')
             .setFooter(`${member.user.tag} just landed in the Kingdom of Corona! We are now ${members} in the server`, `${member.user.displayAvatarURL}`)
         } else if (member.user.bot) return
-        client.guilds.get('562602234265731080').channels.get('615236807478607921').send(embed);
+        client.guilds.get('562602234265731080').channels.get('658808055558832132').send(embed);
     }
     if (member.guild.id === '570024448371982373'){
         let embed = new Discord.RichEmbed()
