@@ -141,7 +141,7 @@ client.on('ready', async () => { // If bot was connected:
           });
         dailythings
 
-    } else if (client.user.id == nightly){
+    } else if (client.user.id == nightly || execArgs.includes('-n')){
         /*
         const lant_num_members_guild = () => num_members_guild(client, "570024448371982373", channel_id.nightly_members);
         lant_num_members_guild();
@@ -271,7 +271,7 @@ client.on('reconnecting', () => {
 })
 
 client.on('debug', text => {
-    if (execArgs.includes('nightly')) {
+    if (execArgs.includes('-n')) {
         console.log(text)
     }
 })
