@@ -8,7 +8,10 @@ const client = new Discord.Client({
   const fs = require('fs');
   const configfile = "./data/config.json";
   const config = JSON.parse(fs.readFileSync(configfile, "utf8")); // Retrieves the contents of the configuration file (the prefix and the login token)
-const execArgs = process.argv.slice(2);
+  const packagefile = "./package.json";
+  const package = JSON.parse(fs.readFileSync(configfile, "utf8"));
+
+  const execArgs = process.argv.slice(2);
 if (execArgs.includes('shard')) {
     console.log('Started with shard')
     console.log = (text) => client.shard.send(text)
@@ -103,17 +106,21 @@ client.on('ready', async () => { // If bot was connected:
 
     if (client.user.id == config.public){
 
+        /*
         const lant_num_members_guild = () => num_members_guild(client, "562602234265731080", channel_id.members);
+        lant_num_members_guild(); //Set the Member count
+        
         const lant_num_guilds = () => num_guilds(client, channel_id.guilds);
+        lant_num_guilds(); //Set the guilds count
+        */
         const lant_ver = () => ver(client, channel_id.version);
+        lant_ver(); //Set version number in the version number channel
+        const versionCheck = require('./events/ver-check.js');
+        versionCheck(client);
     
         const totalguildsize = await client.shard.fetchClientValues('guilds.size')
         dbl.postStats(totalguildsize.reduce((prev, val) => prev + val, 0))
-        const versionCheck = require('./events/ver-check.js');
-        versionCheck(client);
-        lant_num_members_guild(); //Set the Member count
-        lant_num_guilds(); //Set the guilds count
-        lant_ver(); //Set version number in the version number channel
+        
         inviteTracker.ready(client); // Starts the invite tracker plugin
 
         const loginterval = function() { // send automatic log file
@@ -133,13 +140,19 @@ client.on('ready', async () => { // If bot was connected:
             }, 8.64e+7); // do this every day    
           });
         dailythings
+
     } else if (client.user.id == nightly){
+        /*
         const lant_num_members_guild = () => num_members_guild(client, "570024448371982373", channel_id.nightly_members);
-        const lant_num_guilds = () => num_guilds(client, channel_id.nightly_guilds);
-        client.user.setStatus('dnd');
-        client.user.setActivity('with the fire of the lantern');
         lant_num_members_guild();
+
+        const lant_num_guilds = () => num_guilds(client, channel_id.nightly_guilds);
         lant_num_guilds();
+        */
+
+        client.user.setStatus('dnd');
+        client.user.setActivity('with alchemy. Version ' + package.version + ' (beta)');
+        
         const interval = new Promise(function() {
             setInterval(function() {
                 const attachment = new Attachment('./logs/bot_nightly.log')
@@ -190,8 +203,10 @@ client.on('guildMemberAdd', member => { // If any member join a server (or guild
         if (member.guild.id === '562602234265731080') inviteTracker.track(client, member);
         console.log(`\n${member.user.tag} joined ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who joined
     }
+    /*
     const lant_num_members_guild = () => num_members_guild(client, "570024448371982373", channel_id.nightly_members);
     if (client.user.id == config.public || client.user.id == nightly) lant_num_members_guild(); //Change the members count (+1)
+    */
 })
 
 client.on('guildMemberRemove', member => { // If any member leave a server (or guild in Discord language)
@@ -200,28 +215,40 @@ client.on('guildMemberRemove', member => { // If any member leave a server (or g
         goodbye(member, client);
         console.log(`\n${member.user.tag} left ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who left
     }
+    /*
     const lant_num_members_guild = () => num_members_guild(client, "570024448371982373", channel_id.nightly_members);
     if (client.user.id == config.public || client.user.id == nightly) lant_num_members_guild(); //Change the members count (-1)
+    */
 })
 
 client.on('guildCreate', guild => { // If the bot join a server
     const botjoinguildlog = `${client.user.username} joined __${guild.name}__\n*ID: ${guild.id}*` // Set the text
     console.log(`[${functiondate(0)} - ${functiontime(0)}]\n${botjoinguildlog}`) // Send at the console
     getlogchannel().send(botjoinguildlog) // Send at the Discord log channel
+
+    const totalguildsize = await client.shard.fetchClientValues('guilds.size')
+    dbl.postStats(totalguildsize.reduce((prev, val) => prev + val, 0))
+    /* Unused now
     if (client.user.id == config.public || client.user.id == nightly) {
         const lant_num_guilds = () => num_guilds(client, channel_id.guilds);
         lant_num_guilds(); // Change the servers count (+1)
     }
+    */
 })
 
 client.on('guildDelete', guild => { // If the bot leave a server
     const botleftguildlog = `${client.user.username} left __${guild.name}__\n*ID: ${guild.id}*`
     console.log(`[${functiondate(0)} - ${functiontime(0)}]\n${botleftguildlog}`)
     getlogchannel().send(botleftguildlog)
+
+    const totalguildsize = await client.shard.fetchClientValues('guilds.size')
+    dbl.postStats(totalguildsize.reduce((prev, val) => prev + val, 0))
+    /* Unused now
     if (client.user.id == config.public || client.user.id == nightly) {
         const lant_num_guilds = () => num_guilds(client, channel_id.guilds);
         lant_num_guilds(); // Change the servers count (-1)
     }
+    */
 })
 
 client.on('messageReactionAdd', reaction => {
