@@ -221,7 +221,7 @@ client.on('guildMemberRemove', member => { // If any member leave a server (or g
     */
 })
 
-client.on('guildCreate', guild => { // If the bot join a server
+client.on('guildCreate', async guild => { // If the bot join a server
     const botjoinguildlog = `${client.user.username} joined __${guild.name}__\n*ID: ${guild.id}*` // Set the text
     console.log(`[${functiondate(0)} - ${functiontime(0)}]\n${botjoinguildlog}`) // Send at the console
     getlogchannel().send(botjoinguildlog) // Send at the Discord log channel
@@ -236,7 +236,7 @@ client.on('guildCreate', guild => { // If the bot join a server
     */
 })
 
-client.on('guildDelete', guild => { // If the bot leave a server
+client.on('guildDelete', async guild => { // If the bot leave a server
     const botleftguildlog = `${client.user.username} left __${guild.name}__\n*ID: ${guild.id}*`
     console.log(`[${functiondate(0)} - ${functiontime(0)}]\n${botleftguildlog}`)
     getlogchannel().send(botleftguildlog)
