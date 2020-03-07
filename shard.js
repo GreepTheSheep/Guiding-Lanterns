@@ -3,7 +3,7 @@ const { ShardingManager } = require('discord.js');
 const execArgs = process.argv.slice(2);
 const shard = new ShardingManager('./bot.js',{
   token : config.token,
-  shardArgs: ['shard', execArgs[0]],
+  shardArgs: ['-s', execArgs[0]],
   autoSpawn: true
 });
 

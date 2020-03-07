@@ -12,14 +12,14 @@ const client = new Discord.Client({
   const package = JSON.parse(fs.readFileSync(configfile, "utf8"));
 
   const execArgs = process.argv.slice(2);
-if (execArgs.includes('shard')) {
+if (execArgs.includes('-s')) {
     console.log('Started with shard')
     console.log = (text) => client.shard.send(text)
 }
 else {
     console.log('Started without shard')
 }
-if (execArgs.includes('nightly')) {
+if (execArgs.includes('-n')) {
     console.log('Started as nightly')
     client.login(config.token_nightly)
 }
