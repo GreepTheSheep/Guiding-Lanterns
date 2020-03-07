@@ -78,4 +78,4 @@ thanks @mention                                     : you're welcome!
 ^ !ssh [command]                                    : execute shell command to computer
 ^ !log                                              : send log file (clears every 24h)
 ^ !setstatus [play/watch/listen/stream]             : await status of bot
-^ !update                                           : shell eval: git pull && npm install && restart bot
+^ !update                                           : shell eval: git pull && npm update && restart bot
