@@ -1,7 +1,7 @@
 module.exports = {
   apps : [{
     name: 'GL (nightly)',
-    script: 'shard.js',
+    script: 'bot.js',
     args: '-n',
 
     // Options reference: https://pm2.io/doc/en/runtime/reference/ecosystem-file/
