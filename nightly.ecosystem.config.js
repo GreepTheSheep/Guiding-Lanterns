@@ -1,6 +1,6 @@
 module.exports = {
   apps : [{
-    name: 'GL',
+    name: 'GL (nightly)',
     script: 'shard.js',
     args: '-n',
 
