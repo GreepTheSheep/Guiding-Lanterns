@@ -4,8 +4,8 @@ Themeparks.Settings.Cache = __dirname + "/data/themeparks.sqlite";
 
 function parkslist(){
     const Parks = {};
-    for (const park in ThemeParks.Parks) {
-        Parks[park] = new ThemeParks.Parks[park]();
+    for (const park in Themeparks.Parks) {
+        Parks[park] = new Themeparks.Parks[park]();
     }
     const array = [];
     for (const park in Parks) {
@@ -57,7 +57,7 @@ async function parktimes(message, client, prefix, cooldowns){
 
         if (args[0] == 'list'){
             embed.setTitle('List of themeparks:')
-            .setDescription(parkslist.join('\n'))
+            .setDescription(parkslist().join('\n'))
         } else {
             message.channel.send('Work in progress...')
         }
