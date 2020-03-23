@@ -1,5 +1,6 @@
 const Discord = require('discord.js')
 const Themeparks = require('themeparks')
+const wait = require('util').promisify(setTimeout);
 
 async function parktimes(message, client, prefix, cooldowns){
     if (message.content.startsWith(prefix + 'ridetime')){
@@ -41,7 +42,21 @@ async function parktimes(message, client, prefix, cooldowns){
 
         let embed = new Discord.RichEmbed
 
-        message.channel.send('Work in progress...')
+        message.channel.send('NOTE: This is work in progress...')
+        
+        const awaitmsg = await message.channel.send('Please enter your themepark name')
+        const filter = m => message.author == m.author;
+        const collectorguild = message.channel.createMessageCollector(filter, {time: 60000, max: 1});
+        collectorguild.on('collect', m => {
+            const pleasewait = await message.channel.send('Please wait...')
+            await wait(5000)
+            pleasewait.edit('Working in progress, need some waiting ¯\\_(ツ)_/¯')
+        });
+        collector4.on('end', (collected, reason) => {
+            if (reason == 'time'){
+                awaitmsg.react('❌')
+            }
+        });
     }
 }
 
