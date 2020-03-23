@@ -56,8 +56,7 @@ async function parktimes(message, client, prefix, cooldowns){
         let embed = new Discord.RichEmbed
 
         if (args[0] == 'list'){
-            embed.setTitle('List of themeparks:')
-            .setDescription(parkslist().join('\n'))
+            message.channel.send(parkslist().join('\n'))
         } else {
             message.channel.send('Work in progress...')
         }
