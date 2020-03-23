@@ -15,7 +15,6 @@ function parkslist(){
 
 async function parktimes(message, client, prefix, cooldowns){
     if (message.content.startsWith(prefix + 'ridetime')){
-        Themeparks.Settings.Cache = "./data/themeparks.sqlite";
 
          //Implement cooldown
     if (!cooldowns.has(prefix + 'ridetime')) {
