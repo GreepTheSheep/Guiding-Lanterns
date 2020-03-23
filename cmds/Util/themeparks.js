@@ -3,15 +3,15 @@ const Themeparks = require('themeparks')
 const wait = require('util').promisify(setTimeout);
 
 async function parktimes(message, client, prefix, cooldowns){
-    if (message.content.startsWith(prefix + 'ridetime')){
+    if (message.content.startsWith(prefix + 'themepark')){
 
          //Implement cooldown
-    if (!cooldowns.has(prefix + 'ridetime')) {
-        cooldowns.set(prefix + 'ridetime', new Discord.Collection());
+    if (!cooldowns.has(prefix + 'themepark')) {
+        cooldowns.set(prefix + 'themepark', new Discord.Collection());
     }
 
     const now = Date.now();
-    const timestamps = cooldowns.get(prefix + 'ridetime');
+    const timestamps = cooldowns.get(prefix + 'themepark');
     const cooldownAmount = 60000;
 
     if (timestamps.has(message.author.id)) {
