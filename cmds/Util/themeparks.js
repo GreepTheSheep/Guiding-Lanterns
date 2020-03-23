@@ -1,6 +1,5 @@
 const Discord = require('discord.js')
 const Themeparks = require('themeparks')
-Themeparks.Settings.Cache = __dirname + "/data/themeparks.sqlite";
 
 function parkslist(){
     const Parks = {};
@@ -16,6 +15,7 @@ function parkslist(){
 
 async function parktimes(message, client, prefix, cooldowns){
     if (message.content.startsWith(prefix + 'ridetime')){
+        Themeparks.Settings.Cache = __dirname + "/data/themeparks.sqlite";
 
          //Implement cooldown
     if (!cooldowns.has(prefix + 'ridetime')) {
