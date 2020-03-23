@@ -1,18 +1,6 @@
 const Discord = require('discord.js')
 const Themeparks = require('themeparks')
 
-function parkslist(){
-    const Parks = {};
-    for (const park in Themeparks.Parks) {
-        Parks[park] = new Themeparks.Parks[park]();
-    }
-    const array = [];
-    for (const park in Parks) {
-        array.push(`- ${Parks[park].Name}: \`${park.toString()}\``);
-    }
-    return array
-}
-
 async function parktimes(message, client, prefix, cooldowns){
     if (message.content.startsWith(prefix + 'ridetime')){
 
@@ -50,20 +38,10 @@ async function parktimes(message, client, prefix, cooldowns){
 
         let args = message.content.split(" ");
         args.shift();
-        if (args.length < 1) return message.channel.send(`__Input your themepark!__\nExample: \`${prefix}ridetime WaltDisneyWorldMagicKingdom\`\nList of themeparks avialble with \`${prefix}ridetime list\``);
 
         let embed = new Discord.RichEmbed
 
-        if (args[0] == 'list'){
-            try{
-                message.channel.send(parkslist().join('\n'))
-            } catch(err) {
-                console.error(err)
-                message.channel.send(err)
-            }
-        } else {
-            message.channel.send('Work in progress...')
-        }
+        message.channel.send('Work in progress...')
     }
 }
 
