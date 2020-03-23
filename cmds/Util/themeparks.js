@@ -55,7 +55,13 @@ async function parktimes(message, client, prefix, cooldowns){
         let embed = new Discord.RichEmbed
 
         if (args[0] == 'list'){
-            message.channel.send(parkslist().join('\n'))
+            try{
+                console.log(parkslist().join('\n'))
+                message.channel.send(parkslist().join('\n'))
+            } catch(err) {
+                console.error(err)
+                message.channel.send(err)
+            }
         } else {
             message.channel.send('Work in progress...')
         }
