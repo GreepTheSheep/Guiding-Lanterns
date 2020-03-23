@@ -1,6 +1,6 @@
 {
     "name": "guiding-lanterns",
-    "version": "2.12.0",
+    "version": "3.0.0",
     "changelog": "The Open Source Update (host your own instance here: https://github.com/Guiding-Lanterns/Guiding-Lanterns)",
     "description": "",
     "main": "bot.js",
