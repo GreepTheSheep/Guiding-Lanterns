@@ -58,6 +58,9 @@ function cmds_index(message, client, prefix, config, functiondate, functiontime,
     --------------- Util -------------
     --------------------------------*/
 
+    const parktimes = require('./Util/themeparks.js')
+    parktimes(message, client, prefix, cooldowns);
+
     const wolfram = require('./Util/wolfram.js');
     wolfram(message, client, prefix, cooldowns);
 
