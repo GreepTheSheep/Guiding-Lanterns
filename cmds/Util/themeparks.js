@@ -47,7 +47,7 @@ async function parktimes(message, client, prefix, cooldowns){
         const awaitmsg = await message.channel.send('Please enter your themepark name')
         const filter = m => message.author == m.author;
         const collectorguild = message.channel.createMessageCollector(filter, {time: 60000, max: 1});
-        collectorguild.on('collect', m => {
+        collectorguild.on('collect', async m => {
             const pleasewait = await message.channel.send('Please wait...')
             await wait(5000)
             pleasewait.edit('Working in progress, need some waiting ¯\\_(ツ)_/¯')
