@@ -56,7 +56,6 @@ async function parktimes(message, client, prefix, cooldowns){
 
         if (args[0] == 'list'){
             try{
-                console.log(parkslist().join('\n'))
                 message.channel.send(parkslist().join('\n'))
             } catch(err) {
                 console.error(err)
