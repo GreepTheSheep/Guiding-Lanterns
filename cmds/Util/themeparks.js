@@ -50,58 +50,62 @@ async function parktimes(message, client, prefix, cooldowns){
         collector.on('collect', async m => {
             const pleasewait = await message.channel.send('Please wait...')
             const Parks = {};
-            for (const park in Themeparks.Parks) {
-                Parks[park] = new Themeparks.Parks[park]();
-            }
 
             if(m.content.toLowerCase() == 'list'){
                 const parkslist = []
+                for (const park in Themeparks.Parks) {
+                    Parks[park] = new Themeparks.Parks[park]();
+                }
                 for (const park in Parks) {
                     parkslist.push(Parks[park].Name);
                 }
                 message.channel.send('List of parks:\```' + parkslist.join('\n') + '\`\`\`')
             } else {
                 try{
-                var seletedpark
                 for (const park in Themeparks.Parks) {
-                    seletedpark = Parks[park];
-                    if (m.content.toLowerCase() == seletedpark.Name.toLowerCase()){
-                        console.log(seletedpark);
-                        const founditmsg = await message.channel.send('Found it! Please send your ride name or type \`list\`')
-                        var rides = await seletedpark.GetWaitTimes()
-                        const collector2 = message.channel.createMessageCollector(filter, {time: 60000, max: 1});
-                        collector2.on('collect', async m => {
-                            var rideslist = []
-                            if (m.content.toLowerCase() == 'list'){
-                                rides.forEach(async ride=>{
-                                    rideslist.push(ride.name);
-                                })
-                                return message.channel.send('\`\`\`' + rideslist.join('\n') + '\`\`\`')
-                            } else {
-                                var ridelist = []
-                                rides.forEach(async ride=>{
-                                    ridelist.push(ride)
-                                })
-                                if (ridelist.includes(m.content)){
-                                    if (ride.status == 'Closed'){
-                                        return message.channel.send(`❌ __${ride.name}__ is ${ride.status}`);
-                                    } else {
-                                        return message.channel.send(`__${ride.name}__: ${ride.waitTime} minutes wait *(${ride.status})*`);
-                                    }
+                    Parks[park.Name.toLowerCase()] = park;
+                }
+                if (Parks[m.content.toLowerCase()]){
+                    console.log(Parks[m.content.toLowerCase()]);
+                    const founditmsg = await message.channel.send('Found it! Please send your ride name or type \`list\`')
+                    var rides = await Parks[m.content.toLowerCase()].GetWaitTimes()
+                    const collector2 = message.channel.createMessageCollector(filter, {time: 60000, max: 1});
+                    collector2.on('collect', async m => {
+                        var rideslist = []
+                        if (m.content.toLowerCase() == 'list'){
+                            rides.forEach(async ride=>{
+                                rideslist.push(ride.name);
+                            })
+                            return message.channel.send('\`\`\`' + rideslist.join('\n') + '\`\`\`')
+                        } else {
+                            var ridelist = {}
+                            rides.forEach(async ride=>{
+                                ridelist[ride.name] = {
+                                    "name" : ride.name,
+                                    "status": ride.status,
+                                    "waitTime": ride.waitTime,
+                                    "lastUpdated": ride.lastUpdated
+                                };
+                            })
+                            if (ridelist[m.content]){
+                                if (ridelist[m.content].status == 'Closed'){
+                                    return message.channel.send(`❌ __${ridelist[m.content].name}__ is ${ridelist[m.content].status}`);
                                 } else {
-                                    return console.log('ride not found')
-                                }   
-                            }   
-                        });
-                        collector2.on('end', (collected, reason) => {
-                            if (reason == 'time'){
-                                awaitmsg.react('❌')
+                                    return message.channel.send(`__${ridelist[m.content].name}__: ${ridelist[m.content].waitTime} minutes wait *(${ridelist[m.content].status})*`);
+                                }
+                            } else {
+                                return console.log('ride not found')
                             }
-                        });
-                        
-                    } else {
-                        return console.log('park not found')
-                    }
+                        }   
+                    });
+                    collector2.on('end', (collected, reason) => {
+                        if (reason == 'time'){
+                            awaitmsg.react('❌')
+                        }
+                    });
+                    
+                } else {
+                    return console.log('park not found')
                 }
                 } catch (err) {
                     message.channel.send(err)
