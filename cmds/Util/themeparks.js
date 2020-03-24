@@ -73,27 +73,23 @@ async function parktimes(message, client, prefix, cooldowns, Parks){
                     collector2.on('collect', async m => {
                         const pleasewait2 = await message.channel.send('Please wait...')
                         var rides = await thisPark.GetWaitTimes()
-                        var rideslist = []
+                        var ridename = []
+                        var ridestatus = []
+                        var ridewaittime = []
+                        var ridelastupdate = []
+                        rides.forEach(async ride=>{
+                            ridename.push(ride.name)
+                            ridestatus.push(ride.status)
+                            ridewaittime.push(ride.waitTime)
+                            ridelastupdate.push(ride.lastUpdated)
+                        })
                         if (m.content.toLowerCase() == 'list'){
-                            rides.forEach(async ride=>{
-                                rideslist.push(ride.name);
-                            })
-                            message.channel.send('\`\`\`' + rideslist.join('\n') + '\`\`\`')
+                            message.channel.send('\`\`\`' + ridename.join('\n') + '\`\`\`')
                         } else {
-                            var ridename = []
-                            var ridestatus = []
-                            var ridewaittime = []
-                            var ridelastupdate = []
-                            for (const ride in rides){
-                                ridename.push(ride.name)
-                                ridestatus.push(ride.status)
-                                ridewaittime.push(ride.waitTime)
-                                ridelastupdate.push(ride.lastUpdated)
-                            }
                             if (ridename.includes(m.content)){
                                 var rideindex = ridename.indexOf(m.content)
                                 if (ridestatus[rideindex] == 'Closed'){
-                                    message.channel.send(`❌ __${ridename[rideindex]}__ is ${ridestatus[ridestatus]}`);
+                                    message.channel.send(`❌ __${ridename[rideindex]}__ is ${ridestatus[rideindex]}`);
                                 } else {
                                     message.channel.send(`__${ridename[rideindex]}__: ${ridewaittime[rideindex]} minutes wait *(${ridestatus[rideindex]})*`);
                                 }
