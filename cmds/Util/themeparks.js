@@ -59,9 +59,24 @@ async function parktimes(message, client, prefix, cooldowns){
                 for (const park in Parks) {
                     parkslist.push(Parks[park].Name);
                 }
-                message.channel.send('List of parks:\```xl\n- ' + parkslist.join('\n- ') + '\`\`\`')
+                message.channel.send('List of parks:\```' + parkslist.join('\n') + '\`\`\`')
             } else {
-                message.channel.send('Work in progress. Sorry!')
+                var seletedpark
+                seletedpark = new ThemeParks.Parks[park]();
+                if (m.content.toLowerCase() == seletedpark.Name.toLowerCase()){
+                    console.log('Park found! ' + seletedpark.Name);
+                    // message.channel.send('Found it!')
+                    var rides = await seletedpark.GetWaitTimes()
+                    var rideslist = []
+                    rides.forEach(async ride=>{
+                        if (ride.status == 'Closed'){
+                            rideslist.push(`❌ __${ride.name}__ is ${ride.status}`);
+                        } else {
+                            rideslist.push(`__${ride.name}__: ${ride.waitTime} minutes wait *(${ride.status})*`);
+                        }
+                    })
+                    message.channel.send(rideslist.join('\n'))
+                }
             }
             pleasewait.delete()
         });
