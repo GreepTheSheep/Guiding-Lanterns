@@ -59,7 +59,7 @@ async function parktimes(message, client, prefix, cooldowns, Parks){
             } else {
                 try{
                 for (const park in Parks) {
-                    parkslist.push(park.Name.toLowerCase())
+                    parkslist.push(park[park].Name.toLowerCase())
                 }
                 if (parkslist.includes(m.content.toLowerCase())){
                     var ParkLength = parkslist.indexOf(m.content.toLowerCase());
