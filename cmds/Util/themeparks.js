@@ -65,40 +65,43 @@ async function parktimes(message, client, prefix, cooldowns, Parks){
                 }
                 if (parkslist.includes(m.content.toLowerCase())){
                     var ParkLength = parkslist.indexOf(m.content.toLowerCase());
-                    console.log(ParkLength)
                     var thisPark = Parks[ParkID[ParkLength]]
                     console.log(thisPark)
                     const founditmsg = await message.channel.send('Found it! Please send your ride name or type \`list\`')
-                    const filter2 = m2 => message.author == m2.author;
+                    const filter2 = m => message.author == m.author;
                     const collector2 = message.channel.createMessageCollector(filter2, {time: 60000, max: 1});
-                    collector2.on('collect', async m2 => {
+                    collector2.on('collect', async m => {
+                        const pleasewait2 = await message.channel.send('Please wait...')
                         var rides = await thisPark.GetWaitTimes()
                         var rideslist = []
-                        if (m2.content.toLowerCase() == 'list'){
+                        if (m.content.toLowerCase() == 'list'){
                             rides.forEach(async ride=>{
                                 rideslist.push(ride.name);
                             })
-                            return message.channel.send('\`\`\`' + rideslist.join('\n') + '\`\`\`')
+                            message.channel.send('\`\`\`' + rideslist.join('\n') + '\`\`\`')
                         } else {
-                            var ridelist = {}
-                            rides.forEach(async ride=>{
-                                ridelist[ride.name] = {
-                                    "name" : ride.name,
-                                    "status": ride.status,
-                                    "waitTime": ride.waitTime,
-                                    "lastUpdated": ride.lastUpdated
-                                };
-                            })
-                            if (ridelist[m.content]){
-                                if (ridelist[m.content].status == 'Closed'){
-                                    return message.channel.send(`❌ __${ridelist[m.content].name}__ is ${ridelist[m.content].status}`);
+                            var ridename = []
+                            var ridestatus = []
+                            var ridewaittime = []
+                            var ridelastupdate = []
+                            for (const ride in rides){
+                                ridename.push(ride.name)
+                                ridestatus.push(ride.status)
+                                ridewaittime.push(ride.waitTime)
+                                ridelastupdate.push(ride.lastUpdated)
+                            }
+                            if (ridename.includes(m.content)){
+                                var rideindex = ridename.indexOf(m.content)
+                                if (ridestatus[rideindex] == 'Closed'){
+                                    message.channel.send(`❌ __${ridename[rideindex]}__ is ${ridestatus[ridestatus]}`);
                                 } else {
-                                    return message.channel.send(`__${ridelist[m.content].name}__: ${ridelist[m.content].waitTime} minutes wait *(${ridelist[m.content].status})*`);
+                                    message.channel.send(`__${ridename[rideindex]}__: ${ridewaittime[rideindex]} minutes wait *(${ridestatus[rideindex]})*`);
                                 }
                             } else {
-                                return console.log('ride not found')
+                                message.channel.send('Ride not found')
                             }
-                        }   
+                        }
+                        pleasewait2.delete()
                     });
                     collector2.on('end', (collected, reason) => {
                         if (reason == 'time'){
@@ -107,7 +110,7 @@ async function parktimes(message, client, prefix, cooldowns, Parks){
                     });
                     
                 } else {
-                    return console.log('park not found')
+                    message.channel.send('Park not found')
                 }
                 } catch (err) {
                     message.channel.send(err)
