@@ -61,8 +61,9 @@ async function parktimes(message, client, prefix, cooldowns){
                 }
                 message.channel.send('List of parks:\```' + parkslist.join('\n') + '\`\`\`')
             } else {
+                try{
                 var seletedpark
-                seletedpark = new ThemeParks.Parks[park]();
+                seletedpark = new Themeparks.Parks[park]();
                 if (m.content.toLowerCase() == seletedpark.Name.toLowerCase()){
                     console.log('Park found! ' + seletedpark.Name);
                     // message.channel.send('Found it!')
@@ -76,6 +77,10 @@ async function parktimes(message, client, prefix, cooldowns){
                         }
                     })
                     message.channel.send(rideslist.join('\n'))
+                }
+                } catch (err) {
+                    message.channel.send(err)
+                    console.error(err)
                 }
             }
             pleasewait.delete()
