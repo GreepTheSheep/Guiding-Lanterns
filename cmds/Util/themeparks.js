@@ -58,11 +58,14 @@ async function parktimes(message, client, prefix, cooldowns, Parks){
                 message.channel.send('List of parks:\```' + parkslist.join('\n') + '\`\`\`')
             } else {
                 try{
+                const ParkID = []
                 for (const park in Parks) {
                     parkslist.push(Parks[park].Name.toLowerCase())
+                    ParkID.push(park.toString())
                 }
                 if (parkslist.includes(m.content.toLowerCase())){
                     var ParkLength = parkslist.indexOf(m.content.toLowerCase());
+                    console.log(ParkLength)
                     var thisPark = Parks[ParkLength]
                     console.log(thisPark)
                     const founditmsg = await message.channel.send('Found it! Please send your ride name or type \`list\`')
