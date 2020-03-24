@@ -66,7 +66,8 @@ async function parktimes(message, client, prefix, cooldowns, Parks){
                     var thisPark = Parks[ParkLength]
                     const founditmsg = await message.channel.send('Found it! Please send your ride name or type \`list\`')
                     var rides = await thisPark.GetWaitTimes()
-                    const collector2 = message.channel.createMessageCollector(filter, {time: 60000, max: 1});
+                    const filter2 = m => message.author == m.author;
+                    const collector2 = message.channel.createMessageCollector(filter2, {time: 60000, max: 1});
                     collector2.on('collect', async m => {
                         var rideslist = []
                         if (m.content.toLowerCase() == 'list'){
