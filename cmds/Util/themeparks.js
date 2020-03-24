@@ -78,17 +78,19 @@ async function parktimes(message, client, prefix, cooldowns){
                                 })
                                 return message.channel.send('\`\`\`' + rideslist.join('\n') + '\`\`\`')
                             } else {
+                                var ridelist = []
                                 rides.forEach(async ride=>{
-                                    if (m.content == ride.name){
-                                        if (ride.status == 'Closed'){
-                                            return message.channel.send(`❌ __${ride.name}__ is ${ride.status}`);
-                                        } else {
-                                            return message.channel.send(`__${ride.name}__: ${ride.waitTime} minutes wait *(${ride.status})*`);
-                                        }
-                                    } else {
-                                        console.log('not found')
-                                    }   
+                                    ridelist.push(ride)
                                 })
+                                if (ridelist.includes(m.content)){
+                                    if (ride.status == 'Closed'){
+                                        return message.channel.send(`❌ __${ride.name}__ is ${ride.status}`);
+                                    } else {
+                                        return message.channel.send(`__${ride.name}__: ${ride.waitTime} minutes wait *(${ride.status})*`);
+                                    }
+                                } else {
+                                    return console.log('ride not found')
+                                }   
                             }   
                         });
                         collector2.on('end', (collected, reason) => {
@@ -98,7 +100,7 @@ async function parktimes(message, client, prefix, cooldowns){
                         });
                         
                     } else {
-                        console.log('not found')
+                        return console.log('park not found')
                     }
                 }
                 } catch (err) {
