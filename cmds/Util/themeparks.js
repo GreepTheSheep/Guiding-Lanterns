@@ -46,8 +46,8 @@ async function parktimes(message, client, prefix, cooldowns){
         
         const awaitmsg = await message.channel.send('Please enter your themepark name. Or enter \`list\`')
         const filter = m => message.author == m.author;
-        const collectorguild = message.channel.createMessageCollector(filter, {time: 60000, max: 1});
-        collectorguild.on('collect', async m => {
+        const collector = message.channel.createMessageCollector(filter, {time: 60000, max: 1});
+        collector.on('collect', async m => {
             const pleasewait = await message.channel.send('Please wait...')
             
             if(m.content.toLowerCase() == 'list'){
@@ -67,17 +67,34 @@ async function parktimes(message, client, prefix, cooldowns){
                     seletedpark = new Themeparks.Parks[park]();
                     if (m.content.toLowerCase() == seletedpark.Name.toLowerCase()){
                         console.log('Park found! ' + seletedpark.Name);
-                        // message.channel.send('Found it!')
+                        const founditmsg = await message.channel.send('Found it! Please send your ride name or type \`list\`')
                         var rides = await seletedpark.GetWaitTimes()
-                        var rideslist = []
-                        rides.forEach(async ride=>{
-                            if (ride.status == 'Closed'){
-                                rideslist.push(`❌ __${ride.name}__ is ${ride.status}`);
+                        const collector2 = message.channel.createMessageCollector(filter, {time: 60000, max: 1});
+                        collector2.on('collect', async m => {
+                            var rideslist = []
+                            if (m.content.toLowerCase() == 'list'){
+                                rides.forEach(async ride=>{
+                                    rideslist.push(ride.name);
+                                })
+                                return message.channel.send('\`\`\`' + rideslist.join('\n') + '\`\`\`')
                             } else {
-                                rideslist.push(`__${ride.name}__: ${ride.waitTime} minutes wait *(${ride.status})*`);
-                         }
-                        })
-                        return message.channel.send(rideslist.join('\n'))
+                                rides.forEach(async ride=>{
+                                    if (m.content == ride.name){
+                                        if (ride.status == 'Closed'){
+                                            return message.channel.send(`❌ __${ride.name}__ is ${ride.status}`);
+                                        } else {
+                                            return message.channel.send(`__${ride.name}__: ${ride.waitTime} minutes wait *(${ride.status})*`);
+                                        }
+                                    }     
+                                })
+                            }   
+                        });
+                        collector2.on('end', (collected, reason) => {
+                            if (reason == 'time'){
+                                awaitmsg.react('❌')
+                            }
+                        });
+                        
                     }
                 }
                 } catch (err) {
@@ -87,7 +104,7 @@ async function parktimes(message, client, prefix, cooldowns){
             }
             pleasewait.delete()
         });
-        collector4.on('end', (collected, reason) => {
+        collector.on('end', (collected, reason) => {
             if (reason == 'time'){
                 awaitmsg.react('❌')
             }
