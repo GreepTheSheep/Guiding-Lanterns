@@ -49,13 +49,12 @@ async function parktimes(message, client, prefix, cooldowns){
         const collector = message.channel.createMessageCollector(filter, {time: 60000, max: 1});
         collector.on('collect', async m => {
             const pleasewait = await message.channel.send('Please wait...')
-            
+            const Parks = {};
+            for (const park in Themeparks.Parks) {
+                Parks[park] = new Themeparks.Parks[park]();
+            }
+
             if(m.content.toLowerCase() == 'list'){
-                const Parks = {};
-                for (const park in Themeparks.Parks) {
-                    if (!Parks[park]) Parks[park] = new Themeparks.Parks[park]();
-                    else Parks[park] = Themeparks.Parks[park]();
-                }
                 const parkslist = []
                 for (const park in Parks) {
                     parkslist.push(Parks[park].Name);
@@ -65,8 +64,7 @@ async function parktimes(message, client, prefix, cooldowns){
                 try{
                 var seletedpark
                 for (const park in Themeparks.Parks) {
-                    if (!seletedpark) seletedpark = new Themeparks.Parks[park]();
-                    else seletedpark = Themeparks.Parks[park]();
+                    seletedpark = Parks[park]();
                     if (m.content.toLowerCase() == seletedpark.Name.toLowerCase()){
                         console.log('Park found! ' + seletedpark.Name);
                         const founditmsg = await message.channel.send('Found it! Please send your ride name or type \`list\`')
