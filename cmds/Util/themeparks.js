@@ -64,7 +64,7 @@ async function parktimes(message, client, prefix, cooldowns){
                 try{
                 var seletedpark
                 for (const park in Themeparks.Parks) {
-                    seletedpark = Parks[park]();
+                    seletedpark = Parks[park];
                     if (m.content.toLowerCase() == seletedpark.Name.toLowerCase()){
                         console.log('Park found! ' + seletedpark.Name);
                         const founditmsg = await message.channel.send('Found it! Please send your ride name or type \`list\`')
