@@ -63,7 +63,7 @@ async function parktimes(message, client, prefix, cooldowns){
             } else {
                 try{
                 var seletedpark
-                for (const park in ThemeParks.Parks) {
+                for (const park in Themeparks.Parks) {
                     seletedpark = new Themeparks.Parks[park]();
                     if (m.content.toLowerCase() == seletedpark.Name.toLowerCase()){
                         console.log('Park found! ' + seletedpark.Name);
