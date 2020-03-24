@@ -85,7 +85,9 @@ async function parktimes(message, client, prefix, cooldowns){
                                         } else {
                                             return message.channel.send(`__${ride.name}__: ${ride.waitTime} minutes wait *(${ride.status})*`);
                                         }
-                                    }     
+                                    } else {
+                                        console.log('not found')
+                                    }   
                                 })
                             }   
                         });
@@ -95,6 +97,8 @@ async function parktimes(message, client, prefix, cooldowns){
                             }
                         });
                         
+                    } else {
+                        console.log('not found')
                     }
                 }
                 } catch (err) {
