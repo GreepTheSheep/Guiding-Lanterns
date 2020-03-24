@@ -66,7 +66,7 @@ async function parktimes(message, client, prefix, cooldowns, Parks){
                 if (parkslist.includes(m.content.toLowerCase())){
                     var ParkLength = parkslist.indexOf(m.content.toLowerCase());
                     console.log(ParkLength)
-                    var thisPark = Parks[m.content]
+                    var thisPark = Parks[ParkID[ParkLength]]
                     console.log(thisPark)
                     const founditmsg = await message.channel.send('Found it! Please send your ride name or type \`list\`')
                     const filter2 = m2 => message.author == m2.author;
