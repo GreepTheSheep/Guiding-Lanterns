@@ -65,7 +65,7 @@ async function parktimes(message, client, prefix, cooldowns){
                 const Parks = [];
                 const ParksID = []
                 for (const park in Themeparks.Parks) {
-                    seletedpark = new ThemeParks.Parks[park]();
+                    seletedpark = new Themeparks.Parks[park]();
                     Parks.push(seletedpark.Name.toLowerCase())
                     ParksID.push(park.toString())
                 }
