@@ -59,7 +59,7 @@ async function parktimes(message, client, prefix, cooldowns){
                 for (const park in Parks) {
                     parkslist.push(Parks[park].Name);
                 }
-                message.channel.send('List of parks:\```md\n- ' + parkslist.join('\n- ') + '\`\`\`')
+                message.channel.send('List of parks:\```css\n- ' + parkslist.join('\n- ') + '\`\`\`')
             } else {
                 message.channel.send('Work in progress. Sorry!')
             }
