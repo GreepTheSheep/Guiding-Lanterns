@@ -64,13 +64,14 @@ async function parktimes(message, client, prefix, cooldowns, Parks){
                 if (parkslist.includes(m.content.toLowerCase())){
                     var ParkLength = parkslist.indexOf(m.content.toLowerCase());
                     var thisPark = Parks[ParkLength]
+                    console.log(thisPark)
                     const founditmsg = await message.channel.send('Found it! Please send your ride name or type \`list\`')
-                    var rides = await thisPark.GetWaitTimes()
-                    const filter2 = m => message.author == m.author;
+                    const filter2 = m2 => message.author == m2.author;
                     const collector2 = message.channel.createMessageCollector(filter2, {time: 60000, max: 1});
-                    collector2.on('collect', async m => {
+                    collector2.on('collect', async m2 => {
+                        var rides = await thisPark.GetWaitTimes()
                         var rideslist = []
-                        if (m.content.toLowerCase() == 'list'){
+                        if (m2.content.toLowerCase() == 'list'){
                             rides.forEach(async ride=>{
                                 rideslist.push(ride.name);
                             })
