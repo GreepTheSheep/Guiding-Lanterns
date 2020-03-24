@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const Themeparks = require('themeparks')
 const wait = require('util').promisify(setTimeout);
 
-async function parktimes(message, client, prefix, cooldowns){
+async function parktimes(message, client, prefix, cooldowns, Parks){
     if (message.content.startsWith(prefix + 'themepark')){
 
          //Implement cooldown
@@ -40,6 +40,7 @@ async function parktimes(message, client, prefix, cooldowns){
         let args = message.content.split(" ");
         args.shift();
 
+
         let embed = new Discord.RichEmbed
 
         message.channel.send('NOTE: This is work in progress...')
@@ -49,30 +50,22 @@ async function parktimes(message, client, prefix, cooldowns){
         const collector = message.channel.createMessageCollector(filter, {time: 60000, max: 1});
         collector.on('collect', async m => {
             const pleasewait = await message.channel.send('Please wait...')
-
+            const parkslist = []
             if(m.content.toLowerCase() == 'list'){
-                const Parks = {};
-                const parkslist = []
-                for (const park in Themeparks.Parks) {
-                    Parks[park] = new Themeparks.Parks[park]();
-                }
                 for (const park in Parks) {
                     parkslist.push(Parks[park].Name);
                 }
                 message.channel.send('List of parks:\```' + parkslist.join('\n') + '\`\`\`')
             } else {
                 try{
-                const Parks = [];
-                const ParksID = []
-                for (const park in Themeparks.Parks) {
-                    seletedpark = new Themeparks.Parks[park]();
-                    Parks.push(seletedpark.Name.toLowerCase())
-                    ParksID.push(park.toString())
+                for (const park in Parks) {
+                    parkslist.push(park.Name.toLowerCase())
                 }
-                if (Parks.includes(m.content.toLowerCase())){
-                    var ParkLength = Parks.indexOf(m.content.toLowerCase());
+                if (parkslist.includes(m.content.toLowerCase())){
+                    var ParkLength = parkslist.indexOf(m.content.toLowerCase());
+                    var thisPark = Parks[ParkLength]
                     const founditmsg = await message.channel.send('Found it! Please send your ride name or type \`list\`')
-                    var rides = await ParksID[ParkLength].GetWaitTimes()
+                    var rides = await thisPark.GetWaitTimes()
                     const collector2 = message.channel.createMessageCollector(filter, {time: 60000, max: 1});
                     collector2.on('collect', async m => {
                         var rideslist = []
