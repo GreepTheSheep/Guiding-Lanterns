@@ -88,7 +88,7 @@ async function parktimes(message, client, prefix, cooldowns, Parks){
                         } else {
                             if (ridename.includes(m.content)){
                                 var rideindex = ridename.indexOf(m.content)
-                                if (ridestatus[rideindex] == 'Closed'){
+                                if (ridestatus[rideindex] == 'Closed' || ridestatus[rideindex] == 'Refurbishment'){
                                     message.channel.send(`❌ __${ridename[rideindex]}__ is ${ridestatus[rideindex]}`);
                                 } else {
                                     message.channel.send(`__${ridename[rideindex]}__: ${ridewaittime[rideindex]} minutes wait *(${ridestatus[rideindex]})*`);
