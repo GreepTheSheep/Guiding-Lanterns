@@ -63,20 +63,22 @@ async function parktimes(message, client, prefix, cooldowns){
             } else {
                 try{
                 var seletedpark
-                seletedpark = new Themeparks.Parks[park]();
-                if (m.content.toLowerCase() == seletedpark.Name.toLowerCase()){
-                    console.log('Park found! ' + seletedpark.Name);
-                    // message.channel.send('Found it!')
-                    var rides = await seletedpark.GetWaitTimes()
-                    var rideslist = []
-                    rides.forEach(async ride=>{
-                        if (ride.status == 'Closed'){
-                            rideslist.push(`❌ __${ride.name}__ is ${ride.status}`);
-                        } else {
-                            rideslist.push(`__${ride.name}__: ${ride.waitTime} minutes wait *(${ride.status})*`);
-                        }
-                    })
-                    message.channel.send(rideslist.join('\n'))
+                for (const park in ThemeParks.Parks) {
+                    seletedpark = new Themeparks.Parks[park]();
+                    if (m.content.toLowerCase() == seletedpark.Name.toLowerCase()){
+                        console.log('Park found! ' + seletedpark.Name);
+                        // message.channel.send('Found it!')
+                        var rides = await seletedpark.GetWaitTimes()
+                        var rideslist = []
+                        rides.forEach(async ride=>{
+                            if (ride.status == 'Closed'){
+                                rideslist.push(`❌ __${ride.name}__ is ${ride.status}`);
+                            } else {
+                                rideslist.push(`__${ride.name}__: ${ride.waitTime} minutes wait *(${ride.status})*`);
+                         }
+                        })
+                        return message.channel.send(rideslist.join('\n'))
+                    }
                 }
                 } catch (err) {
                     message.channel.send(err)
