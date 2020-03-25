@@ -87,7 +87,7 @@ async function triggerRide(message, client, prefix, Parks, embed, thisPark, Park
         if (ridename.length == 0) return message.channel.send('There\'s an error when retrieving the rides list...').then(pleasewait2.delete())
         if (m.content.toLowerCase() == 'list'){
             message.channel.send('\`\`\`' + ridename.join('\n') + '\`\`\`')
-            triggerRide(message, client, prefix, Parks, embed, parkslist, ParkID, mOld)
+            triggerRide(message, client, prefix, Parks, embed, thisPark, ParkID, mOld)
         } else {
             const searchr = searchStringInArray(m.content, ridename)
             if (!searchr) {
