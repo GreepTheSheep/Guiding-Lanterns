@@ -40,7 +40,7 @@ async function triggerPark(message, client, prefix, Parks, embed){
                     ParkID.push(park.toString())
                 }
                 if (parkslist.includes(m.content.toLowerCase())){
-                    triggerRide(message, client, prefix, Parks, embed, parkslist, m)
+                    triggerRide(message, client, prefix, Parks, embed, parkslist, ParkID, m)
                 } else {
                     message.channel.send('Park not found')
                 }
@@ -59,7 +59,7 @@ async function triggerPark(message, client, prefix, Parks, embed){
 
 }
 
-async function triggerRide(message, client, prefix, Parks, embed, parkslist, m){
+async function triggerRide(message, client, prefix, Parks, embed, parkslist, ParkID, m){
     var mOld = m
     var ParkLength = parkslist.indexOf(m.content.toLowerCase());
     var thisPark = Parks[ParkID[ParkLength]]
@@ -82,7 +82,7 @@ async function triggerRide(message, client, prefix, Parks, embed, parkslist, m){
     const pleasewait2 = await message.channel.send('Please wait...')
     if (m.content.toLowerCase() == 'list'){
         message.channel.send('\`\`\`' + ridename.join('\n') + '\`\`\`')
-        triggerRide(message, client, prefix, Parks, embed, parkslist, mOld)
+        triggerRide(message, client, prefix, Parks, embed, parkslist, ParkID, mOld)
     } else {
         if (ridename.includes(m.content)){
             var rideindex = ridename.indexOf(m.content)
