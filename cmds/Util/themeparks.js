@@ -64,7 +64,7 @@ async function triggerPark(message, client, prefix, Parks, embed){
                     var ParkLength = parkslist.indexOf(searchp.resultats[0]);
                     var thisPark = Parks[ParkID[ParkLength]]
                     console.log(thisPark)
-                    triggerRide(message, client, prefix, Parks, embed, thisPark, ParkID, m)
+                    triggerRide(message, client, prefix, Parks, embed, thisPark, ParkID, m, pleasewait)
                 }
                 } catch (err) {
                     pleasewait.edit(err)
@@ -80,9 +80,9 @@ async function triggerPark(message, client, prefix, Parks, embed){
 
 }
 
-async function triggerRide(message, client, prefix, Parks, embed, thisPark, ParkID, m){
+async function triggerRide(message, client, prefix, Parks, embed, thisPark, ParkID, m, pleasewait){
     var mOld = m
-    const founditmsg = await message.channel.send('Found __'+ thisPark.Name +'__. Please send your ride name or type \`list\`')
+    const founditmsg = await pleasewait.edit('Found __'+ thisPark.Name +'__. Please send your ride name or type \`list\`')
     var rides = await thisPark.GetWaitTimes()
     var ridename = []
     var ridestatus = []
@@ -101,7 +101,7 @@ async function triggerRide(message, client, prefix, Parks, embed, thisPark, Park
         if (ridename.length == 0) return pleasewait2.edit('There\'s an error when retrieving the rides list...').then(pleasewait2.delete())
         if (m.content.toLowerCase() == 'list'){
             pleasewait2.edit('\`\`\`' + ridename.join('\n') + '\`\`\`')
-            triggerRide(message, client, prefix, Parks, embed, thisPark, ParkID, mOld)
+            triggerRide(message, client, prefix, Parks, embed, thisPark, ParkID, mOld, pleasewait)
         } else {
             const searchr = searchStringInArray(m.content, ridename)
             if (!searchr || searchr.multiple == ridename.length) {
