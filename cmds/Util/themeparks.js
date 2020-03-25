@@ -40,7 +40,7 @@ async function triggerPark(message, client, prefix, Parks, embed){
                     ParkID.push(park.toString())
                 }
                 if (parkslist.includes(m.content.toLowerCase())){
-                    triggerRide(message, client, prefix, Parks, embed)
+                    triggerRide(message, client, prefix, Parks, embed, parkslist)
                 } else {
                     message.channel.send('Park not found')
                 }
@@ -59,7 +59,7 @@ async function triggerPark(message, client, prefix, Parks, embed){
 
 }
 
-async function triggerRide(message, client, prefix, Parks, embed){
+async function triggerRide(message, client, prefix, Parks, embed, parkslist){
     var ParkLength = parkslist.indexOf(m.content.toLowerCase());
     var thisPark = Parks[ParkID[ParkLength]]
     console.log(thisPark)
