@@ -40,11 +40,26 @@ async function triggerPark(message, client, prefix, Parks, embed){
                     parkslist.push(Parks[park].Name.toLowerCase())
                     ParkID.push(park.toString())
                 }
-                const searchp = searchStringInArray(m.content, parkslist)
-                if (!searchp) {
+                var searchp
+                if (m.content.toLowerCase() == 'wdw'){
+                    searchp = searchStringInArray('Walt Disney World Florida', parkslist)
+                } else if (m.content.toLowerCase() == 'dlp'){
+                    searchp = searchStringInArray('Disneyland Paris', parkslist)
+                } else if (m.content.toLowerCase() == 'dlr'){
+                    searchp = searchStringInArray('Disneyland Resort', parkslist)
+                } else if (m.content.toLowerCase() == 'tdr'){
+                    searchp = searchStringInArray('Tokyo Disney Resort', parkslist)
+                } else if (m.content.toLowerCase() == 'disney'){
+                    searchp = searchStringInArray('Disney', parkslist)
+                } else searchp = searchStringInArray(m.content, parkslist)
+                if (!searchp || searchp.multiple == parkslist.length) {
                     message.channel.send('Park not found')
                 } else if (searchp.multiple > 1) {
-                    message.channel.send('I have ' + searchp.multiple + ' results :/')
+                    var resultsAfterSearch = []
+                    searchp.resultats.forEach(p=>{
+                        resultsAfterSearch.push(p)
+                    })
+                    message.channel.send('I have ' + searchp.multiple + ' results:\`\`\`' + resultsAfterSearch.join('\n') + '\`\`\`')
                 } else {
                     var ParkLength = parkslist.indexOf(searchp.resultats[0]);
                     var thisPark = Parks[ParkID[ParkLength]]
@@ -90,7 +105,7 @@ async function triggerRide(message, client, prefix, Parks, embed, thisPark, Park
             triggerRide(message, client, prefix, Parks, embed, thisPark, ParkID, mOld)
         } else {
             const searchr = searchStringInArray(m.content, ridename)
-            if (!searchr) {
+            if (!searchr || searchr.multiple == ridename.length) {
                 message.channel.send('Ride not found')
             } else if (searchr.multiple > 1) {
                 message.channel.send('I have ' + searchr.multiple + ' results :/')
