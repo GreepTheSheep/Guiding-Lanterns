@@ -108,7 +108,11 @@ async function triggerRide(message, client, prefix, Parks, embed, thisPark, Park
             if (!searchr || searchr.multiple == ridename.length) {
                 message.channel.send('Ride not found')
             } else if (searchr.multiple > 1) {
-                message.channel.send('I have ' + searchr.multiple + ' results :')
+                var resultsAfterSearch = []
+                searchr.resultats.forEach(p=>{
+                    resultsAfterSearch.push(p)
+                })
+                message.channel.send('I have ' + searchp.multiple + ' results:\`\`\`' + resultsAfterSearch.join('\n') + '\`\`\`')
             } else {
                 var rideindex = ridename.indexOf(searchr.resultats[0])
                 if (ridestatus[rideindex] == 'Closed' ){
