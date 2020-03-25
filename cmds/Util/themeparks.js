@@ -147,6 +147,7 @@ async function parktimes(message, client, prefix, cooldowns, Parks){
     // End of cooldown implement
 
         let embed = new Discord.RichEmbed
+        Themeparks.Settings.Cache = __dirname + "/data/themeparks.sqlite";
 
         message.channel.send('NOTE: This is work in progress...')
         
