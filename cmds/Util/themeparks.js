@@ -39,10 +39,16 @@ async function triggerPark(message, client, prefix, Parks, embed){
                     parkslist.push(Parks[park].Name.toLowerCase())
                     ParkID.push(park.toString())
                 }
-                if (parkslist.includes(m.content.toLowerCase())){
-                    triggerRide(message, client, prefix, Parks, embed, parkslist, ParkID, m)
-                } else {
+                const searchp = searchStringInArray(m.content, parkslist)
+                if (!searchp) {
                     message.channel.send('Park not found')
+                } else if (searchp.multiple > 1) {
+                    message.channel.send('I have ' + searchp.multiple + ' results :/')
+                } else {
+                    var ParkLength = parkslist.indexOf(searchp.resultats[0]);
+                    var thisPark = Parks[ParkID[ParkLength]]
+                    console.log(thisPark)
+                    triggerRide(message, client, prefix, Parks, embed, thisPark, ParkID, m)
                 }
                 } catch (err) {
                     message.channel.send(err)
@@ -59,11 +65,8 @@ async function triggerPark(message, client, prefix, Parks, embed){
 
 }
 
-async function triggerRide(message, client, prefix, Parks, embed, parkslist, ParkID, m){
+async function triggerRide(message, client, prefix, Parks, embed, thisPark, ParkID, m){
     var mOld = m
-    var ParkLength = parkslist.indexOf(m.content.toLowerCase());
-    var thisPark = Parks[ParkID[ParkLength]]
-    console.log(thisPark)
     const founditmsg = await message.channel.send('Found it! Please send your ride name or type \`list\`')
     var rides = await thisPark.GetWaitTimes()
     var ridename = []
@@ -79,32 +82,35 @@ async function triggerRide(message, client, prefix, Parks, embed, parkslist, Par
     const filter2 = m => message.author == m.author;
     const collector2 = message.channel.createMessageCollector(filter2, {time: 120000, max: 1});
     collector2.on('collect', async m => {
-    const pleasewait2 = await message.channel.send('Please wait...')
-    if (ridename.length == 0) return message.channel.send('There\'s an error when retrieving the rides list...').then(pleasewait2.delete())
-    if (m.content.toLowerCase() == 'list'){
-        message.channel.send('\`\`\`' + ridename.join('\n') + '\`\`\`')
-        triggerRide(message, client, prefix, Parks, embed, parkslist, ParkID, mOld)
-    } else {
-        if (ridename.includes(m.content)){
-            var rideindex = ridename.indexOf(m.content)
-            if (ridestatus[rideindex] == 'Closed' ){
-                message.channel.send(`❌ __${ridename[rideindex]}__ is ${ridestatus[rideindex]}`);
-            } else if (ridestatus[rideindex] == 'Refurbishment') {
-                message.channel.send(`❌ __${ridename[rideindex]}__ is in ${ridestatus[rideindex]}`);
-            } else {
-                if (ridewaittime[rideindex] <= 5){
-                    message.channel.send(`🟢 __${ridename[rideindex]}__: ${ridewaittime[rideindex]} minutes wait. *(${ridestatus[rideindex]})*`);
-                } else if (ridewaittime[rideindex] <= 15){
-                    message.channel.send(`🟠 __${ridename[rideindex]}__: ${ridewaittime[rideindex]} minutes wait. *(${ridestatus[rideindex]})*`);
-                } else {
-                    message.channel.send(`🔴 __${ridename[rideindex]}__: ${ridewaittime[rideindex]} minutes wait. *(${ridestatus[rideindex]})*`);
-                }   
-            }
+        const pleasewait2 = await message.channel.send('Please wait...')
+        if (ridename.length == 0) return message.channel.send('There\'s an error when retrieving the rides list...').then(pleasewait2.delete())
+        if (m.content.toLowerCase() == 'list'){
+            message.channel.send('\`\`\`' + ridename.join('\n') + '\`\`\`')
+            triggerRide(message, client, prefix, Parks, embed, parkslist, ParkID, mOld)
         } else {
-            message.channel.send('Ride not found')
+            const searchr = searchStringInArray(m.content, ridename)
+            if (!searchr) {
+                message.channel.send('Ride not found')
+            } else if (searchr.multiple > 1) {
+                message.channel.send('I have ' + searchr.multiple + ' results :/')
+            } else {
+                var rideindex = ridename.indexOf(searchr.resultats[0])
+                if (ridestatus[rideindex] == 'Closed' ){
+                    message.channel.send(`❌ __${ridename[rideindex]}__ is ${ridestatus[rideindex]}`);
+                } else if (ridestatus[rideindex] == 'Refurbishment') {
+                    message.channel.send(`❌ __${ridename[rideindex]}__ is in ${ridestatus[rideindex]}`);
+                } else {
+                    if (ridewaittime[rideindex] <= 5){
+                        message.channel.send(`🟢 __${ridename[rideindex]}__: ${ridewaittime[rideindex]} minutes wait. *(${ridestatus[rideindex]})*`);
+                    } else if (ridewaittime[rideindex] <= 15){
+                        message.channel.send(`🟠 __${ridename[rideindex]}__: ${ridewaittime[rideindex]} minutes wait. *(${ridestatus[rideindex]})*`);
+                    } else {
+                        message.channel.send(`🔴 __${ridename[rideindex]}__: ${ridewaittime[rideindex]} minutes wait. *(${ridestatus[rideindex]})*`);
+                    }   
+                }
             }
+            pleasewait2.delete()
         }
-        pleasewait2.delete()
     });
     collector2.on('end', (collected, reason) => {
         if (reason == 'time'){
