@@ -82,7 +82,7 @@ async function triggerPark(message, client, prefix, Parks, embed){
 
 async function triggerRide(message, client, prefix, Parks, embed, thisPark, ParkID, m, pleasewait){
     var mOld = m
-    const founditmsg = await pleasewait.edit('Found __'+ thisPark.Name +'__. Please send your ride name or type \`list\`')
+    const founditmsg = await pleasewait.edit('Found __'+ thisPark.Name +'__. Please type your ride name or type \`list\`')
     var rides = await thisPark.GetWaitTimes()
     var ridename = []
     var ridestatus = []
@@ -100,7 +100,7 @@ async function triggerRide(message, client, prefix, Parks, embed, thisPark, Park
         const pleasewait2 = await message.channel.send('Please wait...')
         if (ridename.length == 0) return pleasewait2.edit('There\'s an error when retrieving the rides list...').then(pleasewait2.delete())
         if (m.content.toLowerCase() == 'list'){
-            pleasewait2.edit('\`\`\`' + ridename.join('\n') + '\`\`\`')
+            pleasewait2.edit('\`\`\`' + ridename.join('\n') + '\`\`\`__'+ thisPark.Name +'__. Please type your ride name or type \`list\`')
             triggerRide(message, client, prefix, Parks, embed, thisPark, ParkID, mOld, pleasewait)
         } else {
             const searchr = searchStringInArray(m.content, ridename)
