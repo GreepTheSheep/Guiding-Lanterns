@@ -37,18 +37,18 @@ async function triggerPark(message, client, prefix, Parks, embed){
                 try{
                 const ParkID = []
                 for (const park in Parks) {
-                    parkslist.push(Parks[park].Name.toLowerCase())
+                    parkslist.push(Parks[park].Name)
                     ParkID.push(park.toString())
                 }
                 var searchp
                 if (m.content.toLowerCase() == 'wdw'){
-                    searchp = searchStringInArray('Walt Disney World Florida', parkslist)
+                    searchp = searchStringInArray('Magic Kingdom - Walt Disney World Florida', parkslist)
                 } else if (m.content.toLowerCase() == 'dlp'){
-                    searchp = searchStringInArray('Disneyland Paris', parkslist)
+                    searchp = searchStringInArray('Magic Kingdom - Disneyland Paris', parkslist)
                 } else if (m.content.toLowerCase() == 'dlr'){
-                    searchp = searchStringInArray('Disneyland Resort', parkslist)
+                    searchp = searchStringInArray('Magic Kingdom - Disneyland Resort', parkslist)
                 } else if (m.content.toLowerCase() == 'tdr'){
-                    searchp = searchStringInArray('Tokyo Disney Resort', parkslist)
+                    searchp = searchStringInArray('Magic Kingdom - Tokyo Disney Resort', parkslist)
                 } else if (m.content.toLowerCase() == 'disney'){
                     searchp = searchStringInArray('Disney', parkslist)
                 } else searchp = searchStringInArray(m.content, parkslist)
@@ -83,7 +83,7 @@ async function triggerPark(message, client, prefix, Parks, embed){
 
 async function triggerRide(message, client, prefix, Parks, embed, thisPark, ParkID, m){
     var mOld = m
-    const founditmsg = await message.channel.send('Found it! Please send your ride name or type \`list\`')
+    const founditmsg = await message.channel.send('Found __'+ thisPark.Name +'__. Please send your ride name or type \`list\`')
     var rides = await thisPark.GetWaitTimes()
     var ridename = []
     var ridestatus = []
@@ -108,7 +108,7 @@ async function triggerRide(message, client, prefix, Parks, embed, thisPark, Park
             if (!searchr || searchr.multiple == ridename.length) {
                 message.channel.send('Ride not found')
             } else if (searchr.multiple > 1) {
-                message.channel.send('I have ' + searchr.multiple + ' results :/')
+                message.channel.send('I have ' + searchr.multiple + ' results :')
             } else {
                 var rideindex = ridename.indexOf(searchr.resultats[0])
                 if (ridestatus[rideindex] == 'Closed' ){
