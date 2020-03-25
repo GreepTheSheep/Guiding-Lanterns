@@ -31,7 +31,7 @@ async function triggerPark(message, client, prefix, Parks, embed){
                 for (const park in Parks) {
                     parkslist.push(Parks[park].Name);
                 }
-                message.channel.send('List of parks:\```' + parkslist.join('\n') + '\`\`\`')
+                pleasewait.edit('List of parks:\```' + parkslist.join('\n') + '\`\`\`')
                 triggerPark(message, client, prefix, Parks, embed)
             } else {
                 try{
@@ -53,13 +53,13 @@ async function triggerPark(message, client, prefix, Parks, embed){
                     searchp = searchStringInArray('Disney', parkslist)
                 } else searchp = searchStringInArray(m.content, parkslist)
                 if (!searchp || searchp.multiple == parkslist.length) {
-                    message.channel.send('Park not found')
+                    pleasewait.edit('Park not found')
                 } else if (searchp.multiple > 1) {
                     var resultsAfterSearch = []
                     searchp.resultats.forEach(p=>{
                         resultsAfterSearch.push(p)
                     })
-                    message.channel.send('I have ' + searchp.multiple + ' results:\`\`\`' + resultsAfterSearch.join('\n') + '\`\`\`')
+                    pleasewait.edit('I have ' + searchp.multiple + ' results:\`\`\`' + resultsAfterSearch.join('\n') + '\`\`\`')
                 } else {
                     var ParkLength = parkslist.indexOf(searchp.resultats[0]);
                     var thisPark = Parks[ParkID[ParkLength]]
@@ -67,11 +67,10 @@ async function triggerPark(message, client, prefix, Parks, embed){
                     triggerRide(message, client, prefix, Parks, embed, thisPark, ParkID, m)
                 }
                 } catch (err) {
-                    message.channel.send(err)
+                    pleasewait.edit(err)
                     console.error(err)
                 }
             }
-            pleasewait.delete()
         });
         collector.on('end', (collected, reason) => {
             if (reason == 'time'){
@@ -99,37 +98,36 @@ async function triggerRide(message, client, prefix, Parks, embed, thisPark, Park
     const collector2 = message.channel.createMessageCollector(filter2, {time: 120000, max: 1});
     collector2.on('collect', async m => {
         const pleasewait2 = await message.channel.send('Please wait...')
-        if (ridename.length == 0) return message.channel.send('There\'s an error when retrieving the rides list...').then(pleasewait2.delete())
+        if (ridename.length == 0) return pleasewait2.edit('There\'s an error when retrieving the rides list...').then(pleasewait2.delete())
         if (m.content.toLowerCase() == 'list'){
-            message.channel.send('\`\`\`' + ridename.join('\n') + '\`\`\`')
+            pleasewait2.edit('\`\`\`' + ridename.join('\n') + '\`\`\`')
             triggerRide(message, client, prefix, Parks, embed, thisPark, ParkID, mOld)
         } else {
             const searchr = searchStringInArray(m.content, ridename)
             if (!searchr || searchr.multiple == ridename.length) {
-                message.channel.send('Ride not found')
+                pleasewait2.edit('Ride not found')
             } else if (searchr.multiple > 1) {
                 var resultsAfterSearch = []
                 searchr.resultats.forEach(p=>{
                     resultsAfterSearch.push(p)
                 })
-                message.channel.send('I have ' + searchp.multiple + ' results:\`\`\`' + resultsAfterSearch.join('\n') + '\`\`\`')
+                pleasewait2.edit('I have ' + searchp.multiple + ' results:\`\`\`' + resultsAfterSearch.join('\n') + '\`\`\`')
             } else {
                 var rideindex = ridename.indexOf(searchr.resultats[0])
                 if (ridestatus[rideindex] == 'Closed' ){
-                    message.channel.send(`❌ __${ridename[rideindex]}__ is ${ridestatus[rideindex]}`);
+                    pleasewait2.edit(`❌ __${ridename[rideindex]}__ is ${ridestatus[rideindex]}`);
                 } else if (ridestatus[rideindex] == 'Refurbishment') {
-                    message.channel.send(`❌ __${ridename[rideindex]}__ is in ${ridestatus[rideindex]}`);
+                    pleasewait2.edit(`❌ __${ridename[rideindex]}__ is in ${ridestatus[rideindex]}`);
                 } else {
                     if (ridewaittime[rideindex] <= 5){
-                        message.channel.send(`🟢 __${ridename[rideindex]}__: ${ridewaittime[rideindex]} minutes wait. *(${ridestatus[rideindex]})*`);
+                        pleasewait2.edit(`🟢 __${ridename[rideindex]}__: ${ridewaittime[rideindex]} minutes wait. *(${ridestatus[rideindex]})*`);
                     } else if (ridewaittime[rideindex] <= 15){
-                        message.channel.send(`🟠 __${ridename[rideindex]}__: ${ridewaittime[rideindex]} minutes wait. *(${ridestatus[rideindex]})*`);
+                        pleasewait2.edit(`🟠 __${ridename[rideindex]}__: ${ridewaittime[rideindex]} minutes wait. *(${ridestatus[rideindex]})*`);
                     } else {
-                        message.channel.send(`🔴 __${ridename[rideindex]}__: ${ridewaittime[rideindex]} minutes wait. *(${ridestatus[rideindex]})*`);
+                        pleasewait2.edit(`🔴 __${ridename[rideindex]}__: ${ridewaittime[rideindex]} minutes wait. *(${ridestatus[rideindex]})*`);
                     }   
                 }
             }
-            pleasewait2.delete()
         }
     });
     collector2.on('end', (collected, reason) => {
