@@ -80,6 +80,7 @@ async function triggerRide(message, client, prefix, Parks, embed, parkslist, Par
     const collector2 = message.channel.createMessageCollector(filter2, {time: 120000, max: 1});
     collector2.on('collect', async m => {
     const pleasewait2 = await message.channel.send('Please wait...')
+    if (ridename.length == 0) return message.channel.send('There\'s an error when retrieving the rides list...').then(pleasewait2.delete())
     if (m.content.toLowerCase() == 'list'){
         message.channel.send('\`\`\`' + ridename.join('\n') + '\`\`\`')
         triggerRide(message, client, prefix, Parks, embed, parkslist, ParkID, mOld)
