@@ -4,6 +4,7 @@ const wait = require('util').promisify(setTimeout);
 
 function searchStringInArray(search, list) {
     var resultats = []
+    var multiple = 0
     list.forEach(r=>{
         if (r.toLowerCase().includes(search.toLowerCase())) {
             // console.log(r)
