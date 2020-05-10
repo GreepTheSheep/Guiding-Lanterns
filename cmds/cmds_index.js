@@ -110,6 +110,9 @@ function cmds_index(message, client, prefix, config, functiondate, functiontime,
         const lantern = require('./Guild/lantern.js');
         lantern(message, client, prefix, getlogchannel(), cooldowns);
 
+        const welcome = require('./Guild/rules-accept-welcome.js');
+        welcome(message, client, prefix);
+
         const screenshot = require('./Guild/screenshot.js');
         screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel(), dbl);
 

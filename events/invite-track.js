@@ -30,7 +30,7 @@ module.exports = {
         When a member joins a guild, the bot compare the current invites with the cached ones
 	*/
         try {
-            const logchannel = client.channels.get("562607103337037834")
+            const logchannel = client.channels.get("663096647437516810")
             const guildInvites = await member.guild.fetchInvites();
 
             //Update cached invites
