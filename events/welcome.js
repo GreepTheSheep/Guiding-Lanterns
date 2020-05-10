@@ -34,16 +34,6 @@ function welcome(member, client) {
         } else if (member.user.bot) return
         client.guilds.get('562602234265731080').channels.get('658808055558832132').send(embed);
     }
-    if (member.guild.id === '570024448371982373'){
-        let embed = new Discord.RichEmbed()
-        if (!member.user.bot){
-            embed.setColor("#01B023")
-            .setTimestamp()
-            .addField(`Bienvenue sur le serveur de Greep!`, `${member.user.tag} (<@${member.user.id}>)`)
-            .setFooter(`We are now ${members} in the server`, `${member.user.displayAvatarURL}`)
-        } else if (member.user.bot) return
-        client.guilds.get('570024448371982373').channels.get('591219640315674641').send(embed);
-    }
 }
 
 module.exports = welcome;
