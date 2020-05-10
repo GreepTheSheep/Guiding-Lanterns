@@ -28,14 +28,6 @@ function goodbye(member, client) {
         .setFooter(`${member.user.tag} left the Kingdom of Corona! We are now ${members} in the server`, `${member.user.displayAvatarURL}`)
         client.guilds.get('562602234265731080').channels.get('658808055558832132').send(embed);
     }
-    if (member.guild.id === '570024448371982373'){
-        let embed = new Discord.RichEmbed()
-        embed.setColor("#910002")
-        .setTimestamp()
-        .addField(`${msg}`, `**${member.user.username}**`)
-        .setFooter(`${member.user.tag} left the Guiding Lanterns support server! We are now ${members} in the server`, `${member.user.displayAvatarURL}`)
-        client.guilds.get('570024448371982373').channels.get('591219640315674641').send(embed);
-    }
 }
 
 module.exports = goodbye;
