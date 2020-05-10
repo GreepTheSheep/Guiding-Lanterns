@@ -28,7 +28,7 @@ function welcome(member, client) {
         if (!member.user.bot){
             embed.setColor("#01B023")
             .setTimestamp()
-            .addField(`${welcomemsg}`, `Hey, **say welcome to __${member.user.username}__** 🙌\nType \`!hello\` to access more channels and roles!`)
+            .addField(`${welcomemsg}`, `Hey, **say welcome to __${member.user.username}__** 🙌`)
             .setThumbnail('http://www.youloveit.com/uploads/posts/2017-11/1511021094_youloveit_com_tangled_the_series_animated_gifs_emotions03.gif')
             .setFooter(`${member.user.tag} just landed in the Kingdom of Corona! We are now ${members} in the server`, `${member.user.displayAvatarURL}`)
         } else if (member.user.bot) return
@@ -39,14 +39,9 @@ function welcome(member, client) {
         if (!member.user.bot){
             embed.setColor("#01B023")
             .setTimestamp()
-            .addField(`Welcome to the Guiding Lanterns support server!`, `<@${member.user.id}>`)
-            .setFooter(`${member.user.tag} just landed in the Guiding Lanterns support server! We are now ${members} in the server`, `${member.user.displayAvatarURL}`)
-        } else if (member.user.bot){
-            embed.setColor("#01B023")
-            .setTimestamp()
-            .addField(`A bot joined the Guiding Lanterns support server!`, `<@${member.user.id}>`)
-            .setFooter(`${member.user.tag} just landed in the Guiding Lanterns support server! We are now ${bots} bots in the server`, `${member.user.displayAvatarURL}`)
-        }
+            .addField(`Bienvenue sur le serveur de Greep!`, `${member.user.tag} (<@${member.user.id}>)`)
+            .setFooter(`We are now ${members} in the server`, `${member.user.displayAvatarURL}`)
+        } else if (member.user.bot) return
         client.guilds.get('570024448371982373').channels.get('591219640315674641').send(embed);
     }
 }
