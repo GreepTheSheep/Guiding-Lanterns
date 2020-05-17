@@ -42,7 +42,7 @@ async function welcome(message, client, prefix, cooldowns) {
         const calc_max=9;
         var randomnum1 = (Math.random() * (+calc_max - +calc_min) + +calc_min).toFixed(0);
         var randomnum2 = (Math.random() * (+calc_max - +calc_min) + +calc_min).toFixed(0);
-        const firstmessage = await message.channel.send(`**__To verify that you are human, please do this math.__** We do this to protect our server from raids or malicious people who may retrieve information.\n\`\`\`${randomnum1} + ${randomnum2}}\`\`\``)
+        const firstmessage = await message.channel.send(`**__To verify that you are human, please do this math.__** We do this to protect our server from raids or malicious people who may retrieve information.\n\`\`\`${randomnum1} + ${randomnum2}\`\`\``)
 
         const filter = m => message.author == m.author;
         const collector = message.channel.createMessageCollector(filter, {time: 30000, max: 1});
@@ -63,8 +63,8 @@ async function welcome(message, client, prefix, cooldowns) {
 function validate(client, m, message, firstmessage, randomnum1, randomnum2){
 
     if (!Number(m.content) || Number(m.content) == NaN) return message.channel.send('That\'s not a valid number! Please try again')
-    else if (randomnum1 + randomnum2 != Number(m.content)) return message.channel.send(`You miscalculated, the correct answer was ${randomnum1 + randomnum2}. Please try again!`)
-    else if (randomnum1 + randomnum2 == Number(m.content)){
+    else if (Number(Number(randomnum1) + Number(randomnum2)) != Number(m.content)) return message.channel.send(`You miscalculated, the correct answer was ${Number(Number(randomnum1) + Number(randomnum2))}. Please try again!`)
+    else if (Number(Number(randomnum1) + Number(randomnum2)) == Number(m.content)){
         message.author.send(`Howdy ! I can help you to better integrate into the kingdom! That's the role of a lady-in-waiting!\n\nWe (mostly the Royal Guard) regularly post announcements about the server. <#563241725133455391>\n\nYou can get more roles and change the colour of your name here: <#643107104504152065>\n\nIf you've joined the subreddit at https://reddit.com/r/tangled , you can type \`!subbed\` to get the Friend of Rapunzel badge!\n\nDon't forget to participate because I count your messages and transform them into experience, and thanks to this experience you can gain levels. The higher you are, the more rewards you will get! (Type \`!rank\` in #bot-commands to see your level!)\n\n**__And above all, don't forget to have fun in the world of Tangled!__**`).catch(e=>console.log(e))
         message.member.addRole('562608575227363329')
         message.member.removeRole('675436155453308959')
