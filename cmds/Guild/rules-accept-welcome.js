@@ -5,7 +5,7 @@ function randomItem(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
 
-async function welcome(message, client, prefix) {
+async function welcome(message, client, prefix, cooldowns) {
     const command_name = prefix + 'accept'
 
     if (message.content.startsWith(command_name)){

@@ -118,7 +118,7 @@ function cmds_index(message, client, prefix, config, functiondate, functiontime,
         lantern(message, client, prefix, getlogchannel(), cooldowns);
 
         const welcome = require('./Guild/rules-accept-welcome.js');
-        welcome(message, client, prefix);
+        welcome(message, client, prefix, cooldowns);
 
         const screenshot = require('./Guild/screenshot.js');
         screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel(), dbl);
