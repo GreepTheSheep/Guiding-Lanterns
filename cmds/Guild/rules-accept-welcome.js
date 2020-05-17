@@ -39,9 +39,9 @@ async function welcome(message, client, prefix, cooldowns) {
     // End of cooldown implement
 
         const calc_min=1; 
-        const calc_max=10;
-        var randomnum1 = Math.random() * (+calc_max - +calc_min) + +calc_min;
-        var randomnum2 = Math.random() * (+calc_max - +calc_min) + +calc_min;
+        const calc_max=9;
+        var randomnum1 = (Math.random() * (+calc_max - +calc_min) + +calc_min).toFixed(0);
+        var randomnum2 = (Math.random() * (+calc_max - +calc_min) + +calc_min).toFixed(0);
         const firstmessage = await message.channel.send(`**__To verify that you are human, please do this math.__** We do this to protect our server from raids or malicious people who may retrieve information.\n\`\`\`${randomnum1} + ${randomnum2}}\`\`\``)
 
         const filter = m => message.author == m.author;
