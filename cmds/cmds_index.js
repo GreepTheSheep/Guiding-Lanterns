@@ -1,3 +1,6 @@
+const Discord = require('discord.js')
+const Enmap = require('enmap')
+
 // All commands listed here
 
 function cmds_index(message, client, prefix, config, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext, ThemeparksList){
@@ -107,11 +110,18 @@ function cmds_index(message, client, prefix, config, functiondate, functiontime,
     --------------------------------*/
 
     if (message.guild.id == '562602234265731080') { // Kingdom of Corona
+        const check_db = new Enmap({name : 'Tangled_verification'})
+        if (!check_db.has(message.author.id) && message.member.roles.some(r => r.id === "562608575227363329")) check_db.set(message.author.id, true)
+        if (check_db.get(message.author.id) == false) {
+            message.member.addRole('675436155453308959')
+            message.member.removeRole('562608575227363329')
+        }
+
         const lantern = require('./Guild/lantern.js');
         lantern(message, client, prefix, getlogchannel(), cooldowns);
 
         const welcome = require('./Guild/rules-accept-welcome.js');
-        welcome(message, client, prefix);
+        welcome(message, client, prefix, cooldowns);
 
         const screenshot = require('./Guild/screenshot.js');
         screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel(), dbl);
