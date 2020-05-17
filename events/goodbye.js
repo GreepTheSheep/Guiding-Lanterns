@@ -1,4 +1,5 @@
 const Discord = require('discord.js');
+const Enmap = require('enmap')
 
 function randomItem(array) {
     return array[Math.floor(Math.random() * array.length)];
@@ -20,6 +21,8 @@ function goodbye(member, client) {
     
     if (member.guild.id === '562602234265731080'){
         if (member.user.bot) return
+        const check_db = new Enmap({name : 'Tangled_verification'})
+        if (check_db.get(message.author.id) == false) return
         let embed = new Discord.RichEmbed()
         embed.setColor("#910002")
         .setTimestamp()
