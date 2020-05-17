@@ -9,6 +9,7 @@ async function welcome(message, client, prefix) {
     const command_name = prefix + 'accept'
 
     if (message.content.startsWith(command_name)){
+        if (message.channel.id != '708850459061780540') retuen
 
         //Implement cooldown
     if (!cooldowns.has(command_name)) {
@@ -69,7 +70,7 @@ function validate(client, m, message, firstmessage, randomnum1, randomnum2){
         message.member.removeRole('675436155453308959')
         const check_db = new Enmap({name : 'Tangled_verification'})
         check_db.set(message.author.id, true)
-        
+
         const messages = [
             'Welcome and hello to Kingdom of Corona :sunny:',
             'Welcome, welcome to Kingdom Of Corona :sunny:',
