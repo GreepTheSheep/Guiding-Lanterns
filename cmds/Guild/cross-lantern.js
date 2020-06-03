@@ -1,0 +1,30 @@
+const Discord = require('discord.js')
+
+async function cross_lanterns(message, client, prefix, getlogchannel, cooldowns){
+    if (message.guild.id == '562602234265731080') { // r/tangled
+        if (message.channel.id == '663693329187471370'){
+            // send to disneyFR
+            var webhooks = await client.guilds.find(g=> g.id == "600355162279641108").channels.find(c => c.id == "717018224784310342").fetchWebhooks()
+            //var webhooks = await client.shard.broadcastEval(`await this.guilds.find(g=> g.id == "600355162279641108").channels.find(c => c.id == "717018224784310342").fetchWebhooks()`)
+            var webhook = webhooks.first()
+            webhook.send('<:Lanterne:717500316987162655>', {
+                username: message.author.username,
+                avatarURL: message.author.displayAvatarURL,
+            })
+        }
+    } else if (message.guild.id == '600355162279641108') { // disneyFR
+        if (message.channel.id == '717018224784310342'){
+            // send to r/tangled
+            var webhooks = await client.guilds.find(g=> g.id == "562602234265731080").channels.find(c => c.id == "663693329187471370").fetchWebhooks()
+            // var webhooks = await client.shard.broadcastEval(`await this.guilds.find(g=> g.id == "562602234265731080").channels.find(c => c.id == "663693329187471370").fetchWebhooks()`)
+            var webhook = webhooks.first()
+            webhook.send('<:Lantern:570822664789426186>', {
+                username: message.author.username,
+                avatarURL: message.author.displayAvatarURL,
+            })
+            
+        }
+    }
+}
+
+module.exports = cross_lanterns

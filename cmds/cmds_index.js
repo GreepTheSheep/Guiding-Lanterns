@@ -106,17 +106,14 @@ function cmds_index(message, client, prefix, config, functiondate, functiontime,
     --------- Guild-specific ---------
     --------------------------------*/
 
-    if (message.guild.id == '562602234265731080') { // Kingdom of Corona
+    if (message.guild.id == '562602234265731080') { // r/Tangled
         const check_db = new Enmap({name : 'Tangled_verification'})
         if (!check_db.has(message.author.id) && message.member.roles.some(r => r.id === "562608575227363329")) check_db.set(message.author.id, true)
         if (check_db.get(message.author.id) == false) {
             message.member.addRole('675436155453308959')
             message.member.removeRole('562608575227363329')
         }
-
-        const lantern = require('./Guild/lantern.js');
-        lantern(message, client, prefix, getlogchannel(), cooldowns);
-
+        
         const welcome = require('./Guild/rules-accept-welcome.js');
         welcome(message, client, prefix, cooldowns);
 
@@ -124,6 +121,20 @@ function cmds_index(message, client, prefix, config, functiondate, functiontime,
         screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel(), dbl);
 
     }
+
+    if (message.guild.id == '562602234265731080' || message.guild.id == '600355162279641108'){  // r/Tangled & DisneyFRdiscord 
+        const lantern_filter = require('./Guild/lantern-filter.js');
+        lantern_filter(message, client, prefix, getlogchannel(), cooldowns);
+        
+        const lantern = require('./Guild/lantern.js');
+        lantern(message, client, prefix, getlogchannel(), cooldowns);
+
+        const cross_lantern = require('./Guild/cross-lantern.js');
+        cross_lantern(message, client, prefix, getlogchannel(), cooldowns);
+    
+        
+    }
+    
 
     //-----------------------------------------------------------------------------------------------
 
