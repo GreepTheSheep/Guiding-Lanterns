@@ -123,9 +123,7 @@ function cmds_index(message, client, prefix, config, functiondate, functiontime,
     }
 
     if (message.guild.id == '562602234265731080' || message.guild.id == '600355162279641108'){  // r/Tangled & DisneyFRdiscord 
-        const lantern_filter = require('./Guild/lantern-filter.js');
-        lantern_filter(message, client, prefix, getlogchannel(), cooldowns);
-        
+
         const lantern = require('./Guild/lantern.js');
         lantern(message, client, prefix, getlogchannel(), cooldowns);
 
