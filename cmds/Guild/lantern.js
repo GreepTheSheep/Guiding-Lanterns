@@ -13,6 +13,8 @@ function lantern(message, client, prefix, getlogchannel, cooldowns) {
             if (!counter.has(message.guild.id)) counter.set(message.guild.id, 0)
             counter.set(message.guild.id, counter.get(message.guild.id) + 1 )
         }
+        // change the topic
+        client.channels.find(c=> c.id == '717018224784310342').setTopic(`<:Lanterne:717500316987162655> | Vous avez lancé ${counter.get(message.guild.id)} lanternes depuis le début du mini-jeu! - /r/Tangled à lancé ${counter.get('count')} lanternes!`)
     }
 
     if (message.content.startsWith(prefix + 'lanterns')) {
@@ -54,7 +56,7 @@ function lantern(message, client, prefix, getlogchannel, cooldowns) {
             .setTitle('Lantern counter')
             if (message.guild.id == '562602234265731080') {
                 embed.setDescription(`**__${counter.get('count')}__ lanterns thrown**`)
-                embed.addField('DisneyFR has:', `**__${counter.get('600355162279641108')}__ lanterns thrown**`)
+                embed.addField('Disney[FR] has:', `**__${counter.get('600355162279641108')}__ lanterns thrown**`)
                 embed.addField('Total:', `**__${counter.get('total')}__ lanterns thrown**`)
             } else {
                 embed.setDescription(`**__${counter.get(message.guild.id)}__ lanterns thrown**`)

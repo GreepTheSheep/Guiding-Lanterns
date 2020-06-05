@@ -28,7 +28,6 @@ async function cross_lanterns(message, client, prefix, getlogchannel, cooldowns)
                 username: message.author.username,
                 avatarURL: message.author.displayAvatarURL,
             })
-            
         }
     }
 }
