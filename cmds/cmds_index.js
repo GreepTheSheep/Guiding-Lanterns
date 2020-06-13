@@ -18,6 +18,9 @@ function cmds_index(message, client, prefix, config, functiondate, functiontime,
     const command = require('./Owner/shell.js');
     command(message, client, prefix);
 
+    const dblInfo = require('./Owner/dblInfo.js');
+    dblInfo(message, client, prefix, dbl)
+
     const testCommands = require('./Owner/test-cmds.js');
     testCommands(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns);
 
