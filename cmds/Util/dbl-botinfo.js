@@ -56,7 +56,7 @@ async function dblBotInfo(message, client, prefix, dbl, cooldowns) {
             .addField('Stats:', `${result.server_count ? result.server_count+` servers \n${result.shard_count ? result.shard_count+' shards' : 'No shards info'}`: 'No stats found'}`, true)
             .addField('Owner:', owner.username+'#'+owner.discriminator+`\nID: ${result.owners[0]}`, true)
             .addField('Verified bot:', result.certifiedBot?'Yes':'No', true)
-            .addField('Links', `- [top.gg bot page](https://top.gg/bot/${result.id})\n- ${result.website == "" ? 'No website': `[Website](${result.website})`}\n- ${result.support == ""?'No support server': `[Support server](https://discord.gg/${result.support})`}\n- ${result.github == "" ? 'No github repo': `[Github repo](${result.github})`}`, true)
+            .addField('Links', `- [Invite](${result.invite})\n- [top.gg bot page](https://top.gg/bot/${result.id})\n- ${result.website == "" ? 'No website': `[Website](${result.website})`}\n- ${result.support == ""?'No support server': `[Support server](https://discord.gg/${result.support})`}\n- ${result.github == "" ? 'No github repo': `[Github repo](${result.github})`}`, true)
             .setThumbnail(`https://cdn.discordapp.com/avatars/${result.id}/${result.avatar}.png`)
             .setFooter(`ID: ${result.id} - Added on top.gg on`)
             .setTimestamp(result.date)
