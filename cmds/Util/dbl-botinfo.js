@@ -45,8 +45,7 @@ async function dblBotInfo(message, client, prefix, dbl, cooldowns) {
         } else {
             if (!rUser.bot) return message.channel.send('This is not a bot.')
         } 
-        const result = await dbl.getBot(rUser.id)
-        if (!result) return message.channel.send('This bot is not registed on top.gg')
+        const result = await dbl.getBot(rUser.id).catch(e=>message.channel.send('This bot is not registed on top.gg'))
         const owner = await dbl.getUser(result.owners[0])
         let embed = new Discord.RichEmbed
         embed.setAuthor(`${result.username}#${result.discriminator}`, `https://cdn.discordapp.com/avatars/${result.id}/${result.avatar}.png`, `https://top.gg/bot/${result.id}`)
