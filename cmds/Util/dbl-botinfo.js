@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 
 async function dblBotInfo(message, client, prefix, dbl, cooldowns) {
     if (message.content.startsWith(prefix + 'botinfo')) {
-        if (dbl == undefined || !dbl) return message.channel.send('Bot not registed on top.gg. It might be an error.')
+        if (dbl == undefined || !dbl) return message.channel.send('I\'m not registed on top.gg! It might be an error.')
         let args = message.content.split(" ")
         args.shift()
         if (args.length < 1) return message.channel.send('ID is missing! Usage \`'+prefix+'botinfo <ID of the bot>\`')
@@ -14,7 +14,7 @@ async function dblBotInfo(message, client, prefix, dbl, cooldowns) {
 
         const now = Date.now();
         const timestamps = cooldowns.get(prefix + 'botinfo');
-        const cooldownAmount = 60000;
+        const cooldownAmount = 10000;
 
         if (timestamps.has(message.guild.id)) {
             const expirationTime = timestamps.get(message.guild.id) + cooldownAmount;
@@ -26,7 +26,7 @@ async function dblBotInfo(message, client, prefix, dbl, cooldowns) {
                 totalSeconds %= 3600;
                 let minutes = Math.floor(totalSeconds / 60);
                 let seconds = totalSeconds % 60;
-                return;
+                return message.reply('Cooldown! Please wait ' + seconds.toFixed(0) + ' seconds!')
             }
         }
 
