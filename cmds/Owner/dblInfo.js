@@ -10,7 +10,11 @@ async function dblInfo (message, client, prefix, dbl) {
         if (args[0] == 'getBot'){
             if (!args[1]) return message.channel.send('ID or mention is missing')
             const rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[1]))
-            if (!rUser.bot) return message.channel.send('This is not a bot.')
+            if (rUser != client.users.get(args[0])){
+                if (!rUser.user.bot) return message.channel.send('This is not a bot.')
+            } else {
+                if (!rUser.bot) return message.channel.send('This is not a bot.')
+            } 
             const result = await dbl.getBot(rUser.id)
             const owner = await dbl.getUser(result.owners[0])
             let embed = new Discord.RichEmbed
@@ -30,7 +34,11 @@ async function dblInfo (message, client, prefix, dbl) {
         } else if (args[0] == 'getUser'){
             if (!args[1]) return message.channel.send('ID is missing')
             const rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[1]))
-            if (rUser.bot) return message.channel.send('This is not a user.')
+            if (rUser != client.users.get(args[0])){
+                if (rUser.user.bot) return message.channel.send('This is not a user.')
+            } else {
+                if (rUser.bot) return message.channel.send('This is not a user.')
+            } 
             message.channel.send('WIP')
         } else if (args[0] == 'getVotes'){
             message.channel.send('WIP')
