@@ -48,7 +48,7 @@ async function dblBotInfo(message, client, prefix, dbl, cooldowns) {
         const result = await dbl.getBot(rUser.id)
         const owner = await dbl.getUser(result.owners[0])
         let embed = new Discord.RichEmbed
-            .setAuthor(`${result.username}#${result.discriminator}`, `https://cdn.discordapp.com/avatars/${result.id}/${result.avatar}.png`, `https://top.gg/bot/${result.id}`)
+        embed.setAuthor(`${result.username}#${result.discriminator}`, `https://cdn.discordapp.com/avatars/${result.id}/${result.avatar}.png`, `https://top.gg/bot/${result.id}`)
             .setColor('RANDOM')
             .setDescription(result.shortdesc)
             .addField('Prefix', '```'+result.prefix+'```', true)
