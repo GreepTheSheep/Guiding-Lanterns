@@ -70,6 +70,9 @@ function cmds_index(message, client, prefix, config, functiondate, functiontime,
     const voted = require('./Util/voted.js');
     voted(message, client, prefix, dbl, cooldowns);
 
+    const dblBotInfo = require('./Util/dbl-botinfo.js');
+    dblBotInfo(message, client, prefix, dbl, cooldowns);
+
     const image_search_request = require('./Util/img_search.js')
     image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel(), dbl, cooldowns)
 
