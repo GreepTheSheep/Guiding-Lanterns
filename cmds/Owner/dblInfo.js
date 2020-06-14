@@ -5,10 +5,13 @@ async function dblInfo (message, client, prefix, dbl) {
         if (dbl == undefined || !dbl) return message.channel.send('Bot not registed on top.gg')
         let args = message.content.split(" ")
         args.shift()
-        if (args.length < 1) return message.channel.send('Args: \`\`\`\ngetBot <ID>\ngetUser <ID>\ngetVotes\nhasVoted <ID>\`\`\`*(case sensitive)*')
+        if (args.length < 1) return message.channel.send('Args: \`\`\`\ngetBot <ID or mention>\ngetUser <ID or mention>\ngetVotes\nhasVoted <ID or mention>\`\`\`*(case sensitive)*')
+        const result = await dbl.getBot(rUser.id)
         if (args[0] == 'getBot'){
-            if (!args[1]) return message.channel.send('ID is missing')
-            const result = await dbl.getBot(args[1])
+            if (!args[1]) return message.channel.send('ID or mention is missing')
+            const rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[1]))
+            if (!rUser.bot) return message.channel.send('This is not a bot.')
+            const result = await dbl.getBot(rUser.id)
             const owner = await dbl.getUser(result.owners[0])
             let embed = new Discord.RichEmbed
             .setAuthor(`${result.username}#${result.discriminator}`, `https://cdn.discordapp.com/avatars/${result.id}/${result.avatar}.png`, `https://top.gg/bot/${result.id}`)
@@ -26,13 +29,15 @@ async function dblInfo (message, client, prefix, dbl) {
             message.channel.send(embed)
         } else if (args[0] == 'getUser'){
             if (!args[1]) return message.channel.send('ID is missing')
+            const rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[1]))
+            if (rUser.bot) return message.channel.send('This is not a user.')
             message.channel.send('WIP')
         } else if (args[0] == 'getVotes'){
             message.channel.send('WIP')
         } else if (args[0] == 'hasVoted'){
             if (!args[1]) return message.channel.send('ID is missing')
             message.channel.send('WIP')
-        } else return message.channel.send('Args: \`\`\`\ngetBot <ID>\ngetUser <ID>\ngetVotes\nhasVoted <ID>\`\`\`*(case sensitive)*')
+        } else return message.channel.send('Args: \`\`\`\ngetBot <ID or mention>\ngetUser <ID or mention>\ngetVotes\nhasVoted <ID or mention>\`\`\`*(case sensitive)*')
     }
 }
 

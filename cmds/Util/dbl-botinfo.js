@@ -1,13 +1,4 @@
 const Discord = require('discord.js');
-const fs = require('fs')
-const package = JSON.parse(fs.readFileSync('./package.json', "utf8"));
-const os = require('os');
-const shell = require('shelljs');
-const translate = require('translate')
-const configfile = "./data/config.json";
-const config = JSON.parse(fs.readFileSync(configfile, "utf8"));
-translate.engine = 'yandex'
-translate.key = config.translate_key
 
 async function dblBotInfo(message, client, prefix, dbl, cooldowns) {
     if (message.content.startsWith(prefix + 'botinfo')) {
@@ -48,7 +39,9 @@ async function dblBotInfo(message, client, prefix, dbl, cooldowns) {
         }
         // End of cooldown implement
 
-        const result = await dbl.getBot(args[0])
+        const rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]))
+        if (!rUser.bot) return message.channel.send('This is not a bot.')
+        const result = await dbl.getBot(rUser.id)
         const owner = await dbl.getUser(result.owners[0])
         let embed = new Discord.RichEmbed
             .setAuthor(`${result.username}#${result.discriminator}`, `https://cdn.discordapp.com/avatars/${result.id}/${result.avatar}.png`, `https://top.gg/bot/${result.id}`)

@@ -80,4 +80,4 @@ thanks @mention                                     : you're welcome!
 ^ !log                                              : send log file (clears every 24h)
 ^ !setstatus [play/watch/listen/stream]             : await status of bot
 ^ !update                                           : shell eval: git pull && npm update && restart bot
-^ !dblinfo [getBot/getUser/getVotes/hasVoted] [ID]
+^ !dblinfo [getBot/getUser/getVotes/hasVoted] [ID or mention] : get any type of informations on top.gg
