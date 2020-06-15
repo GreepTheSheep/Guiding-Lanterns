@@ -71,11 +71,11 @@ async function dblInfo (message, client, prefix, dbl) {
             });
         } else if (args[0] == 'getBots' || args[0] == 'search'){
             if (!args[1]) return message.channel.send('query is missing')
-            dbl.getBots({sort: args[1], limit: 10}).then(bots => {
+            dbl.getBots({sort: args[1], limit: 20}).then(bots => {
                 if (!bots.results) return message.channel.send('No results')
                 var botList = []
                 bots.results.forEach(bot=>{
-                    botList.push(`- ${bot.username}#${bot.discriminator} (${bot.id}) [Link](https://top.gg/bot/${bot.id})`)
+                    botList.push(`- **${bot.username}**#${bot.discriminator} *(${bot.id})* [__Link__](https://top.gg/bot/${bot.id})`)
                 })
                 embed.setTitle('Results:')
                 .setDescription(botList)
