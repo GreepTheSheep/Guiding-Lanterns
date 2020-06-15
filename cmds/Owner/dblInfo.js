@@ -40,7 +40,7 @@ async function dblInfo (message, client, prefix, dbl) {
             } 
             const result = await dbl.getBot(rUser.id).catch(e=>message.channel.send('This user is not registed on top.gg'))
             embed.setAuthor(`${result.username}#${result.discriminator}`, `https://cdn.discordapp.com/avatars/${result.id}/${result.avatar}.png`, `https://top.gg/user/${result.id}`)
-            .setDescription(result.bio)
+            .setDescription(result.bio ? result.bio: 'No description found')
             .setColor(result.color==''?'RANDOM':result.color)
             if (result.admin || result.webMod || result.mod || result.certifiedDev || result.supporter) embed.addField('top.gg stats', result.admin?'- Admin\n':'' + result.webMod?'- Web Moderator\n':'' + result.mod?'- Moderator\n':'' + result.certifiedDev?'- Certified developer\n':'' + result.supporter?'- Supporter\n':'')
             message.channel.send(embed)
