@@ -38,7 +38,7 @@ async function dblInfo (message, client, prefix, dbl) {
             } else {
                 if (rUser.bot) return message.channel.send('This is not a user.')
             } 
-            const result = await dbl.getBot(rUser.id).catch(e=>{return message.channel.send('This user is not registed on top.gg')})
+            const result = await dbl.getUser(rUser.id).catch(e=>{return message.channel.send('This user is not registed on top.gg')})
             embed.setAuthor(`${result.username}#${result.discriminator}`, `https://cdn.discordapp.com/avatars/${result.id}/${result.avatar}.png`, `https://top.gg/user/${result.id}`)
             .setDescription(result.bio ? result.bio: 'No description found')
             .setColor(result.color==''?'RANDOM':result.color)
