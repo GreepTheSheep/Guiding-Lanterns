@@ -10,7 +10,7 @@ async function dblInfo (message, client, prefix, dbl) {
         if (args[0] == 'getBot'){
             if (!args[1]) return message.channel.send('ID or mention is missing')
             const rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[1]))
-            if (rUser != client.users.get(args[0])){
+            if (rUser != client.users.get(args[1])){
                 if (!rUser.user.bot) return message.channel.send('This is not a bot.')
             } else {
                 if (!rUser.bot) return message.channel.send('This is not a bot.')
@@ -33,7 +33,7 @@ async function dblInfo (message, client, prefix, dbl) {
         } else if (args[0] == 'getUser'){
             if (!args[1]) return message.channel.send('ID is missing')
             const rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[1]))
-            if (rUser != client.users.get(args[0])){
+            if (rUser != client.users.get(args[1])){
                 if (rUser.user.bot) return message.channel.send('This is not a user.')
             } else {
                 if (rUser.bot) return message.channel.send('This is not a user.')
