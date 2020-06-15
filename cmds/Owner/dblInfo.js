@@ -6,7 +6,7 @@ async function dblInfo (message, client, prefix, dbl) {
         let args = message.content.split(" ")
         args.shift()
         if (args.length < 1) return message.channel.send('Args: \`\`\`\ngetBot <ID or mention>\ngetUser <ID or mention>\ngetVotes\nhasVoted <ID or mention>\`\`\`*(case sensitive)*')
-        const result = await dbl.getBot(rUser.id)
+        let embed = new Discord.RichEmbed
         if (args[0] == 'getBot'){
             if (!args[1]) return message.channel.send('ID or mention is missing')
             const rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[1]))
@@ -17,7 +17,6 @@ async function dblInfo (message, client, prefix, dbl) {
             } 
             const result = await dbl.getBot(rUser.id).catch(e=>message.channel.send('This bot is not registed on top.gg'))
             const owner = await dbl.getUser(result.owners[0])
-            let embed = new Discord.RichEmbed
             embed.setAuthor(`${result.username}#${result.discriminator}`, `https://cdn.discordapp.com/avatars/${result.id}/${result.avatar}.png`, `https://top.gg/bot/${result.id}`)
             .setColor('RANDOM')
             .setDescription(result.shortdesc)
@@ -39,7 +38,12 @@ async function dblInfo (message, client, prefix, dbl) {
             } else {
                 if (rUser.bot) return message.channel.send('This is not a user.')
             } 
-            message.channel.send('WIP')
+            const result = await dbl.getBot(rUser.id).catch(e=>message.channel.send('This user is not registed on top.gg'))
+            embed.setAuthor(`${result.username}#${result.discriminator}`, `https://cdn.discordapp.com/avatars/${result.id}/${result.avatar}.png`, `https://top.gg/user/${result.id}`)
+            .setDescription(result.bio)
+            .setColor(result.color==''?'RANDOM':result.color)
+            if (result.admin || result.webMod || result.mod || result.certifiedDev || result.supporter) embed.addField('top.gg stats', result.admin?'- Admin\n':'' + result.webMod?'- Web Moderator\n':'' + result.mod?'- Moderator\n':'' + result.certifiedDev?'- Certified developer\n':'' + result.supporter?'- Supporter\n':'')
+            message.channel.send(embed)
         } else if (args[0] == 'getVotes'){
             message.channel.send('WIP')
         } else if (args[0] == 'hasVoted'){
