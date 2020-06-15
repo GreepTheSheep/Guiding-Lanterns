@@ -43,7 +43,7 @@ async function dblInfo (message, client, prefix, dbl) {
             .setDescription(result.bio ? result.bio: 'No description found')
             .setColor(result.color==''?'RANDOM':result.color)
             if (result.admin || result.webMod || result.mod || result.certifiedDev || result.supporter) embed.addField('top.gg stats', result.admin?'- Admin\n':'' + result.webMod?'- Web Moderator\n':'' + result.mod?'- Moderator\n':'' + result.certifiedDev?'- Certified developer\n':'' + result.supporter?'- Supporter\n':'')
-            .setThumbnail(`https://cdn.discordapp.com/avatars/${result.id}/${result.avatar}.png`)
+            embed.setThumbnail(`https://cdn.discordapp.com/avatars/${result.id}/${result.avatar}.png`)
             .setFooter(`ID: ${result.id}`)
             message.channel.send(embed)
         } else if (args[0] == 'getVotes'){
