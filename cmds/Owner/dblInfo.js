@@ -15,7 +15,7 @@ async function dblInfo (message, client, prefix, dbl) {
             } else {
                 if (!rUser.bot) return message.channel.send('This is not a bot.')
             } 
-            const result = await dbl.getBot(rUser.id).catch(e=>message.channel.send('This bot is not registed on top.gg'))
+            const result = await dbl.getBot(rUser.id).catch(e=>{return message.channel.send('This bot is not registed on top.gg')})
             const owner = await dbl.getUser(result.owners[0])
             embed.setAuthor(`${result.username}#${result.discriminator}`, `https://cdn.discordapp.com/avatars/${result.id}/${result.avatar}.png`, `https://top.gg/bot/${result.id}`)
             .setColor('RANDOM')
@@ -38,7 +38,7 @@ async function dblInfo (message, client, prefix, dbl) {
             } else {
                 if (rUser.bot) return message.channel.send('This is not a user.')
             } 
-            const result = await dbl.getBot(rUser.id).catch(e=>message.channel.send('This user is not registed on top.gg'))
+            const result = await dbl.getBot(rUser.id).catch(e=>{return message.channel.send('This user is not registed on top.gg')})
             embed.setAuthor(`${result.username}#${result.discriminator}`, `https://cdn.discordapp.com/avatars/${result.id}/${result.avatar}.png`, `https://top.gg/user/${result.id}`)
             .setDescription(result.bio ? result.bio: 'No description found')
             .setColor(result.color==''?'RANDOM':result.color)
