@@ -40,7 +40,7 @@ async function dblBotInfo(message, client, prefix, dbl, cooldowns) {
         // End of cooldown implement
 
         const rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]))
-        if (rUser != client.users.get(args[0])){
+        if (rUser != message.guild.members.get(args[1])){
             if (!rUser.user.bot) return message.channel.send('This is not a bot.')
         } else {
             if (!rUser.bot) return message.channel.send('This is not a bot.')
