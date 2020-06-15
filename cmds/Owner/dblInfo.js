@@ -69,7 +69,20 @@ async function dblInfo (message, client, prefix, dbl) {
                 if (voted) message.channel.send(rUser.tag + ' has voted!')
                 else message.channel.send('nope!')
             });
-        } else return message.channel.send('Args: \`\`\`\ngetBot <ID or mention>\ngetUser <ID or mention>\ngetVotes\nhasVoted <ID or mention>\`\`\`*(case sensitive)*')
+        } else if (args[0] == 'getBots' || args[0] == 'search'){
+            if (!args[1]) return message.channel.send('query is missing')
+            dbl.getBots({sort: args[1], limit: 10}).then(bots => {
+                if (!bots.results) return message.channel.send('No results')
+                var botList = []
+                bots.results.forEach(bot=>{
+                    botList.push(`- ${bot.username}#${bot.discriminator} (${bot.id}) [Link](https://top.gg/bot/${bot.id})`)
+                })
+                embed.setTitle('Results:')
+                .setDescription(botList)
+                .setColor('RANDOM')
+                message.channel.send(embed)
+            });
+        } else return message.channel.send('Args: \`\`\`\ngetBot <ID or mention>\nsearch <query>\ngetUser <ID or mention>\ngetVotes\nhasVoted <ID or mention>\`\`\`*(case sensitive)*')
     }
 }
 
