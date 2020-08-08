@@ -22,7 +22,7 @@ function goodbye(member, client) {
     if (member.guild.id === '562602234265731080'){
         if (member.user.bot) return
         const check_db = new Enmap({name : 'Tangled_verification'})
-        if (check_db.get(message.author.id) == false || message.member.roles.some(r => r.id === "675436155453308959") || !message.member.roles) return
+        if (check_db.has(member.user.id) && !check_db.get(member.user.id)|| member.roles.some(r => r.id === "675436155453308959")) return
         let embed = new Discord.RichEmbed()
         embed.setColor("#910002")
         .setTimestamp()
