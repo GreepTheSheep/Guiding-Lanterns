@@ -254,7 +254,12 @@ client.on('guildDelete', async guild => { // If the bot leave a server
     */
 })
 
-client.on('messageReactionAdd', reaction => {
+client.on('messageReactionAdd', reaction, user => {
+    if (reaction.message.guild.id == '562602234265731080') { // r/Tangled
+        const role_react_accept_rules = require('./events/react-accept-rules-welcome.js')
+        role_react_accept_rules(client, reaction, user, getlogchannel(), functiondate(), functiontime())
+    }
+
     const starboard = require('./events/starboard.js')
     starboard(client, reaction, getlogchannel(), functiondate(), functiontime())
 })
