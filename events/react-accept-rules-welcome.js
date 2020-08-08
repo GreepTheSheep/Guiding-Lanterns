@@ -40,7 +40,7 @@ async function role_react_accept_rules(client, reaction, user, getlogchannel, fu
         .setTimestamp()
         .addField(`${welcomemsg}`, `Hey, **say welcome to __<@${user.id}>__** 🙌`)
         .setThumbnail('http://www.youloveit.com/uploads/posts/2017-11/1511021094_youloveit_com_tangled_the_series_animated_gifs_emotions03.gif')
-        .setFooter(`${user.tag} just landed in the Kingdom of Corona! We are now ${members} in the server`, `${message.author.displayAvatarURL}`)
+        .setFooter(`${user.tag} just landed in the Kingdom of Corona! We are now ${members} in the server`, `${user.displayAvatarURL}`)
         client.guilds.get('562602234265731080').channels.get('658808055558832132').send(embed);
     }
     }
