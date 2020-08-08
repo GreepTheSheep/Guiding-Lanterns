@@ -10,6 +10,11 @@ const client = new Discord.Client({
   const config = JSON.parse(fs.readFileSync(configfile, "utf8")); // Retrieves the contents of the configuration file (the prefix and the login token)
   const packagefile = "./package.json";
   const package = JSON.parse(fs.readFileSync(packagefile, "utf8"));
+  const Themeparks = require('themeparks')
+  const ThemeparksList = {};
+  for (const park in Themeparks.Parks) {
+    ThemeparksList[park] = new Themeparks.Parks[park]();
+}
 
   const execArgs = process.argv.slice(2);
 if (execArgs.includes('-s')) {
@@ -184,7 +189,7 @@ client.on('message', message => { // If any message was recived
 
     //All commands listed in cmds_index.js
     const cmds_index = require('./cmds/cmds_index.js');
-    cmds_index(message, client, prefix, config, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext);
+    cmds_index(message, client, prefix, config, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext, ThemeparksList);
 
     //Lists of mini-games
     const games_index = require('./games/games_index.js');

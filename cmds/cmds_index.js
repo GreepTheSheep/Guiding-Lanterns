@@ -3,7 +3,7 @@ const Enmap = require('enmap')
 
 // All commands listed here
 
-function cmds_index(message, client, prefix, config, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext){
+function cmds_index(message, client, prefix, config, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext, ThemeparksList){
     if (message.channel.type === 'dm') return
     /*--------------------------------
     -------------- Owner -------------
@@ -63,6 +63,9 @@ function cmds_index(message, client, prefix, config, functiondate, functiontime,
     /*--------------------------------
     --------------- Util -------------
     --------------------------------*/
+
+    const parktimes = require('./Util/themeparks.js')
+    parktimes(message, client, prefix, cooldowns, ThemeparksList);
 
     const wolfram = require('./Util/wolfram.js');
     wolfram(message, client, prefix, cooldowns);
