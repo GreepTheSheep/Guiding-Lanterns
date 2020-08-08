@@ -113,6 +113,7 @@ client.on('ready', async () => { // If bot was connected:
 
         client.channels.get('741594861408354325').fetchMessage('741596213165555743').then(m => {
             console.log("Cached reaction (rules accept) message.");
+            console.log(m.content)
         }).catch(e => {
         console.error("Error loading (rules accept) message.");
         console.error(e);
