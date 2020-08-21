@@ -123,8 +123,10 @@ function cmds_index(message, client, prefix, config, functiondate, functiontime,
             message.member.removeRole('562608575227363329')
         }
         
+        /*
         const welcome = require('./Guild/rules-accept-welcome.js');
         welcome(message, client, prefix, cooldowns);
+        */
 
         const screenshot = require('./Guild/screenshot.js');
         screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel(), dbl);
