@@ -1,3 +1,5 @@
+// This function is not finished, and will not finished
+
 const Discord = require('discord.js')
 const Themeparks = require('themeparks')
 const wait = require('util').promisify(setTimeout);

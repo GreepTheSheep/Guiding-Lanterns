@@ -64,8 +64,10 @@ function cmds_index(message, client, prefix, config, functiondate, functiontime,
     --------------- Util -------------
     --------------------------------*/
 
+    /*  Ded function
     const parktimes = require('./Util/themeparks.js')
     parktimes(message, client, prefix, cooldowns, ThemeparksList);
+    */
 
     const wolfram = require('./Util/wolfram.js');
     wolfram(message, client, prefix, cooldowns);
