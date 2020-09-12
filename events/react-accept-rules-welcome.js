@@ -8,7 +8,7 @@ function randomItem(array) {
 
 async function role_react_accept_rules(client, reaction, user, getlogchannel, functiondate, functiontime){
 
-    if(reaction.message.id === '741596213165555743'){
+    if(reaction.message.id === '754365382189514802'){
         console.log(`${user.tag} reacted to the rules accept messages with the emoji ${reaction.emoji.id}`)
         if (reaction.emoji.id == "684487006050320431"){
         reaction.remove(user.id).catch(e=>console.log('Can\'t remove the react for ' + user.tag + ' on rules validation'))
