@@ -51,7 +51,7 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
             gm(request(imgurl))
             .font("Letters_for_Learners.ttf", 12)
             .drawText(30, 20, args.join(' '))
-            .write("./data/images/rapsbook.png", function (err) {
+            .write(__dirname + "/data/images/rapsbook.png", function (err) {
                 if (err){
                     message.reply(lang.error_reported)
                     console.log(err)
