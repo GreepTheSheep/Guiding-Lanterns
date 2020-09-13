@@ -1,4 +1,5 @@
 const Discord = require('discord.js')
+const { Attachment } = require('discord.js');
 const fs = require('fs')
 const request = require('request')
 const gm = require('gm')
@@ -36,17 +37,29 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
             timestamps.delete(message.author.id);
         }
         // End of cooldown implement
+
+        const imgurl = 'https://cdn.discordapp.com/attachments/662735703284908067/754638959233204254/Rapunzel_Book_Template.png'
+
         let args = message.content.split(" ")
         args.shift()
 
-        gm(request('https://cdn.discordapp.com/attachments/662735703284908067/754638959233204254/Rapunzel_Book_Template.png'))
-        .font("Letters_for_Learners.ttf", 12)
-        .drawText(30, 20, args.join(' '))
-        .write("/rapsbook.png", function (err) {
-            if (err){
-                message.reply(lang.error)
-            } console.log('done');
-        });
+        if (args.length < 1) {
+            const attachment = new Attachment(request(imgurl));
+            message.channel.send(attachment)
+        } else {
+            gm(request(imgurl))
+            .font("Letters_for_Learners.ttf", 12)
+            .drawText(30, 20, args.join(' '))
+            .write("./data/images/rapsbook.png", function (err) {
+                if (err){
+                    message.reply(lang.error_reported)
+                    console.log(err)
+                } else {
+                    const attachment = new Attachment('./data/images/rapsbook.png');
+                    message.channel.send(attachment)
+                }
+            });
+        }
     }
 }
 
