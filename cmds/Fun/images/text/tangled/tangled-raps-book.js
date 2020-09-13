@@ -50,7 +50,7 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
         } else {
             gm(request(imgurl))
             .font(__dirname + "/Letters_for_Learners.ttf", 40)
-            .drawText(190, 330, args.join(' '))
+            .drawText(200, 290, args.join(' '))
             .write(process.cwd() + "/data/images/rapsbook.png", function (err) {
                 if (err){
                     message.reply(lang.error_reported)
