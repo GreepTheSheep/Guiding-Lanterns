@@ -5,8 +5,9 @@ const request = require('request')
 const gm = require('gm')
 
 function tangled_raps_book(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext, config) {
-    if (message.content.toLowerCase().startsWith(prefix + 'rapunzelbook' || prefix + 'rapsbook')){
-        //Implement cooldown
+    if (message.content.toLowerCase().startsWith(prefix + 'rapunzelbook') || message.content.toLowerCase().startsWith(prefix + 'rapsbook')){
+        try{
+            //Implement cooldown
         if (!cooldowns.has(prefix + 'rapunzelbook')) {
             cooldowns.set(prefix + 'rapunzelbook', new Discord.Collection());
         }
@@ -60,6 +61,10 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
                 }
             });
         }
+        } catch (err) {
+            console.log(err)
+            message.reply(lang.error_reported)
+        }  
     }
 }
 
