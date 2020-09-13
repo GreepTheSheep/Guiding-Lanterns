@@ -1,7 +1,7 @@
 {
     "name": "guiding-lanterns",
-    "version": "3.0.0",
-    "changelog": "The Open Source Update (host your own instance here: https://github.com/Guiding-Lanterns/Guiding-Lanterns)",
+    "version": "3.1.0",
+    "changelog": "Add image manipulation system",
     "description": "",
     "main": "bot.js",
     "repository": {
