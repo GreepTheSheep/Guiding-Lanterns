@@ -53,9 +53,10 @@ Arguments:
 !8ball [question]                                   : Ask a question and he will answer.
 * !say [text]                                       : Makes the bot talking !
 
-  ---------- Images ---------
+----------- Images ----------
 
 !rapsbook
+!casspaper
 
 ------------ Games ------------
 
