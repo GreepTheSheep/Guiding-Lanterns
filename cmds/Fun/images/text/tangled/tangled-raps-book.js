@@ -48,19 +48,10 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
             const attachment = new Attachment(request(imgurl));
             message.channel.send(attachment)
         } else {
-            var lines = []
             text = args.join(' ')
-            if (text.length < 15) lines.push(text)
-            else if (text.length >= 15){
-                lines.push(text.slice(0, 15))
-                for (var i = 0; i = 5; i++) {
-                    if (lines[i].length >= 15) lines.push(text.slice(15, 15))
-                }
-            } 
-            text = lines.join('-\n')
             gm(request(imgurl))
             .font(__dirname + "/Letters_for_Learners.ttf", 35)
-            .drawText(200, 230, text)
+            .drawText(200, 270, text)
             .write(process.cwd() + "/data/images/rapsbook.png", function (err) {
                 if (err){
                     message.reply(lang.error_reported)
