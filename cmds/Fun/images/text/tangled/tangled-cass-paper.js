@@ -57,7 +57,7 @@ function tangled_cass_paper(message, client, prefix, functiondate, functiontime,
                     message.reply(lang.error_reported)
                     console.log(err)
                 } else {
-                    const attachment = new Attachment('./data/images/rapsbook.png');
+                    const attachment = new Attachment('./data/images/casspaper.png');
                     message.channel.send(attachment)
                 }
             });
