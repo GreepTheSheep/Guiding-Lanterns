@@ -51,7 +51,7 @@ function tangled_cass_paper(message, client, prefix, functiondate, functiontime,
             text = args.join(' ')
             gm(request(imgurl))
             .font(__dirname + "/Letters_for_Learners.ttf", 35)
-            .drawText(350, 300, text)
+            .drawText(325, 400, text)
             .write(process.cwd() + "/data/images/rapsbook.png", function (err) {
                 if (err){
                     message.reply(lang.error_reported)
