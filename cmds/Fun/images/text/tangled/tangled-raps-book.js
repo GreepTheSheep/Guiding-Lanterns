@@ -59,11 +59,11 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
                 for (; ; i++){
                     if (lines[i].charAt(lengthLine-1) == ' '){
                         // Crée une ligne
-                        lines.push(lines[i].slice(0, lengthLine))
+                        lines.push(lines[i].slice(0, lengthLine-1))
                     } else {
                         if (lines[i].charAt(lengthLine) == ' '){
                             // Crée une ligne
-                            lines.push(lines[i].slice(0, lengthLine))
+                            lines.push(lines[i].slice(0, lengthLine-1))
                         } else {
                             // Crée un tiret puis une ligne
                             lines.push(lines[i].concat('-').slice(0, lengthLine))
