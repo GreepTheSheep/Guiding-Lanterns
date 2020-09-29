@@ -57,7 +57,7 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
             if (text.length > lengthLine){
                 lines.push(text)
                 var i = 0
-                for (i ; ; i++) {
+                do{
                     if (lines[i].length > lengthLine){
                         if (lines[i].charAt(lengthLine-1) == ' '){
                             // Crée une ligne
@@ -72,8 +72,8 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
                             }
                         }
                     }
-                    if (text.length - (lengthLine * i) <= 0) break
-                }
+                    i++
+                } while (text.length - (lengthLine * (i+1)) <= 0)
                 lines.shift()
                 text = lines.join('\n')
             }
