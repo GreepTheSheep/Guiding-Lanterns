@@ -54,8 +54,8 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
             const lengthLine = 15
             // https://www.w3schools.com/js/js_string_methods.asp
             lines.push(text)
-            for (var i = 0; ; i++){
-                if (lines[i].length > lengthLine){
+            if (lines[i].length > lengthLine){
+                for (var i = 0; ; i++){
                     if (lines[i].charAt(lengthLine-1) == ' '){
                         // Crée une ligne
                         lines.push(lines[i].slice(0, lengthLine))
@@ -68,11 +68,12 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
                             lines.push(lines[i].concat('-').slice(0, lengthLine))
                         }
                     }
+                    if (text.length - (lengthLine * i) <= 0) break;
                 }
-                if (text.length - (lengthLine * i) <= 0) break;
+                lines.shift()
+                text = lines.join('\n')
             }
-            lines.shift()
-            text = lines.join('\n')
+            
 
             gm(request(imgurl))
             .font(__dirname + "/Letters_for_Learners.ttf", 35)
