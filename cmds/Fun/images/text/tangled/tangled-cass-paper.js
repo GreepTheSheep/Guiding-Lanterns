@@ -48,7 +48,36 @@ function tangled_cass_paper(message, client, prefix, functiondate, functiontime,
             const attachment = new Attachment(request(imgurl));
             message.channel.send(attachment)
         } else {
-            text = args.join('\n')
+            text = args.join(' ')
+            var lines = []
+
+            const lengthLine = 15
+            // https://www.w3schools.com/js/js_string_methods.asp
+            
+            if (text.length > lengthLine){
+                lines.push(text)
+                var i = 0
+                do{
+                    if (lines[i].length > lengthLine){
+                        if (lines[i].charAt(lengthLine-1) == ' '){
+                            // Crée une ligne
+                            lines.push(lines[i].slice(0, lengthLine))
+                        } else {
+                            if (lines[i].charAt(lengthLine) == ' '){
+                                // Crée une ligne
+                                lines.push(lines[i].slice(0, lengthLine-1))
+                            } else {
+                                // Crée un tiret puis une ligne
+                                lines.push(lines[i].concat('-').slice(0, lengthLine))
+                            }
+                        }
+                    }
+                    i++
+                } while (lengthLine * (i-1) >= text.length)
+                lines.shift()
+                text = lines.join('\n')
+            }
+            
             gm(request(imgurl))
             .font(__dirname + "/Letters_for_Learners.ttf", 35)
             .drawText(265, 520, text)
