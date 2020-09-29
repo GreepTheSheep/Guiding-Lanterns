@@ -54,8 +54,9 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
             const lengthLine = 15
             // https://www.w3schools.com/js/js_string_methods.asp
             lines.push(text)
+            var i = 0
             if (lines[i].length > lengthLine){
-                for (var i = 0; ; i++){
+                for (; ; i++){
                     if (lines[i].charAt(lengthLine-1) == ' '){
                         // Crée une ligne
                         lines.push(lines[i].slice(0, lengthLine))
