@@ -73,7 +73,7 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
                         }
                     }
                     i++
-                } while (text.length - (lengthLine * (i+1)) <= 0)
+                } while (lengthLine * (i+1) >= text.length)
                 lines.shift()
                 text = lines.join('\n')
             }
