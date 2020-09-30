@@ -57,23 +57,29 @@ function tangled_cass_paper(message, client, prefix, functiondate, functiontime,
             if (text.length > lengthLine){
                 lines.push(text)
                 var i = 0
-                do{
-                    if (lines[i].length > lengthLine){
-                        if (lines[i].charAt(lengthLine-1) == ' '){
-                            // Crée une ligne
-                            lines.push(lines[i].slice(0, lengthLine))
+                console.log('Texte ' + text.length)
+                while (text.length >= lengthLine * i+1) {
+                    console.log('Reste ' + (text.length - lengthLine*i))
+                    if (lines[i].charAt(lengthLine-1) == ' '){
+                        console.log('1 Crée la ligne ' + i)
+                        lines.push(text.slice(lengthLine*i, lengthLine*i + lengthLine-1).trim())
+                    } else {
+                        if (lines[i].charAt(lengthLine) == ' '){
+                            console.log('2 Crée la ligne ' + i)
+                            lines.push(text.slice(lengthLine*i, lengthLine*i + lengthLine))
                         } else {
-                            if (lines[i].charAt(lengthLine) == ' '){
-                                // Crée une ligne
-                                lines.push(lines[i].slice(0, lengthLine-1))
+                            if (text.slice(lengthLine*i, lengthLine*i + lengthLine).length < lengthLine){
+                                console.log('4 Dernière ligne ' + i)
+                                lines.push(text.slice(lengthLine*i, lengthLine*i + lengthLine).trim())
                             } else {
-                                // Crée un tiret puis une ligne
-                                lines.push(lines[i].concat('-').slice(0, lengthLine))
+                                console.log('3 Crée un tiret puis la ligne ' + i)
+                                lines.push(text.slice(lengthLine*i, lengthLine*i + lengthLine).concat('-').trim())
                             }
                         }
                     }
                     i++
-                } while (lengthLine * (i-1) >= text.length)
+                    console.log(lines[i])
+                }
                 lines.shift()
                 text = lines.join('\n')
             }
