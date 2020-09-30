@@ -56,19 +56,19 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
             
             if (text.length > lengthLine){
                 lines.push(text)
-                var i = 0
+                var i = 1
                 while (text.length >= lengthLine * i+1) {
                     if (lines[i].charAt(lengthLine-1) == ' '){
-                        console.log('1 Crée la ligne' + i)
+                        console.log('1 Crée la ligne ' + i)
                         // Crée une ligne
                         lines.push(lines[i].slice(0, lengthLine-1))
                     } else {
                         if (lines[i].charAt(lengthLine) == ' '){
-                            console.log('2 Crée la ligne' + i)
+                            console.log('2 Crée la ligne ' + i)
                             // Crée une ligne
                             lines.push(lines[i].slice(0, lengthLine))
                         } else {
-                            console.log('3 Crée un tiret puis la ligne' + i)
+                            console.log('3 Crée un tiret puis la ligne ' + i)
                             // Crée un tiret puis une ligne
                             lines.push(lines[i].concat('-').slice(0, lengthLine))
                         }
