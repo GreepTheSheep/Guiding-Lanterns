@@ -51,7 +51,7 @@ function tangled_cass_paper(message, client, prefix, functiondate, functiontime,
             text = args.join(' ')
             var lines = []
 
-            const lengthLine = 15
+            const lengthLine = 5
             // https://www.w3schools.com/js/js_string_methods.asp
             
             if (text.length > lengthLine){
@@ -86,7 +86,7 @@ function tangled_cass_paper(message, client, prefix, functiondate, functiontime,
             
             gm(request(imgurl))
             .font(__dirname + "/Letters_for_Learners.ttf", 35)
-            .drawText(265, 520, text)
+            .drawText(235, 520, text)
             .write(process.cwd() + "/data/images/casspaper.png", function (err) {
                 if (err){
                     message.reply(lang.error_reported)
