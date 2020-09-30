@@ -63,16 +63,16 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
                     if (lines[i].charAt(lengthLine-1) == ' '){
                         console.log('1 Crée la ligne ' + i)
                         // Crée une ligne
-                        lines.push(text.slice(lengthLine*i, lengthLine-1))
+                        lines.push(text.slice(lengthLine*i, lengthLine*i + lengthLine-1))
                     } else {
                         if (lines[i].charAt(lengthLine) == ' '){
                             console.log('2 Crée la ligne ' + i)
                             // Crée une ligne
-                            lines.push(text.slice(lengthLine*i, lengthLine))
+                            lines.push(text.slice(lengthLine*i, lengthLine*i + lengthLine))
                         } else {
                             console.log('3 Crée un tiret puis la ligne ' + i)
                             // Crée un tiret puis une ligne
-                            lines.push(text.concat('-').slice(lengthLine*i, lengthLine))
+                            lines.push(text.concat('-').slice(lengthLine*i, lengthLine*i + lengthLine))
                         }
                     }
                     i++
