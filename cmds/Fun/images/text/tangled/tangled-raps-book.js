@@ -72,7 +72,7 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
                         } else {
                             console.log('3 Crée un tiret puis la ligne ' + i)
                             // Crée un tiret puis une ligne
-                            lines.push(text.concat('-').slice(lengthLine*i, lengthLine*i + lengthLine))
+                            lines.push(text.slice(lengthLine*i, lengthLine*i + lengthLine).concat('-'))
                         }
                     }
                     console.log(lines[i])
