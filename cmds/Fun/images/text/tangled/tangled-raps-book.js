@@ -70,9 +70,14 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
                             // Crée une ligne
                             lines.push(text.slice(lengthLine*i, lengthLine*i + lengthLine))
                         } else {
-                            console.log('3 Crée un tiret puis la ligne ' + i)
-                            // Crée un tiret puis une ligne
-                            lines.push(text.slice(lengthLine*i, lengthLine*i + lengthLine).concat('-'))
+                            if (text.slice(lengthLine*i, lengthLine*i + lengthLine).length < lengthLine){
+                                console.log('4 Dernière ligne ' + i)
+                                lines.push(text.slice(lengthLine*i, lengthLine*i + lengthLine))
+                            } else {
+                                console.log('3 Crée un tiret puis la ligne ' + i)
+                                // Crée un tiret puis une ligne
+                                lines.push(text.slice(lengthLine*i, lengthLine*i + lengthLine).concat('-'))
+                            }
                         }
                     }
                     console.log(lines[i])
