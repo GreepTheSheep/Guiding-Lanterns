@@ -73,7 +73,7 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
                             lines.push(lines[i].concat('-').slice(0, lengthLine))
                         }
                     }
-                    // i++
+                    i++
                 }
                 console.log(lines)
                 lines.shift()
