@@ -62,7 +62,7 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
                     console.log('Reste ' + (text.length - lengthLine*i))
                     if (lines[i].charAt(lengthLine-1) == ' '){
                         console.log('1 Crée la ligne ' + i)
-                        lines.push(text.slice(lengthLine*i, lengthLine*i + lengthLine-1))
+                        lines.push(text.slice(lengthLine*i, lengthLine*i + lengthLine-1).trim())
                     } else {
                         if (lines[i].charAt(lengthLine) == ' '){
                             console.log('2 Crée la ligne ' + i)
@@ -70,10 +70,10 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
                         } else {
                             if (text.slice(lengthLine*i, lengthLine*i + lengthLine).length < lengthLine){
                                 console.log('4 Dernière ligne ' + i)
-                                lines.push(text.slice(lengthLine*i, lengthLine*i + lengthLine))
+                                lines.push(text.slice(lengthLine*i, lengthLine*i + lengthLine).trim())
                             } else {
                                 console.log('3 Crée un tiret puis la ligne ' + i)
-                                lines.push(text.slice(lengthLine*i, lengthLine*i + lengthLine).concat('-'))
+                                lines.push(text.slice(lengthLine*i, lengthLine*i + lengthLine).concat('-').trim())
                             }
                         }
                     }
