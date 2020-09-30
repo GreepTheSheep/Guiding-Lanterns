@@ -3,6 +3,7 @@ const { Attachment } = require('discord.js');
 const fs = require('fs')
 const request = require('request')
 const gm = require('gm')
+const autoLineBreaks = require('auto-line-breaks')
 
 function tangled_cass_paper(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext, config) {
     if (message.content.toLowerCase().startsWith(prefix + 'cassandrapaper') || message.content.toLowerCase().startsWith(prefix + 'casspaper')){
@@ -54,28 +55,7 @@ function tangled_cass_paper(message, client, prefix, functiondate, functiontime,
             const lengthLine = 10
             // https://www.w3schools.com/js/js_string_methods.asp
             
-            if (text.length > lengthLine){
-                lines.push(text)
-                var i = 0
-                while (text.length >= lengthLine * i+1) {
-                    if (lines[i].charAt(lengthLine-1) == ' '){
-                        lines.push(text.slice(lengthLine*i, lengthLine*i + lengthLine-1).trim())
-                    } else {
-                        if (lines[i].charAt(lengthLine) == ' '){
-                            lines.push(text.slice(lengthLine*i, lengthLine*i + lengthLine))
-                        } else {
-                            if (text.slice(lengthLine*i, lengthLine*i + lengthLine).length < lengthLine){
-                                lines.push(text.slice(lengthLine*i, lengthLine*i + lengthLine).trim())
-                            } else {
-                                lines.push(text.slice(lengthLine*i, lengthLine*i + lengthLine).concat('-').trim())
-                            }
-                        }
-                    }
-                    i++
-                }
-                lines.shift()
-                text = lines.join('\n')
-            }
+            if (text.length > lengthLine) text = autoLineBreaks(text, lengthLine)
             
             gm(request(imgurl))
             .font(__dirname + "/Letters_for_Learners.ttf", 35)
