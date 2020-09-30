@@ -58,7 +58,7 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
                 lines.push(text)
                 var i = 0
                 while (text.length >= lengthLine * i+1) {
-                    console.log(i)
+                    console.log(lengthLine*i)
                     if (lines[i].charAt(lengthLine-1) == ' '){
                         console.log('1 Crée la ligne ' + i)
                         // Crée une ligne
