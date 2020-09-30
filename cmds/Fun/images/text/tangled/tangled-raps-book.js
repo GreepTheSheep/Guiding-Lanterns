@@ -57,7 +57,7 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
             if (text.length > lengthLine){
                 lines.push(text)
                 var i = 0
-                while (lines[i].length <= lengthLine) {
+                while (text.length >= lengthLine * i+1) {
                     if (lines[i].charAt(lengthLine-1) == ' '){
                         console.log('Crée la ligne 1')
                         // Crée une ligne
@@ -79,7 +79,6 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
                 text = lines.join('\n')
             }
             
-
             gm(request(imgurl))
             .font(__dirname + "/Letters_for_Learners.ttf", 35)
             .drawText(200, 230, text)
