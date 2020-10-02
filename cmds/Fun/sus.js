@@ -20,15 +20,15 @@ function au_sus(message, client, prefix){
             var isimp = randomItem(['', 'not '])
             var text = `. 　　　。　　　　•　 　ﾟ　　。 　　.
 
-            　　　.　　　 　　.　　　　　。　　 。　. 　
+　　　.　　　 　　.　　　　　。　　 。　. 　
+
+.　　 。　　　ﾟ　　 ඞ  。 . 　　 • 　　　　•
             
-            .　　 。　　　ﾟ　　 ඞ  。 . 　　 • 　　　　•
-            
-            　　ﾟ　　 ${rUser.username} was ${isimp}An Impostor.　 。　•
-            
-            　.　　　'　　${impnum} Impostors remain.　　。　　ﾟ
-            
-            　　。　　ﾟ　　　•　　　. 　ﾟ　　　　'　 .`
+　　ﾟ　　 ${rUser.user.username} was ${isimp}An Impostor.　 。　•
+
+.　　　'　　${impnum.toFixed(0)} Impostors remain.　　。　　ﾟ
+
+　　。　　ﾟ　　　•　　　. 　ﾟ　　　　'　 .`
 
             message.channel.send(text)
         }
