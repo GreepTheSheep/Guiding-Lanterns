@@ -60,6 +60,9 @@ function cmds_index(message, client, prefix, config, functiondate, functiontime,
     const bot_ping = require('./Fun/ping.js');
     bot_ping(message, client, prefix, config);
 
+    const au_sus = require('./Fun/sus.js');
+    au_sus(message, client, prefix);
+
     /*--------------------------------
     --------------- Util -------------
     --------------------------------*/
