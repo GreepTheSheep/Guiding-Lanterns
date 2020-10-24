@@ -75,9 +75,6 @@ function cmds_index(message, client, prefix, config, functiondate, functiontime,
     const wolfram = require('./Util/wolfram.js');
     wolfram(message, client, prefix, cooldowns);
 
-    const voted = require('./Util/voted.js');
-    voted(message, client, prefix, cooldowns);
-
     const image_search_request = require('./Util/img_search.js')
     image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns)
 
