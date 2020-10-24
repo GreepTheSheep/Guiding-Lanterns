@@ -55,7 +55,7 @@ function cmds_index(message, client, prefix, config, functiondate, functiontime,
     --------------------------------*/
 
     const ing_cmds = require('./Fun/images/gm-index.js')
-    ing_cmds(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel(), dbl, guildPrefix, userLang, lang, langtext, config)
+    ing_cmds(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel(), guildPrefix, userLang, lang, langtext, config)
 
     const eight_ball = require('./Fun/8ball.js');
     eight_ball(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns);
