@@ -44,12 +44,6 @@ var logchannel
 const inviteTracker = require('./events/invite-track.js'); // Define the invite tracker plugin
 const shell = require('shelljs'); // Require for executing shell commands (such as git)
 
-var dbl;
-if (config.dbl_token){
-const DBL = require("dblapi.js");
-dbl = new DBL(config.dbl_token);
-} else dbl = undefined;
-
 const Enmap = require("enmap"); // Define enmap, a database integrated with the bot
 const guildPrefix = new Enmap({name: "guildPrefix"}); // Define a new table for custom prefixes
 const userLang = new Enmap({name: "user_languages"}); // Define a new table for user languages
@@ -132,7 +126,6 @@ client.on('ready', async () => { // If bot was connected:
         versionCheck(client);
     
         const totalguildsize = await client.shard.fetchClientValues('guilds.size')
-        dbl.postStats(totalguildsize.reduce((prev, val) => prev + val, 0))
         
         inviteTracker.ready(client); // Starts the invite tracker plugin
 
@@ -193,15 +186,15 @@ client.on('message', message => { // If any message was recived
 
     //Check if user has supported
     const SupportCheck = require('./support/support_check.js');
-    if (client.user.id == config.public) SupportCheck(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, config)
+    if (client.user.id == config.public) SupportCheck(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, config)
 
     //All commands listed in cmds_index.js
     const cmds_index = require('./cmds/cmds_index.js');
-    cmds_index(message, client, prefix, config, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext, ThemeparksList);
+    cmds_index(message, client, prefix, config, functiondate, functiontime, cooldowns, getlogchannel, guildPrefix, userLang, lang, langtext, ThemeparksList);
 
     //Lists of mini-games
     const games_index = require('./games/games_index.js');
-    games_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext);
+    games_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, guildPrefix, userLang, lang, langtext);
 
     } catch (e) {
         console.log(e)
@@ -238,7 +231,6 @@ client.on('guildCreate', async guild => { // If the bot join a server
     getlogchannel().send(botjoinguildlog) // Send at the Discord log channel
 
     const totalguildsize = await client.shard.fetchClientValues('guilds.size')
-    dbl.postStats(totalguildsize.reduce((prev, val) => prev + val, 0))
     /* Unused now
     if (client.user.id == config.public || client.user.id == nightly) {
         const lant_num_guilds = () => num_guilds(client, channel_id.guilds);
@@ -253,7 +245,6 @@ client.on('guildDelete', async guild => { // If the bot leave a server
     getlogchannel().send(botleftguildlog)
 
     const totalguildsize = await client.shard.fetchClientValues('guilds.size')
-    dbl.postStats(totalguildsize.reduce((prev, val) => prev + val, 0))
     /* Unused now
     if (client.user.id == config.public || client.user.id == nightly) {
         const lant_num_guilds = () => num_guilds(client, channel_id.guilds);
@@ -290,12 +281,6 @@ client.on('debug', text => {
     if (execArgs.includes('-n')) {
         console.log(text)
     }
-})
-
-dbl.on('error', e => {
-    const errmsg = `DBL error: ${e}`
-    console.log(`[${functiondate(0)} - ${functiontime(0)}] ` + errmsg)
-    getlogchannel().send(errmsg)
 })
 
 }catch(e){

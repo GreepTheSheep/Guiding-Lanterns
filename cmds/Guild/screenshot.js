@@ -160,7 +160,7 @@ function upload_scr_jpg(message, filename, timemark, displayid, prefix, getlogch
 
 }
 
-function screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl) {
+function screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel) {
     if (message.content.startsWith(prefix + SCR)) {
         scr_msg(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel);
     }
