@@ -3,7 +3,7 @@ const Enmap = require('enmap')
 
 // All commands listed here
 
-function cmds_index(message, client, prefix, config, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext, ThemeparksList){
+function cmds_index(message, client, prefix, config, functiondate, functiontime, cooldowns, getlogchannel, guildPrefix, userLang, lang, langtext, ThemeparksList){
     if (message.channel.type === 'dm') return
     /*--------------------------------
     -------------- Owner -------------
@@ -17,9 +17,6 @@ function cmds_index(message, client, prefix, config, functiondate, functiontime,
 
     const command = require('./Owner/shell.js');
     command(message, client, prefix);
-
-    const dblInfo = require('./Owner/dblInfo.js');
-    dblInfo(message, client, prefix, dbl)
 
     const testCommands = require('./Owner/test-cmds.js');
     testCommands(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns);
@@ -38,7 +35,7 @@ function cmds_index(message, client, prefix, config, functiondate, functiontime,
     --------------------------------*/
     
     const currency_cmds = require('./Currency/cur_index.js');
-    currency_cmds(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, guildPrefix, userLang, lang, langtext, config);
+    currency_cmds(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, guildPrefix, userLang, lang, langtext, config);
     
     /*--------------------------------
     ------------- Worlds -------------
@@ -79,13 +76,10 @@ function cmds_index(message, client, prefix, config, functiondate, functiontime,
     wolfram(message, client, prefix, cooldowns);
 
     const voted = require('./Util/voted.js');
-    voted(message, client, prefix, dbl, cooldowns);
-
-    const dblBotInfo = require('./Util/dbl-botinfo.js');
-    dblBotInfo(message, client, prefix, dbl, cooldowns);
+    voted(message, client, prefix, cooldowns);
 
     const image_search_request = require('./Util/img_search.js')
-    image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel(), dbl, cooldowns)
+    image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns)
 
     const about = require('./Util/about.js');
     about(message, client, prefix, lang, langtext, cooldowns);
@@ -98,9 +92,6 @@ function cmds_index(message, client, prefix, config, functiondate, functiontime,
 
     const geturlofattachment = require('./Util/geturlofattach.js')
     geturlofattachment(message, client, prefix, lang);
-
-    const speedtest = require('./Util/speedtest.js')
-    speedtest(message, client, prefix, getlogchannel(), dbl)
     
     /*--------------------------------
     -------------- Other -------------
@@ -137,7 +128,7 @@ function cmds_index(message, client, prefix, config, functiondate, functiontime,
         */
 
         const screenshot = require('./Guild/screenshot.js');
-        screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel(), dbl);
+        screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel());
 
     }
 

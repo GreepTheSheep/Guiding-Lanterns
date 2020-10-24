@@ -44,7 +44,7 @@ function image_search(message, client, prefix, functiondate, functiontime, getlo
 }
 
 
-function image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel, dbl, cooldowns) {
+function image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel, cooldowns) {
     if (message.content.startsWith(prefix + 'googleimage')) {
     //Implement cooldown
     if (!cooldowns.has(prefix + 'googleimage')) {

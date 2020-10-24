@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const Enmap = require('enmap')
 const fs = require('fs');
 
-function claim(message, client, prefix, cooldowns, dbl, cur_json, lang){
+function claim(message, client, prefix, cooldowns, cur_json, lang){
     if(message.content.startsWith(prefix + "claim") || message.content.startsWith(prefix + "daily")) {
 
         //Implement cooldown
@@ -43,42 +43,14 @@ function claim(message, client, prefix, cooldowns, dbl, cur_json, lang){
         .setColor('RANDOM')
 
         if (!bal.has(message.author.id)) bal.set(message.author.id, 0)
-        
-        if (dbl === undefined){
-            if (!donor){
-                bal.set(message.author.id, bal.get(message.author.id) + 100)
-                embed.setDescription(lang.claim_normal.replace('${money}', `100 ${cur_json.cur.symbol}`))
-            } else if (donor) {
-                bal.set(message.author.id, bal.get(message.author.id) + 200)
-                embed.setDescription(lang.claim_support.replace('${money}', `200 ${cur_json.cur.symbol}`))
-            }
-            message.channel.send(embed);
-        } else {
-            dbl.hasVoted(message.author.id).then(voted => {
-                if (voted) {
-                    if (!donor){
-                        bal.set(message.author.id, bal.get(message.author.id) + 200)
-                        embed.setDescription(lang.claim_vote1.replace('${money1}', `200 ${cur_json.cur.symbol}`).replace('${money2}', `100 ${cur_json.cur.symbol}`))
-                        embed.setFooter(lang.claim_thanks_vote)
-                    } else if (donor){
-                        bal.set(message.author.id, bal.get(message.author.id) + 500)
-                        embed.setDescription(lang.claim_vote2.replace('${money1}', `500 ${cur_json.cur.symbol}`).replace('${money2}', `400 ${cur_json.cur.symbol}`))
-                        embed.setFooter(lang.claim_thanks_support)
-                    }
-                } else {
-                    if (!donor){
-                        bal.set(message.author.id, bal.get(message.author.id) + 100)
-                        embed.setDescription(lang.claim_normal.replace('${money}', `100 ${cur_json.cur.symbol}`))
-                        embed.setFooter(lang.claim_tip)
-                    } else if (donor) {
-                        bal.set(message.author.id, bal.get(message.author.id) + 400)
-                        embed.setDescription(lang.claim_support.replace('${money}', `400 ${cur_json.cur.symbol}`))
-                        embed.setFooter(lang.claim_tip)
-                    }
-                }
-                message.channel.send(embed);
-            })
+        if (!donor){
+            bal.set(message.author.id, bal.get(message.author.id) + 100)
+            embed.setDescription(lang.claim_normal.replace('${money}', `100 ${cur_json.cur.symbol}`))
+        } else if (donor) {
+            bal.set(message.author.id, bal.get(message.author.id) + 500)
+            embed.setDescription(lang.claim_support.replace('${money}', `500 ${cur_json.cur.symbol}`))
         }
+        message.channel.send(embed);
     }
 }
 

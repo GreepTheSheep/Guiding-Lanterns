@@ -4,7 +4,7 @@ const dbfile = './data/support_db.json'
 const Enmap = require("enmap");
 const support_db = new Enmap({name: "support"})
 
-function SupportCheck (message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, dbl, config) {
+function SupportCheck (message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, config) {
     const db = JSON.parse(fs.readFileSync(dbfile, "utf8"))
 
     let donorsonly = new Discord.RichEmbed()
