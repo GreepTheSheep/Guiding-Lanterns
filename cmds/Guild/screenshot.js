@@ -162,7 +162,9 @@ function upload_scr_jpg(message, filename, timemark, displayid, prefix, getlogch
 
 function screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel) {
     if (message.content.startsWith(prefix + SCR)) {
-        scr_msg(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel);
+        if (message.guild.id == '562602234265731080'){ 
+            scr_msg(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel);
+        } else message.channel.send('Sorry, this command is only for the r/Tangled community server. You can join here: discord.gg/tangled')
     }
 };
 

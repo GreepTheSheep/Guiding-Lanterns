@@ -121,15 +121,15 @@ function cmds_index(message, client, prefix, config, functiondate, functiontime,
         welcome(message, client, prefix, cooldowns);
         */
 
-        const screenshot = require('./Guild/screenshot.js');
-        screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel());
-
     }
 
-    if (message.guild.id == '562602234265731080' || message.guild.id == '600355162279641108'){  // r/Tangled & DisneyFRdiscord 
+    const screenshot = require('./Guild/screenshot.js');
+    screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel());
 
-        const lantern = require('./Guild/lantern.js');
-        lantern(message, client, prefix, getlogchannel(), cooldowns);
+    const lantern = require('./Guild/lantern.js');
+    lantern(message, client, prefix, getlogchannel(), cooldowns);
+
+    if (message.guild.id == '562602234265731080' || message.guild.id == '600355162279641108'){  // r/Tangled & DisneyFRdiscord 
 
         const cross_lantern = require('./Guild/cross-lantern.js');
         cross_lantern(message, client, prefix, getlogchannel(), cooldowns);
