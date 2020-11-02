@@ -23,7 +23,7 @@
     "dependencies": {
         "better-sqlite-pool": "^0.2.3",
         "better-sqlite3": "^5.4.3",
-        "bufferutil": "^4.0.1",
+        "bufferutil": "^4.0.2",
         "canvas": "^2.6.1",
         "colors": "^1.4.0",
         "country-data": "0.0.31",
