@@ -12,7 +12,7 @@ async function cross_lanterns(message, client, prefix, getlogchannel, cooldowns)
             var webhook = webhooks.first()
             webhook.send('🏮', {
                 username: message.author.username,
-                avatarURL: message.author.displayAvatarURL,
+                avatarURL: message.author.displayAvatarURL(),
             })
         }
     } else if (message.guild.id == '600355162279641108') { // disneyFR
@@ -26,7 +26,7 @@ async function cross_lanterns(message, client, prefix, getlogchannel, cooldowns)
             var webhook = webhooks.first()
             webhook.send('<:Lantern:570822664789426186>', {
                 username: message.author.username,
-                avatarURL: message.author.displayAvatarURL,
+                avatarURL: message.author.displayAvatarURL(),
             })
         }
     }

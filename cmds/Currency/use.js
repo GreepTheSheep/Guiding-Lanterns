@@ -62,7 +62,7 @@ async function use(message, client, prefix, cooldowns, cur_json, lang, langtext)
         
         inv.set(`${message.author.id}_${args[0]}`, inv.get(`${message.author.id}_${args[0]}`) - 1)
 
-        let embed = new Discord.RichEmbed;
+        let embed = new Discord.MessageEmbed;
         embed.setTitle(lang.use_title.replace('${item}', cur_json.item[Number(args[0])].name))
         .setColor('#339966')
         .setDescription(translateddesc)

@@ -30,7 +30,7 @@ function command(message, client, prefix) {
                         .then(m=>message.channel.stopTyping(true))
                     })
                 
-                let embed = new Discord.RichEmbed()
+                let embed = new Discord.MessageEmbed()
                     embed.addField("Command:", args.join(' '))
                     .addField('Program output:', `\`\`\`${stdout}${stderr}\`\`\``)
                     .setFooter('Exit code: ' + code)

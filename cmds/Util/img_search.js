@@ -21,8 +21,8 @@ function image_search(message, client, prefix, functiondate, functiontime, getlo
     .then(image => {
         var imgurl = image[random.toFixed(0)].url;
         var parentpageurl = image[random.toFixed(0)].parentPage;
-        let embed = new Discord.RichEmbed()
-        embed.setAuthor(`Here is a picture of ${args.join(" ")}`, message.author.displayAvatarURL, parentpageurl)
+        let embed = new Discord.MessageEmbed()
+        embed.setAuthor(`Here is a picture of ${args.join(" ")}`, message.author.displayAvatarURL(), parentpageurl)
         .setImage(imgurl)
         .setColor('RANDOM')
         .setFooter(`Picture ${random.toFixed(0)}/10`);

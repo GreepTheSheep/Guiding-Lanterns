@@ -37,10 +37,10 @@ function scr_msg(message, client, prefix, functiondate, functiontime, cooldowns,
     const doclink = "https://Guiding-Lanterns.github.io/screenshot.html"
     const args = message.content.split(/ +/).slice(1);
     if (args[0] === 'list') {
-        let embed = new Discord.RichEmbed()
+        let embed = new Discord.MessageEmbed()
         embed.addField("Available video ids are:", `- \`${video_id_str()}\``)
             .addField("More info:", `[See the documentation about screenshots here](${doclink})`)
-            .setFooter(`The proper usage would be: "${prefix+SCR} <video_id> <timestamp>"`, `${message.author.displayAvatarURL}`)
+            .setFooter(`The proper usage would be: "${prefix+SCR} <video_id> <timestamp>"`, `${message.author.displayAvatarURL()}`)
         message.reply(embed)
         return;
     }
@@ -51,12 +51,12 @@ function scr_msg(message, client, prefix, functiondate, functiontime, cooldowns,
     }
     var filename = episode_to_filename(args[0]);
     if (filename === undefined) {
-        let embed = new Discord.RichEmbed()
+        let embed = new Discord.MessageEmbed()
         embed.setTitle('ERROR!')
             .setColor('#ff0000')
             .addField("I don\'t have that video id!", `Available video ids are:\n- \`${video_id_str()}\``)
             .setThumbnail("https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061132_960_720.png")
-            .setFooter(`Type "${prefix}bug <details of your bug>" to send at the devs`, `${message.author.displayAvatarURL}`)
+            .setFooter(`Type "${prefix}bug <details of your bug>" to send at the devs`, `${message.author.displayAvatarURL()}`)
         message.reply(embed)
         return;
     }
@@ -116,12 +116,12 @@ function upload_scr_png(message, filename, timemark, displayid, prefix, getlogch
             const errlog = 'Tangled screencap [PNG] error : ' + err.message
             console.log(errlog);
             getlogchannel.send(errlog);
-            let embed = new Discord.RichEmbed()
+            let embed = new Discord.MessageEmbed()
             embed.setTitle('ERROR!')
                 .setColor('#ff0000')
                 .addField("Screenshot Error :", `Error during screenshot`)
                 .setThumbnail("https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061132_960_720.png")
-                .setFooter(`Type "${prefix}bug <details of your bug>" to send at the devs`, `${message.author.displayAvatarURL}`)
+                .setFooter(`Type "${prefix}bug <details of your bug>" to send at the devs`, `${message.author.displayAvatarURL()}`)
             message.reply(embed)
         })
         .screenshots({
@@ -144,12 +144,12 @@ function upload_scr_jpg(message, filename, timemark, displayid, prefix, getlogch
             const errlog = 'Tangled screencap [JPG] error : ' + err.message
             console.log(errlog);
             getlogchannel.send(errlog);
-            let embed = new Discord.RichEmbed()
+            let embed = new Discord.MessageEmbed()
             embed.setTitle('ERROR!')
                 .setColor('#ff0000')
                 .addField("Screenshot Error :", `Error during screenshot`)
                 .setThumbnail("https://cdn.pixabay.com/photo/2017/02/12/21/29/false-2061132_960_720.png")
-                .setFooter(`Type "${prefix}bug <details of your bug>" to send at the devs`, `${message.author.displayAvatarURL}`)
+                .setFooter(`Type "${prefix}bug <details of your bug>" to send at the devs`, `${message.author.displayAvatarURL()}`)
             message.reply(embed)
         })
         .screenshots({

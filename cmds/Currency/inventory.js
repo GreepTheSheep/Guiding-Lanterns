@@ -74,7 +74,7 @@ function inventory(message, client, prefix, cooldowns, cur_json, lang){
         const bal = new Enmap({name:"cur_balance"})
         const inv = new Enmap({name:"cur_inventory"})
 
-        let listembed = new Discord.RichEmbed()
+        let listembed = new Discord.MessageEmbed()
         let args = message.content.split(" ")
         args.shift()
         var rUser;

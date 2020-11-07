@@ -54,7 +54,7 @@ function market(message, client, prefix, cooldowns, cur_json, lang){
         let args = message.content.split(" ")
         args.shift()
         if (args.length < 1 || args[0] === 'list') {
-            let listembed = new Discord.RichEmbed()
+            let listembed = new Discord.MessageEmbed()
             listembed.setTitle(cur_json.name[2])
                 .setColor("#0567DA")
                 .addField("Avialble items:", itemList(message, cur_json))

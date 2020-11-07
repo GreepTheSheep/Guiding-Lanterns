@@ -52,7 +52,7 @@ const waApi = WolframAlphaAPI(wolfID);
                      message.reply('Wolfram|Alpha did not understand your input')
                      return;
                 }
-                let embed = new Discord.RichEmbed;
+                let embed = new Discord.MessageEmbed;
                 embed.setColor('#008888')
                     .addField('Wolfram|Alpha says:', queryresult)
                     .setFooter('https://www.wolframalpha.com/', "https://images-eu.ssl-images-amazon.com/images/I/41II4YzkFxL.png")

@@ -6,7 +6,7 @@ function geturlofattachment(message, client, prefix, lang) {
             let attachurl = message.attachments.array()[0].url
             var isimage = false
             if (message.attachments.array()[0].width > 0 && message.attachments.array()[0].height > 0) isimage = true
-            let embed = new Discord.RichEmbed
+            let embed = new Discord.MessageEmbed
             embed.setColor('RANDOM')
                 .setTitle(`${prefix}geturl : ` + lang.geturl_title)
                 .setTitle(lang.geturl_done)
@@ -14,7 +14,7 @@ function geturlofattachment(message, client, prefix, lang) {
                 if (isimage == true) embed.setThumbnail(attachurl)
             message.channel.send(embed)
         } else {
-            let embed1 = new Discord.RichEmbed
+            let embed1 = new Discord.MessageEmbed
             embed1.setColor('RANDOM')
             .setTitle(`${prefix}geturl : ` + lang.geturl_title)
             .setDescription(lang.geturl_usage.split('${prefix}').join(prefix))

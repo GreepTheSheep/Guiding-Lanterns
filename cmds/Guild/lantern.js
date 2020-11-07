@@ -52,7 +52,7 @@ function lantern(message, client, prefix, getlogchannel, cooldowns) {
             // End of cooldown implement
             counter.set('total', counter.get('count') + counter.get('600355162279641108'))
 
-            let embed = new Discord.RichEmbed()
+            let embed = new Discord.MessageEmbed()
             embed.setColor("#E35D05")
                 .setTitle('Lantern counter')
                 if (message.guild.id == '562602234265731080') {

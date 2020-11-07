@@ -10,8 +10,8 @@ function starboard (client, reaction, logchannel, date, time){
             if (reaction.message.channel.name.includes('starboard')) return;
 
                 if (reaction.message.attachments.size > 0){
-                    let starboardembed = new Discord.RichEmbed
-                    starboardembed.setAuthor(reaction.message.author.username, reaction.message.author.displayAvatarURL)
+                    let starboardembed = new Discord.MessageEmbed
+                    starboardembed.setAuthor(reaction.message.author.username, reaction.message.author.displayAvatarURL())
                     if (!reaction.message.content) starboardembed.setDescription(`[Link to message](https://discord.com/channels/${reaction.message.guild.id}/${reaction.message.channel.id}/${reaction.message.id})`)
                     else starboardembed.setDescription(reaction.message.content + `\n\n[Link to message](https://discord.com/channels/${reaction.message.guild.id}/${reaction.message.channel.id}/${reaction.message.id})`)
                     starboardembed.setImage(reaction.message.attachments.array()[0].url)
@@ -20,8 +20,8 @@ function starboard (client, reaction, logchannel, date, time){
                         reaction.message.guild.channels.find(c => c.name.includes('starboard')).send(starboardembed) 
                     }
                 } else {
-                    let starboardembed = new Discord.RichEmbed
-                    starboardembed.setAuthor(reaction.message.author.username, reaction.message.author.displayAvatarURL)
+                    let starboardembed = new Discord.MessageEmbed
+                    starboardembed.setAuthor(reaction.message.author.username, reaction.message.author.displayAvatarURL())
                     if (!reaction.message.content) starboardembed.setDescription(`[Link to message](https://discord.com/channels/${reaction.message.guild.id}/${reaction.message.channel.id}/${reaction.message.id})`)
                     else starboardembed.setDescription(reaction.message.content + `\n\n[Link to message](https://discord.com/channels/${reaction.message.guild.id}/${reaction.message.channel.id}/${reaction.message.id})`)
                     starboardembed.setTimestamp(reaction.message.createdTimestamp)

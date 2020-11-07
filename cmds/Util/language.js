@@ -20,7 +20,7 @@ function setLanguage(message, client, prefix, userLang, lang, langtext){
         if (args.length < 1) return message.reply(lang.lang_check.replace('${langtext}', langtext).replace('${prefix}', prefix));
         
         if (args[0] === 'list'){
-            let embed = new Discord.RichEmbed;
+            let embed = new Discord.MessageEmbed;
             embed.setTitle(lang.lang_list_title)
             .setDescription(`- \`${givelist()}\``)
             .setFooter(lang.lang_usage.replace('${prefix}', prefix))

@@ -54,7 +54,7 @@ function quotes(message, client, prefix, date, time, logchannel, cooldowns, conf
         let args = message.content.split(" ")
         args.shift()
         if (args.length < 1 || args[0] === 'list') {
-            let listembed = new Discord.RichEmbed()
+            let listembed = new Discord.MessageEmbed()
             listembed.setColor("#0567DA")
                 .addField("Avialble movies are:", givelist())
                 .setFooter(`Usage: ${prefix}quote <movie>`)
@@ -67,7 +67,7 @@ function quotes(message, client, prefix, date, time, logchannel, cooldowns, conf
             var quotes = JSON.parse(data);
             let random = Math.floor(Math.random() * quotes.length)
     
-            let embed = new Discord.RichEmbed()
+            let embed = new Discord.MessageEmbed()
                 embed.setColor("RANDOM")
                     .addField(`Random ${args[0].charAt(0).toUpperCase() + args[0].slice(1).toLowerCase()} quote :`, `${quotes[random]}`)
                     .setFooter(`Quote ${random + 1}/${quotes.length} | Another? ${prefix}quote ${args[0]}`, `${client.user.avatarURL}`)

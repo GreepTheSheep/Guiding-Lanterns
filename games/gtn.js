@@ -12,12 +12,12 @@ function gtn(message, client, prefix, functiondate, functiontime, getlogchannel,
         GTN_db.set(message.author.id+'_number', Number(randomnum.toFixed(0)))
         GTN_db.set(message.author.id+'_try', 0)
         if (!GTN_db.has(message.author.id+'_wins')) GTN_db.set(message.author.id+'_wins', 0)
-        const startembed = new Discord.RichEmbed
+        const startembed = new Discord.MessageEmbed
         startembed  .setTitle('Guess The Number')
                     .setDescription(lang.gtn_startdesc.split('${min}').join(min).split('${max}').join(max).split('${prefix}').join(prefix))
                     .setColor('RANDOM')
                     .setThumbnail('https://cdn.discordapp.com/attachments/419211709803134986/627444691352289300/emote.png')
-                    .setFooter(`Guess The Number game started by ${message.author.tag}`, message.author.displayAvatarURL)
+                    .setFooter(`Guess The Number game started by ${message.author.tag}`, message.author.displayAvatarURL())
         message.channel.send(startembed)
         }catch(err){
             message.channel.send(lang.error_reported)
@@ -43,12 +43,12 @@ function gtn(message, client, prefix, functiondate, functiontime, getlogchannel,
             if (args[0] = dbnumber) {
                 var tryes = GTN_db.get(message.author.id+'_try')
                 GTN_db.set(message.author.id+'_wins', GTN_db.get(message.author.id+'_wins')+1)
-                const congratsembed = new Discord.RichEmbed
+                const congratsembed = new Discord.MessageEmbed
                 congratsembed   .setTitle('Guess The Number')
                                 .setDescription(lang.gtn_win.split('${try}').join(tryes))
                                 .setColor('RANDOM')
                                 .setThumbnail('https://cdn.discordapp.com/attachments/419211709803134986/627473218181005345/emote.png')
-                                .setFooter(`${message.author.tag} win a game of Guess The Number. ${GTN_db.get(message.author.id+'_wins')} wins in total`, message.author.displayAvatarURL)
+                                .setFooter(`${message.author.tag} win a game of Guess The Number. ${GTN_db.get(message.author.id+'_wins')} wins in total`, message.author.displayAvatarURL())
                 message.channel.send(congratsembed)
                 GTN_db.set(message.author.id+'_try', 0)
                 var randomnum = Math.random() * (+max - +min) + +min;

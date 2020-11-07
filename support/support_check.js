@@ -7,7 +7,7 @@ const support_db = new Enmap({name: "support"})
 function SupportCheck (message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, config) {
     const db = JSON.parse(fs.readFileSync(dbfile, "utf8"))
 
-    let donorsonly = new Discord.RichEmbed()
+    let donorsonly = new Discord.MessageEmbed()
     donorsonly.setColor("#D30051")
     .addField("Sorry :shrug:", `This command is reserved for donors only\n\n[You can contribute to the financing of the project by clicking here](https://donatebot.io/checkout/570024448371982373?buyer=${message.author.id})`)
 

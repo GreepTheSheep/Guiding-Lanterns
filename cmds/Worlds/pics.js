@@ -54,7 +54,7 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
         let args = message.content.split(" ")
         args.shift()
         if (args.length < 1 || args[0] === 'list') {
-            let listembed = new Discord.RichEmbed()
+            let listembed = new Discord.MessageEmbed()
             listembed.setColor("#0567DA")
                 .addField("Avialble movies are:", givelist())
                 .setFooter(`Usage: ${prefix}picture <movie>`)
@@ -67,11 +67,11 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
             var pics = JSON.parse(data);
             let random = Math.floor(Math.random() * pics.length)
 
-            let embed = new Discord.RichEmbed;
-            embed.setAuthor(`No image? Click here!`, message.author.displayAvatarURL, pics[random])
+            let embed = new Discord.MessageEmbed;
+            embed.setAuthor(`No image? Click here!`, message.author.displayAvatarURL(), pics[random])
             .setImage(pics[random])
             .setColor('RANDOM')
-            .setFooter(`Picture ${random + 1}/${pics.length} | If you want to add your own picture, type ${prefix}addpicture`, message.author.displayAvatarURL)
+            .setFooter(`Picture ${random + 1}/${pics.length} | If you want to add your own picture, type ${prefix}addpicture`, message.author.displayAvatarURL())
             
              message.channel.send(embed)
         })
@@ -121,8 +121,8 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
         } else {
             const requestchannel = client.guilds.get('570024448371982373').channels.get('603649742441938944')
 
-            let embed = new Discord.RichEmbed;
-            embed.setAuthor(`New request sent by ${message.author.tag}.\nMovie: ${args[0].charAt(0).toUpperCase() + args[0].slice(1)}`, message.author.displayAvatarURL, args[1])
+            let embed = new Discord.MessageEmbed;
+            embed.setAuthor(`New request sent by ${message.author.tag}.\nMovie: ${args[0].charAt(0).toUpperCase() + args[0].slice(1)}`, message.author.displayAvatarURL(), args[1])
                 .setImage(args[1])
                 .setColor('RANDOM')
                 .setFooter(`User ID: ${message.author.id}`)

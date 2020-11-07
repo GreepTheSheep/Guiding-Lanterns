@@ -38,7 +38,7 @@ function claim(message, client, prefix, cooldowns, cur_json, lang){
 
         const bal = new Enmap({name:"cur_balance"})
 
-        let embed = new Discord.RichEmbed
+        let embed = new Discord.MessageEmbed
         embed.setTitle(cur_json.name[1])
         .setColor('RANDOM')
 
