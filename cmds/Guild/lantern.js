@@ -18,54 +18,56 @@ function lantern(message, client, prefix, getlogchannel, cooldowns) {
     }
 
     if (message.content.startsWith(prefix + 'lanterns')) {
-        //Implement cooldown
-        if (!cooldowns.has(prefix + 'lanterns')) {
-            cooldowns.set(prefix + 'lanterns', new Discord.Collection());
-        }
-
-        const now = Date.now();
-        const timestamps = cooldowns.get(prefix + 'lanterns');
-        const cooldownAmount = 30000;
-
-        if (timestamps.has(message.guild.id)) {
-            const expirationTime = timestamps.get(message.guild.id) + cooldownAmount;
-
-            if (now < expirationTime) {
-                let totalSeconds = (expirationTime - now) / 1000;
-                let days = Math.floor(totalSeconds / 86400);
-                let hours = Math.floor(totalSeconds / 3600);
-                totalSeconds %= 3600;
-                let minutes = Math.floor(totalSeconds / 60);
-                let seconds = totalSeconds % 60;
-                return;
+        if (message.guild.id == '562602234265731080' || message.guild.id == '600355162279641108'){ 
+            //Implement cooldown
+            if (!cooldowns.has(prefix + 'lanterns')) {
+                cooldowns.set(prefix + 'lanterns', new Discord.Collection());
             }
-        }
 
-        timestamps.set(message.guild.id, now);
-        setTimeout(() => timestamps.delete(message.guild.id), cooldownAmount);
+            const now = Date.now();
+            const timestamps = cooldowns.get(prefix + 'lanterns');
+            const cooldownAmount = 30000;
 
+            if (timestamps.has(message.guild.id)) {
+                const expirationTime = timestamps.get(message.guild.id) + cooldownAmount;
 
-        if (message.member.roles.find(r => r.name === "KEY (The Guiding Lanterns)")) { //Override cooldown
-            timestamps.delete(message.guild.id);
-        }
-        // End of cooldown implement
-        counter.set('total', counter.get('count') + counter.get('600355162279641108'))
-
-        let embed = new Discord.RichEmbed()
-        embed.setColor("#E35D05")
-            .setTitle('Lantern counter')
-            if (message.guild.id == '562602234265731080') {
-                embed.setDescription(`**__${counter.get('count')}__ lanterns thrown**`)
-                embed.addField('Disney[FR] has:', `**__${counter.get('600355162279641108')}__ lanterns thrown**`)
-                embed.addField('Total:', `**__${counter.get('total')}__ lanterns thrown**`)
-            } else {
-                embed.setDescription(`**__${counter.get(message.guild.id)}__ lanternes lancées**`)
-                embed.addField('Tangled a lancé', `**__${counter.get('count')}__ lanternes**`)
-                embed.addField('Total:', `**__${counter.get('total')}__ lanternes lancées**`)
+                if (now < expirationTime) {
+                    let totalSeconds = (expirationTime - now) / 1000;
+                    let days = Math.floor(totalSeconds / 86400);
+                    let hours = Math.floor(totalSeconds / 3600);
+                    totalSeconds %= 3600;
+                    let minutes = Math.floor(totalSeconds / 60);
+                    let seconds = totalSeconds % 60;
+                    return;
+                }
             }
-            embed.setThumbnail(`https://i.pinimg.com/originals/ed/d8/1f/edd81f0f8cd57690777f917a514ae840.gif`)
-            .setFooter(`Launch a lantern with :Lantern: emoji`, `${client.user.avatarURL}`)
-        message.channel.send(embed)
+
+            timestamps.set(message.guild.id, now);
+            setTimeout(() => timestamps.delete(message.guild.id), cooldownAmount);
+
+
+            if (message.member.roles.find(r => r.name === "KEY (The Guiding Lanterns)")) { //Override cooldown
+                timestamps.delete(message.guild.id);
+            }
+            // End of cooldown implement
+            counter.set('total', counter.get('count') + counter.get('600355162279641108'))
+
+            let embed = new Discord.RichEmbed()
+            embed.setColor("#E35D05")
+                .setTitle('Lantern counter')
+                if (message.guild.id == '562602234265731080') {
+                    embed.setDescription(`**__${counter.get('count')}__ lanterns thrown**`)
+                    embed.addField('Disney[FR] has:', `**__${counter.get('600355162279641108')}__ lanterns thrown**`)
+                    embed.addField('Total:', `**__${counter.get('total')}__ lanterns thrown**`)
+                } else {
+                    embed.setDescription(`**__${counter.get(message.guild.id)}__ lanternes lancées**`)
+                    embed.addField('Tangled a lancé', `**__${counter.get('count')}__ lanternes**`)
+                    embed.addField('Total:', `**__${counter.get('total')}__ lanternes lancées**`)
+                }
+                embed.setThumbnail(`https://i.pinimg.com/originals/ed/d8/1f/edd81f0f8cd57690777f917a514ae840.gif`)
+                .setFooter(`Launch a lantern with :Lantern: emoji`, `${client.user.avatarURL}`)
+            message.channel.send(embed)
+        } else message.channel.send('Sorry, this command is only for the r/Tangled community server. You can join here: discord.gg/tangled')
     }
 
     if (message.content.startsWith(prefix + 'resetlanterncount')) {

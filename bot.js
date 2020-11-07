@@ -85,7 +85,7 @@ client.on('ready', async () => { // If bot was connected:
 
     if (client.user.id == config.public) logchannel = config.log_channel //Set a channel for logging
     else if (client.user.id == nightly) logchannel = '589337521553539102' // if nightly send to log nightly
-    getlogchannel = () => client.channels.get(logchannel)
+    getlogchannel = () => client.channels.cache.get(logchannel)
     const countdown = require('./counter/countdown.js');
     const num_guilds = require('./counter/guilds.js');
     const ver = require('./counter/version.js')
@@ -105,7 +105,7 @@ client.on('ready', async () => { // If bot was connected:
 
     if (client.user.id == config.public){
 
-        client.channels.get('741594861408354325').fetchMessage('754365382189514802').then(m => {
+        client.channels.cache.get('741594861408354325').messages.fetch('754365382189514802').then(m => {
             console.log("Cached reaction (rules accept) message.");
             console.log(m.content)
         }).catch(e => {

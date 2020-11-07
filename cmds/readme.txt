@@ -2,7 +2,6 @@ List of all commands:
 
 Syntax:
 * = commands for supporters
-¤ = need a vote to https://top.gg/bot/569624646475972608/vote before trigger
 ^ = commands for owner
 // = disabled
 
@@ -28,11 +27,8 @@ Arguments:
 
 !about                                              : Informations of bot (versions, uptime...)
 !geturl [attachment]                                : Sends a direct URL link to your attachment
-!didivote                                           : Check if you're voted on top.gg. Bot reacts with emoji 👍 or 👎. If bot not registed on top.gg sends 😢
-!botinfo [ID or mention of the bot]                 : Get informations on a Discord bot on top.gg
 !wolfram [question]                                 : What would you like to know about ?
 !googleimage [input]                                : Input your search and he will returns an image
-¤ !speedtest                                        : Run a bot speedtest
 !prefix {set %newPrefix%}                           : changes the server's prefix
 !lang {%langcode%}                                  : Changes the user's language
 
@@ -85,4 +81,3 @@ thanks @mention                                     : you're welcome!
 ^ !log                                              : send log file (clears every 24h)
 ^ !setstatus [play/watch/listen/stream]             : await status of bot
 ^ !update                                           : shell eval: git pull && npm update && restart bot
-^ !dblinfo [getBot/getUser/getVotes/hasVoted] [ID or mention] : get any type of informations on top.gg
