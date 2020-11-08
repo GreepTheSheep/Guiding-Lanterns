@@ -3,7 +3,7 @@ const fs = require('fs');
 
 
 function versionCheck(client) {
-    const channel = client.channels.get('671283971149004801');
+    const channel = client.channels.cache.get('671283971149004801');
     if (!channel) {
         console.log(`Update notifications channel cannot be found`);
         return;

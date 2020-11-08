@@ -7,8 +7,8 @@ async function cross_lanterns(message, client, prefix, getlogchannel, cooldowns)
                 return message.delete()
             }
             // send to disneyFR
-            var webhooks = await client.guilds.find(g=> g.id == "600355162279641108").channels.find(c => c.id == "717018224784310342").fetchWebhooks()
-            //var webhooks = await client.shard.broadcastEval(`await this.guilds.find(g=> g.id == "600355162279641108").channels.find(c => c.id == "717018224784310342").fetchWebhooks()`)
+            var webhooks = await client.guilds.cache.find(g=> g.id == "600355162279641108").channels.cache.find(c => c.id == "717018224784310342").fetchWebhooks()
+            //var webhooks = await client.shard.broadcastEval(`await this.guilds.cache.find(g=> g.id == "600355162279641108").channels.cache.find(c => c.id == "717018224784310342").fetchWebhooks()`)
             var webhook = webhooks.first()
             webhook.send('🏮', {
                 username: message.author.username,
