@@ -99,8 +99,8 @@ client.on('ready', async () => { // If bot was connected:
         console.log(`[Client] connected as ${client.user.tag}`)
         getlogchannel().send(`${client.user.tag} is connected`)
     } else {
-        console.log(`[Client] connected as ${client.user.tag} in shard ${client.shard.id}`)
-        getlogchannel().send(`${client.user.tag} is connected in shard ${client.shard.id}`) 
+        console.log(`[Client] connected as ${client.user.tag} in shard ${client.shard.ids[0]}`)
+        getlogchannel().send(`${client.user.tag} is connected in shard ${client.shard.ids[0]}`) 
     }
 
     if (client.user.id == config.public){
