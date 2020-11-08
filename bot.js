@@ -19,10 +19,7 @@ const client = new Discord.Client({
   const execArgs = process.argv.slice(2);
 if (execArgs.includes('-s')) {
     console.log('Started with shard')
-    console.log = (text) => {
-        console.log(text)
-        client.shard.send(text)
-    }
+    console.log = (text) => client.shard.send(text)
 }
 else {
     console.log('Started without shard')
