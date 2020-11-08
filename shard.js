@@ -9,7 +9,7 @@ const shard = new ShardingManager('./bot.js',{
 
 shard.spawn().catch(e=>console.error(e));
 
-shard.on('launch', shard => console.log(`[SHARD] Shard ${shard.id} started`));
+shard.on('shardCreate', shard => console.log(`[SHARD] Shard ${shard.id} started`));
 
 shard.on('message', (shard, message) => {
   if (message._eval){
