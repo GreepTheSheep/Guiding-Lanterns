@@ -29,7 +29,7 @@ function userItemList(client, args, rUser, cur_json, lang){
         totalItems = totalItems + inv.get(`${rUser.id}_${id}`)
         id++
     }
-    if (rUser === client.users.get(args[0])){
+    if (rUser === client.users.cache.get(args[0])){
         array.push(`\n${lang.inv_total_number2.replace('${user}', rUser.username)} ${totalItems}`)
     } else {
         array.push(`\n${lang.inv_total_number2.replace('${user}', rUser.user.username)} ${totalItems}`)
@@ -79,7 +79,7 @@ function inventory(message, client, prefix, cooldowns, cur_json, lang){
         args.shift()
         var rUser;
         if (message.author.id === "330030648456642562" || message.author.id === "460348027463401472") {
-            rUser =  message.guild.member(message.mentions.users.first()) || client.users.get(args[0])
+            rUser =  message.guild.member(message.mentions.users.first()) || client.users.cache.get(args[0])
         } else {
             rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]))
         }
@@ -91,7 +91,7 @@ function inventory(message, client, prefix, cooldowns, cur_json, lang){
                 .setFooter(`${lang.bal_your} ${bal.get(message.author.id)} ${cur_json.cur.symbol}`)
             return message.channel.send(listembed)
         } else {
-            if (rUser === client.users.get(args[0])){
+            if (rUser === client.users.cache.get(args[0])){
                 if (rUser.bot) return message.reply(lang.inv_bot_err)
                 listembed.setTitle(lang.inv_title.replace('${user}', rUser.username))
             } else {

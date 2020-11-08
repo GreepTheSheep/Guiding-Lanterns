@@ -47,7 +47,7 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
     setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
 
-    if (message.member.roles.find(r => r.name === "KEY (The Guiding Lanterns)")) { //Override cooldown
+    if (message.member.roles.cache.find(r => r.name === "KEY (The Guiding Lanterns)")) { //Override cooldown
         timestamps.delete(message.author.id);
     }
     // End of cooldown implement
@@ -111,7 +111,7 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
             }
         }
         if (args[1].endsWith('.jpg') || args[1].endsWith('.png') || args[1].endsWith('.gif') ||  args[1].endsWith('.jpeg')){
-        if (message.member.roles.find(r=>r.id === '611908442944176140')) {
+        if (message.member.roles.cache.find(r=>r.id === '611908442944176140')) {
             var picsfile = `./data/movies/${args[0].toLowerCase()}_pics.json`
             var pictures = JSON.parse(fs.readFileSync(picsfile, 'utf8'))
             pictures.push(args[1]);

@@ -29,7 +29,7 @@ function help(message, client, prefix, lang, cooldowns) {
         setTimeout(() => timestamps.delete(message.guild.id), cooldownAmount);
 
 
-        if (message.member.roles.find(r => r.name === "KEY (The Guiding Lanterns)")) { //Override cooldown
+        if (message.member.roles.cache.find(r => r.name === "KEY (The Guiding Lanterns)")) { //Override cooldown
             timestamps.delete(message.guild.id);
         }
         // End of cooldown implement        

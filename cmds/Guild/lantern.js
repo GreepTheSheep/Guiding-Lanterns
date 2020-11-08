@@ -14,7 +14,7 @@ function lantern(message, client, prefix, getlogchannel, cooldowns) {
             counter.set(message.guild.id, counter.get(message.guild.id) + 1 )
         }
         // change the topic
-        client.channels.find(c=> c.id == '717018224784310342').setTopic(`🏮 | Vous avez lancé ${counter.get(message.guild.id)} lanternes depuis le début du mini-jeu!\n\n/r/Tangled à lancé ${counter.get('count')} lanternes!`)
+        client.channels.cache.find(c=> c.id == '717018224784310342').setTopic(`🏮 | Vous avez lancé ${counter.get(message.guild.id)} lanternes depuis le début du mini-jeu!\n\n/r/Tangled à lancé ${counter.get('count')} lanternes!`)
     }
 
     if (message.content.startsWith(prefix + 'lanterns')) {
@@ -46,7 +46,7 @@ function lantern(message, client, prefix, getlogchannel, cooldowns) {
             setTimeout(() => timestamps.delete(message.guild.id), cooldownAmount);
 
 
-            if (message.member.roles.find(r => r.name === "KEY (The Guiding Lanterns)")) { //Override cooldown
+            if (message.member.roles.cache.find(r => r.name === "KEY (The Guiding Lanterns)")) { //Override cooldown
                 timestamps.delete(message.guild.id);
             }
             // End of cooldown implement

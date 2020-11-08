@@ -169,7 +169,7 @@ async function parktimes(message, client, prefix, cooldowns, Parks){
     setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
 
 
-    if (message.member.roles.find(r => r.name === "KEY (The Guiding Lanterns)")) { //Override cooldown
+    if (message.member.roles.cache.find(r => r.name === "KEY (The Guiding Lanterns)")) { //Override cooldown
         timestamps.delete(message.author.id);
     }
     // End of cooldown implement

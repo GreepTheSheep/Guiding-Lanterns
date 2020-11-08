@@ -45,7 +45,7 @@ module.exports = {
             });
             if (!logchannel) return console.log('Invite tracker channel not found');
             if (invite) {
-                const inviter = member.client.users.get(invite.inviter.id)
+                const inviter = member.client.users.cache.get(invite.inviter.id)
                 if (!inviter) return logchannel.send(
                     `${member.user.tag} joined using invite code ${invite.code} from a unknown inviter. Invite was used ${invite.uses} times since its creation.`
                 );

@@ -65,7 +65,7 @@ function gtn(message, client, prefix, functiondate, functiontime, getlogchannel,
         if (message.author.id == '330030648456642562'  || message.author.id === "460348027463401472"){
             let messageArray = message.content.split(" ");
             let args = messageArray.slice(1);
-            let rUser = message.guild.member(message.mentions.users.first() || client.users.get(args[0]))
+            let rUser = message.guild.member(message.mentions.users.first() || client.users.cache.get(args[0]))
             if (!rUser) return message.react('❌')
             message.channel.send(`\`\`\`User: ${rUser.user.username} - ${rUser.user.tag} - ${rUser.id}\n\nGenerated number for him: ${GTN_db.get(rUser.id+'_number')}\nAttempts: ${GTN_db.get(rUser.id+'_try')}\nTotal GTN wins: ${GTN_db.get(rUser.id+'_wins')}\`\`\``)
         } else return;
@@ -74,13 +74,13 @@ function gtn(message, client, prefix, functiondate, functiontime, getlogchannel,
         if (message.author.id == '330030648456642562'  || message.author.id === "460348027463401472"){
             let messageArray = message.content.split(" ");
             let args = messageArray.slice(1);
-            let rUser = message.guild.member(message.mentions.users.first() || client.users.get(args[0]))
+            let rUser = message.guild.member(message.mentions.users.first() || client.users.cache.get(args[0]))
             if (!rUser) return message.react('❌')
             var randomnum = Math.random() * (+max - +min) + +min;
             GTN_db.set(rUser.id+'_number', Number(randomnum.toFixed(0)))
             GTN_db.set(rUser.id+'_try', 0)
             GTN_db.set(rUser.id+'_wins', 0)
-            client.users.get(rUser.id).send(lang.gtn_statsresetmsg + ': https://discord.gg/Nzherng')
+            client.users.cache.get(rUser.id).send(lang.gtn_statsresetmsg + ': https://discord.gg/Nzherng')
             message.channel.send(`All stats for ${rUser.user.username} has been reseted`)
         } else return;
     }

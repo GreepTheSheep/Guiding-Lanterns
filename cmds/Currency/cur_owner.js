@@ -10,10 +10,10 @@ function cur_owner(message, client, prefix, cooldowns, cur_json, lang, config){
             let args = message.content.split(" ")
             args.shift()
             if (args.length < 1) return message.react('❌')
-            let rUser = message.guild.member(message.mentions.users.first() || client.users.get(args[0]))
+            let rUser = message.guild.member(message.mentions.users.first() || client.users.cache.get(args[0]))
             if (!rUser) return message.react('❌')
             if (!args[1]) return message.react('❌')
-            if (rUser != client.users.get(args[0])){
+            if (rUser != client.users.cache.get(args[0])){
                 if (rUser.user.bot) return message.react('❌')
             } else {
                 if (rUser.bot) return message.react('❌')
@@ -25,10 +25,10 @@ function cur_owner(message, client, prefix, cooldowns, cur_json, lang, config){
             let args = message.content.split(" ")
             args.shift()
             if (args.length < 1) return message.react('❌')
-            let rUser = message.guild.member(message.mentions.users.first() || client.users.get(args[0]))
+            let rUser = message.guild.member(message.mentions.users.first() || client.users.cache.get(args[0]))
             if (!rUser) return message.react('❌')
             if (!args[1]) return message.react('❌')
-            if (rUser != client.users.get(args[0])){
+            if (rUser != client.users.cache.get(args[0])){
                 if (rUser.user.bot) return message.react('❌')
             } else {
                 if (rUser.bot) return message.react('❌')
@@ -43,9 +43,9 @@ function cur_owner(message, client, prefix, cooldowns, cur_json, lang, config){
             let args = message.content.split(" ")
             args.shift()
             if (args.length < 1) return message.react('❌')
-            let rUser = message.guild.member(message.mentions.users.first() || client.users.get(args[0]))
+            let rUser = message.guild.member(message.mentions.users.first() || client.users.cache.get(args[0]))
             if (!rUser) return message.react('❌')
-            if (rUser != client.users.get(args[0])){
+            if (rUser != client.users.cache.get(args[0])){
                 if (rUser.user.bot) return message.react('❌')
             } else {
                 if (rUser.bot) return message.react('❌')
@@ -55,7 +55,7 @@ function cur_owner(message, client, prefix, cooldowns, cur_json, lang, config){
                 inv.set(`${rUser.id}_${id}`, 0)
                 id++
             }
-            client.users.get(rUser.id).send(lang.inv_resetmsg)
+            client.users.cache.get(rUser.id).send(lang.inv_resetmsg)
             message.react('✅')
         }
     }
