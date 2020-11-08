@@ -11,7 +11,7 @@ module.exports = {
         wait(1000);
 
         // Load all invites for all guilds and save them to the cache.
-        client.guilds.forEach(async g => {
+        client.guilds.cache.forEach(async g => {
             try {
                 if (g == '562602234265731080'){
                     const guildInvites = await g.fetchInvites();

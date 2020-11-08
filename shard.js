@@ -11,11 +11,6 @@ shard.spawn().catch(e=>console.error(e));
 
 shard.on('shardCreate', shard => console.log(`[SHARD] Shard ${shard.id} started`));
 
-shard.on('message', (shard, message) => {
-  if (message._eval){
-    console.log(`Shard #${shard.id} : ${message._eval} : ${message._result}`);
-    console.log(message._result)
-  } else {
-    console.log(message)
-  }
+shard.on('message', (message) => {
+  console.log(message)
 });
