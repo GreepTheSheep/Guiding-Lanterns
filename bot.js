@@ -1,6 +1,6 @@
 try{
 const Discord = require('discord.js'); // Defines the Discord.js library
-const {Attachment} = require('discord.js') // Defines attachment config (for sending files)
+const {MessageAttachment} = require('discord.js') // Defines attachment config (for sending files)
 const client = new Discord.Client({
     fetchAllMembers: true,
     autoReconnect: true
@@ -131,7 +131,7 @@ client.on('ready', async () => { // If bot was connected:
 
         const loginterval = function() { // send automatic log file
             console.log(`[ ${functiondate()} - ${functiontime()} ] Sending log file...`)
-            const attachment = new Attachment('./logs/bot.log') // Defines the log file to send
+            const attachment = new MessageAttachment('./logs/bot.log') // Defines the log file to send
             getlogchannel().send('Daily log file:', attachment) // Send the file
             .then(function(){
                 console.log(`[ ${functiondate()} - ${functiontime()} ] Log file sent, erasing old file...`)
@@ -161,7 +161,7 @@ client.on('ready', async () => { // If bot was connected:
         
         const interval = new Promise(function() {
             setInterval(function() {
-                const attachment = new Attachment('./logs/bot_nightly.log')
+                const attachment = new MessageAttachment('./logs/bot_nightly.log')
                 getlogchannel().send('Log file:', attachment)
                 .then(m=>fs.writeFileSync('./logs/bot_nightly.log', ''))
                 .catch(err=>getlogchannel().send('Error during sending the log file: ' + err + '\nThe file was anyway recreated').then(fs.writeFileSync('./logs/bot_nightly.log', '')))

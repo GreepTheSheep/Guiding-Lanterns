@@ -161,7 +161,7 @@ async function parktimes(message, client, prefix, cooldowns, Parks){
             totalSeconds %= 3600;
             let minutes = Math.floor(totalSeconds / 60);
             let seconds = totalSeconds % 60;
-            return message.react('⌚').then(message.delete(5000))
+            return message.react('⌚').then(message.delete({timeout: 5000}))
         }
     }
 

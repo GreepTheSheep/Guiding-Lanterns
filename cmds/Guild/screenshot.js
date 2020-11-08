@@ -2,7 +2,7 @@
 // Edited for Corona Lanterns by Greep#3022
 
 // require the discord.js module
-const { Attachment } = require('discord.js');
+const { MessageAttachment } = require('discord.js');
 const Discord = require('discord.js');
 
 const fs = require('fs');
@@ -108,7 +108,7 @@ function upload_scr_png(message, filename, timemark, displayid, prefix, getlogch
     const ffmpeg = require('fluent-ffmpeg');
     ffmpeg(filename)
         .on('end', function() {
-            const attachment = new Attachment('./data/screenshot.png');
+            const attachment = new MessageAttachment('./data/screenshot.png');
             message.channel.send(`${message.author}\nScreenshot of ${displayid} taken at ${timemark}`, attachment)
             .then(m=>message.channel.stopTyping(true));
         })
@@ -136,7 +136,7 @@ function upload_scr_jpg(message, filename, timemark, displayid, prefix, getlogch
     const ffmpeg = require('fluent-ffmpeg');
     ffmpeg(filename)
         .on('end', function() {
-            const attachment = new Attachment('./data/screenshot.jpg');
+            const attachment = new MessageAttachment('./data/screenshot.jpg');
             message.channel.send(`${message.author}\nScreenshot of ${displayid} taken at ${timemark}`, attachment)
             .then(m=>message.channel.stopTyping(true));
         })

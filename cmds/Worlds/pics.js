@@ -39,7 +39,7 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
             totalSeconds %= 3600;
             let minutes = Math.floor(totalSeconds / 60);
             let seconds = totalSeconds % 60;
-            return message.reply('Please wait again ' + minutes + ' minutes and ' + seconds + ' seconds before seeing a new picture of your movie.').then(m=>{m.delete(10000) ; message.delete(10000)})
+            return message.reply('Please wait again ' + minutes + ' minutes and ' + seconds + ' seconds before seeing a new picture of your movie.').then(m=>{m.delete({timeout: 10000}) ; message.delete({timeout: 10000})})
         }
     }
 

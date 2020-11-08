@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const fs = require('fs')
 
 function errorgenerating(message, err, date, time, logchannel) {
-    message.channel.send('Error during generating files, see log channel for more details').then(m=>m.delete(15000))
+    message.channel.send('Error during generating files, see log channel for more details').then(m=>m.delete({timeout: 15000}))
     const errorlog = `Error during generating files: ${err}`
     logchannel.send(errorlog)
     console.log(`[${date()} - ${time()}] ${errorlog}`)
@@ -15,10 +15,10 @@ function worlds(message, client, prefix, date, time, logchannel) {
                 args.shift()
                 if (args.length < 1) return message.react('❌')
                 const path = `./data/movies/${args.join("-").toLowerCase()}`
-                message.delete(15000)
+                message.delete({timeout: 15000})
                 message.channel.send('Generating files...')
                 .then(async m=>{
-                    m.delete(15000)
+                    m.delete({timeout: 15000})
                     fs.writeFile(path+'_pics.json', '[]', function(err){ if (err) {errorgenerating(message, err, date, time, logchannel)}})
                     fs.writeFile(path+'_quotes.json', '[]', function(err){ if (err) {errorgenerating(message, err, date, time, logchannel)}})
                     m.edit('Files successfully generated!')

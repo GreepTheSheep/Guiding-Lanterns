@@ -13,16 +13,16 @@ async function status(message, client, prefix) {
         collector.on('collect', m => {
             
             if (args[0] === "playing" || args[0] === "play") {
-                message.channel.send(`The status of the bot has been set to "Playing **${m.content}**" !`).then(mbot=> mbot.delete(5000))
+                message.channel.send(`The status of the bot has been set to "Playing **${m.content}**" !`).then(mbot=> mbot.delete({timeout: 5000}))
                 client.user.setActivity(m.content);
             } else if (args[0] === "watching" || args[0] === "watch") {
-                message.channel.send(`The status of the bot has been set to "Watching **${m.content}**" !`).then(mbot=> mbot.delete(5000))
+                message.channel.send(`The status of the bot has been set to "Watching **${m.content}**" !`).then(mbot=> mbot.delete({timeout: 5000}))
                 client.user.setActivity(m.content, { type: 'WATCHING' })
             } else if (args[0] === "listening" || args[0] === "listen") {
-                message.channel.send(`The status of the bot has been set to "Listening **${m.content}**" !`).then(mbot=> mbot.delete(5000))
+                message.channel.send(`The status of the bot has been set to "Listening **${m.content}**" !`).then(mbot=> mbot.delete({timeout: 5000}))
                 client.user.setActivity(m.content, { type: 'LISTENING' })
             } else if (args[0] === "streaming" || args[0] === "stream") {
-                message.channel.send(`The status of the bot has been set to "Streaming **${m.content}**" !`).then(mbot=> mbot.delete(5000))
+                message.channel.send(`The status of the bot has been set to "Streaming **${m.content}**" !`).then(mbot=> mbot.delete({timeout: 5000}))
                 client.user.setActivity(m.content, { type: 'STREAMING', url: 'https://twitch.tv/greeplive' })
             }
             m.delete()
@@ -31,7 +31,7 @@ async function status(message, client, prefix) {
         collector.on('end', (collected, reason) => {
             if (reason == 'time'){
                 const nothingsetmsg = `You put nothing? Okay, I set nothing ¯\\_(ツ)_/¯`
-                message.channel.send(nothingsetmsg).then(mbot=> mbot.delete(5000))
+                message.channel.send(nothingsetmsg).then(mbot=> mbot.delete({timeout: 5000}))
                 client.user.setActivity()
                 message.delete()
                 awaitmsg.delete()

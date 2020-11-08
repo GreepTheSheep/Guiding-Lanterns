@@ -39,7 +39,7 @@ function quotes(message, client, prefix, date, time, logchannel, cooldowns, conf
             totalSeconds %= 3600;
             let minutes = Math.floor(totalSeconds / 60);
             let seconds = totalSeconds % 60;
-            return message.reply('Please wait again ' + minutes + ' minutes and ' + seconds + ' seconds before seeing a new quote of your movie.').then(m=>{m.delete(10000) ; message.delete(10000)})
+            return message.reply('Please wait again ' + minutes + ' minutes and ' + seconds + ' seconds before seeing a new quote of your movie.').then(m=>{m.delete({timeout: 10000}) ; message.delete({timeout: 10000})})
         }
     }
 
@@ -84,7 +84,7 @@ function quotes(message, client, prefix, date, time, logchannel, cooldowns, conf
         if (message.author.id == config.owner) {
             const args = message.content.split(" ");
             args.shift()
-            message.delete(10000)
+            message.delete({timeout: 10000})
             const text = args.join(' ')
             if (args.length < 1) return message.react('❌')
             var quotefile = `./data/movies/${args[0].toLowerCase()}_quotes.json`
@@ -92,7 +92,7 @@ function quotes(message, client, prefix, date, time, logchannel, cooldowns, conf
             quotes.push(text.slice(args[0].length+1));
             quoteread = JSON.stringify(quotes);
             fs.writeFile(quotefile, quoteread, function(err){if (err){
-                message.reply('I think the file does not exist').then(m=>m.delete(10000))
+                message.reply('I think the file does not exist').then(m=>m.delete({timeout: 10000}))
             }});
             message.react('✅')
         }

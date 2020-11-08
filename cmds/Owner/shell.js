@@ -1,4 +1,4 @@
-const { Attachment } = require('discord.js');
+const { MessageAttachment } = require('discord.js');
 const Discord = require('discord.js');
 const shell = require('shelljs');
 const fs = require('fs');
@@ -25,7 +25,7 @@ function command(message, client, prefix) {
                             console.log(err);
                             message.reply(`FS error: ${err}`)
                         }
-                        const attachment = new Attachment('./logs/shelleval.log')
+                        const attachment = new MessageAttachment('./logs/shelleval.log')
                         message.reply('Output is more than 2000 characters, see attachment', attachment)
                         .then(m=>message.channel.stopTyping(true))
                     })

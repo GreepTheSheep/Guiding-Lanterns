@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 const fs = require('fs');
-const { Attachment } = require('discord.js');
+const { MessageAttachment } = require('discord.js');
 
  function clean(text) {
     if (typeof(text) === "string")
@@ -27,7 +27,7 @@ const { Attachment } = require('discord.js');
                     console.log(err);
                     message.reply(`FS error: ${err}`)
                 }
-                const attachment = new Attachment('./logs/eval.log')
+                const attachment = new MessageAttachment('./logs/eval.log')
                 message.reply('Output is more than 2000 characters, see attachment', attachment)
             })
             

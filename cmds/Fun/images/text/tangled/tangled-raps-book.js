@@ -1,5 +1,5 @@
 const Discord = require('discord.js')
-const { Attachment } = require('discord.js');
+const { MessageAttachment } = require('discord.js');
 const fs = require('fs')
 const request = require('request')
 const gm = require('gm')
@@ -46,7 +46,7 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
         args.shift()
 
         if (args.length < 1) {
-            const attachment = new Attachment(request(imgurl));
+            const attachment = new MessageAttachment(request(imgurl));
             message.channel.send(attachment)
         } else {
             text = args.join(' ')
@@ -65,7 +65,7 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
                     message.reply(lang.error_reported)
                     console.log(err)
                 } else {
-                    const attachment = new Attachment('./data/images/rapsbook.png');
+                    const attachment = new MessageAttachment('./data/images/rapsbook.png');
                     message.channel.send(attachment)
                 }
             });
