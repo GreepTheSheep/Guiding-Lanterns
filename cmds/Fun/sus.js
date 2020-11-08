@@ -25,7 +25,7 @@ function au_sus(message, client, prefix){
 
 .　　 。　　　ﾟ　　 ඞ  。 . 　　 • 　　　　•
             
-　　ﾟ　　 ${args.join(' ')} was ${isimp}An Impostor.　 。　•
+　　ﾟ　　 ${args.join(' ')} was ${isimp}The Impostor.　 。　•
 
 .　　　'　　${impnum} Impostor${impnum == 1? '' : 's'} remain.　　。　　ﾟ
 
