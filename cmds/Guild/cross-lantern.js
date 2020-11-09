@@ -21,7 +21,7 @@ async function cross_lanterns(message, client, prefix, getlogchannel, cooldowns)
                 return message.delete()
             }
             // send to r/tangled
-            var webhooks = await client.guilds.find(g=> g.id == "562602234265731080").channels.find(c => c.id == "663693329187471370").fetchWebhooks()
+            var webhooks = await client.guilds.cache.find(g=> g.id == "562602234265731080").channels.find(c => c.id == "663693329187471370").fetchWebhooks()
             // var webhooks = await client.shard.broadcastEval(`await this.guilds.find(g=> g.id == "562602234265731080").channels.find(c => c.id == "663693329187471370").fetchWebhooks()`)
             var webhook = webhooks.first()
             webhook.send('<:Lantern:570822664789426186>', {
