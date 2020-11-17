@@ -57,8 +57,8 @@ async function welcome(message, client, prefix, cooldowns) {
         ];
     
         let welcomemsg = randomItem(messages);
-        var total = message.guild.members.array().length;
-        var bots = message.guild.members.filter(m => m.user.bot).size; 
+        var total = message.guild.members.cache.array().length;
+        var bots = message.guild.members.cache.filter(m => m.user.bot).size; 
         var members = total - bots;
     
         let embed = new Discord.RichEmbed()
