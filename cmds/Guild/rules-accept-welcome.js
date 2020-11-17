@@ -57,18 +57,15 @@ async function welcome(message, client, prefix, cooldowns) {
         ];
     
         let welcomemsg = randomItem(messages);
-        var total = message.guild.members.cache.array().length;
-        var bots = message.guild.members.cache.filter(m => m.user.bot).size; 
-        var members = total - bots;
     
         let embed = new Discord.MessageEmbed()
         embed.setColor("#01B023")
         .setTimestamp()
         .addField(`${welcomemsg}`, `Hey, **say welcome to __${message.author.username}__** 🙌`)
         .setThumbnail('http://www.youloveit.com/uploads/posts/2017-11/1511021094_youloveit_com_tangled_the_series_animated_gifs_emotions03.gif')
-        .setFooter(`${message.author.tag} just landed in the Kingdom of Corona! We are now ${members} in the server`, `${message.author.displayAvatarURL()}`)
+        .setFooter(`${message.author.tag} just landed in the Kingdom of Corona!`, `${message.author.displayAvatarURL()}`)
         client.guilds.cache.get('562602234265731080').channels.cache.get('658808055558832132').send(embed);
-        client.guilds.cache.get('562602234265731080').channels.cache.get('615236807478607921').send(`\`+\` ${user.username}`);
+        client.guilds.cache.get('562602234265731080').channels.cache.get('615236807478607921').send(`\`+\` ${message.author.username}`);
   
     }
 }
