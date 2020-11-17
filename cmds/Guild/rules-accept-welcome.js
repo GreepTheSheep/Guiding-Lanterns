@@ -61,7 +61,7 @@ async function welcome(message, client, prefix, cooldowns) {
         var bots = message.guild.members.cache.filter(m => m.user.bot).size; 
         var members = total - bots;
     
-        let embed = new Discord.RichEmbed()
+        let embed = new Discord.MessageEmbed()
         embed.setColor("#01B023")
         .setTimestamp()
         .addField(`${welcomemsg}`, `Hey, **say welcome to __${message.author.username}__** 🙌`)
