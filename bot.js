@@ -105,13 +105,13 @@ client.on('ready', async () => { // If bot was connected:
 
     if (client.user.id == config.public){
 
-        client.channels.cache.get('741594861408354325').messages.fetch('754365382189514802').then(m => {
-            console.log("Cached reaction (rules accept) message.");
-            console.log(m.content)
-        }).catch(e => {
-        console.error("Error loading (rules accept) message.");
-        console.error(e);
-        });
+        // client.channels.cache.get('741594861408354325').messages.fetch('754365382189514802').then(m => {
+        //     console.log("Cached reaction (rules accept) message.");
+        //     console.log(m.content)
+        // }).catch(e => {
+        // console.error("Error loading (rules accept) message.");
+        // console.error(e);
+        // });
 
         /*
         const lant_num_members_guild = () => num_members_guild(client, "562602234265731080", channel_id.members);
