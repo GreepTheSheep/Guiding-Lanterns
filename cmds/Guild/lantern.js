@@ -9,12 +9,12 @@ function lantern(message, client, prefix, getlogchannel, cooldowns) {
             counter.set('count', counter.get('count') + 1 )
         }
     } else if (message.guild.id == '600355162279641108') {
-        if (message.content.includes('🏮')) {
+        if (message.content.includes('<:Lanterne:717500316987162655>')) {
             if (!counter.has(message.guild.id)) counter.set(message.guild.id, 0)
             counter.set(message.guild.id, counter.get(message.guild.id) + 1 )
         }
         // change the topic
-        client.channels.cache.find(c=> c.id == '717018224784310342').setTopic(`🏮 | Vous avez lancé ${counter.get(message.guild.id)} lanternes depuis le début du mini-jeu!\n\n/r/Tangled à lancé ${counter.get('count')} lanternes!`)
+        client.channels.cache.find(c=> c.id == '717018224784310342').setTopic(`<:Lanterne:717500316987162655> | Vous avez lancé ${counter.get(message.guild.id)} lanternes depuis le début du mini-jeu!\n\n/r/Tangled à lancé ${counter.get('count')} lanternes!`)
     }
 
     if (message.content.startsWith(prefix + 'lanterns')) {

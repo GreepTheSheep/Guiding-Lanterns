@@ -105,13 +105,13 @@ client.on('ready', async () => { // If bot was connected:
 
     if (client.user.id == config.public){
 
-        client.channels.cache.get('741594861408354325').messages.fetch('754365382189514802').then(m => {
-            console.log("Cached reaction (rules accept) message.");
-            console.log(m.content)
-        }).catch(e => {
-        console.error("Error loading (rules accept) message.");
-        console.error(e);
-        });
+        // client.channels.cache.get('741594861408354325').messages.fetch('754365382189514802').then(m => {
+        //     console.log("Cached reaction (rules accept) message.");
+        //     console.log(m.content)
+        // }).catch(e => {
+        // console.error("Error loading (rules accept) message.");
+        // console.error(e);
+        // });
 
         /*
         const lant_num_members_guild = () => num_members_guild(client, "562602234265731080", channel_id.members);
@@ -254,10 +254,10 @@ client.on('guildDelete', async guild => { // If the bot leave a server
 })
 
 client.on('messageReactionAdd', (reaction, user) => {
-    if (reaction.message.guild.id == '562602234265731080') { // r/Tangled
-        const role_react_accept_rules = require('./events/react-accept-rules-welcome.js')
-        role_react_accept_rules(client, reaction, user, getlogchannel(), functiondate(), functiontime())
-    }
+    // if (reaction.message.guild.id == '562602234265731080') { // r/Tangled
+    //     const role_react_accept_rules = require('./events/react-accept-rules-welcome.js')
+    //     role_react_accept_rules(client, reaction, user, getlogchannel(), functiondate(), functiontime())
+    // }
 
     const starboard = require('./events/starboard.js')
     starboard(client, reaction, getlogchannel(), functiondate(), functiontime())

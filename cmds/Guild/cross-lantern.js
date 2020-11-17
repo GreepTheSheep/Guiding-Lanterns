@@ -10,14 +10,14 @@ async function cross_lanterns(message, client, prefix, getlogchannel, cooldowns)
             var webhooks = await client.guilds.cache.find(g=> g.id == "600355162279641108").channels.cache.find(c => c.id == "717018224784310342").fetchWebhooks()
             //var webhooks = await client.shard.broadcastEval(`await this.guilds.cache.find(g=> g.id == "600355162279641108").channels.cache.find(c => c.id == "717018224784310342").fetchWebhooks()`)
             var webhook = webhooks.first()
-            webhook.send('🏮', {
+            webhook.send('<:Lanterne:717500316987162655>', {
                 username: message.author.username,
                 avatarURL: message.author.displayAvatarURL(),
             })
         }
     } else if (message.guild.id == '600355162279641108') { // disneyFR
         if (message.channel.id == '717018224784310342'){
-            if (!message.content.includes('🏮')) {
+            if (!message.content.includes('<:Lanterne:717500316987162655>')) {
                 return message.delete()
             }
             // send to r/tangled
