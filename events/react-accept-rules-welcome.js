@@ -32,16 +32,13 @@ async function role_react_accept_rules(client, reaction, user, getlogchannel, fu
             ];
         
             let welcomemsg = randomItem(messages);
-            var total = reaction.message.guild.members.cache.array().length;
-            var bots = reaction.message.guild.members.cache.filter(m => m.user.bot).size; 
-            var members = total - bots;
         
             let embed = new Discord.MessageEmbed()
             embed.setColor("#01B023")
             .setTimestamp()
             .addField(`${welcomemsg}`, `Hey, **say welcome to __<@${user.id}>__** 🙌`)
             .setThumbnail('http://www.youloveit.com/uploads/posts/2017-11/1511021094_youloveit_com_tangled_the_series_animated_gifs_emotions03.gif')
-            .setFooter(`${user.tag} just landed in the Kingdom of Corona! We are now ${members} in the server`, `${user.displayAvatarURL()}`)
+            .setFooter(`${user.tag} just landed in the Kingdom of Corona!`, `${user.displayAvatarURL()}`)
             client.guilds.cache.get('562602234265731080').channels.cache.get('658808055558832132').send(embed);
             client.guilds.cache.get('562602234265731080').channels.cache.get('615236807478607921').send(`\`+\` ${user.username}`);
         }
