@@ -21,7 +21,7 @@
     "author": "Greep",
     "license": "Apache-2.0",
     "dependencies": {
-        "auto-line-breaks": "1.0.0",
+        "auto-line-breaks": "^1.0.2",
         "better-sqlite-pool": "^0.3.0",
         "better-sqlite3": "^7.1.1",
         "bufferutil": "^4.0.2",
