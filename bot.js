@@ -5,16 +5,24 @@ const client = new Discord.Client({
     fetchAllMembers: true,
     autoReconnect: true
   });
-  const fs = require('fs');
-  const configfile = "./data/config.json";
-  const config = JSON.parse(fs.readFileSync(configfile, "utf8")); // Retrieves the contents of the configuration file (the prefix and the login token)
-  const packagefile = "./package.json";
-  const package = JSON.parse(fs.readFileSync(packagefile, "utf8"));
-  const Themeparks = require('themeparks')
-  const ThemeparksList = {};
-  for (const park in Themeparks.Parks) {
+const fs = require('fs');
+const configfile = "./data/config.json";
+const config = JSON.parse(fs.readFileSync(configfile, "utf8")); // Retrieves the contents of the configuration file (the prefix and the login token)
+const packagefile = "./package.json";
+const package = JSON.parse(fs.readFileSync(packagefile, "utf8"));
+const Themeparks = require('themeparks')
+const ThemeparksList = {};
+for (const park in Themeparks.Parks) {
     ThemeparksList[park] = new Themeparks.Parks[park]();
 }
+
+const DiscordPlayer = require("discord-player");
+const player = new DiscordPlayer.Player(client, {
+    leaveOnEmptyCooldown: 30 * 1000
+});
+client.player = player;
+
+require('./events/player')(client)
 
   const execArgs = process.argv.slice(2);
 if (execArgs.includes('-s')) {

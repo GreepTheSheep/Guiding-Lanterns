@@ -30,6 +30,7 @@
         "country-data": "0.0.31",
         "dateformat": "^3.0.3",
         "discord-emoji": "^1.1.1",
+        "discord-player": "3.0.2",
         "discord.js": "^12.3.1",
         "download": "^8.0.0",
         "enmap": "^5.8.2",
