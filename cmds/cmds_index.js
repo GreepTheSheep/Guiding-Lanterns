@@ -30,20 +30,12 @@ function cmds_index(message, client, prefix, config, functiondate, functiontime,
     const worldsmanager = require('./Owner/worlds.js')
     worldsmanager(message, client, prefix, functiondate, functiontime, getlogchannel())
     }
-
     /*--------------------------------
     ------------ Currency ------------
     --------------------------------*/
     
     const currency_cmds = require('./Currency/cur_index.js');
     currency_cmds(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, guildPrefix, userLang, lang, langtext, config);
-
-     /*--------------------------------
-    ---------- Music Player ----------
-    --------------------------------*/
-    
-    const discord_player = require('./Music/_yt_index.js');
-    discord_player(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, guildPrefix, userLang, lang, langtext, config);
     
     /*--------------------------------
     ------------- Worlds -------------
