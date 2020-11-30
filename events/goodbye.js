@@ -21,7 +21,7 @@ function goodbye(member, client) {
     
     if (member.guild.id === '562602234265731080'){
         if (member.user.bot) return
-        if (member.roles.some(r => r.id === "675436155453308959")) return
+        if (!member.roles.some(r => r.id === "562608575227363329")) return
         let embed = new Discord.MessageEmbed()
         embed.setColor("#910002")
         .setTimestamp()
@@ -29,7 +29,7 @@ function goodbye(member, client) {
         .setThumbnail('http://www.youloveit.com/uploads/posts/2017-11/1511021113_youloveit_com_tangled_the_series_animated_gifs_emotions09.gif')
         .setFooter(`${member.user.tag} left the Kingdom of Corona! We are now ${members} in the server`, `${member.user.displayAvatarURL()}`)
         client.guilds.cache.get('562602234265731080').channels.cache.get('658808055558832132').send(embed);
-        client.guilds.cache.get('562602234265731080').channels.cache.get('615236807478607921').send(`\`-\` ${member.user.username}`);
+        client.guilds.cache.get('562602234265731080').channels.cache.get('663096647437516810').send(`\`-\` ${member.user.username}`);
     }
 }
 
