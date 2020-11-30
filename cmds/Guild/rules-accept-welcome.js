@@ -65,7 +65,7 @@ async function welcome(message, client, prefix, cooldowns) {
         .setThumbnail('http://www.youloveit.com/uploads/posts/2017-11/1511021094_youloveit_com_tangled_the_series_animated_gifs_emotions03.gif')
         .setFooter(`${message.author.tag} just landed in the Kingdom of Corona!`, `${message.author.displayAvatarURL()}`)
         client.guilds.cache.get('562602234265731080').channels.cache.get('658808055558832132').send(embed);
-        client.guilds.cache.get('562602234265731080').channels.cache.get('615236807478607921').send(`\`+\` ${message.author.username}`);
+        client.guilds.cache.get('562602234265731080').channels.cache.get('663096647437516810').send(`\`+\` ${message.author.username}`);
   
     }
 }
