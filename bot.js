@@ -203,26 +203,18 @@ client.on('message', message => { // If any message was recived
 });
 
 client.on('guildMemberAdd', member => { // If any member join a server (or guild in Discord language)
-    if (member.guild.id === '562602234265731080'|| member.guild.id === '570024448371982373') { // If the member join Kingdom of Corona, do the welcome script
-        if (member.guild.id === '562602234265731080') inviteTracker.track(client, member);
-        console.log(`\n${member.user.tag} joined ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who joined
+    if (member.guild.id === '562602234265731080') { // If the member join Kingdom of Corona, do the welcome script
+        inviteTracker.track(client, member);
     }
-    /*
-    const lant_num_members_guild = () => num_members_guild(client, "570024448371982373", channel_id.nightly_members);
-    if (client.user.id == config.public || client.user.id == nightly) lant_num_members_guild(); //Change the members count (+1)
-    */
+    console.log(`\n${member.user.tag} joined ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who joined
 })
 
 client.on('guildMemberRemove', member => { // If any member leave a server (or guild in Discord language)
-    if (member.guild.id === '562602234265731080' || member.guild.id === '570024448371982373') { // If the member leave Kingdom of Corona, do the goodbye script
+    if (member.guild.id === '562602234265731080') { // If the member leave Kingdom of Corona, do the goodbye script
         const goodbye = require('./events/goodbye.js');
         goodbye(member, client);
-        console.log(`\n${member.user.tag} left ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who left
     }
-    /*
-    const lant_num_members_guild = () => num_members_guild(client, "570024448371982373", channel_id.nightly_members);
-    if (client.user.id == config.public || client.user.id == nightly) lant_num_members_guild(); //Change the members count (-1)
-    */
+    console.log(`\n${member.user.tag} left ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who left
 })
 
 client.on('guildCreate', async guild => { // If the bot join a server
@@ -278,7 +270,7 @@ client.on('reconnecting', () => {
 })
 
 client.on('debug', text => {
-    if (execArgs.includes('-n')) {
+    if (!text.toLowerCase().includes('heartbeat') || execArgs.includes('-n')){
         console.log(text)
     }
 })
