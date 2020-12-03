@@ -213,6 +213,7 @@ client.on('guildMemberRemove', member => { // If any member leave a server (or g
     if (member.guild.id === '562602234265731080') { // If the member leave Kingdom of Corona, do the goodbye script
         const goodbye = require('./events/goodbye.js');
         goodbye(member, client);
+        if (member.user.bot) return
     }
     console.log(`\n${member.user.tag} left ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who left
 })
