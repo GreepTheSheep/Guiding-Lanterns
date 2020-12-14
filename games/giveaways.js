@@ -4,7 +4,7 @@ const ms = require("ms");
 
 function giveawayCommands(message, client, prefix, functiondate, functiontime, getlogchannel, lang){
     if (message.content.toLowerCase().startsWith(prefix + 'giveaway')){
-        const args = message.content.split(" ").slice(1);
+        var args = message.content.split(" ").slice(1);
         if (args.length < 1 || args[0].toLowerCase() == 'help'){
             let embed = new Discord.MessageEmbed
             embed.setTitle(lang.giveaway_help_title.replace('${username}', client.user.username))
