@@ -133,7 +133,7 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
         } else if (args[0].toLowerCase() == 'list'){
             args = args.slice(1)
             var list = client.giveawaysManager.giveaways.filter((g) => g.guildID === message.guild.id)
-            message.channel.send(list)
+            message.channel.send(JSON.stringify(list, null, 2))
 
         }
     }
