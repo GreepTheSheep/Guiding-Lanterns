@@ -48,6 +48,24 @@ const Enmap = require("enmap"); // Define enmap, a database integrated with the 
 const guildPrefix = new Enmap({name: "guildPrefix"}); // Define a new table for custom prefixes
 const userLang = new Enmap({name: "user_languages"}); // Define a new table for user languages
 
+const DiscordGiveaways = require("discord-giveaways");
+const GiveawayManager = class extends DiscordGiveaways.GiveawaysManager {
+    async refreshStorage(){
+        return client.shard.broadcastEval(() => this.giveawaysManager.getAllGiveaways());
+    }
+};
+const giveawaysManager = new GiveawayManager(client, {
+    storage: './data/giveaways.json',
+    updateCountdownEvery: 120 * 1000,
+    default: {
+        botsCanWin: false,
+        exemptPermissions: [ "MANAGE_MESSAGES", "ADMINISTRATOR" ],
+        embedColor: "#FF0000",
+        reaction: "🎉"
+    }
+});
+client.giveawaysManager = giveawaysManager;
+
 const getGuildPrefix = (message) => {
     if (!guildPrefix.has(message.guild.id)) guildPrefix.set(message.guild.id, config.prefix) // If the server has not a prefix, give the default one
     return guildPrefix.get(message.guild.id); // Gives the prefix for the server
