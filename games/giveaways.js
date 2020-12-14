@@ -133,7 +133,15 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
         } else if (args[0].toLowerCase() == 'list'){
             args = args.slice(1)
             var list = client.giveawaysManager.giveaways.filter((g) => g.guildID === message.guild.id)
-            message.channel.send(JSON.stringify(list, null, 2))
+            var current = []
+            list.forEach(g=>{
+                if (!g.ended) current.push(`- \`${g.messageID}\` ([Click Me](https://discord.com/channels/${g.guildID}/${g.messageID})) - <#${g.channelID}> - ${g.prize} - ${lang.giveaway_endsIn} ${ms(g.endAt,{long:true})}`)
+            })
+            let embed = new Discord.MessageEmbed
+            embed.setTitle(lang.giveaway_list_title)
+            .setDescription(list.join('\n'))
+            .setColor('RANDOM')
+            message.channel.send(embed)
 
         }
     }

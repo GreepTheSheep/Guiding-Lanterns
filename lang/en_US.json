@@ -92,6 +92,8 @@
     "giveaway_start_menu_winners": "Great! Now set the number of winners, how many people can win this prize?",
     "giveaway_start_menu_done": "All done! Your giveaway for ${name} has been started at ${channel}, wish good luck to participants! :wink:",
     "giveaway_reroll_notFound": "No giveaway found for ${ID}, please check and try again",
+    "giveaway_list_title": "Active giveaways",
+    "giveaway_endsIn": "Ends in",
     "seconds": "seconds",
     "minutes": "minutes",
     "hours": "hours",
