@@ -116,12 +116,21 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
             }
         } else if (args[0].toLowerCase() == 'reroll'){
             args = args.slice(1)
-            let messageID = args[0];
-            client.giveawaysManager.reroll(messageID).then(() => {
-                //message.channel.send("Success! Giveaway rerolled!");
-            }).catch((err) => {
-                message.channel.send(lang.giveaway_reroll_notFound.replace('${ID}', messageID));
-            });
+            if (args.length < 1){
+                var list = client.giveawaysManager.giveaways.filter((g) => g.guildID == message.guild.id && g.channelID == message.channel.id && g.ended == false)
+                client.giveawaysManager.reroll(list.slice(list.length-1).messageID).then(() => {
+                    //message.channel.send("Success! Giveaway rerolled!");
+                }).catch((err) => {
+                    message.channel.send(lang.giveaway_reroll_notFound.replace('${ID}', list.slice(list.length-1).messageID));
+                });
+            } else {
+                let messageID = args[0];
+                client.giveawaysManager.reroll(messageID).then(() => {
+                    //message.channel.send("Success! Giveaway rerolled!");
+                }).catch((err) => {
+                    message.channel.send(lang.giveaway_reroll_notFound.replace('${ID}', messageID));
+                });
+            }
         } else if (args[0].toLowerCase() == 'edit'){
             args = args.slice(1)
             message.channel.send('WIP')
@@ -136,15 +145,15 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
             var current = []
             var past = []
             list.forEach(g=>{
-                if (!g.ended) current.push(`- \`${g.messageID}\` <#${g.channelID}> - [${g.prize}](https://discord.com/channels/${g.guildID}/${g.messageID}) - ${lang.giveaway_endsIn} ${ms(g.endAt,{long:true})}`)
-                else past.push(`- [${g.prize}](https://discord.com/channels/${g.guildID}/${g.messageID})`)
+                if (!g.ended) current.push(`- \`${g.messageID}\` <#${g.channelID}> - [${g.prize}](https://discord.com/channels/${g.guildID}/${g.channelID}/${g.messageID}) - ${lang.giveaway_endsIn} ${ms(g.endAt,{long:true})}`)
+                else past.push(`- [${g.prize}](https://discord.com/channels/${g.guildID}/${g.channelID}/${g.messageID})`)
             })
             if (current.length < 1) current.push(lang.giveaway_noActive)
             if (past.length < 1) past.push(lang.giveaway_noPast)
             let embed = new Discord.MessageEmbed
             embed.setTitle(lang.giveaway_list_title)
             .setDescription(current.join('\n'))
-            .addField(lang.giveaway_list_last, past.slice(0, 10).join('\n'))
+            .addField(lang.giveaway_list_last, past.slice(past.length - 10, past.length).join('\n'))
             .setColor('RANDOM')
             message.channel.send(embed)
 
