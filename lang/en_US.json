@@ -79,7 +79,7 @@
     "giveaway_help_delete": "Deletes a giveaway, will open a confirmation pannel",
     "giveaway_help_list": "Lists all giveaways in this server",
     "giveaway_timeRemaining": "Time remaining",
-    "giveaway_inviteToParticipate": "React with 🎉 to participate!",
+    "giveaway_inviteToParticipate": "React with ✨ to participate!",
     "giveaway_winMessage": "Congratulations, {winners}! You won **{prize}**!",
     "giveaway_noWinner": "Giveaway cancelled, no valid participations.",
     "giveaway_hostedBy": "Hosted by: {user}",

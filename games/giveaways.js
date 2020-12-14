@@ -42,8 +42,8 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
                                     winnerCount: winners,
                                     hostedBy: message.author,
                                     messages: {
-                                        giveaway: "🎉🎉 **GIVEAWAY** 🎉🎉",
-                                        giveawayEnded: "🎉🎉 **GIVEAWAY ENDED** 🎉🎉",
+                                        giveaway: "🎆 **GIVEAWAY** ✨",
+                                        giveawayEnded: "~~GIVEAWAY~~",
                                         timeRemaining: lang.giveaway_timeRemaining + ": **{duration}**!",
                                         inviteToParticipate: lang.giveaway_inviteToParticipate,
                                         winMessage: lang.giveaway_winMessage,
@@ -95,8 +95,8 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
                     winnerCount: parseInt(args[2]),
                     hostedBy: message.author,
                     messages: {
-                        giveaway: "🎉🎉 **GIVEAWAY** 🎉🎉",
-                        giveawayEnded: "🎉🎉 **GIVEAWAY ENDED** 🎉🎉",
+                        giveaway: "🎆 **GIVEAWAY** ✨",
+                        giveawayEnded: "~~GIVEAWAY~~",
                         timeRemaining: lang.giveaway_timeRemaining + ": **{duration}**!",
                         inviteToParticipate: lang.giveaway_inviteToParticipate,
                         winMessage: lang.giveaway_winMessage,
