@@ -103,6 +103,7 @@
     "giveaway_edit_setNewEndTime": "Type the new duration from now of the giveaway",
     "giveaway_edit_addEndTime": "Type the time to add",
     "giveaway_updated": "Success! Giveaway will updated in less than ${time} seconds.",
+    "giveaway_deleted": "Success! Giveaway deleted.",
     "seconds": "seconds",
     "minutes": "minutes",
     "hours": "hours",

@@ -253,8 +253,28 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
             })
         } else if (args[0].toLowerCase() == 'delete'){
             args = args.slice(1)
-            message.channel.send('WIP')
-
+            var giveaway = client.giveawaysManager.giveaways.filter((g) => g.guildID == message.guild.id && g.messageID == args[0] && g.ended == false)
+            if (!giveaway) return message.channel.send(lang.giveaway_notFound.replace('${ID}', args[0]))
+            message.react('✅').then(() => message.react('❌'));
+            const filter = (reaction, user) => {
+                return ['✅', '❌'].includes(reaction.emoji.name) && user.id === message.author.id;
+            };
+            message.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
+            .then(collected=>{
+                const reaction = collected.first();
+                if (reaction.emoji.name === '✅') {
+                    client.giveawaysManager.delete(args[0]).then(() => {
+                        message.channel.send(lang.giveaway_deleted);
+                    }).catch((err) => {
+                        message.channel.send(lang.giveaway_notFound.replace('${ID}', args[0]));
+                    });
+                } else {
+                    message.delete()
+                }
+            })
+            .catch(collected => {
+                message.delete();
+            });
         } else if (args[0].toLowerCase() == 'list'){
             args = args.slice(1)
             var list = client.giveawaysManager.giveaways.filter((g) => g.guildID === message.guild.id)
