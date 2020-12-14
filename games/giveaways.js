@@ -134,12 +134,17 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
             args = args.slice(1)
             var list = client.giveawaysManager.giveaways.filter((g) => g.guildID === message.guild.id)
             var current = []
+            var past = []
             list.forEach(g=>{
-                if (!g.ended) current.push(`- \`${g.messageID}\` ([Click Me](https://discord.com/channels/${g.guildID}/${g.messageID})) - <#${g.channelID}> - ${g.prize} - ${lang.giveaway_endsIn} ${ms(g.endAt,{long:true})}`)
+                if (!g.ended) current.push(`- \`${g.messageID}\` <#${g.channelID}> - [${g.prize}](https://discord.com/channels/${g.guildID}/${g.messageID}) - ${lang.giveaway_endsIn} ${ms(g.endAt,{long:true})}`)
+                else past.push(`- [${g.prize}](https://discord.com/channels/${g.guildID}/${g.messageID})`)
             })
+            if (current.length < 1) current.push(lang.giveaway_noActive)
+            if (past.length < 1) past.push(lang.giveaway_noPast)
             let embed = new Discord.MessageEmbed
             embed.setTitle(lang.giveaway_list_title)
-            .setDescription(list.join('\n'))
+            .setDescription(current.join('\n'))
+            .addField(lang.giveaway_list_last, past.slice(0, 10).join('\n'))
             .setColor('RANDOM')
             message.channel.send(embed)
 
