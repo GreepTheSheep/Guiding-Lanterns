@@ -7,6 +7,9 @@ function games_index(message, client, prefix, functiondate, functiontime, cooldo
     const gtn = require('./gtn.js')
     gtn(message, client, prefix, functiondate, functiontime, getlogchannel(), lang)
 
+    const giveawayCommands = require('./giveaways.js')
+    giveawayCommands(message, client, prefix, functiondate, functiontime, getlogchannel(), lang)
+
 
     /*--------------------------------
     --------- Guild-specific ---------
