@@ -121,20 +121,136 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
                 client.giveawaysManager.reroll(list.slice(list.length-1).messageID).then(() => {
                     //message.channel.send("Success! Giveaway rerolled!");
                 }).catch((err) => {
-                    message.channel.send(lang.giveaway_reroll_notFound.replace('${ID}', list.slice(list.length-1).messageID));
+                    message.channel.send(lang.giveaway_notFound.replace('${ID}', list.slice(list.length-1).messageID));
                 });
             } else {
                 let messageID = args[0];
                 client.giveawaysManager.reroll(messageID).then(() => {
                     //message.channel.send("Success! Giveaway rerolled!");
                 }).catch((err) => {
-                    message.channel.send(lang.giveaway_reroll_notFound.replace('${ID}', messageID));
+                    message.channel.send(lang.giveaway_notFound.replace('${ID}', messageID));
                 });
             }
         } else if (args[0].toLowerCase() == 'edit'){
             args = args.slice(1)
-            message.channel.send('WIP')
+            var giveaway = client.giveawaysManager.giveaways.filter((g) => g.guildID == message.guild.id && g.messageID == args[0] && g.ended == false)
+            if (!giveaway) return message.channel.send(lang.giveaway_notFound.replace('${ID}', args[0]))
+            let embed = new Discord.MessageEmbed
+            embed.setTitle('Edit a giveaway')
+            .setDescription(lang.giveaway_edit_menu)
+            .setColor('#0000FF')
+            message.channel.send(embed).then(async (m)=>{
+                var emojis = [
+                    '1️⃣', // Change name
+                    '2️⃣', // Number of winners
+                    '3️⃣', // New end time
+                    '4️⃣', // Add or remove time
+                    '❌'
+                ]
+                emojis.forEach(async e=>{
+                    await m.react(e)
+                })
 
+                const filter = (reaction, user) => {
+                    return emojis.includes(reaction.emoji.name) && user.id === message.author.id;
+                };
+                m.awaitReactions(filter, { max: 1, time: 60000, errors: ['time'] })
+                .then(collected=>{
+                    const reaction = collected.first();
+                    if (reaction.emoji.name === '1️⃣') {
+                        embed.setDescription(lang.giveaway_edit_setNewTitle)
+                        m.edit(embed)
+                        const msgFilter = m => message.author == m.author;
+                        const collector = message.channel.createMessageCollector(msgFilter, {time: 60000, max: 1});
+                        collector.on('collect', m => {
+                            client.giveawaysManager.edit(args[0], {
+                                newPrize: m.content,
+                            }).then(() => {
+                                message.channel.send(lang.giveaway_updated.replace('${time}', manager.updateCountdownEvery/1000));
+                            }).catch((err) => {
+                                message.channel.send(lang.giveaway_notFound.replace('${ID}', args[0]));
+                            });
+                            
+                            message.channel.send(lang.giveaway_start_menu_done.replace('${name}', `**${prize}**`).replace('${channel}', `<#${channel.id}>`))
+                        });
+                        collector.on('end', (collected, reason) => {
+                            if (reason == 'time'){
+                                message.channel.send(`Delay expired`)
+                            }
+                        });
+                    } else if (reaction.emoji.name === '2️⃣') {
+                        embed.setDescription(lang.giveaway_edit_setNewWinners)
+                        m.edit(embed)
+                        const msgFilter = m => message.author == m.author;
+                        const collector = message.channel.createMessageCollector(msgFilter, {time: 60000, max: 1});
+                        collector.on('collect', m => {
+                            client.giveawaysManager.edit(args[0], {
+                                newWinnerCount: parseInt(m.content),
+                            }).then(() => {
+                                message.channel.send(lang.giveaway_updated.replace('${time}', manager.updateCountdownEvery/1000));
+                            }).catch((err) => {
+                                message.channel.send(lang.giveaway_notFound.replace('${ID}', args[0]));
+                            });
+                            
+                            message.channel.send(lang.giveaway_start_menu_done.replace('${name}', `**${prize}**`).replace('${channel}', `<#${channel.id}>`))
+                        });
+                        collector.on('end', (collected, reason) => {
+                            if (reason == 'time'){
+                                message.channel.send(`Delay expired`)
+                            }
+                        });
+                    } else if (reaction.emoji.name === '3️⃣') {
+                        embed.setDescription(lang.giveaway_edit_setNewEndTime)
+                        m.edit(embed)
+                        const msgFilter = m => message.author == m.author;
+                        const collector = message.channel.createMessageCollector(msgFilter, {time: 60000, max: 1});
+                        collector.on('collect', m => {
+                            client.giveawaysManager.edit(args[0], {
+                                newWinnerCount: ms(m.content),
+                            }).then(() => {
+                                message.channel.send(lang.giveaway_updated.replace('${time}', manager.updateCountdownEvery/1000));
+                            }).catch((err) => {
+                                message.channel.send(lang.giveaway_notFound.replace('${ID}', args[0]));
+                            });
+                            
+                            message.channel.send(lang.giveaway_start_menu_done.replace('${name}', `**${prize}**`).replace('${channel}', `<#${channel.id}>`))
+                        });
+                        collector.on('end', (collected, reason) => {
+                            if (reason == 'time'){
+                                message.channel.send(`Delay expired`)
+                            }
+                        });
+                    } else if (reaction.emoji.name === '4️⃣') {
+                        embed.setDescription(lang.giveaway_edit_addEndTime)
+                        m.edit(embed)
+                        const msgFilter = m => message.author == m.author;
+                        const collector = message.channel.createMessageCollector(msgFilter, {time: 60000, max: 1});
+                        collector.on('collect', m => {
+                            client.giveawaysManager.edit(args[0], {
+                                addTime: ms(m.content),
+                            }).then(() => {
+                                message.channel.send(lang.giveaway_updated.replace('${time}', manager.updateCountdownEvery/1000));
+                            }).catch((err) => {
+                                message.channel.send(lang.giveaway_notFound.replace('${ID}', args[0]));
+                            });
+                            
+                            message.channel.send(lang.giveaway_start_menu_done.replace('${name}', `**${prize}**`).replace('${channel}', `<#${channel.id}>`))
+                        });
+                        collector.on('end', (collected, reason) => {
+                            if (reason == 'time'){
+                                message.channel.send(`Delay expired`)
+                            }
+                        });
+                    } else if (reaction.emoji.name === '❌') {
+                        embed.setDescription('Canceled')
+                        m.edit(embed)
+                    }
+                })
+                .catch(()=>{
+                    embed.setDescription('Delay expired')
+                    m.edit(embed)
+                })
+            })
         } else if (args[0].toLowerCase() == 'delete'){
             args = args.slice(1)
             message.channel.send('WIP')
