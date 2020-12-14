@@ -1,7 +1,7 @@
 {
     "name": "guiding-lanterns",
-    "version": "3.1.0",
-    "changelog": "Add image manipulation system",
+    "version": "3.2.0",
+    "changelog": "Add giveaways system",
     "description": "",
     "main": "bot.js",
     "repository": {
