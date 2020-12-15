@@ -81,7 +81,7 @@ function inventory(message, client, prefix, cooldowns, cur_json, lang){
         if (message.author.id === "330030648456642562" || message.author.id === "460348027463401472") {
             rUser =  message.guild.member(message.mentions.users.first()) || client.users.cache.get(args[0])
         } else {
-            rUser = message.guild.member(message.mentions.users.first() || message.guild.members.get(args[0]))
+            rUser = message.guild.member(message.mentions.users.first() || message.guild.members.cache.get(args[0]))
         }
         if (!rUser) {
             if (!bal.has(message.author.id)) bal.set(message.author.id, 0)
