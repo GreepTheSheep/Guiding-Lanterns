@@ -103,7 +103,7 @@
     "giveaway_edit_setNewWinners": "Type the new number of winners",
     "giveaway_edit_setNewEndTime": "Type the new duration from now of the giveaway",
     "giveaway_edit_addEndTime": "Type the time to add",
-    "giveaway_updated": "Success! Giveaway will updated in less than ${time} minutes.",
+    "giveaway_updated": "Success! Giveaway will updated in less than ${time} seconds.",
     "giveaway_deleted": "Success! Giveaway deleted.",
     "giveaway_rerolled": "Success! Giveaway rerolled!",
     "giveaway_noPerms": "You don't have sufficient permissions to make/manage a giveaway. You must be at least a moderator or you must have a role with the word \"giveaway\" on it (like \" Giveaway hoster\" for example.)",
