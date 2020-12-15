@@ -255,7 +255,7 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
                 })
             } else if (args[0].toLowerCase() == 'delete'){
                 args = args.slice(1)
-                var giveaway = client.giveawaysManager.giveaways.filter((g) => g.guildID == message.guild.id && g.messageID == args[0] && g.ended == false)
+                var giveaway = client.giveawaysManager.giveaways.filter((g) => g.guildID == message.guild.id && g.messageID == args[0])
                 if (giveaway.length < 1) return message.channel.send(lang.giveaway_notFound.replace('${ID}', args[0]))
                 message.react('✅').then(() => message.react('❌'));
                 const filter = (reaction, user) => {
