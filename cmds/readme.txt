@@ -60,6 +60,7 @@ Arguments:
 !gtnguess [number]                                  : Guess the number on GTN
 ^ !gtnstats [User mention or ID]                    : Stats of user's current game on GTN
 ^ !gtnreset [User mention or ID]                    : Resets all stats of user on GTN
+!giveaway                                           : Opens giveaway help menu to create/edit/delete giveaways
 
 ------------ Other ------------
 
