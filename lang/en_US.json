@@ -73,7 +73,7 @@
     "loot_min": "by shaking the water fountain in the city centre, you found ${money}, it's the beginning of the richness.",
     "loot_max": "Scrooge saw you and gave you ${money}. Wait? that's weird!",
     "giveaway_help_title": "Set up Giveaways with ${username}",
-    "giveaway_help_start": "Start a giveaway, will open a menu pannel if no args. Time must be in w(eeks), d(ays), m(inutes), s(econds).\nExample: `${prefix}giveaway start 1d 2 Discord Nitro Classic for one month for two people`",
+    "giveaway_help_start": "Start a giveaway, will open a menu pannel if no args. Time must be in w(eeks), d(ays), m(inutes), s(econds).\nExample: `${prefix}giveaway start #giveaways 1d 2 Discord Nitro Classic for one month for two people`",
     "giveaway_help_reroll": "Reroll latest giveaway or specific giveaway with their ID",
     "giveaway_help_edit": "Edits a giveaway, will open a menu pannel",
     "giveaway_help_delete": "Deletes a giveaway, will open a confirmation pannel",
