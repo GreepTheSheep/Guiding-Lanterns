@@ -73,7 +73,7 @@ const GiveawayManager = class extends DiscordGiveaways.GiveawaysManager {
 };
 const giveawaysManager = new GiveawayManager(client, {
     storage: false,
-    updateCountdownEvery: 120 * 1000,
+    updateCountdownEvery: 30 * 1000,
     default: {
         botsCanWin: false,
         exemptPermissions: [ "MANAGE_MESSAGES", "ADMINISTRATOR" ],
