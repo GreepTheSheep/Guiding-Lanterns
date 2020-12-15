@@ -210,7 +210,7 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
                                 client.giveawaysManager.edit(args[0], {
                                     newWinnerCount: ms(m.content),
                                 }).then(() => {
-                                    message.channel.send(lang.giveaway_updated.replace('${time}', client.giveawaysManager.updateCountdownEvery/1000));
+                                    message.channel.send(lang.giveaway_updated.replace('${time}', client.giveawaysManager.options.updateCountdownEvery/60/1000));
                                 }).catch((err) => {
                                     message.channel.send(lang.giveaway_notFound.replace('${ID}', args[0]));
                                 });
@@ -231,7 +231,7 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
                                 client.giveawaysManager.edit(args[0], {
                                     addTime: ms(m.content),
                                 }).then(() => {
-                                    message.channel.send(lang.giveaway_updated.replace('${time}', client.giveawaysManager.updateCountdownEvery/1000));
+                                    message.channel.send(lang.giveaway_updated.replace('${time}', client.giveawaysManager.options.updateCountdownEvery/60/1000));
                                 }).catch((err) => {
                                     message.channel.send(lang.giveaway_notFound.replace('${ID}', args[0]));
                                 });
@@ -296,8 +296,8 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
                 message.channel.send(embed)
             }
         }
+        else message.channel.send(lang.giveaway_noPerms)
     }
-    else message.channel.send(lang.giveaway_noPerms)
 }
 
 module.exports = giveawayCommands
