@@ -47,15 +47,32 @@ const shell = require('shelljs'); // Require for executing shell commands (such 
 const Enmap = require("enmap"); // Define enmap, a database integrated with the bot
 const guildPrefix = new Enmap({name: "guildPrefix"}); // Define a new table for custom prefixes
 const userLang = new Enmap({name: "user_languages"}); // Define a new table for user languages
+const giveawayDB = new Enmap({name: "giveaway"}); // Define a new table for giveaways
+if(!giveawayDB.has("giveaways")) giveawayDB.set("giveaways", []);
 
 const DiscordGiveaways = require("discord-giveaways");
 const GiveawayManager = class extends DiscordGiveaways.GiveawaysManager {
+    async getAllGiveaways(){
+        return giveawayDB.get("giveaways");
+    }
+    async saveGiveaway(messageID, giveawayData){
+        giveawayDB.push("giveaways", giveawayData);
+        return true;
+    }
+    async editGiveaway(messageID, giveawayData){
+        giveawayDB.set("giveaways", giveawayDB.get("giveaways").filter((giveaway) => giveaway.messageID !== messageID).push(giveawayData));
+        return true;
+    }
+    async deleteGiveaway(messageID){
+        giveawayDB.set("giveaways", giveawayDB.get("giveaways").filter((giveaway) => giveaway.messageID !== messageID));
+        return true;
+    }
     async refreshStorage(){
         return client.shard.broadcastEval(() => this.giveawaysManager.getAllGiveaways());
     }
 };
 const giveawaysManager = new GiveawayManager(client, {
-    storage: './data/giveaways.json',
+    storage: false,
     updateCountdownEvery: 120 * 1000,
     default: {
         botsCanWin: false,
