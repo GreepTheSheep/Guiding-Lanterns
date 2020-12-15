@@ -114,20 +114,21 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
                         }
                     }
                 });
+                message.channel.send(lang.giveaway_start_menu_done.replace('${name}', `**${args.slice(3).join(" ")}**`).replace('${channel}', `<#${channel.id}>`))
             }
         } else if (args[0].toLowerCase() == 'reroll'){
             args = args.slice(1)
             if (args.length < 1){
                 var list = client.giveawaysManager.giveaways.filter((g) => g.guildID == message.guild.id && g.channelID == message.channel.id && g.ended == false)
-                client.giveawaysManager.reroll(list.slice(list.length-1).messageID).then(() => {
-                    //message.channel.send("Success! Giveaway rerolled!");
+                client.giveawaysManager.reroll(list.slice(list.length-1)[0].messageID).then(() => {
+                    message.channel.send(lang.giveaway_rerolled);
                 }).catch((err) => {
                     message.channel.send(lang.giveaway_notFound.replace('${ID}', list.slice(list.length-1).messageID));
                 });
             } else {
                 let messageID = args[0];
                 client.giveawaysManager.reroll(messageID).then(() => {
-                    //message.channel.send("Success! Giveaway rerolled!");
+                    message.channel.send(lang.giveaway_rerolled);
                 }).catch((err) => {
                     message.channel.send(lang.giveaway_notFound.replace('${ID}', messageID));
                 });
@@ -135,7 +136,7 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
         } else if (args[0].toLowerCase() == 'edit'){
             args = args.slice(1)
             var giveaway = client.giveawaysManager.giveaways.filter((g) => g.guildID == message.guild.id && g.messageID == args[0] && g.ended == false)
-            if (!giveaway) return message.channel.send(lang.giveaway_notFound.replace('${ID}', args[0]))
+            if (giveaway.length < 1) return message.channel.send(lang.giveaway_notFound.replace('${ID}', args[0]))
             let embed = new Discord.MessageEmbed
             embed.setTitle('Edit a giveaway')
             .setDescription(lang.giveaway_edit_menu)
@@ -167,7 +168,7 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
                             client.giveawaysManager.edit(args[0], {
                                 newPrize: m.content,
                             }).then(() => {
-                                message.channel.send(lang.giveaway_updated.replace('${time}', manager.updateCountdownEvery/1000));
+                                message.channel.send(lang.giveaway_updated.replace('${time}', client.giveawaysManager.updateCountdownEvery/1000));
                             }).catch((err) => {
                                 message.channel.send(lang.giveaway_notFound.replace('${ID}', args[0]));
                             });
@@ -188,7 +189,7 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
                             client.giveawaysManager.edit(args[0], {
                                 newWinnerCount: parseInt(m.content),
                             }).then(() => {
-                                message.channel.send(lang.giveaway_updated.replace('${time}', manager.updateCountdownEvery/1000));
+                                message.channel.send(lang.giveaway_updated.replace('${time}', client.giveawaysManager.updateCountdownEvery/1000));
                             }).catch((err) => {
                                 message.channel.send(lang.giveaway_notFound.replace('${ID}', args[0]));
                             });
@@ -209,7 +210,7 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
                             client.giveawaysManager.edit(args[0], {
                                 newWinnerCount: ms(m.content),
                             }).then(() => {
-                                message.channel.send(lang.giveaway_updated.replace('${time}', manager.updateCountdownEvery/1000));
+                                message.channel.send(lang.giveaway_updated.replace('${time}', client.giveawaysManager.updateCountdownEvery/1000));
                             }).catch((err) => {
                                 message.channel.send(lang.giveaway_notFound.replace('${ID}', args[0]));
                             });
@@ -230,7 +231,7 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
                             client.giveawaysManager.edit(args[0], {
                                 addTime: ms(m.content),
                             }).then(() => {
-                                message.channel.send(lang.giveaway_updated.replace('${time}', manager.updateCountdownEvery/1000));
+                                message.channel.send(lang.giveaway_updated.replace('${time}', client.giveawaysManager.updateCountdownEvery/1000));
                             }).catch((err) => {
                                 message.channel.send(lang.giveaway_notFound.replace('${ID}', args[0]));
                             });
@@ -255,7 +256,7 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
         } else if (args[0].toLowerCase() == 'delete'){
             args = args.slice(1)
             var giveaway = client.giveawaysManager.giveaways.filter((g) => g.guildID == message.guild.id && g.messageID == args[0] && g.ended == false)
-            if (!giveaway) return message.channel.send(lang.giveaway_notFound.replace('${ID}', args[0]))
+            if (giveaway.length < 1) return message.channel.send(lang.giveaway_notFound.replace('${ID}', args[0]))
             message.react('✅').then(() => message.react('❌'));
             const filter = (reaction, user) => {
                 return ['✅', '❌'].includes(reaction.emoji.name) && user.id === message.author.id;
@@ -289,8 +290,8 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
             if (past.length < 1) past.push(lang.giveaway_noPast)
             let embed = new Discord.MessageEmbed
             embed.setTitle(lang.giveaway_list_title)
-            .setDescription(current.join('\n'))
-            .addField(lang.giveaway_list_last, past.slice(past.length - 10, past.length).join('\n'))
+            .setDescription(current.reverse().join('\n'))
+            .addField(lang.giveaway_list_last, past.slice(past.length - 10, past.length).reverse().join('\n'))
             .setColor('RANDOM')
             message.channel.send(embed)
 
