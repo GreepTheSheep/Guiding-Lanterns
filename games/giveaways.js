@@ -119,7 +119,7 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
             } else if (args[0].toLowerCase() == 'reroll'){
                 args = args.slice(1)
                 if (args.length < 1){
-                    var list = client.giveawaysManager.giveaways.filter((g) => g.guildID == message.guild.id && g.channelID == message.channel.id && g.ended == false)
+                    var list = client.giveawaysManager.giveaways.filter((g) => g.guildID == message.guild.id && g.channelID == message.channel.id)
                     client.giveawaysManager.reroll(list.slice(list.length-1)[0].messageID).then(() => {
                         message.channel.send(lang.giveaway_rerolled);
                     }).catch((err) => {
@@ -135,7 +135,7 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
                 }
             } else if (args[0].toLowerCase() == 'edit'){
                 args = args.slice(1)
-                var giveaway = client.giveawaysManager.giveaways.filter((g) => g.guildID == message.guild.id && g.messageID == args[0] && g.ended == false)
+                var giveaway = client.giveawaysManager.giveaways.filter((g) => g.guildID == message.guild.id && g.messageID == args[0])
                 if (giveaway.length < 1) return message.channel.send(lang.giveaway_notFound.replace('${ID}', args[0]))
                 let embed = new Discord.MessageEmbed
                 embed.setTitle('Edit a giveaway')
@@ -283,7 +283,7 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
                 var current = []
                 var past = []
                 list.forEach(g=>{
-                    if (!g.ended) current.push(`- \`${g.messageID}\` <#${g.channelID}> - [${g.prize}](https://discord.com/channels/${g.guildID}/${g.channelID}/${g.messageID}) - ${lang.giveaway_endsIn} ${ms(Date().now() - g.endAt,{long:true})}`)
+                    if (!g.ended) current.push(`- \`${g.messageID}\` <#${g.channelID}> - [${g.prize}](https://discord.com/channels/${g.guildID}/${g.channelID}/${g.messageID}) - ${lang.giveaway_endsIn} ${ms(g.endAt - Date.now(),{long:true})}`)
                     else past.push(`- [${g.prize}](https://discord.com/channels/${g.guildID}/${g.channelID}/${g.messageID})`)
                 })
                 if (current.length < 1) current.push(lang.giveaway_noActive)
