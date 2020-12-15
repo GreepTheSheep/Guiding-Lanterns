@@ -4,7 +4,7 @@ const ms = require("ms");
 
 function giveawayCommands(message, client, prefix, functiondate, functiontime, getlogchannel, lang){
     if (message.content.toLowerCase().startsWith(prefix + 'giveaway')){
-        if (!message.member.roles.cache.some(role => role.name.toLowerCase().includes('giveaway')) || !message.member.hasPermission('MANAGE_MESSAGES')) return
+        if (!message.member.roles.cache.some(role => role.name.toLowerCase().includes('giveaway')) || message.member.hasPermission('MANAGE_MESSAGES')) return
         var args = message.content.split(" ").slice(1);
         if (args.length < 1 || args[0].toLowerCase() == 'help'){
             let embed = new Discord.MessageEmbed
