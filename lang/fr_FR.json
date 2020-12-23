@@ -84,6 +84,7 @@
     "giveaway_noWinner": "Giveaway annulé, aucune participation valide.",
     "giveaway_hostedBy": "Hébergé par: {user}",
     "giveaway_winners": "gagnant(s)",
+    "giveaway_footerText": "Good luck to you!",
     "giveaway_endedAt": "Terminé le",
     "giveaway_start_menu_begin": "Bien ${user}, commençons un giveaway!",
     "giveaway_start_menu_channel": "Tout d'abord, mentionnez un canal où le giveaway aura lieu",
