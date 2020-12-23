@@ -51,6 +51,7 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
                                             noWinner: lang.giveaway_noWinner,
                                             hostedBy: lang.giveaway_hostedBy,
                                             winners: lang.giveaway_winners,
+                                            embedFooter: lang.giveaway_footerText,
                                             endedAt: lang.giveaway_endedAt,
                                             units: {
                                                 seconds: lang.seconds,
@@ -104,6 +105,7 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
                             noWinner: lang.giveaway_noWinner,
                             hostedBy: lang.giveaway_hostedBy,
                             winners: lang.giveaway_winners,
+                            embedFooter: lang.giveaway_footerText,
                             endedAt: lang.giveaway_endedAt,
                             units: {
                                 seconds: lang.seconds,
