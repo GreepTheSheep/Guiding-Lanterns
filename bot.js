@@ -244,12 +244,22 @@ client.on('guildMemberAdd', member => { // If any member join a server (or guild
 })
 
 client.on('guildMemberRemove', member => { // If any member leave a server (or guild in Discord language)
+    if (member.user.bot) return
     if (member.guild.id === '562602234265731080') { // If the member leave Kingdom of Corona, do the goodbye script
         const goodbye = require('./events/goodbye.js');
         goodbye(member, client);
-        if (member.user.bot) return
     }
     console.log(`\n${member.user.tag} left ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who left
+})
+
+client.on('guildMemberUpdate', (oldMember, newMember) => { 
+    if (oldMember.user.bot) return
+    if (oldMember.guild.id === '562602234265731080' && newMember.guild.id === '562602234265731080') { 
+        if(!oldMember.roles.cache.some(r=> r.id == '562608575227363329') && newMember.roles.cache.some(r=> r.id == '562608575227363329')){
+            const welcome = require('./events/welcome.js');
+            welcome(oldMember, newMember, client);
+        } else return
+    } else return
 })
 
 client.on('guildCreate', async guild => { // If the bot join a server
