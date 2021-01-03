@@ -48,7 +48,6 @@ const Enmap = require("enmap"); // Define enmap, a database integrated with the 
 const guildPrefix = new Enmap({name: "guildPrefix"}); // Define a new table for custom prefixes
 const userLang = new Enmap({name: "user_languages"}); // Define a new table for user languages
 const giveawayDB = new Enmap({name: "giveaway"}); // Define a new table for giveaways
-if(!giveawayDB.has("giveaways") || giveawayDB.get("giveaways") == 1) giveawayDB.set("giveaways", []);
 
 const DiscordGiveaways = require("discord-giveaways");
 const GiveawayManager = class extends DiscordGiveaways.GiveawaysManager {
