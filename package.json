@@ -31,7 +31,7 @@
         "country-data": "0.0.31",
         "dateformat": "^3.0.3",
         "discord-emoji": "^1.1.1",
-        "discord-giveaways": "^4.3.0",
+        "discord-giveaways": "^4.4.1",
         "discord.js": "^12.5.1",
         "download": "^8.0.0",
         "enmap": "^5.8.2",
