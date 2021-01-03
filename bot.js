@@ -53,18 +53,18 @@ if(!giveawayDB.has("giveaways") || giveawayDB.get("giveaways") == 1) giveawayDB.
 const DiscordGiveaways = require("discord-giveaways");
 const GiveawayManager = class extends DiscordGiveaways.GiveawaysManager {
     async getAllGiveaways(){
-        return giveawayDB.get("giveaways");
+        return giveawayDB.fetchEverything().array();
     }
     async saveGiveaway(messageID, giveawayData){
-        giveawayDB.push("giveaways", giveawayData);
+        giveawayDB.set(messageID, giveawayData);
         return true;
     }
     async editGiveaway(messageID, giveawayData){
-        giveawayDB.set("giveaways", giveawayDB.get("giveaways").filter((giveaway) => giveaway.messageID !== messageID).push(giveawayData));
+        giveawayDB.set(messageID, giveawayData);
         return true;
     }
     async deleteGiveaway(messageID){
-        giveawayDB.set("giveaways", giveawayDB.get("giveaways").filter((giveaway) => giveaway.messageID !== messageID));
+        giveawayDB.delete(messageID);
         return true;
     }
     async refreshStorage(){
