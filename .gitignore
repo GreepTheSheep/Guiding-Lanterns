@@ -85,3 +85,4 @@ crowdin.yml
 
 # binary files
 bin/*
+themeparks.db
