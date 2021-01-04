@@ -48,6 +48,7 @@ Arguments:
 
 !8ball [question]                                   : Ask a question and he will answer.
 * !say [text]                                       : Makes the bot talking !
+!reddit {subreddit}                                 : Get a random image from a subreddit
 
 ----------- Images ----------
 

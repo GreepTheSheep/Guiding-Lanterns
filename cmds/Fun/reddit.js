@@ -3,9 +3,8 @@ const request = require('request')
 const moment = require('moment')
 const tz = require('moment-timezone')
 
-var tries = 0
-function checkImage(message, args, prefix){
-    if (tries >= 20) return message.reply('No post with an image was found in this subreddit')
+function checkImage(message, args, prefix, tries){
+    if (tries >= 40) return message.reply('No post with an image was found in this subreddit')
     request(`https://www.reddit.com${args.length < 1 ? '' : `/r/${args[0]}`}/random.json`, function (error, response, body) {
         if (error){
             return message.channel.send('error:'+ error);
@@ -16,7 +15,7 @@ function checkImage(message, args, prefix){
                 resData = body[0].data.children[0].data
                 if (resData.post_hint !== 'image'){
                     tries++
-                    checkImage(message, args, prefix)
+                    checkImage(message, args, prefix, tries)
                 } else postEmbed(message, args, prefix, resData)
             } else if (Object.prototype.toString.call(body) === '[object Object]'){
                 if (json.error) return message.reply('Error ' + json.error + ': ' + json.message)
@@ -40,6 +39,7 @@ module.exports = function(message, prefix){
     if (message.content.toLowerCase().startsWith(prefix + 'reddit')){
         let args = message.content.split(" ");
         args.shift();
-        checkImage(message, args, prefix)
+        var tries = 0
+        checkImage(message, args, prefix, tries)
     }
 }
