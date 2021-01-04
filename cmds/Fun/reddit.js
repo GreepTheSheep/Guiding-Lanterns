@@ -24,6 +24,7 @@ function checkImage(message, args, prefix, tries){
             } else if (Object.prototype.toString.call(body) === '[object Object]'){
                 if (body.error) return message.reply('Error ' + body.error + ': ' + body.message)
                 else {
+                    if (!body.data.children[0]) return message.reply('Subreddit not found, check the name')
                     resData = randomItem(body.data.children).data
                     console.log(resData)
                     if (resData.post_hint !== 'image'){
