@@ -47,7 +47,7 @@ module.exports = function(message, client, prefix, config, functiondate, functio
 
     require('./Fun/ping.js')(message, client, prefix, config);
 
-    require('./Fun/reddit.js')(message, client, prefix, config);
+    require('./Fun/reddit.js')(message, prefix);
 
     require('./Fun/sus.js')(message, client, prefix);
 

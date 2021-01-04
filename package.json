@@ -10,7 +10,7 @@
     "private": true,
     "scripts": {
         "start": "pm2 start bot.ecosystem.config.js",
-        "test": "node bot nightly",
+        "test": "node bot -n",
         "restart": "pm2 reload bot.ecosystem.config.js",
         "install": "node selfhost-install.js",
         "eslint": "npx eslint ."
