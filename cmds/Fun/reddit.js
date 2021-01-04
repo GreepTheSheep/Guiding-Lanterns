@@ -18,7 +18,8 @@ function checkImage(message, args, prefix, tries){
                     checkImage(message, args, prefix, tries)
                 } else postEmbed(message, args, prefix, resData)
             } else if (Object.prototype.toString.call(body) === '[object Object]'){
-                if (json.error) return message.reply('Error ' + json.error + ': ' + json.message)
+                console.log(body)
+                if (body.error) return message.reply('Error ' + body.error + ': ' + body.message)
                 else return message.reply('Error :(')
             }
         }
