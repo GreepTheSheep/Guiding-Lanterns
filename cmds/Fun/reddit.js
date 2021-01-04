@@ -18,9 +18,9 @@ function checkImage(message, args, prefix, tries){
                     checkImage(message, args, prefix, tries)
                 } else postEmbed(message, args, prefix, resData)
             } else if (Object.prototype.toString.call(body) === '[object Object]'){
-                console.log(body)
                 if (body.error) return message.reply('Error ' + body.error + ': ' + body.message)
                 else {
+                    console.log(body.data.children[0])
                     resData = body.data.children[0].data
                     if (resData.post_hint !== 'image'){
                         tries++
