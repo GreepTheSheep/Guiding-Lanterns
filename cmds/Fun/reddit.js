@@ -20,7 +20,13 @@ function checkImage(message, args, prefix, tries){
             } else if (Object.prototype.toString.call(body) === '[object Object]'){
                 console.log(body)
                 if (body.error) return message.reply('Error ' + body.error + ': ' + body.message)
-                else return message.reply('Error :(')
+                else {
+                    resData = body.data.children[0].data
+                    if (resData.post_hint !== 'image'){
+                        tries++
+                        checkImage(message, args, prefix, tries)
+                    } else postEmbed(message, args, prefix, resData)
+                }
             }
         }
     });
