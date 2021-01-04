@@ -3,6 +3,10 @@ const request = require('request')
 const moment = require('moment')
 const tz = require('moment-timezone')
 
+function randomItem(array) {
+    return array[Math.floor(Math.random() * array.length)];
+}
+
 function checkImage(message, args, prefix, tries){
     if (tries >= 40) return message.reply('No post with an image was found in this subreddit')
     request(`https://www.reddit.com${args.length < 1 ? '' : `/r/${args[0]}`}/random.json`, function (error, response, body) {
@@ -20,8 +24,8 @@ function checkImage(message, args, prefix, tries){
             } else if (Object.prototype.toString.call(body) === '[object Object]'){
                 if (body.error) return message.reply('Error ' + body.error + ': ' + body.message)
                 else {
-                    console.log(body.data.children[0])
-                    resData = body.data.children[0].data
+                    resData = randomItem(body.data.children).data
+                    console.log(resData)
                     if (resData.post_hint !== 'image'){
                         tries++
                         checkImage(message, args, prefix, tries)
