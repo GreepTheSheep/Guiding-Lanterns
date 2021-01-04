@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const shell = require('shelljs');
 const fs = require('fs');
 
-function update(message, client, prefix) {
+module.exports = function(message, client, prefix) {
     if (message.content.startsWith(prefix + 'update')) {
         try {
             message.channel.startTyping()
@@ -19,5 +19,3 @@ function update(message, client, prefix) {
         }
     }
 }
-
-module.exports = update;

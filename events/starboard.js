@@ -3,7 +3,7 @@ const fs = require('fs');
 
 const reactions = 3
 
-function starboard (client, reaction, logchannel, date, time){
+module.exports = function (client, reaction, logchannel, date, time){
     try{
         if (reaction.emoji.name === '⭐' && reaction.count === reactions) {
 
@@ -36,5 +36,3 @@ function starboard (client, reaction, logchannel, date, time){
         logchannel.send(errmsg)
     }
 }
-
-module.exports = starboard

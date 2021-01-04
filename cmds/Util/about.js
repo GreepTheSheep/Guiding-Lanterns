@@ -9,7 +9,7 @@ const config = JSON.parse(fs.readFileSync(configfile, "utf8"));
 translate.engine = 'yandex'
 translate.key = config.translate_key
 
-async function about(message, client, prefix, lang, langtext, cooldowns) {
+module.exports = async function(message, client, prefix, lang, langtext, cooldowns) {
     if (message.content.startsWith(prefix + 'about')) {
         //Implement cooldown
         if (!cooldowns.has(prefix + 'about')) {
@@ -86,5 +86,3 @@ async function about(message, client, prefix, lang, langtext, cooldowns) {
         message.channel.send(inviteembed)
     }
 }
-
-module.exports = about;

@@ -37,7 +37,7 @@ function userItemList(client, args, rUser, cur_json, lang){
     return array.join('\n')
 }
 
-function inventory(message, client, prefix, cooldowns, cur_json, lang){
+module.exports = function(message, client, prefix, cooldowns, cur_json, lang){
     if(message.content.startsWith(prefix + "inventory") || message.content.startsWith(prefix + "inv")) {
 
         //Implement cooldown
@@ -107,5 +107,3 @@ function inventory(message, client, prefix, cooldowns, cur_json, lang){
         }
     }
 }
-
-module.exports = inventory;

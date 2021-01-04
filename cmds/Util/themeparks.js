@@ -139,7 +139,7 @@ async function triggerRide(message, client, prefix, Parks, embed, thisPark, Park
     });
 }
 
-async function parktimes(message, client, prefix, cooldowns, Parks){
+module.exports = async function(message, client, prefix, cooldowns, Parks){
     if (message.content.startsWith(prefix + 'themepark')){
 
          //Implement cooldown
@@ -182,5 +182,3 @@ async function parktimes(message, client, prefix, cooldowns, Parks){
         triggerPark(message, client, prefix, Parks, embed)
     }
 }
-
-module.exports = parktimes

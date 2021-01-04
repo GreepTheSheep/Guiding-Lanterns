@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const DiscordGiveaways = require("discord-giveaways");
 const ms = require("ms");
 
-function giveawayCommands(message, client, prefix, functiondate, functiontime, getlogchannel, lang){
+module.exports = function(message, client, prefix, functiondate, functiontime, getlogchannel, lang){
     if (message.content.toLowerCase().startsWith(prefix + 'giveaway')){
         if (message.member.hasPermission('MANAGE_MESSAGES') || message.member.roles.cache.some(role => role.name.toLowerCase().includes('giveaway'))){
             var args = message.content.split(" ").slice(1);
@@ -301,5 +301,3 @@ function giveawayCommands(message, client, prefix, functiondate, functiontime, g
         else message.channel.send(lang.giveaway_noPerms)
     }
 }
-
-module.exports = giveawayCommands

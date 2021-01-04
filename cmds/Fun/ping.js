@@ -6,7 +6,7 @@ const wait = require('util').promisify(setTimeout);
 const min=1000; 
 const max=5000;
 
-function bot_ping(message, client, prefix, config){
+module.exports = function(message, client, prefix, config){
     var reponsesread = fs.readFileSync(answerfile, "utf8");
     var reponses = JSON.parse(reponsesread);
 
@@ -39,5 +39,3 @@ function bot_ping(message, client, prefix, config){
         } else return;
     }
 }
-
-module.exports = bot_ping;

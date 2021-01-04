@@ -1,7 +1,7 @@
 const Discord = require('discord.js')
 const Enmap = require('enmap')
 
-function cur_owner(message, client, prefix, cooldowns, cur_json, lang, config){
+module.exports = function(message, client, prefix, cooldowns, cur_json, lang, config){
     if (message.author.id === config.owner) {
         const bal = new Enmap({name:"cur_balance"})
         const inv = new Enmap({name:"cur_inventory"})
@@ -60,5 +60,3 @@ function cur_owner(message, client, prefix, cooldowns, cur_json, lang, config){
         }
     }
 }
-
-module.exports = cur_owner;

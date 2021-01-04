@@ -8,7 +8,7 @@ function errorgenerating(message, err, date, time, logchannel) {
     console.log(`[${date()} - ${time()}] ${errorlog}`)
 }
 
-function worlds(message, client, prefix, date, time, logchannel) {
+module.exports = function(message, client, prefix, date, time, logchannel) {
         if (message.content.startsWith(prefix + 'createworld') || message.content.startsWith(prefix + 'addworld')) {
             try {
                 let args = message.content.split(" ")
@@ -34,5 +34,3 @@ function worlds(message, client, prefix, date, time, logchannel) {
             }
         }
 }
-
-module.exports = worlds

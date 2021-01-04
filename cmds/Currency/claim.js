@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const Enmap = require('enmap')
 const fs = require('fs');
 
-function claim(message, client, prefix, cooldowns, cur_json, lang){
+module.exports = function(message, client, prefix, cooldowns, cur_json, lang){
     if(message.content.startsWith(prefix + "claim") || message.content.startsWith(prefix + "daily")) {
 
         //Implement cooldown
@@ -53,5 +53,3 @@ function claim(message, client, prefix, cooldowns, cur_json, lang){
         message.channel.send(embed);
     }
 }
-
-module.exports = claim

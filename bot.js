@@ -155,8 +155,7 @@ client.on('ready', async () => { // If bot was connected:
         */
         const lant_ver = () => ver(client, channel_id.version);
         lant_ver(); //Set version number in the version number channel
-        const versionCheck = require('./events/ver-check.js');
-        versionCheck(client);
+        require('./events/ver-check.js')(client);
     
         const totalguildsize = await client.shard.fetchClientValues('guilds.size')
         
@@ -218,16 +217,13 @@ client.on('message', message => { // If any message was recived
     if (message.author.bot) return; // If is a bot, do nothing
 
     //Check if user has supported
-    const SupportCheck = require('./support/support_check.js');
-    if (client.user.id == config.public) SupportCheck(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, config)
+    if (client.user.id == config.public) require('./support/support_check.js')(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, config)
 
     //All commands listed in cmds_index.js
-    const cmds_index = require('./cmds/cmds_index.js');
-    cmds_index(message, client, prefix, config, functiondate, functiontime, cooldowns, getlogchannel, guildPrefix, userLang, lang, langtext, ThemeparksList);
+    require('./cmds/cmds_index.js')(message, client, prefix, config, functiondate, functiontime, cooldowns, getlogchannel, guildPrefix, userLang, lang, langtext, ThemeparksList);
 
     //Lists of mini-games
-    const games_index = require('./games/games_index.js');
-    games_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, guildPrefix, userLang, lang, langtext);
+    require('./games/games_index.js')(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, guildPrefix, userLang, lang, langtext);
 
     } catch (e) {
         console.log(e)
@@ -245,8 +241,7 @@ client.on('guildMemberAdd', member => { // If any member join a server (or guild
 client.on('guildMemberRemove', member => { // If any member leave a server (or guild in Discord language)
     if (member.user.bot) return
     if (member.guild.id === '562602234265731080') { // If the member leave Kingdom of Corona, do the goodbye script
-        const goodbye = require('./events/goodbye.js');
-        goodbye(member, client);
+        require('./events/goodbye.js')(member, client);
     }
     console.log(`\n${member.user.tag} left ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who left
 })
@@ -255,8 +250,7 @@ client.on('guildMemberUpdate', (oldMember, newMember) => {
     if (oldMember.user.bot) return
     if (oldMember.guild.id === '562602234265731080' && newMember.guild.id === '562602234265731080') { 
         if(!oldMember.roles.cache.some(r=> r.id == '562608575227363329') && newMember.roles.cache.some(r=> r.id == '562608575227363329')){
-            const welcome = require('./events/welcome.js');
-            welcome(oldMember, newMember, client);
+            require('./events/welcome.js')(oldMember, newMember, client);
         } else return
     } else return
 })
@@ -295,8 +289,7 @@ client.on('messageReactionAdd', (reaction, user) => {
     //     role_react_accept_rules(client, reaction, user, getlogchannel(), functiondate(), functiontime())
     // }
 
-    const starboard = require('./events/starboard.js')
-    starboard(client, reaction, getlogchannel(), functiondate(), functiontime())
+    require('./events/starboard.js')(client, reaction, getlogchannel(), functiondate(), functiontime())
 })
 
 client.on('disconnect', event => {

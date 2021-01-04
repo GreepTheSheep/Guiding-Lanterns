@@ -1,6 +1,6 @@
 // All commands listed here
 
-function games_index(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, guildPrefix, userLang, lang, langtext){
+module.exports = function (message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, guildPrefix, userLang, lang, langtext){
     if (message.channel.type === 'dm') return
 
 
@@ -22,5 +22,3 @@ function games_index(message, client, prefix, functiondate, functiontime, cooldo
     //-----------------------------------------------------------------------------------------------
 
 }
-
-module.exports = games_index;

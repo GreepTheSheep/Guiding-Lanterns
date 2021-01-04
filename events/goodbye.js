@@ -5,7 +5,7 @@ function randomItem(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
 
-function goodbye(member, client) {
+module.exports = function(member, client) {
     const messages = [
         ':cry:',
         'Bye... :cry:',
@@ -29,5 +29,3 @@ function goodbye(member, client) {
     client.guilds.cache.get('562602234265731080').channels.cache.get('658808055558832132').send(embed);
     client.guilds.cache.get('562602234265731080').channels.cache.get('663096647437516810').send(`\`-\` ${member.user.username}`);
 }
-
-module.exports = goodbye;

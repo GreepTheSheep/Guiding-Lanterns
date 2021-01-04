@@ -13,7 +13,7 @@ function itemList(message, cur_json){
     return array.join('\n')
 }
 
-function market(message, client, prefix, cooldowns, cur_json, lang){
+module.exports = function(message, client, prefix, cooldowns, cur_json, lang){
     if(message.content.startsWith(prefix + "market") || message.content.startsWith(prefix + "shop")) {
 
         //Implement cooldown
@@ -102,5 +102,3 @@ function market(message, client, prefix, cooldowns, cur_json, lang){
         } else return message.reply(`Usage: ${prefix}market <buy|sell> <ID> [count]`)
     }
 }
-
-module.exports = market;

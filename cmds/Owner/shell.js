@@ -10,7 +10,7 @@ function clean(text) {
         return text;
 }
 
-function command(message, client, prefix) {
+module.exports = function(message, client, prefix) {
     if (message.content.startsWith(prefix + 'ssh')) {
         try {
             let args = message.content.split(" ")
@@ -45,5 +45,3 @@ function command(message, client, prefix) {
         }
     }
 }
-
-module.exports = command;

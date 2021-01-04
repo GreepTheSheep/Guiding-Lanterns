@@ -5,7 +5,7 @@ const GTN_db = new Enmap({name: "gtn"})
 const min=1; 
 const max=100000;
 
-function gtn(message, client, prefix, functiondate, functiontime, getlogchannel, lang) {
+module.exports = function(message, client, prefix, functiondate, functiontime, getlogchannel, lang) {
     if (message.content == prefix + 'guessthenumber' || message.content == prefix + 'gtnstart'){
         try{
         var randomnum = Math.random() * (+max - +min) + +min;
@@ -85,5 +85,3 @@ function gtn(message, client, prefix, functiondate, functiontime, getlogchannel,
         } else return;
     }
 }
-
-module.exports = gtn;

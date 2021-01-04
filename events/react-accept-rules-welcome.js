@@ -6,7 +6,7 @@ function randomItem(array) {
 }
 
 
-async function role_react_accept_rules(client, reaction, user, getlogchannel, functiondate, functiontime){
+module.exports = async function(client, reaction, user, getlogchannel, functiondate, functiontime){
 
     if(reaction.message.id === '754365382189514802'){
         console.log(`${user.tag} reacted to the rules accept messages with the emoji ${reaction.emoji.id}`)
@@ -43,7 +43,4 @@ async function role_react_accept_rules(client, reaction, user, getlogchannel, fu
             client.guilds.cache.get('562602234265731080').channels.cache.get('615236807478607921').send(`\`+\` ${user.username}`);
         }
     }
-
 }
-
-module.exports = role_react_accept_rules;

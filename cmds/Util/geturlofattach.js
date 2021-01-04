@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 
-function geturlofattachment(message, client, prefix, lang) {
+module.exports = function(message, client, prefix, lang) {
     if (message.content.startsWith(prefix + 'geturl')) {
         if (message.attachments.size > 0) {
             let attachurl = message.attachments.array()[0].url
@@ -23,5 +23,3 @@ function geturlofattachment(message, client, prefix, lang) {
         }
     }
 }
-
-module.exports = geturlofattachment

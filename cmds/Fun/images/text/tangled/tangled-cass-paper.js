@@ -5,7 +5,7 @@ const request = require('request')
 const gm = require('gm')
 const autoLineBreaks = require('auto-line-breaks')
 
-function tangled_cass_paper(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, guildPrefix, userLang, lang, langtext, config) {
+module.exports = function(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, guildPrefix, userLang, lang, langtext, config) {
     if (message.content.toLowerCase().startsWith(prefix + 'cassandrapaper') || message.content.toLowerCase().startsWith(prefix + 'casspaper')){
         try{
             //Implement cooldown
@@ -76,5 +76,3 @@ function tangled_cass_paper(message, client, prefix, functiondate, functiontime,
         }  
     }
 }
-
-module.exports = tangled_cass_paper

@@ -17,7 +17,7 @@ function givelist(){
     return listarray.join("\n")
 }
 
-function picture(message, client, prefix, functiondate, functiontime, getlogchannel, cooldowns, config){
+module.exports = function(message, client, prefix, functiondate, functiontime, getlogchannel, cooldowns, config){
     if(message.content.startsWith(prefix + "picture")){
         try {
             //Implement cooldown
@@ -140,5 +140,3 @@ function picture(message, client, prefix, functiondate, functiontime, getlogchan
         }
     }
 }
-
-module.exports = picture;

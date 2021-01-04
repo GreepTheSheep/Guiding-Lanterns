@@ -17,7 +17,7 @@ function getRandom(){
     return output.toFixed(0)
   }
 
-function loot(message, client, prefix, cooldowns, cur_json, lang){
+module.exports = function(message, client, prefix, cooldowns, cur_json, lang){
     if (message.content.startsWith(prefix + 'loot')){
         //Implement cooldown
         if (!cooldowns.has(prefix + 'loot')) {
@@ -61,5 +61,3 @@ function loot(message, client, prefix, cooldowns, cur_json, lang){
         else if (random >= 20) return message.reply(lang.loot_max.replace('${money}', `${random} ${cur_json.cur.symbol}`))
     }
 }
-
-module.exports = loot

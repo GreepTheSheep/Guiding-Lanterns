@@ -4,7 +4,7 @@ function randomItem(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
 
-function au_sus(message, client, prefix){
+module.exports = function(message, client, prefix){
     if (message.content.toLowerCase().startsWith(prefix + 'sus')){
         let args = message.content.split(" ")
         args.shift()
@@ -35,5 +35,3 @@ function au_sus(message, client, prefix){
         }
     }
 }
-
-module.exports = au_sus

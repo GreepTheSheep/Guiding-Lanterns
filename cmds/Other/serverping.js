@@ -1,13 +1,11 @@
 const Discord = require('discord.js')
 
-async function serverping(message, client, prefix){
+module.exports = async function(message, client, prefix){
     if(message.content.startsWith(prefix + "ping")) {
         const m = await message.channel.send("Pong?");
         let embed = new Discord.MessageEmbed
         embed.setTitle(`Pong!`)
-            .setDescription(`❓: ${m.createdTimestamp - message.createdTimestamp}ms\n\n💓: ${Math.round(client.ping)}ms`)
+            .setDescription(`${m.createdTimestamp - message.createdTimestamp}ms`)
         m.edit(embed);
       }
 }
-
-module.exports = serverping

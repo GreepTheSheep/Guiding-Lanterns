@@ -5,7 +5,7 @@ const request = require('request')
 const gm = require('gm')
 const autoLineBreaks = require('auto-line-breaks')
 
-function tangled_raps_book(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, guildPrefix, userLang, lang, langtext, config) {
+module.exports = function(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, guildPrefix, userLang, lang, langtext, config) {
     if (message.content.toLowerCase().startsWith(prefix + 'rapunzelbook') || message.content.toLowerCase().startsWith(prefix + 'rapsbook')){
         try{
             //Implement cooldown
@@ -76,5 +76,3 @@ function tangled_raps_book(message, client, prefix, functiondate, functiontime, 
         }  
     }
 }
-
-module.exports = tangled_raps_book

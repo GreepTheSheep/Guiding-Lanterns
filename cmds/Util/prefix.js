@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-function setPrefix(message, client, prefix, guildPrefix, lang, config){
+module.exports = function(message, client, prefix, guildPrefix, lang, config){
     if (message.content.startsWith(prefix + "prefix") || message.content.startsWith(`<@!${client.user.id}> prefix`) || message.content.startsWith(`<@${client.user.id}> prefix`)) {
         let args = message.content.split("set ")
         args.shift()
@@ -14,4 +14,3 @@ function setPrefix(message, client, prefix, guildPrefix, lang, config){
         }
     }
 }
-module.exports = setPrefix;

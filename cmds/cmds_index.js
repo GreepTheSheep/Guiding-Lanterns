@@ -3,108 +3,83 @@ const Enmap = require('enmap')
 
 // All commands listed here
 
-function cmds_index(message, client, prefix, config, functiondate, functiontime, cooldowns, getlogchannel, guildPrefix, userLang, lang, langtext, ThemeparksList){
+module.exports = function(message, client, prefix, config, functiondate, functiontime, cooldowns, getlogchannel, guildPrefix, userLang, lang, langtext, ThemeparksList){
     if (message.channel.type === 'dm') return
     /*--------------------------------
     -------------- Owner -------------
     --------------------------------*/
     if (message.author.id === config.owner){
-    const eval_cmd = require('./Owner/eval.js');
-    eval_cmd(message, client, prefix, getlogchannel());
+        require('./Owner/eval.js')(message, client, prefix, getlogchannel());
 
-    const update = require('./Owner/update.js');
-    update(message, client, prefix);
+        require('./Owner/update.js')(message, client, prefix);
 
-    const command = require('./Owner/shell.js');
-    command(message, client, prefix);
+        require('./Owner/shell.js')(message, client, prefix);
 
-    const testCommands = require('./Owner/test-cmds.js');
-    testCommands(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns);
+        require('./Owner/test-cmds.js')(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns);
 
-    const status = require('./Owner/status.js');
-    status(message, client, prefix);
+        require('./Owner/status.js')(message, client, prefix);
 
-    const claimlog = require('./Owner/log.js');
-    claimlog(message, client, prefix, config);
+        require('./Owner/log.js')(message, client, prefix, config);
 
-    const worldsmanager = require('./Owner/worlds.js')
-    worldsmanager(message, client, prefix, functiondate, functiontime, getlogchannel())
+        require('./Owner/worlds.js')(message, client, prefix, functiondate, functiontime, getlogchannel())
     }
     /*--------------------------------
     ------------ Currency ------------
     --------------------------------*/
     
-    const currency_cmds = require('./Currency/cur_index.js');
-    currency_cmds(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, guildPrefix, userLang, lang, langtext, config);
+    require('./Currency/cur_index.js')(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel, guildPrefix, userLang, lang, langtext, config);
     
     /*--------------------------------
     ------------- Worlds -------------
     --------------------------------*/
 
-    const quotes = require('./Worlds/quotes.js');
-    quotes(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns, config);
+    require('./Worlds/quotes.js')(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns, config);
 
-    const picture = require('./Worlds/pics.js')
-    picture(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns, config)
+    require('./Worlds/pics.js')(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns, config)
 
     /*--------------------------------
     --------------- Fun --------------
     --------------------------------*/
 
-    const ing_cmds = require('./Fun/images/gm-index.js')
-    ing_cmds(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel(), guildPrefix, userLang, lang, langtext, config)
+    require('./Fun/images/gm-index.js')(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel(), guildPrefix, userLang, lang, langtext, config)
 
-    const eight_ball = require('./Fun/8ball.js');
-    eight_ball(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns);
+    require('./Fun/8ball.js')(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns);
 
-    const bot_ping = require('./Fun/ping.js');
-    bot_ping(message, client, prefix, config);
+    require('./Fun/ping.js')(message, client, prefix, config);
 
-    const au_sus = require('./Fun/sus.js');
-    au_sus(message, client, prefix);
+    require('./Fun/sus.js')(message, client, prefix);
 
     /*--------------------------------
     --------------- Util -------------
     --------------------------------*/
 
     /*  Ded function
-    const parktimes = require('./Util/themeparks.js')
-    parktimes(message, client, prefix, cooldowns, ThemeparksList);
+    require('./Util/themeparks.js')(message, client, prefix, cooldowns, ThemeparksList);
     */
 
-    const wolfram = require('./Util/wolfram.js');
-    wolfram(message, client, prefix, cooldowns);
+    require('./Util/wolfram.js')(message, client, prefix, cooldowns);
 
-    const image_search_request = require('./Util/img_search.js')
-    image_search_request(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns)
+    require('./Util/img_search.js')(message, client, prefix, functiondate, functiontime, getlogchannel(), cooldowns)
 
-    const about = require('./Util/about.js');
-    about(message, client, prefix, lang, langtext, cooldowns);
+    require('./Util/about.js')(message, client, prefix, lang, langtext, cooldowns);
 
-    const setPrefix = require('./Util/prefix.js')
-    setPrefix(message, client, prefix, guildPrefix, lang, config);
+    require('./Util/prefix.js')(message, client, prefix, guildPrefix, lang, config);
 
-    const setLanguage = require('./Util/language.js')
-    setLanguage(message, client, prefix, userLang, lang, langtext);
+    require('./Util/language.js')(message, client, prefix, userLang, lang, langtext);
 
-    const geturlofattachment = require('./Util/geturlofattach.js')
-    geturlofattachment(message, client, prefix, lang);
+    require('./Util/geturlofattach.js')(message, client, prefix, lang);
     
     /*--------------------------------
     -------------- Other -------------
     --------------------------------*/
 
-    const help = require('./Other/help.js');
-    help(message, client, prefix, lang, cooldowns);
+    require('./Other/help.js')(message, client, prefix, lang, cooldowns);
 
-    const serverping = require('./Other/serverping.js');
-    serverping(message, client, prefix)
+    require('./Other/serverping.js')(message, client, prefix)
 
-    const bug = require('./Other/bug.js');
-    bug(message, client, prefix, lang, getlogchannel());
+    require('./Other/bug.js')(message, client, prefix, lang, getlogchannel());
 
-    const replyToThanks = require('./Other/thanks.js')
-    replyToThanks(message, client, prefix)
+    require('./Other/thanks.js')(message, client, prefix)
 
 
     /*--------------------------------
@@ -119,28 +94,19 @@ function cmds_index(message, client, prefix, config, functiondate, functiontime,
             message.member.removeRole('562608575227363329')
         }
         
-        const welcome = require('./Guild/rules-accept-welcome.js');
-        welcome(message, client, prefix, cooldowns);
+        require('./Guild/rules-accept-welcome.js')(message, client, prefix, cooldowns);
 
     }
 
-    const screenshot = require('./Guild/screenshot.js');
-    screenshot(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel());
+    require('./Guild/screenshot.js')(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel());
 
-    const lantern = require('./Guild/lantern.js');
-    lantern(message, client, prefix, getlogchannel(), cooldowns);
+    require('./Guild/lantern.js')(message, client, prefix, getlogchannel(), cooldowns);
 
     if (message.guild.id == '562602234265731080' || message.guild.id == '600355162279641108'){  // r/Tangled & DisneyFRdiscord 
-
-        const cross_lantern = require('./Guild/cross-lantern.js');
-        cross_lantern(message, client, prefix, getlogchannel(), cooldowns);
-    
-        
+        require('./Guild/cross-lantern.js')(message, client, prefix, getlogchannel(), cooldowns);
     }
     
 
     //-----------------------------------------------------------------------------------------------
 
 }
-
-module.exports = cmds_index;

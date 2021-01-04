@@ -2,7 +2,7 @@ const Discord = require('discord.js')
 const {MessageAttachment} = require('discord.js')
 const fs = require('fs')
 
-async function claimlog (message, client, prefix, config) {
+module.exports = async function(message, client, prefix, config) {
     if (message.content.startsWith(prefix + 'log')){
         try {
             let args = message.content.split(" ")
@@ -26,5 +26,3 @@ async function claimlog (message, client, prefix, config) {
         }
     }
 }
-
-module.exports = claimlog

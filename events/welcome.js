@@ -5,7 +5,7 @@ function randomItem(array) {
     return array[Math.floor(Math.random() * array.length)];
 }
 
-async function welcome(oldMember, newMember, client) {
+module.exports = async function(oldMember, newMember, client) {
     newMember.user.send(`Howdy ! I can help you to  better integrate into the kingdom! That's the role of a lady-in-waiting!\n\nWe (mostly the Royal Guard) regularly post announcements about the server. <#563241725133455391>\n\nYou can get more roles and change the colour of your name here: <#643107104504152065>\n\nIf you've joined the subreddit at https://reddit.com/r/tangled , you can type \`!subbed\` to get the Friend of Rapunzel badge!\n\nDon't forget to participate because I count your messages and transform them into experience, and thanks to this experience you can gain levels. The higher you are, the more rewards you will get! (Type \`!rank\` in #bot-commands to see your level!)\n\n**__And above all, don't forget to have fun in the world of Tangled!__**`).catch(e=>console.log(e))
     const check_db = new Enmap({name : 'Tangled_verification'})
     check_db.set(newMember.user.id, true)
@@ -34,5 +34,3 @@ async function welcome(oldMember, newMember, client) {
     client.guilds.cache.get('562602234265731080').channels.cache.get('658808055558832132').send(embed);
     client.guilds.cache.get('562602234265731080').channels.cache.get('663096647437516810').send(`\`+\` ${newMember.user.username}`);
 }
-
-module.exports = welcome;

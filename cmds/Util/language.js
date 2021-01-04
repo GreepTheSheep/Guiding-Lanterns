@@ -12,7 +12,7 @@ function givelist(){
     return list
 }
 
-function setLanguage(message, client, prefix, userLang, lang, langtext){
+module.exports = function(message, client, prefix, userLang, lang, langtext){
     try{
     if (message.content.startsWith(prefix + "lang")) {
         const args = message.content.split(/ +/).slice(1);
@@ -48,4 +48,3 @@ function setLanguage(message, client, prefix, userLang, lang, langtext){
         message.channel.send('Error')
     }
 }
-module.exports = setLanguage;

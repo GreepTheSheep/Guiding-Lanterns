@@ -1,8 +1,7 @@
 const Discord = require('discord.js');
 const fs = require('fs');
 
-
-function versionCheck(client) {
+module.exports = function(client) {
     const channel = client.channels.cache.get('671283971149004801');
     if (!channel) {
         console.log(`Update notifications channel cannot be found`);
@@ -23,9 +22,5 @@ function versionCheck(client) {
     if (package.version.slice(0, package.version.indexOf('.', package.version.indexOf('.') + 1)) != verCheck) {
         fs.writeFileSync(verCheckfile, package.version.slice(0, package.version.indexOf('.', package.version.indexOf('.') + 1)))
             channel.send(`<@&627499119153512479>\n> **__New version: ${package.version}__\n> What's new: *${package.changelog}***\n\nType \`!botnotif\` to get notified of new features (you can disable by typing \`!disablebotnotif\`)`)
-
     }
-
 }
-
-module.exports = versionCheck;

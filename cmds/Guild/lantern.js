@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const Enmap = require('enmap')
 const counter = new Enmap({name: 'r-tangled_lantern'})
 
-function lantern(message, client, prefix, getlogchannel, cooldowns) {
+module.exports = function(message, client, prefix, getlogchannel, cooldowns) {
 
     if (message.guild.id == '562602234265731080') {
         if (message.content.includes('<:Lantern:570822664789426186>')) {
@@ -80,5 +80,3 @@ function lantern(message, client, prefix, getlogchannel, cooldowns) {
         } else return;
     }
 }
-
-module.exports = lantern;

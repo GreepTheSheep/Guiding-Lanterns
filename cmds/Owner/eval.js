@@ -9,7 +9,7 @@ const { MessageAttachment } = require('discord.js');
         return text;
 }
 
- function eval_cmd(message, client, prefix, getlogchannel) {
+module.exports = function(message, client, prefix, getlogchannel) {
     if (message.content.startsWith(prefix + "eval")) {
         try {
             const args = message.content.split(" ").slice(1);
@@ -39,5 +39,3 @@ const { MessageAttachment } = require('discord.js');
         }
     }
  }
-
- module.exports = eval_cmd;

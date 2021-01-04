@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-function bug(message, client, prefix, lang, logchannel) {
+module.exports = function(message, client, prefix, lang, logchannel) {
 
     if (message.content.startsWith(prefix + 'bug')) {
         message.reply(lang.bug_text + '\n> https://github.com/Guiding-Lanterns/Guiding-Lanterns/issues/new').then(
@@ -11,5 +11,3 @@ function bug(message, client, prefix, lang, logchannel) {
         }))
     }
 }
-
-module.exports = bug;

@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-function say(message, client, prefix, donor, donoronlymsg) {
+module.exports = function(message, client, prefix, donor, donoronlymsg) {
 
     if (message.content.startsWith(prefix + 'say')) {
         if (!donor) return message.channel.send(donoronlymsg)
@@ -16,5 +16,3 @@ function say(message, client, prefix, donor, donoronlymsg) {
         }
     }
 }
-
-module.exports = say;

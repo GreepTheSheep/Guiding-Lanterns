@@ -4,7 +4,7 @@ const wait = require('util').promisify(setTimeout);
 const min=1000; 
 const max=10000;
 
-function eight_ball(message, client, prefix, date, time, logchannel, cooldowns){
+module.exports = function(message, client, prefix, date, time, logchannel, cooldowns){
     var reponses = [
         "It is certain.",
         "It is decidedly so.",
@@ -88,5 +88,3 @@ function eight_ball(message, client, prefix, date, time, logchannel, cooldowns){
     }
     }
 }
-
-module.exports = eight_ball;

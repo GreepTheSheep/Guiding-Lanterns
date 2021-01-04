@@ -1,6 +1,6 @@
 const Discord = require('discord.js')
 
-async function cross_lanterns(message, client, prefix, getlogchannel, cooldowns){
+module.exports = async function(message, client, prefix, getlogchannel, cooldowns){
     if (message.guild.id == '562602234265731080') { // r/tangled
         if (message.channel.id == '663693329187471370'){
             if (!message.content.includes('<:Lantern:570822664789426186>')) {
@@ -31,5 +31,3 @@ async function cross_lanterns(message, client, prefix, getlogchannel, cooldowns)
         }
     }
 }
-
-module.exports = cross_lanterns

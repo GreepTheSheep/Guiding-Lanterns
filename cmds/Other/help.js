@@ -1,6 +1,6 @@
 const Discord = require('discord.js');
 
-function help(message, client, prefix, lang, cooldowns) {
+module.exports = function(message, client, prefix, lang, cooldowns) {
     if (message.content.startsWith(prefix + 'help') || message.content.startsWith(prefix + 'commands') || message.content.startsWith(`<@!${client.user.id}> help`) || message.content.startsWith(`<@${client.user.id}> help`) || message.content.startsWith(`<@!${client.user.id}> commands`) || message.content.startsWith(`<@${client.user.id}> commands`)) {
          //Implement cooldown
          if (!cooldowns.has(prefix + 'help')) {
@@ -37,5 +37,3 @@ function help(message, client, prefix, lang, cooldowns) {
         message.reply('https://guiding-lanterns.greep.cf/cmds.html')
     }
 }
-
-module.exports = help;

@@ -7,7 +7,7 @@ const config = JSON.parse(fs.readFileSync(configfile, "utf8"));
 translate.engine = 'yandex'
 translate.key = config.translate_key
 
-async function use(message, client, prefix, cooldowns, cur_json, lang, langtext){
+module.exports = async function(message, client, prefix, cooldowns, cur_json, lang, langtext){
     if(message.content.startsWith(prefix + "use")) {
 
         //Implement cooldown
@@ -70,5 +70,3 @@ async function use(message, client, prefix, cooldowns, cur_json, lang, langtext)
         message.channel.send(embed)
     }
 }
-
-module.exports = use;

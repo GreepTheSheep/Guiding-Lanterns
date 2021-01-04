@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 
 //Update amount of members.
-function num_members_guild(client,guild_id,channel_id) {
+module.exports = function(client,guild_id,channel_id) {
     const channel = client.channels.get(channel_id);
     const guild = client.guilds.get(guild_id);
     if (!guild) {
@@ -23,5 +23,3 @@ function num_members_guild(client,guild_id,channel_id) {
 
     channel.setName(`Members: ${members}`).catch(err=>console.log(err));
 }
-
-module.exports = num_members_guild;

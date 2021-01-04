@@ -7,7 +7,7 @@ const { wolfID } = JSON.parse(fs.readFileSync(configfile, "utf8"));
 const Discord = require('discord.js');
 const WolframAlphaAPI = require('wolfram-alpha-api');
 const waApi = WolframAlphaAPI(wolfID);
-    function wolfram_short (message, client, prefix, cooldowns) {
+module.exports = function(message, client, prefix, cooldowns) {
         if (message.content.startsWith(prefix + 'wolf'))  {
             (async () => {
             try {
@@ -65,5 +65,3 @@ const waApi = WolframAlphaAPI(wolfID);
         })();
         };
     };
-
-module.exports = wolfram_short

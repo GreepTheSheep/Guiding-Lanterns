@@ -1,6 +1,6 @@
 const Discord = require("discord.js");
 
-async function status(message, client, prefix) {
+module.exports = async function(message, client, prefix) {
 
     if (message.content.startsWith(prefix + 'setstatus')) {
         let args = message.content.split(" ");
@@ -39,5 +39,3 @@ async function status(message, client, prefix) {
         });
     }
 }
-
-module.exports = status;

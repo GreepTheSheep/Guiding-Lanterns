@@ -16,7 +16,7 @@ const responses = [
     'Awww'
 ]
 
-function replyToThanks(message, client, prefix){
+module.exports = function(message, client, prefix){
     if(message.content.toLowerCase().includes(`thanks <@${client.user.id}>`) || message.content.toLowerCase().includes(`thanks <@!${client.user.id}>`) || message.content.toLowerCase().includes(`thank lantern`)){
         
         function randomItem(array) {
@@ -34,5 +34,3 @@ function replyToThanks(message, client, prefix){
         .catch(e => console.log(e))
     }
 }
-
-module.exports = replyToThanks
