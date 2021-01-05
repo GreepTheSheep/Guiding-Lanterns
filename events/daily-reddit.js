@@ -21,7 +21,9 @@ dailyReddit.on('send', client=>{
         var guildData = redditDB.get(guild.id)
         if (guildData.length < 1) return
         var tries = 0
-        checkImage(redditDB, client, tries, guild, guildData)
+        guildData.forEach(guildData=>{
+            checkImage(redditDB, client, tries, guild, guildData)
+        })
     })
 });
 
@@ -31,7 +33,7 @@ function randomItem(array) {
 
 function checkImage(redditDB, client, tries, guild, guildData){
     if (tries >= 40) return
-    request(`https://www.reddit.com/r/${redditDB.subreddit}/random.json`, function (error, response, body) {
+    request(`https://www.reddit.com/r/${guildData.subreddit}/random.json`, function (error, response, body) {
         if (error){
             return
         } else {
