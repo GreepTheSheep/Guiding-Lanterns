@@ -29,32 +29,37 @@ function randomItem(array) {
 }
 
 function checkImage(redditDB, client, tries, guild, guildData){
-    if (tries >= 40) return
-    request(`https://www.reddit.com/r/${guildData.subreddit}/random.json`, function (error, response, body) {
-        if (error){
-            return
-        } else {
-            body = JSON.parse(body)
-            if (Object.prototype.toString.call(body) === '[object Array]'){
-                if (body[0] == undefined) return
-                resData = body[0].data.children[0].data
-                if (resData.post_hint !== 'image'){
-                    tries++
-                    checkImage(redditDB, client, tries)
-                } else postEmbed(redditDB, client, resData, guild, guildData)
-            } else if (Object.prototype.toString.call(body) === '[object Object]'){
-                if (body.error) return
-                else {
-                    if (!body.data.children[0]) return
-                    resData = randomItem(body.data.children).data
+    try{
+        if (tries >= 40) return
+        request(`https://www.reddit.com/r/${guildData.subreddit}/random.json`, function (error, response, body) {
+            if (error){
+                return
+            } else {
+                body = JSON.parse(body)
+                if (Object.prototype.toString.call(body) === '[object Array]'){
+                    if (body[0] == undefined) return
+                    resData = body[0].data.children[0].data
                     if (resData.post_hint !== 'image'){
                         tries++
                         checkImage(redditDB, client, tries)
                     } else postEmbed(redditDB, client, resData, guild, guildData)
+                } else if (Object.prototype.toString.call(body) === '[object Object]'){
+                    if (body.error) return
+                    else {
+                        if (!body.data.children[0]) return
+                        resData = randomItem(body.data.children).data
+                        if (resData.post_hint !== 'image'){
+                            tries++
+                            checkImage(redditDB, client, tries)
+                        } else postEmbed(redditDB, client, resData, guild, guildData)
+                    }
                 }
             }
-        }
-    });
+        });
+    } catch (err){
+        console.error(err)
+        return
+    }
 }
 function postEmbed(redditDB, client, resData, guild, guildData){
     let embed = new Discord.MessageEmbed
