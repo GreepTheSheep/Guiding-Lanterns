@@ -2,6 +2,7 @@ const Discord = require('discord.js')
 const moment = require('moment-timezone')
 moment.tz.setDefault("Etc/GMT");
 const Enmap = require('enmap')
+const request = require('request')
 
 module.exports = function(client){
     var actualHour = moment().hour()
