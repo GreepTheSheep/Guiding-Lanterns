@@ -1,5 +1,6 @@
 const Discord = require('discord.js')
-const moment = require('moment')
+const moment = require('moment-timezone')
+moment.tz.setDefault("Etc/GMT");
 const Enmap = require('enmap')
 const redditDB = new Enmap({name: "dailyreddit"})
 const events = require('events');
@@ -16,7 +17,7 @@ module.exports = function(client){
 }
 
 dailyReddit.on('send', client=>{
-    client.guilds.forEach(guild=>{
+    client.guilds.cache.forEach(guild=>{
         if (redditDB.has(guild.id)) return
         var guildData = redditDB.get(guild.id)
         if (guildData.length < 1) return
