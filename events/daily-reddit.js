@@ -10,7 +10,7 @@ module.exports = function(client){
             actualHour = moment().hour()
             var redditDB = new Enmap({name: "dailyreddit"})
             client.guilds.cache.forEach(guild=>{
-                if (redditDB.has(guild.id)) return
+                if (!redditDB.has(guild.id)) return
                 if (redditDB.get(guild.id) == "") redditDB.set(guild.id, [])
                 var guildData = redditDB.get(guild.id)
                 if (guildData.length < 1) return
