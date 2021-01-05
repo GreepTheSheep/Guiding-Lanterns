@@ -111,5 +111,9 @@
     "seconds": "seconds",
     "minutes": "minutes",
     "hours": "hours",
-    "days": "days"
+    "days": "days",
+    "dailyreddit_help_title": "Send daily random pictures",
+    "dailyreddit_help_desc": "Usage: `${prefix}dailyreddit [sub/unsub] [Subreddit name]`",
+    "dailyreddit_help_sub": "`${prefix}dailyreddit sub [Subreddit name] [Channel mention] [hour] {Timezone}`\nHour must be a number between 0 and 23 (24hour format, do not pass minutes)\nTimezone is optional, default is GMT. You can get the list [on this link](${link})",
+    "dailyreddit_help_unsub": "`${prefix}dailyreddit unsub [Subreddit name]`"
 }

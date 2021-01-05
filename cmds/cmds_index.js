@@ -69,6 +69,8 @@ module.exports = function(message, client, prefix, config, functiondate, functio
 
     require('./Util/language.js')(message, client, prefix, userLang, lang, langtext);
 
+    require('./Util/daily-reddit.js')(message, client, prefix, lang);
+
     require('./Util/geturlofattach.js')(message, client, prefix, lang);
     
     /*--------------------------------
