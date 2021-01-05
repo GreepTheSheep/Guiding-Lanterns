@@ -64,7 +64,7 @@ module.exports = function(message, client, prefix, lang){
                             })
                             redditDB.set(message.guild.id, data)
 
-                            message.channel.send('Succesfully added '+subName+' to <#' + channel.id + '> to send random images every day at '+hour+' hours')
+                            message.channel.send('Succesfully added '+subName+' to <#' + channel.id + '> to send random images every day at '+parseInt(args[2])+' hours')
                         } else if (Object.prototype.toString.call(body) === '[object Object]'){
                             if (body.error) return message.reply('Error ' + body.error + ': ' + body.message)
                             else {
@@ -78,7 +78,7 @@ module.exports = function(message, client, prefix, lang){
                                 })
                                 redditDB.set(message.guild.id, data)
 
-                                message.channel.send('Succesfully added '+subName+' to <#' + channel.id + '> to send random images every day at '+hour+' hours')
+                                message.channel.send('Succesfully added '+subName+' to <#' + channel.id + '> to send random images every day at '+parseInt(args[2])+' hours')
                             }
                         }
                     }
