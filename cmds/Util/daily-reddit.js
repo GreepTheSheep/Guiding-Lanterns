@@ -27,23 +27,11 @@ module.exports = function(message, client, prefix, lang){
                 .setDescription(lang.dailyreddit_help_sub.replace('${prefix}', prefix).replace('${link}', 'https://en.wikipedia.org/wiki/List_of_tz_database_time_zones'))
                 message.channel.send(embed)
             } else {
+                if (args.length < 3) return message.reply('I don\'t have all required arguments!')
                 var subName = args[0]
 
-                var value_example = [
-                    {
-                        "subreddit": "name",
-                        "hour": 21,
-                        "channelID": "143"
-                    },
-                    {
-                        "subreddit": "name2",
-                        "hour": 19,
-                        "channelID": "144"
-                    },
-                ]
-
-                var channel = message.mentions.channels.first() || message.guild.channels.find(c=>c.id == args[1])
-                if (!channel || args.length < 3) return message.reply('I don\'t have all arguments!')
+                var channel = message.mentions.channels.first()
+                if (!channel) return message.reply('Channel not found, please mention the channel')
 
                 var timezone;
                 if (!args[3]) timezone = 'Etc/GMT'
