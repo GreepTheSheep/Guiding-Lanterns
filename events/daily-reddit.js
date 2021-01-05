@@ -17,7 +17,7 @@ module.exports = function(client){
                 if (guildData.length < 1) return
                 var tries = 0
                 guildData.forEach(guildData=>{
-                    checkImage(redditDB, client, tries, guild, guildData)
+                    if (guildData.hour == actualHour) checkImage(redditDB, client, tries, guild, guildData)
                 })
             })
         }
@@ -58,7 +58,7 @@ function checkImage(redditDB, client, tries, guild, guildData){
 }
 function postEmbed(redditDB, client, resData, guild, guildData){
     let embed = new Discord.MessageEmbed
-    embed.setAuthor(`Random daily post of r/${resData.subreddit}`)
+    embed.setAuthor(`Your daily post of r/${resData.subreddit}`)
     .setTitle(resData.title.substring(0, 250))
     .setDescription(`[Open link](https://reddit.com${resData.permalink})`)
     .setFooter(`By u/${resData.author}${resData.author_flair_text !== null ? ` - ${resData.author_flair_text}` : ''}`)
