@@ -2,13 +2,13 @@ const Discord = require('discord.js')
 const moment = require('moment-timezone')
 moment.tz.setDefault("Etc/GMT");
 const Enmap = require('enmap')
-const redditDB = new Enmap({name: "dailyreddit"})
 
 module.exports = function(client){
     var actualHour = moment().hour()
     setInterval(function(){
         if (moment().hour() != actualHour){
             actualHour = moment().hour()
+            var redditDB = new Enmap({name: "dailyreddit"})
             client.guilds.cache.forEach(guild=>{
                 if (redditDB.has(guild.id)) return
                 if (redditDB.get(guild.id) == "") redditDB.set(guild.id, [])
