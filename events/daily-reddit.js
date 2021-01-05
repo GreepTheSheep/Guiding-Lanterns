@@ -3,30 +3,24 @@ const moment = require('moment-timezone')
 moment.tz.setDefault("Etc/GMT");
 const Enmap = require('enmap')
 const redditDB = new Enmap({name: "dailyreddit"})
-const events = require('events');
-const dailyReddit = new events.EventEmitter();
 
 module.exports = function(client){
     var actualHour = moment().hour()
     setInterval(function(){
         if (moment().hour() != actualHour){
-            dailyReddit.emit('send', client)
             actualHour = moment().hour()
+            client.guilds.cache.forEach(guild=>{
+                if (redditDB.has(guild.id)) return
+                var guildData = redditDB.get(guild.id)
+                if (guildData.length < 1) return
+                var tries = 0
+                guildData.forEach(guildData=>{
+                    checkImage(redditDB, client, tries, guild, guildData)
+                })
+            })
         }
     }, 1000)
 }
-
-dailyReddit.on('send', client=>{
-    client.guilds.cache.forEach(guild=>{
-        if (redditDB.has(guild.id)) return
-        var guildData = redditDB.get(guild.id)
-        if (guildData.length < 1) return
-        var tries = 0
-        guildData.forEach(guildData=>{
-            checkImage(redditDB, client, tries, guild, guildData)
-        })
-    })
-});
 
 function randomItem(array) {
     return array[Math.floor(Math.random() * array.length)];
