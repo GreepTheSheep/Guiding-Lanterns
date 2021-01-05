@@ -24,7 +24,6 @@ function checkImage(message, args, prefix, tries){
                 else {
                     if (!body.data.children[0]) return message.reply('Subreddit not found, check the name')
                     resData = randomItem(body.data.children).data
-                    console.log(resData)
                     if (resData.post_hint !== 'image'){
                         tries++
                         checkImage(message, args, prefix, tries)
