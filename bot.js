@@ -136,6 +136,8 @@ client.on('ready', async () => { // If bot was connected:
         getlogchannel().send(`${client.user.tag} is connected in shard ${client.shard.ids[0]}`) 
     }
 
+    require('./events/daily-reddit.js')(client)
+
     if (client.user.id == config.public){
 
         // client.channels.cache.get('741594861408354325').messages.fetch('754365382189514802').then(m => {

@@ -27,7 +27,7 @@ module.exports = function(message, client, prefix, lang){
                 .setDescription(lang.dailyreddit_help_sub.replace('${prefix}', prefix).replace('${link}', 'https://en.wikipedia.org/wiki/List_of_tz_database_time_zones'))
                 message.channel.send(embed)
             } else {
-                if (args.length < 3) return message.reply('I don\'t have all required arguments!')
+                if (args.length < 3) return message.reply(lang.missing_args)
                 var subName = args[0]
 
                 var channel = message.mentions.channels.first()
@@ -42,7 +42,7 @@ module.exports = function(message, client, prefix, lang){
                     })
                     if (tzList.includes(args[3].toLowerCase())){
                         timezone = args[3]
-                    } else return message.reply('Invalid timezone format')
+                    } else return message.reply(lang.invalid_tz)
                 }
                 var hour = parseInt(args[2])
                 if (hour < 0 || hour >= 24) return message.channel.send('Invalid hour format, it must be between 0 and 23')
