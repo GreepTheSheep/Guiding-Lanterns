@@ -15,6 +15,7 @@ module.exports = function(message, client, prefix, lang){
             .setDescription(lang.dailyreddit_help_desc.replace('${prefix}', prefix))
             .addField(`${prefix}dailyreddit sub`, lang.dailyreddit_help_sub.replace('${prefix}', prefix).replace('${link}', 'https://en.wikipedia.org/wiki/List_of_tz_database_time_zones'))
             .addField(`${prefix}dailyreddit unsub`, lang.dailyreddit_help_unsub.replace('${prefix}', prefix))
+            .addField(`${prefix}dailyreddit list`, lang.dailyreddit_help_list)
             .setColor('RANDOM')
             message.channel.send(embed)
         } else if (args[0].toLowerCase() == 'sub') {
@@ -53,7 +54,7 @@ module.exports = function(message, client, prefix, lang){
                 }
                 var hour = parseInt(args[2])
                 if (hour < 0 || hour >= 24) return message.channel.send('Invalid hour format, it must be between 0 and 23')
-                hour = moment.hour(hour).tz(timezone).format('HH')
+                hour = parseInt(moment(hour, 'h').tz(timezone).format('HH'))
 
                 request(`https://www.reddit.com/r/${subName}/random.json`, function (error, response, body) {
                     if (error){
@@ -101,12 +102,19 @@ module.exports = function(message, client, prefix, lang){
                 message.channel.send(embed)
             } else {
                 var subName = args[0].toLowerCase()
-                // Check value and remove it
                 var data = redditDB.get(message.guild.id)
+                if (!data.some(d=>d.subName.toLowerCase == subName)) return message.channel.send('The subreddit name '+ subName +' is not on my database')
                 data = data.splice(data.indexOf(data.find(d=>d.subName.toLowerCase == subName)), 1)
                 redditDB.set(message.guild.id, data)
                 message.channel.send('Succesfully removed '+ subName)
             }
+        } else if (args[0].toLowerCase() == 'list'){
+            var data = redditDB.get(message.guild.id)
+            var humanList = []
+            data.forEach(d=>{
+                humanList.push(`- ${d.subreddit} - sends everyday at ${d.hour} GMT - Channel <#${d.channelID}>`)
+            })
+            message.channel.send(humanList.join('\n'))
         } else message.channel.send('Invalid arg')
     }
 }
