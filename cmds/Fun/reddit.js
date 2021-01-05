@@ -1,7 +1,5 @@
 const Discord = require('discord.js')
 const request = require('request')
-const moment = require('moment')
-const tz = require('moment-timezone')
 
 function randomItem(array) {
     return array[Math.floor(Math.random() * array.length)];
