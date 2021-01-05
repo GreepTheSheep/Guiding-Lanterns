@@ -36,7 +36,11 @@ module.exports = function(message, client, prefix, lang){
                 var timezone;
                 if (!args[3]) timezone = 'Etc/GMT'
                 else {
-                    if (args[3].includes(JSON.parse(moment.tz.names()))){
+                    var tzList = []
+                    moment.tz.names().forEach(tz=>{
+                        tzList.push(tz.toLowerCase())
+                    })
+                    if (tzList.includes(args[3].toLowerCase())){
                         timezone = args[3]
                     } else return message.reply('Invalid timezone format')
                 }
