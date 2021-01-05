@@ -95,8 +95,8 @@ module.exports = function(message, client, prefix, lang){
             } else {
                 var subName = args[0].toLowerCase()
                 var data = redditDB.get(message.guild.id)
-                if (!data.some(d=>d.subName.toLowerCase() == subName)) return message.channel.send('The subreddit name '+ subName +' is not on my database')
-                data = data.splice(data.indexOf(data.find(d=>d.subName.toLowerCase == subName)), 1)
+                if (!data.some(d=>d.subreddit.toLowerCase() == subName)) return message.channel.send('The subreddit name '+ subName +' is not on my database')
+                data = data.splice(data.indexOf(data.find(d=>d.subreddit.toLowerCase() == subName)), 1)
                 redditDB.set(message.guild.id, data)
                 message.channel.send('Succesfully removed '+ subName)
             }
