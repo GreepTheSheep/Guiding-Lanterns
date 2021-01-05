@@ -95,7 +95,7 @@ module.exports = function(message, client, prefix, lang){
             } else {
                 var subName = args[0].toLowerCase()
                 var data = redditDB.get(message.guild.id)
-                if (!data.some(d=>d.subName.toLowerCase == subName)) return message.channel.send('The subreddit name '+ subName +' is not on my database')
+                if (!data.some(d=>d.subName.toLowerCase() == subName)) return message.channel.send('The subreddit name '+ subName +' is not on my database')
                 data = data.splice(data.indexOf(data.find(d=>d.subName.toLowerCase == subName)), 1)
                 redditDB.set(message.guild.id, data)
                 message.channel.send('Succesfully removed '+ subName)
@@ -104,7 +104,7 @@ module.exports = function(message, client, prefix, lang){
             var data = redditDB.get(message.guild.id)
             var humanList = []
             data.forEach(d=>{
-                humanList.push(`- ${d.subreddit} - sends everyday at ${d.hour} GMT - Channel <#${d.channelID}>`)
+                humanList.push(`- \`${d.subreddit}\` - sends everyday at ${d.hour} GMT - Channel <#${d.channelID}>`)
             })
             message.channel.send(humanList.join('\n'))
         } else message.channel.send('Invalid arg')
