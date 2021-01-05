@@ -63,6 +63,6 @@ function postEmbed(redditDB, client, resData, guild, guildData){
     .setDescription(`[Open link](https://reddit.com${resData.permalink})`)
     .setFooter(`By u/${resData.author}${resData.author_flair_text !== null ? ` - ${resData.author_flair_text}` : ''}`)
     .setImage(resData.url)
-    if (!guild.channels.some(c=> c.id == guildData.channelID)) return
-    return guild.channels.find(c=> c.id == guildData.channelID).send(embed)
+    if (!guild.channels.cache.some(c=> c.id == guildData.channelID)) return
+    return guild.channels.cache.find(c=> c.id == guildData.channelID).send(embed)
 }
