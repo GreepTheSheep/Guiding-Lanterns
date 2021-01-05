@@ -11,6 +11,7 @@ module.exports = function(client){
             actualHour = moment().hour()
             client.guilds.cache.forEach(guild=>{
                 if (redditDB.has(guild.id)) return
+                if (redditDB.get(guild.id) == "") redditDB.set(guild.id, [])
                 var guildData = redditDB.get(guild.id)
                 if (guildData.length < 1) return
                 var tries = 0
