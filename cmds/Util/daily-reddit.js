@@ -9,7 +9,7 @@ module.exports = function(message, client, prefix, lang){
     if (message.content.toLowerCase().startsWith(prefix + 'dailyreddit')){
         let args = message.content.split(" ");
         args.shift();
-        if (args.length < 1 || args[0].toLowerCase() != 'sub' || args[0].toLowerCase() != 'unsub') {
+        if (args.length < 1) {
             let embed = new Discord.MessageEmbed
             embed.setTitle(lang.dailyreddit_help_title)
             .setDescription(lang.dailyreddit_help_desc.replace('${prefix}', prefix))
@@ -107,6 +107,6 @@ module.exports = function(message, client, prefix, lang){
                 redditDB.set(message.guild.id, data)
                 message.channel.send('Succesfully removed '+ subName)
             }
-        }
+        } else message.channel.send('Invalid arg')
     }
 }
