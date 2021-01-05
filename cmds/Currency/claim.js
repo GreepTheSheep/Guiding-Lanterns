@@ -3,7 +3,7 @@ const Enmap = require('enmap')
 const fs = require('fs');
 
 module.exports = function(message, client, prefix, cooldowns, cur_json, lang){
-    if(message.content.startsWith(prefix + "claim") || message.content.startsWith(prefix + "daily")) {
+    if(message.content ==prefix + "claim" || message.content == prefix + "daily") {
 
         //Implement cooldown
         if (!cooldowns.has(prefix + 'claim')) {
