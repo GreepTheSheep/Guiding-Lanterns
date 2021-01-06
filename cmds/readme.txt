@@ -31,10 +31,11 @@ Arguments:
 !googleimage [input]                                : Input your search and he will returns an image
 !prefix {set %newPrefix%}                           : changes the server's prefix
 !lang {%langcode%}                                  : Changes the user's language
+!dailyreddit [sub/unsub/list] [subreddit name] [Channel] [hour] {timezone} : Send daily random image from a specific subreddit
 
 ------------ Currency ------------
 
-!market {buy - sell} {ID} {count}                   : See what we have in the 24/7 market.
+!market {buy/sell} {ID} {count}                     : See what we have in the 24/7 market.
 !inventory                                          : Opens your inventory and see what you have.
 !balance {user Mention Or ID}                       : See your actual balance.
 !use [ID]                                           : Uses your item. (When used, item is removed from inventory)
