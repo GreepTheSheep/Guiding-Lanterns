@@ -3,7 +3,6 @@ const request = require('request')
 const moment = require('moment-timezone')
 moment.tz.setDefault("Etc/GMT");
 const Enmap = require('enmap')
-const redditDB = new Enmap({name: "dailyreddit"})
 
 module.exports = function(message, client, prefix, lang){
     if (message.content.toLowerCase().startsWith(prefix + 'dailyreddit')){
@@ -19,6 +18,7 @@ module.exports = function(message, client, prefix, lang){
             .setColor('RANDOM')
             message.channel.send(embed)
         } else if (args[0].toLowerCase() == 'sub') {
+            const redditDB = new Enmap({name: "dailyreddit"})
             args.shift()
             if (args.length<1){
                 let embed = new Discord.MessageEmbed
@@ -85,6 +85,7 @@ module.exports = function(message, client, prefix, lang){
                 });
             }
         } else if (args[0].toLowerCase() == 'unsub') {
+            const redditDB = new Enmap({name: "dailyreddit"})
             args.shift()
             if (args.length<1){
                 let embed = new Discord.MessageEmbed
@@ -101,6 +102,7 @@ module.exports = function(message, client, prefix, lang){
                 message.channel.send('Succesfully removed '+ subName)
             }
         } else if (args[0].toLowerCase() == 'list'){
+            const redditDB = new Enmap({name: "dailyreddit"})
             var data = redditDB.get(message.guild.id)
             var humanList = []
             data.forEach(d=>{
