@@ -90,7 +90,7 @@ module.exports = function(message, client, prefix, functiondate, functiontime, g
                 } else {
                     // Create instant
                     const channel = message.mentions.channels.first()
-                    if (!channel || !args.length >= 4) return message.channel.send('I don\'t have all arguments!')
+                    if (!channel || args.length < 4) return message.channel.send('I don\'t have all arguments!')
                     client.giveawaysManager.start(channel, {
                         time: ms(args[1]),
                         prize: args.slice(3).join(" "),
