@@ -97,9 +97,9 @@ module.exports = function(message, client, prefix, lang){
                 var subName = args[0].toLowerCase()
                 var data = redditDB.get(message.guild.id)
                 if (!data.some(d=>d.subreddit.toLowerCase() == subName)) return message.channel.send('The subreddit name '+ subName +' is not on my database')
-                data = data.splice(data.indexOf(data.find(d=>d.subreddit.toLowerCase() == subName)), 1)
+                data = data.filter(d=>d.subreddit.toLowerCase() != subName)
                 redditDB.set(message.guild.id, data)
-                message.channel.send('Succesfully removed '+ subName)
+                message.channel.send('Succesfully removed '+ args[0])
             }
         } else if (args[0].toLowerCase() == 'list'){
             const redditDB = new Enmap({name: "dailyreddit"})
