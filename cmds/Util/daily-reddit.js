@@ -104,7 +104,7 @@ module.exports = function(message, client, prefix, lang){
         } else if (args[0].toLowerCase() == 'list'){
             const redditDB = new Enmap({name: "dailyreddit"})
             var data = redditDB.get(message.guild.id)
-            if (data.length < 1) return message.guild.send('There\'s no data for this server! Add one with the argument "sub"')
+            if (data.length < 1) return message.channel.send('There\'s no data for this server! Add one with the argument "sub"')
             var humanList = []
             data.forEach(d=>{
                 humanList.push(`- \`${d.subreddit}\` - sends everyday at ${d.hour} GMT - Channel <#${d.channelID}>`)
