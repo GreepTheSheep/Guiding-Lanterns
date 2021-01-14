@@ -119,7 +119,7 @@ module.exports = function(message, client, prefix, functiondate, functiontime, g
             fs.writeFileSync(picsfile, picsread);
             message.react('✅')
         } else {
-            const requestchannel = client.guilds.get('570024448371982373').channels.get('603649742441938944')
+            const requestchannel = client.guilds.cache.get('570024448371982373').channels.cache.get('603649742441938944')
 
             let embed = new Discord.MessageEmbed;
             embed.setAuthor(`New request sent by ${message.author.tag}.\nMovie: ${args[0].charAt(0).toUpperCase() + args[0].slice(1)}`, message.author.displayAvatarURL(), args[1])
