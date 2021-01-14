@@ -111,5 +111,12 @@
     "seconds": "secondes",
     "minutes": "minutes",
     "hours": "heures",
-    "days": "jours"
+    "days": "jours",
+    "dailyreddit_help_title": "Send daily random pictures",
+    "dailyreddit_help_desc": "Usage: `${prefix}dailyreddit [sub/unsub] [Subreddit name]`",
+    "dailyreddit_help_sub": "`${prefix}dailyreddit sub [Subreddit name] [Channel mention] [hour] {Timezone}`\nHour must be a number between 0 and 23 (24hour format, do not pass minutes)\nTimezone is optional, default is GMT. You can get the list [on this link](${link})\nExample: `!dailyreddit sub Disney #general 14 Europe/Paris`",
+    "dailyreddit_help_unsub": "`${prefix}dailyreddit unsub [Subreddit name]`",
+    "dailyreddit_help_list": "Get a list of subscribed subreddits",
+    "missing_args": "I don't have all required arguments!",
+    "invalid_tz": "Invalid timezone format"
 }
