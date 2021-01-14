@@ -1,7 +1,7 @@
 {
     "name": "guiding-lanterns",
-    "version": "3.2.0",
-    "changelog": "Add giveaways system",
+    "version": "3.3.0",
+    "changelog": "Add daily picture of a subreddit",
     "description": "",
     "main": "bot.js",
     "repository": {
