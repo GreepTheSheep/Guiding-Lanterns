@@ -59,6 +59,6 @@
         "wolfram-alpha-api": "https://products.wolframalpha.com/api/libraries/javascript/wolfram-alpha-api-1.0.0-rc.1.tgz"
     },
     "devDependencies": {
-        "eslint": "^7.17.0"
+        "eslint": "^7.18.0"
     }
 }
