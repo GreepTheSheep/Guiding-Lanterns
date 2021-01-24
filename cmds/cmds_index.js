@@ -106,11 +106,6 @@ module.exports = function(message, client, prefix, config, functiondate, functio
 
     require('./Guild/lantern.js')(message, client, prefix, getlogchannel(), cooldowns);
 
-    if (message.guild.id == '562602234265731080' || message.guild.id == '600355162279641108'){  // r/Tangled & DisneyFRdiscord 
-        require('./Guild/cross-lantern.js')(message, client, prefix, getlogchannel(), cooldowns);
-    }
-    
-
     //-----------------------------------------------------------------------------------------------
 
 }
