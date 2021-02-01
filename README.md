@@ -1,8 +1,10 @@
 # [The Guiding Lanterns](https://Guiding-Lanterns.github.io/)
 ## (formerly known as Corona's Lanterns)
 ### Official Discord bot of r/tangled
-### **__[Invite me!](https://discordapp.com/oauth2/authorize?client_id=569624646475972608&scope=bot&permissions=67488968)__**
-![Version](https://img.shields.io/github/package-json/v/Guiding-Lanterns/Guiding-Lanterns) [![Status](https://discordbots.org/api/widget/status/569624646475972608.svg?noavatar=true)](https://discordbots.org/bot/569624646475972608)  [![Lib](https://discordbots.org/api/widget/lib/569624646475972608.svg?noavatar=true)](https://discord.js.org)  [![Upvotes](https://discordbots.org/api/widget/upvotes/569624646475972608.svg?noavatar=true)](https://discordbots.org/bot/569624646475972608/vote) [![Crowdin](https://badges.crowdin.net/guiding-lanterns/localized.svg)](https://crowdin.com/project/guiding-lanterns)
+# **__The project was shutdown, see [here for more](https://github.com/Guiding-Lanterns/Guiding-Lanterns/issues/185)__**
+
+
+![Version](https://img.shields.io/github/package-json/v/Guiding-Lanterns/Guiding-Lanterns) [![Crowdin](https://badges.crowdin.net/guiding-lanterns/localized.svg)](https://crowdin.com/project/guiding-lanterns)
 
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FGuiding-Lanterns%2FGuiding-Lanterns.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FGuiding-Lanterns%2FGuiding-Lanterns?ref=badge_shield) [![license](https://img.shields.io/github/license/Guiding-Lanterns/Guiding-Lanterns)](https://github.com/Guiding-Lanterns/Guiding-Lanterns/blob/master/LICENSE)   ![Size](https://img.shields.io/github/repo-size/Guiding-Lanterns/Guiding-Lanterns)   [![DeepScan grade](https://deepscan.io/api/teams/6175/projects/8028/branches/90760/badge/grade.svg)](https://deepscan.io/dashboard#view=project&tid=6175&pid=8028&bid=90760)   [![Star](https://img.shields.io/github/stars/Guiding-Lanterns/Guiding-lanterns)](https://github.com/Guiding-Lanterns/Guiding-Lanterns/stargazers)
 
