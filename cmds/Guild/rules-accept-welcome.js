@@ -11,37 +11,8 @@ module.exports = async function(message, client, prefix, cooldowns) {
     if (message.content.startsWith(command_name)){
         if (message.channel.id != '741594861408354325') return
 
-        //Implement cooldown
-        if (!cooldowns.has(command_name)) {
-            cooldowns.set(command_name, new Discord.Collection());
-        }
-
-        const now = Date.now();
-        const timestamps = cooldowns.get(command_name);
-        const cooldownAmount = 90 * 1000; // 90 seconds cooldown
-
-        if (timestamps.has(message.author.id)) {
-            const expirationTime = timestamps.get(message.author.id) + cooldownAmount;
-
-            if (now < expirationTime) {
-                const timeLeft = (expirationTime - now) / 1000;
-                return message.reply(`please wait ${timeLeft.toFixed(0)} more second(s) before reusing the \`${command_name}\` command.`)
-            }
-        }
-
-        timestamps.set(message.author.id, now);
-        setTimeout(() => timestamps.delete(message.author.id), cooldownAmount);
-
-
-        if (message.member.roles.cache.find(r => r.name === "KEY (The Guiding Lanterns)")) { //Override cooldown
-            timestamps.delete(message.author.id);
-        }
-        // End of cooldown implement
-
         message.author.send(`Howdy ! I can help you to  better integrate into the kingdom! That's the role of a lady-in-waiting!\n\nWe (mostly the Royal Guard) regularly post announcements about the server. <#563241725133455391>\n\nYou can get more roles and change the colour of your name here: <#643107104504152065>\n\nIf you've joined the subreddit at https://reddit.com/r/tangled , you can type \`!subbed\` to get the Friend of Rapunzel badge!\n\nDon't forget to participate because I count your messages and transform them into experience, and thanks to this experience you can gain levels. The higher you are, the more rewards you will get! (Type \`!rank\` in #bot-commands to see your level!)\n\n**__And above all, don't forget to have fun in the world of Tangled!__**`).catch(e=>console.log(e))
         message.member.roles.add('562608575227363329')
-        const check_db = new Enmap({name : 'Tangled_verification'})
-        check_db.set(message.author.id, true)
 
         const messages = [
             'Welcome and hello to Kingdom of Corona :sunny:',

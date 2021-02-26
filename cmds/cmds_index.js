@@ -90,18 +90,6 @@ module.exports = function(message, client, prefix, config, functiondate, functio
     --------- Guild-specific ---------
     --------------------------------*/
 
-    if (message.guild.id == '562602234265731080') { // r/Tangled
-        const check_db = new Enmap({name : 'Tangled_verification'})
-        if (!check_db.has(message.author.id) && message.member.roles.cache.some(r => r.id === "562608575227363329")) check_db.set(message.author.id, true)
-        if (check_db.get(message.author.id) == false) {
-            message.member.addRole('675436155453308959')
-            message.member.removeRole('562608575227363329')
-        }
-        
-        require('./Guild/rules-accept-welcome.js')(message, client, prefix, cooldowns);
-
-    }
-
     require('./Guild/screenshot.js')(message, client, prefix, functiondate, functiontime, cooldowns, getlogchannel());
 
     require('./Guild/lantern.js')(message, client, prefix, getlogchannel(), cooldowns);

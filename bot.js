@@ -236,6 +236,7 @@ client.on('message', message => { // If any message was recived
 client.on('guildMemberAdd', member => { // If any member join a server (or guild in Discord language)
     if (member.guild.id === '562602234265731080') { // If the member join Kingdom of Corona, do the welcome script
         inviteTracker.track(client, member);
+        require('./events/welcome.js')(member, client)
     }
     console.log(`\n${member.user.tag} joined ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who joined
 })

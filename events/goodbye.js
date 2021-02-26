@@ -1,5 +1,4 @@
 const Discord = require('discord.js');
-const Enmap = require('enmap')
 
 function randomItem(array) {
     return array[Math.floor(Math.random() * array.length)];
@@ -16,10 +15,6 @@ module.exports = function(member, client) {
 
     let msg = randomItem(messages);
 
-    const check_db = new Enmap({name : 'Tangled_verification'})
-
-    if (check_db.get(member.id) == false) return
-    
     let embed = new Discord.MessageEmbed()
     embed.setColor("#910002")
     .setTimestamp()
