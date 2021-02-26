@@ -21,6 +21,7 @@ module.exports = function(member, client) {
     .addField(`${msg}`, `Goodbye **${member.user.username}** :sob:`)
     .setThumbnail('http://www.youloveit.com/uploads/posts/2017-11/1511021113_youloveit_com_tangled_the_series_animated_gifs_emotions09.gif')
     .setFooter(`${member.user.tag} left the Kingdom of Corona!`, `${member.user.displayAvatarURL()}`)
-    client.guilds.cache.get('562602234265731080').channels.cache.get('658808055558832132').send(embed);
-    client.guilds.cache.get('562602234265731080').channels.cache.get('663096647437516810').send(`\`-\` ${member.user.username}`);
+    client.channels.fetch('658808055558832132').then(channel=>{
+        channel.send(embed);
+    })
 }

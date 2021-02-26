@@ -234,8 +234,8 @@ client.on('message', message => { // If any message was recived
 });
 
 client.on('guildMemberAdd', member => { // If any member join a server (or guild in Discord language)
-    if (member.guild.id === '562602234265731080') { // If the member join Kingdom of Corona, do the welcome script
-        inviteTracker.track(client, member);
+    if (member.user.bot) return
+    if (member.guild.id == '562602234265731080') { // If the member join Kingdom of Corona, do the welcome script
         require('./events/welcome.js')(member, client)
     }
     console.log(`\n${member.user.tag} joined ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who joined
@@ -243,20 +243,20 @@ client.on('guildMemberAdd', member => { // If any member join a server (or guild
 
 client.on('guildMemberRemove', member => { // If any member leave a server (or guild in Discord language)
     if (member.user.bot) return
-    if (member.guild.id === '562602234265731080') { // If the member leave Kingdom of Corona, do the goodbye script
+    if (member.guild.id == '562602234265731080') { // If the member leave Kingdom of Corona, do the goodbye script
         require('./events/goodbye.js')(member, client);
     }
     console.log(`\n${member.user.tag} left ${member.guild.name} at ${functiondate(0)} at ${functiontime(0)}\n`) // Send at the console who left
 })
 
-client.on('guildMemberUpdate', (oldMember, newMember) => { 
-    if (oldMember.user.bot) return
-    if (oldMember.guild.id === '562602234265731080' && newMember.guild.id === '562602234265731080') { 
-        if(!oldMember.roles.cache.some(r=> r.id == '562608575227363329') && newMember.roles.cache.some(r=> r.id == '562608575227363329')){
-            require('./events/welcome.js')(oldMember, newMember, client);
-        } else return
-    } else return
-})
+// client.on('guildMemberUpdate', (oldMember, newMember) => { 
+//     if (oldMember.user.bot) return
+//     if (oldMember.guild.id === '562602234265731080' && newMember.guild.id === '562602234265731080') { 
+//         if(!oldMember.roles.cache.some(r=> r.id == '562608575227363329') && newMember.roles.cache.some(r=> r.id == '562608575227363329')){
+//             require('./events/welcome.js')(oldMember, newMember, client);
+//         } else return
+//     } else return
+// })
 
 client.on('guildCreate', async guild => { // If the bot join a server
     const botjoinguildlog = `${client.user.username} joined __${guild.name}__\n*ID: ${guild.id}*` // Set the text
